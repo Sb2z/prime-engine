@@ -1,0 +1,69 @@
+{
+ "version": "v1",
+ "trained_at": "2026-07-02T18:21:44.736328+00:00",
+ "protocol": "pr\u00e9-enregistr\u00e9 2026-07-02 (voir docstring du script)",
+ "n": 114,
+ "days": 15,
+ "features": [
+  "us_hours",
+  "asia_eu",
+  "reg_transition",
+  "reg_tendance",
+  "grade_a",
+  "dir_short",
+  "align_tf1h",
+  "align_tf4h",
+  "imb_x_dir",
+  "of_missing"
+ ],
+ "standardize": {
+  "mean": [
+   0.5350877192982456,
+   0.22807017543859648,
+   0.2543859649122807,
+   0.5175438596491229,
+   0.2719298245614035,
+   0.6403508771929824,
+   0.22024853801169592,
+   0.2996637426900586,
+   0.1762333333333334,
+   0.14912280701754385
+  ],
+  "std": [
+   0.498767332485246,
+   0.41958809624917204,
+   0.43551549429145237,
+   0.4996921181974069,
+   0.44495392466569855,
+   0.4798975216347341,
+   0.42201270573752325,
+   0.49883417593341545,
+   0.7659631333790853,
+   0.35620948253064766
+  ]
+ },
+ "weights_bias_first": [
+  0.22448979181898837,
+  0.4439845666909298,
+  0.094038709304213,
+  -0.25650909315669185,
+  -0.15309946419100656,
+  0.0183878592732334,
+  0.5452293421703361,
+  -0.11903570523415499,
+  -0.31340762328848265,
+  -0.1340420746953835,
+  -0.04778497477648014
+ ],
+ "lodo": {
+  "auc": 0.4061624649859944,
+  "accuracy": 0.4298245614035088,
+  "base_rate": 0.5526315789473685
+ },
+ "status": "REJET\u00c9 par le protocole pr\u00e9-enregistr\u00e9 : AUC LODO 0.406 (< hasard 0.5), accuracy 43% (< base 55%), $ filtr\u00e9 par le mod\u00e8le -28.10$ vs +91.09$ pour la R\u00c8GLE SIMPLE us_hours. Verdict : les r\u00e8gles simples suffisent \u2014 pas de mod\u00e8le \u00e0 ce stade (15 jours insuffisants). Re-tenter v2 \u00e0 30+ jours.",
+ "verdict_regle_simple": {
+  "us_hours_only": 91.09,
+  "sans_filtre": 9.2,
+  "n_trades": 114
+ }
+}
