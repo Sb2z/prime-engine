@@ -1,6 +1,6 @@
-# Registre des agents
+# Les agents du système
 
-Chaque agent déployé est recensé ici : ce qu'il fait, ce qui le déclenche, ce qu'il consomme et produit, et les garde-fous qui le bornent. Règle de gouvernance : un agent qui n'est pas dans ce registre n'existe pas.
+Un agent = une entrée dans ce fichier : ce qu'il fait, ce qui le déclenche, ce qu'il consomme et produit, et les garde-fous qui le bornent. La règle maison est simple — pas d'entrée ici, pas d'agent en production.
 
 | Agent | Rôle | Déclencheur | Entrées | Sorties | Garde-fous |
 |---|---|---|---|---|---|

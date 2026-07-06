@@ -83,14 +83,14 @@ Le même patron partout : chaque étape loggue, chaque échec notifie, aucune er
 
 - **TradingView — deux ponts.** Un flux temps réel (prix + bougies multi-timeframes) alimente la boucle principale, et [`tools/claudeverstradingview`](tools/claudeverstradingview) est un **serveur MCP** (Node.js) qui pilote TradingView Desktop via Chrome DevTools Protocol : lecture de la data window, scan multi-symboles, vérification de parité des indicateurs Pine.
 - **Telegram, dans les deux sens.** Sortant : alertes de setups, briefings, rapports, alarmes du watchdog. Entrant : journal de trading en une ligne (`T GOLD SHORT 4150`) et interrogation de discipline (`Z GOLD SHORT`) — le téléphone sert d'interface au système.
-- **Windows Task Scheduler + PowerShell.** Dix tâches planifiées (SYSTEM) portent l'ensemble : démarrage machine, cycles, agents, rapports. Un superviseur en boucle relance le moteur en cas de crash ; un fichier `STOP_WATCHER` permet un redémarrage propre sans élévation.
+- **Windows Task Scheduler + PowerShell.** Des tâches planifiées portent l'ensemble — démarrage machine, cycles, sessions d'agents, rapports hebdomadaires (voir [`windows/install_tasks.bat`](windows/install_tasks.bat)). Un superviseur en boucle relance le moteur en cas de crash ; un fichier `STOP_WATCHER` permet un redémarrage propre sans élévation.
 - **Agents LLM sous contrainte.** Les sessions analyste/chercheur tournent en CLI avec une deny-list de 134 règles ([`.claude/autonomous_settings.json`](.claude/autonomous_settings.json)) : elles proposent dans `research/`, ne touchent jamais à la production.
 - **DuckDB + Parquet.** Base mono-écrivain (le watcher), exports Parquet atomiques pour tous les lecteurs concurrents — le pattern classique writer/readers sans verrou partagé.
 - **yfinance** pour l'univers actions du book swing (~77 titres, données daily + fondamentaux).
 
 ## Les agents
 
-Le registre complet — rôle, déclencheur, entrées/sorties, garde-fous de chaque agent — est tenu dans [`AGENTS.md`](AGENTS.md).
+Chaque agent est documenté dans [`AGENTS.md`](AGENTS.md) : rôle, déclencheur, entrées/sorties et garde-fous.
 
 ## Garde-fous & gouvernance
 
