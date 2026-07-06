@@ -58,7 +58,7 @@ STRATEGIES = [
         "id": "ID_dollar_momentum_regime_1h",
         "hypothesis_text": "Le momentum conditionne au regime de tendance propre "
                            "(ER>=0.45 ET ADX>=30) en INTRADAY 1h degage une "
-                           "esperance nette POSITIVE sur le DOLLAR (DX-Y.NYB) — "
+                           "esperance nette POSITIVE sur le DOLLAR (DX-Y.NYB), "
                            "memes params/exit que HH (gold 1h, KILLED). 3e "
                            "instrument independant pour trancher le confond "
                            "beta-gold. Falsifie si exp_net <= 0 ou IC95 borne "
@@ -75,7 +75,7 @@ STRATEGIES = [
         "hypothesis_text": "Le momentum intraday DOLLAR 1h se capte par ENTREE-"
                            "MARCHE sur CASSURE du canal Donchian 20 bougies, "
                            "CONFIRMEE par regime tendanciel (ER>=0.45 ET ADX>=30), "
-                           "exit stop0.6/tp1.0/24h — memes params/exit que HS "
+                           "exit stop0.6/tp1.0/24h, memes params/exit que HS "
                            "(gold 1h, KILLED). Substitution d'instrument pure : "
                            "l'edge cassure-momentum apparait-il sur un instrument "
                            "non-beta-gold ? Falsifie si exp_net <= 0 ou IC95 borne "

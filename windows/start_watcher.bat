@@ -1,8 +1,8 @@
 @echo off
-rem ── PRIME WATCHER — lancé par le Planificateur de tâches au démarrage ──
+rem ── PRIME WATCHER, lancé par le Planificateur de tâches au démarrage ──
 rem Superviseur de relance (équivalent systemd Restart=always / RestartSec=30) :
-rem si prime_watcher.py sort (crash), on attend 30s — le temps que le verrou
-rem DuckDB se libère — puis on relance. Auto-cicatrisation d'un crash de process,
+rem si prime_watcher.py sort (crash), on attend 30s, le temps que le verrou
+rem DuckDB se libère, puis on relance. Auto-cicatrisation d'un crash de process,
 rem pas seulement d'un reboot. Les évènements START/EXIT vont dans
 rem watcher_supervisor.log (PAS prime_watcher.log) pour ne pas fausser la
 rem détection mtime du watchdog (silence >12 min sur prime_watcher.log).

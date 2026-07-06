@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""UNCERTAINTY — intervalles de confiance pour les stats du journal.
+"""UNCERTAINTY, intervalles de confiance pour les stats du journal.
 
 Un WR de 79% sur n=24 veut dire "quelque part entre 59% et 91%". Ce module
 rend cette incertitude visible partout où un WR ou une espérance est affiché.
@@ -59,7 +59,7 @@ def bootstrap_exp_by_day(trades, iters=BOOTSTRAP_ITERS, seed=42):
 def fmt_wr(wr, wins, n):
     """Format 'WR 71.4% [IC95 36-92] n=7' avec préfixe si échantillon faible."""
     if wr is None or not n:
-        return "WR — (n=0)"
+        return "WR, (n=0)"
     ci = wilson(wins, n)
     txt = f"WR {wr}% [IC95 {ci[0]}-{ci[1]}] n={n}"
     if n < MIN_EFFECTIVE_N:

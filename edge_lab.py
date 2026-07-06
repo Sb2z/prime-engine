@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""EDGE LAB — recherche d'edge sans sur-optimisation.
+"""EDGE LAB, recherche d'edge sans sur-optimisation.
 
 Analyse le journal par batchs d'information/stratégie et donne des conclusions
 robustes seulement si l'échantillon passe des garde-fous:
@@ -183,7 +183,7 @@ def main():
     candidates.sort(key=lambda c: (rank.get(c["verdict"], 9), -c["robust_exp"], -c["all"]["n"]))
 
     print("═" * 76)
-    print("  EDGE LAB — robustesse des edges du journal")
+    print("  EDGE LAB, robustesse des edges du journal")
     print("═" * 76)
     print(f"  Trades clôturés analysés: {len(trades)} | min_n={MIN_N} | split=60/40 | shrink_n={SHRINK_N}")
     for verdict in ("KEEP", "WATCH", "AVOID"):

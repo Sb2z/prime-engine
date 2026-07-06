@@ -1,6 +1,6 @@
 ---
 name: pine-develop
-description: Full Pine Script development loop — write code, compile, fix errors, iterate. Use when building a new indicator or strategy in TradingView.
+description: Full Pine Script development loop, write code, compile, fix errors, iterate. Use when building a new indicator or strategy in TradingView.
 ---
 
 # Pine Script Development Loop
@@ -50,21 +50,21 @@ This injects the code into TradingView's Pine Editor, clicks compile, and report
 
 If errors are reported:
 1. Read the error messages (line number + description)
-2. Edit `scripts/current.pine` locally — fix the specific lines
+2. Edit `scripts/current.pine` locally, fix the specific lines
 3. Push again: `node scripts/pine_push.js`
 4. Repeat until 0 errors
 
 Common Pine Script errors:
-- **"Mismatched input"** — usually indentation (Pine uses 4-space indentation, not braces)
-- **"Could not find function or function reference"** — typo in function name or wrong version
-- **"Undeclared identifier"** — variable used before declaration
-- **"Cannot call X with argument type Y"** — wrong parameter type
+- **"Mismatched input"** : usually indentation (Pine uses 4-space indentation, not braces)
+- **"Could not find function or function reference"** : typo in function name or wrong version
+- **"Undeclared identifier"** : variable used before declaration
+- **"Cannot call X with argument type Y"** : wrong parameter type
 
 ## Step 6: Verify on Chart
 
 After clean compilation:
-1. `capture_screenshot` — take a screenshot to verify it looks right
-2. `data_get_strategy_results` — if it's a strategy, check performance
+1. `capture_screenshot` : take a screenshot to verify it looks right
+2. `data_get_strategy_results` : if it's a strategy, check performance
 3. Show the user the results
 
 ## Step 7: Iterate

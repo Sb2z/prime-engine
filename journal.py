@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-JOURNAL AUTO-APPRENANT — Forward-testing engine
+JOURNAL AUTO-APPRENANT, Forward-testing engine
 ══════════════════════════════════════════════════════════════════
 Chaque scan :
   1. enregistre le signal courant de chaque actif (prix, score, niveaux, indicateurs, macro)
@@ -22,9 +22,9 @@ JOURNAL_FILE = "/Users/sam/trading/journal.json"
 # Horizon d'évaluation : un signal non résolu après X heures est clôturé "au marché"
 HORIZON_HOURS = 8.0
 
-# Bandes stop/TP par actif (en % du prix) si non fournies — basées sur volatilité typique
+# Bandes stop/TP par actif (en % du prix) si non fournies, basées sur volatilité typique
 ASSET_BANDS = {
-    # GOLD : stop élargi 0.35→0.60% — le journal du 29/05 a montré que des stops
+    # GOLD : stop élargi 0.35→0.60%, le journal du 29/05 a montré que des stops
     # serrés se font balayer sur les mèches (4 longs directionnellement bons mais stoppés).
     "GOLD":   {"stop_pct": 0.60, "tp1_pct": 1.00, "tp2_pct": 1.60, "leverage": 20},
     "OIL":    {"stop_pct": 1.20, "tp1_pct": 2.20, "tp2_pct": 3.50, "leverage": 10},
@@ -49,7 +49,7 @@ def load_journal() -> dict:
 
 def save_journal(j: dict):
     # Écriture ATOMIQUE (temp + os.replace) : un crash en plein write ne doit jamais
-    # laisser journal.json tronqué — load_journal avalerait le fichier corrompu et
+    # laisser journal.json tronqué, load_journal avalerait le fichier corrompu et
     # repartirait d'un journal VIDE (perte silencieuse de TOUT l'historique de mesure).
     tmp = JOURNAL_FILE + ".tmp"
     with open(tmp, "w") as f:
@@ -140,7 +140,7 @@ def log_signal(asset, price, direction, score, ta, session, vix=None, dxy=None,
 def evaluate_open(current_prices: dict, candles_1m=None, candle_sources=None):
     """
     current_prices : {asset: {"lp": price, "high_price": h, "low_price": l}}
-    candles_1m     : {asset: [[ts, o, h, l, c, v], ...]} optionnel — fills
+    candles_1m     : {asset: [[ts, o, h, l, c, v], ...]} optionnel, fills
                      intrabar : les mèches entre deux scans sont vues, et
                      l'ordre de touche TP/SL est résolu bougie par bougie.
     Met à jour chaque signal OPEN : MFE/MAE, et clôture si TP1 ou Stop touché,
@@ -154,7 +154,7 @@ def evaluate_open(current_prices: dict, candles_1m=None, candle_sources=None):
     # ── A_SETUP EN ATTENTE : remplissage à l'entrée annoncée ou expiration ──
     # (audit 2026-06-17, fill-tracking honnête) : un trigger devient OPEN
     # SEULEMENT si le prix touche l'entrée OTE dans sa fenêtre de validité ;
-    # sinon EXPIRED (NOFILL). On mesure enfin le VRAI trade — le taux de
+    # sinon EXPIRED (NOFILL). On mesure enfin le VRAI trade, le taux de
     # remplissage de l'entrée annoncée AVANT le PnL.
     for s in j["signals"]:
         if s["status"] != "PENDING":
@@ -463,10 +463,10 @@ def performance_report() -> str:
                 f"     (les stats apparaîtront dès que des signaux toucheront TP/Stop)")
 
     def fmt(t):
-        return f"{t[0]}% ({t[1]})" if t and t[0] is not None else "—"
+        return f"{t[0]}% ({t[1]})" if t and t[0] is not None else "-"
 
     out = []
-    out.append(f"  📓 JOURNAL DE TRADING — Performance réelle (forward-test)")
+    out.append(f"  📓 JOURNAL DE TRADING, Performance réelle (forward-test)")
     out.append(f"     Signaux: {st['total_signals']} | Ouverts: {st['open']} | Clôturés: {st['closed']}"
                f" | Doublons exclus: {st.get('duplicates', 0)}")
     out.append(f"     ✅ Win rate TP/SL : {st['win_rate']}%  ({st['wins']}W / {st['losses']}L)")

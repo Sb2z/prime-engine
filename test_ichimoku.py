@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TEST ICHIMOKU — preuve anti-lookahead + sanité (exigé avant commit, 11/06/2026).
+"""TEST ICHIMOKU, preuve anti-lookahead + sanité (exigé avant commit, 11/06/2026).
 
 Le bug classique des backtests Ichimoku : utiliser comme nuage "à t" les
 midpoints calculés À t (qui décrivent le nuage de t+disp, tracé dans le
@@ -17,7 +17,7 @@ FAILURES = []
 
 
 def check(name, ok, detail=""):
-    print(f"  {'PASS' if ok else 'FAIL'}  {name}" + (f" — {detail}" if detail else ""))
+    print(f"  {'PASS' if ok else 'FAIL'}  {name}" + (f", {detail}" if detail else ""))
     if not ok:
         FAILURES.append(name)
 
@@ -36,7 +36,7 @@ def make_candles(n=300, seed=42, start=100.0):
     return candles
 
 
-print("1. Décalage Senkou — référence indépendante (le cœur de l'anti-lookahead)")
+print("1. Décalage Senkou, référence indépendante (le cœur de l'anti-lookahead)")
 candles = make_candles()
 TK, KJ, SB, DISP = 9, 26, 52, 26
 for t in (120, 200, 299):
@@ -56,12 +56,12 @@ for t in (120, 200, 299):
           abs(s["senkou_b"] - ref_sb) < 1e-9)
 
     # Détecteur du bug : les midpoints DU MOMENT (nuage de t+disp) doivent
-    # être différents — si un refactor les confond, ce test hurle.
+    # être différents, si un refactor les confond, ce test hurle.
     bugged_sa = (mid(candles, TK, t) + mid(candles, KJ, t)) / 2.0
     check(f"senkou_a à t={t} ≠ midpoints du moment (nuage de t+{DISP})",
           abs(s["senkou_a"] - bugged_sa) > 1e-9)
 
-print("2. Chikou — n'utilise que le passé (close(t) vs high/low de t-disp)")
+print("2. Chikou, n'utilise que le passé (close(t) vs high/low de t-disp)")
 t = 200
 w = candles[:t + 1]
 s = sf.ichimoku_state(w, "standard")
@@ -69,7 +69,7 @@ ref = candles[t - DISP]
 expected = 1 if w[-1][4] > ref[2] else (-1 if w[-1][4] < ref[3] else 0)
 check("chikou conforme à la référence t-26", s["chikou"] == expected)
 
-print("3. Invariance au futur — muter toutes les bougies après t ne change RIEN")
+print("3. Invariance au futur, muter toutes les bougies après t ne change RIEN")
 for t in (120, 220):
     base = sf.ichimoku_state(candles[:t + 1], "standard")
     mutated = [list(c) for c in candles]
@@ -81,7 +81,7 @@ for t in (120, 220):
     f_after = ichimoku.features_from_window(mutated[:t + 1])
     check(f"features à t={t} identiques après mutation du futur", f_base == f_after)
 
-print("4. Sanité — tendance haussière franche")
+print("4. Sanité, tendance haussière franche")
 up = [[i * 900.0, 100 + i, 100.6 + i, 99.6 + i, 100.5 + i, 0] for i in range(200)]
 f = ichimoku.features_from_window(up)
 check("prix au-dessus du nuage (pos=1)", f.get("pos") == 1)
@@ -89,7 +89,7 @@ check("chikou dégagée haussière (=1)", f.get("chikou") == 1)
 check("tenkan > kijun (tk_atr > 0)", (f.get("tk_atr") or 0) > 0)
 check("8 features présentes", len(f) == 8, str(sorted(f)))
 
-print("5. Familles — périmètre fermé, sorties valides sur 150 fenêtres")
+print("5. Familles, périmètre fermé, sorties valides sur 150 fenêtres")
 fams = [k for k in sf.FAMILIES if k.startswith("ichimoku_")]
 check("5 familles ichimoku exactement", len(fams) == 5, str(sorted(fams)))
 outputs = set()
@@ -111,4 +111,4 @@ print()
 if FAILURES:
     print(f"✗ {len(FAILURES)} ÉCHEC(S) : {FAILURES}")
     sys.exit(1)
-print("✓ TOUS LES TESTS PASSENT — zéro lookahead, périmètre fermé respecté.")
+print("✓ TOUS LES TESTS PASSENT, zéro lookahead, périmètre fermé respecté.")

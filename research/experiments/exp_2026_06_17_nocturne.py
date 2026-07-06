@@ -4,28 +4,28 @@
 TROIS hypothèses NOUVELLES, falsifiables. UN SEUL levier méthodologique neuf
 cette nuit : le POOL MULTI-ACTIFS GOLD+ES sur l'horizon 1d.
 
-POURQUOI ce levier — l'analyste a refermé l'horizon SWING 1d non pas sur un
+POURQUOI ce levier, l'analyste a refermé l'horizon SWING 1d non pas sur un
 verdict d'edge mais sur un MANQUE DE PUISSANCE : HQ (GOLD 1d momentum_regime)
 exp +1.55% mais n_eff=12<30, HR (ES 1d) exp -0.40% n_eff=8<30. Les deux
 KILLED « faute de n ». Le backlog #3 de l'analyste (23h) en tire : « le 1d ne
-deviendra puissant qu'en agrégeant plusieurs instruments (n_eff>=30) — HORS
+deviendra puissant qu'en agrégeant plusieurs instruments (n_eff>=30), HORS
 LAKE ACTUEL ; ne PAS sauver par sweep ».
 
   CORRECTION FACTUELLE : ce n'est PAS hors lake. Le lake contient GC=F ET ES=F
   en 1d, et `harness.evaluate` POOLE nativement les actifs d'un même `data`
   dict (boucle `for asset, candles in data.items()` dans chaque fenêtre,
   trades concaténés). La garde anti-basis n'interdit que les SOURCES
-  hétérogènes — or GC=F et ES=F sont TOUS DEUX yfinance (une seule source).
+  hétérogènes, or GC=F et ES=F sont TOUS DEUX yfinance (une seule source).
   Pooler GOLD+ES n'est donc ni un sweep, ni un mélange de sources : c'est
   EXACTEMENT le remède de puissance que l'analyste a nommé, et il est IN-LAKE.
 
   Ce n'est pas non plus un data-mining d'actif : GOLD et US500 sont les DEUX
   SEULS actifs que Sam trade (mapping protocole). On n'élargit pas vers DXY/VIX/
-  ZN (non tradés) pour pêcher un survivant — on agrège uniquement les deux
+  ZN (non tradés) pour pêcher un survivant, on agrège uniquement les deux
   actifs cibles, ce qui répond à la question « la règle 1d généralise-t-elle
   sur MES deux actifs, et ce une fois la puissance suffisante ? ».
 
-ISOLEMENT DES DEGRÉS DE LIBERTÉ — aucun paramètre inventé cette nuit :
+ISOLEMENT DES DEGRÉS DE LIBERTÉ, aucun paramètre inventé cette nuit :
   - Trigger momentum_regime (HU) : k6/thr0.5/ER0.45/ADX30 = EXACTEMENT HQ/HR.
   - Trigger momentum_breakout (HV) : lookback20/ER0.45/ADX30 = EXACTEMENT HS/HT.
   - Trigger mean_reversion (HW) : k6/thr1.0 = EXACTEMENT H2/HK (seul le
@@ -86,7 +86,7 @@ STRATEGIES = [
     {
         "id": "HU_pool_momentum_regime_1d",
         "hypothesis_text": "Le momentum_regime 1d (trigger k6/thr0.5/ER0.45/ADX30, "
-                           "exit stop1.2/tp2.4/10 — EXACTEMENT HQ/HR) POOLÉ sur "
+                           "exit stop1.2/tp2.4/10, EXACTEMENT HQ/HR) POOLÉ sur "
                            "GOLD+ES atteint-il enfin la puissance (n_eff>=30) que "
                            "HQ(n12)/HR(n8) n'avaient pas, et l'exp survit-elle une "
                            "fois le +1.55% du seul GOLD dilué par l'échantillon "
@@ -102,7 +102,7 @@ STRATEGIES = [
     {
         "id": "HV_pool_momentum_breakout_1d",
         "hypothesis_text": "Le momentum_breakout 1d (cassure Donchian20 + gate "
-                           "ER0.45/ADX30 — EXACTEMENT HS/HT, exit 1d stop1.2/tp2.4/10) "
+                           "ER0.45/ADX30, EXACTEMENT HS/HT, exit 1d stop1.2/tp2.4/10) "
                            "POOLÉ GOLD+ES : le breakout, plat net de coûts en 1h "
                            "(HS/HT), dégage-t-il un edge à l'horizon SWING 1d une "
                            "fois poolé pour la puissance ? Symétrique de HU pour "
@@ -116,7 +116,7 @@ STRATEGIES = [
     },
     {
         "id": "HW_pool_mean_reversion_1d",
-        "hypothesis_text": "La mean_reversion (trigger k6/thr1.0 — EXACTEMENT H2/HK, "
+        "hypothesis_text": "La mean_reversion (trigger k6/thr1.0, EXACTEMENT H2/HK, "
                            "seul l'horizon passe de 1h à 1d ; exit 1d stop1.2/tp2.4/10) "
                            "POOLÉE GOLD+ES : la surréaction QUOTIDIENNE (mouvement "
                            "6 jours >1%) réverse-t-elle net de coûts ? Famille SANS "

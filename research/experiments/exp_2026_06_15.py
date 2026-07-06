@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Expériences du 15/06/2026 — run nocturne n°6.
+"""Expériences du 15/06/2026, run nocturne n°6.
 
 Deux hypothèses NOUVELLES, falsifiables, données du lake (source homogène par
 test : prix yfinance ; aucune 2e source mélangée). Exits fixés A PRIORI selon
@@ -12,12 +12,12 @@ Contexte d'ingestion (cf. rapport) :
     décisifs (< 15, insuffisant), forward-test en cours.
   - feature_store : **2942 features / 489 outcomes complets** → gate
     **489/500** (apprentissage_autorise=false MAIS à ~11 outcomes du seuil ;
-    saut majeur depuis 72/500 figé sur 4 runs — les outcomes se bouclent enfin).
+    saut majeur depuis 72/500 figé sur 4 runs, les outcomes se bouclent enfin).
   - Mining trades réels TENTÉ : métadonnées dégénérées (session="REAL" partout,
     score=None, adx<30 uniforme) → non minables ; backlog #5 (attendre n≈150)
     confirmé. Sam trade GOLD à 66/78, d'où le choix de l'actif pour HK.
   - Macro : 12→15/06 sans surprise RÉALISÉE à miner (actuals nuls) ; gros bloc
-    banques centrales À VENIR (BoJ/RBA 16/06, FOMC 17/06) — rien d'exploitable
+    banques centrales À VENIR (BoJ/RBA 16/06, FOMC 17/06), rien d'exploitable
     en dérive post-event tant que les surprises ne sont pas publiées.
   - Lake frais : GC=F/ES=F 1h = 13 732 / 13 694 barres (→ 2026-06-15).
 
@@ -30,8 +30,7 @@ HJ (ichimoku_chikou_confirm, GOLD, 1h, 1er test famille → z 1.645) :
     Backlog #2 honoré avec RAISON SPÉCIFIQUE : les 3 mécanismes Ichimoku déjà
     réfutés (kumo_break HC, tk_cross HF, kijun_reject HG) sont tous des entrées
     à TRIGGER UNIQUE. chikou_confirm est structurellement différent : un FILTRE
-    de CONFLUENCE qui exige l'alignement de trois composantes indépendantes —
-    le setup "haute conviction" canonique d'Ichimoku. Si même la confluence la
+    de CONFLUENCE qui exige l'alignement de trois composantes indépendantes, le setup "haute conviction" canonique d'Ichimoku. Si même la confluence la
     plus stricte ne paie pas net de coûts, on pourra déclarer Ichimoku quasi
     clos sur l'or 1h (resterait twist, backlog). Une seule famille Ichimoku ce
     soir (limite backlog respectée). Exit a priori = convention continuation
@@ -40,7 +39,7 @@ HJ (ichimoku_chikou_confirm, GOLD, 1h, 1er test famille → z 1.645) :
 HK (mean_reversion, GOLD, 1h, variant_of=H2 → z 1.960) :
     "Un excès intraday de ±1 % sur 6 bougies 1h sur l'OR mean-reverte (fade de
      l'excès)." H2 avait testé exactement ce mécanisme sur l'ES (US500) et l'a
-     tué. HK est sa robustesse CROSS-ASSET sur l'OR — l'actif que Sam trade
+     tué. HK est sa robustesse CROSS-ASSET sur l'OR, l'actif que Sam trade
      réellement (66/78 trades) et donc le plus pertinent à interroger. Mêmes
      paramètres canoniques que H2 (k 6, thr 1.0 ; exit 0.5/0.8/16) : seul
      l'actif change, ce qui ISOLE la question cross-asset (clé d'hypothèse
@@ -56,7 +55,7 @@ NON TESTÉ ce soir, et POURQUOI :
     (inchangé depuis le 14/06). SIGN-FLIP toujours interdit (aucun COT-follow
     gratuit dérivé du -0.46 % de HD ; aucun "fade des pullbacks" dérivé de HG).
   - Re-test momentum_regime : la famille a déjà 3 entrées à vie (HA/HH/HI), un
-    4e test déflaterait à z~2.24 pour un edge mesuré ~0 — retuner ses seuils
+    4e test déflaterait à z~2.24 pour un edge mesuré ~0, retuner ses seuils
     serait un sweep. Écarté.
 """
 
@@ -86,7 +85,7 @@ STRATEGIES = [
     {
         "id": "HK_gold_meanrev_1pct",
         "hypothesis_text": "Un excès de ±1% sur 6 bougies 1h sur l'OR mean-reverte "
-                           "(fade de l'excès) — robustesse cross-asset de H2 (tué "
+                           "(fade de l'excès), robustesse cross-asset de H2 (tué "
                            "sur l'ES) sur l'actif que Sam trade réellement.",
         "family": "mean_reversion",
         "params": {"k": 6, "thr_pct": 1.0},

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ORDERFLOW — "Order flow du pauvre" calculé depuis les bougies (gratuit)
+ORDERFLOW, "Order flow du pauvre" calculé depuis les bougies (gratuit)
 ══════════════════════════════════════════════════════════════════
 ~60-70% de l'edge order flow sans flux CME payant :
   • VOLUME PROFILE : distribution du volume par niveau de prix
@@ -129,14 +129,14 @@ def analyze(candles):
 
     # POC = aimant principal
     rel_poc = "au-dessus" if price > vp["poc"] else "en-dessous"
-    signals.append(f"🎯 POC {vp['poc']} (prix {rel_poc}) — aimant S/R #1")
+    signals.append(f"🎯 POC {vp['poc']} (prix {rel_poc}), aimant S/R #1")
     # Value Area
     if price > vp["vah"]:
         score += 0.4; signals.append(f"🟢 Prix > VAH {vp['vah']} → au-dessus de la valeur (acheteur)")
     elif price < vp["val"]:
         score -= 0.4; signals.append(f"🔴 Prix < VAL {vp['val']} → sous la valeur (vendeur)")
     else:
-        signals.append(f"⚪ Dans la Value Area {vp['val']}–{vp['vah']} (équilibre)")
+        signals.append(f"⚪ Dans la Value Area {vp['val']}-{vp['vah']} (équilibre)")
     # VWAP
     if vwap:
         if price > vwap:
@@ -168,6 +168,6 @@ if __name__ == "__main__":
         cl = TVCandleClient(symbols=[sym], timeframe="15m", n_bars=120, timeout=25)
         cl.fetch_ta()
         r = analyze(cl._candles.get(sym, []))
-        print(f"\n📊 ORDER FLOW {sym} — biais {r.get('bias')} (score {r.get('score')}) [{r.get('mode')}]")
+        print(f"\n📊 ORDER FLOW {sym}, biais {r.get('bias')} (score {r.get('score')}) [{r.get('mode')}]")
         for s in r["signals"]:
             print(f"   {s}")

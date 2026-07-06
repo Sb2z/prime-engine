@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""ICHIMOKU — features additives pour le feature store (phase enregistrement).
+"""ICHIMOKU, features additives pour le feature store (phase enregistrement).
 
 Hypothèse de Sam (11/06/2026) : le nuage Ichimoku apporte de l'information.
-On ENREGISTRE sans rien décider — comme le COT. Dans quelques semaines, la
+On ENREGISTRE sans rien décider, comme le COT. Dans quelques semaines, la
 corrélation aux outcomes dira si ces colonnes prédisent quoi que ce soit une
 fois le régime ER/ADX connu (redondance suspectée pour les distances
 Tenkan/Kijun vs EMA ; épaisseur du Kumo / position ternaire / twist sont les
 candidats à de l'information nouvelle).
 
 Le CALCUL vit dans strategy_families.ichimoku_state (fichier protégé, source
-unique juge/production) — ce module n'est qu'une projection en colonnes,
+unique juge/production), ce module n'est qu'une projection en colonnes,
 normalisée ATR. Anti-lookahead prouvé par test_ichimoku.py.
 
 Échec réseau/calcul → {} : record_cycle insère des NULL, jamais un cycle

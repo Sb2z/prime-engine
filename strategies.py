@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-STRATEGIES — Playbook des meilleurs traders CFD + Risk Management forcé
+STRATEGIES, Playbook des meilleurs traders CFD + Risk Management forcé
 ══════════════════════════════════════════════════════════════════
 Partagé par SENTINEL-500 (S&P) et AURUM (GOLD).
 Encode ce qui fait gagner les particuliers les plus performants :
@@ -21,7 +21,7 @@ R_TP3 = 4.0
 def build_levels(direction, entry, stop):
     """
     À partir de l'entrée + stop, propose plusieurs cibles (scalp + swing).
-    Le RR n'est PAS un filtre — c'est juste de l'information. La décision vient
+    Le RR n'est PAS un filtre, c'est juste de l'information. La décision vient
     de l'analyse globale (confluence, SMC, order flow, macro).
     """
     risk = abs(entry - stop)
@@ -40,8 +40,7 @@ def build_levels(direction, entry, stop):
 
 def validate_rr(entry, stop, tp1, direction):
     """
-    RR INFORMATIF (plus un gate). Retourne (True, rr, message) toujours OK —
-    la décision de trader vient de l'analyse globale, pas du ratio.
+    RR INFORMATIF (plus un gate). Retourne (True, rr, message) toujours OK, la décision de trader vient de l'analyse globale, pas du ratio.
     """
     risk = abs(entry - stop)
     reward = abs(tp1 - entry)
@@ -49,7 +48,7 @@ def validate_rr(entry, stop, tp1, direction):
         return (True, 0, "Stop non défini")
     rr = reward / risk
     note = "(scalp, WR>RR)" if rr < 1.5 else ("(équilibré)" if rr < 2.5 else "(swing, RR élevé)")
-    return (True, round(rr, 2), f"RR {rr:.2f}:1 {note} — info, pas un filtre")
+    return (True, round(rr, 2), f"RR {rr:.2f}:1 {note}, info, pas un filtre")
 
 
 # ── ICT : Optimal Trade Entry (zone de retracement "double flux") ────────────
@@ -65,12 +64,12 @@ def ote_zone(swing_high, swing_low, direction):
         return {"ote_high": round(swing_high - 0.62 * diff, 2),
                 "ote_low": round(swing_high - 0.79 * diff, 2),
                 "sweet_spot": round(swing_high - 0.705 * diff, 2),
-                "note": "Zone d'achat sur repli (0.62-0.79) — entrée OTE pour continuation haussière"}
+                "note": "Zone d'achat sur repli (0.62-0.79), entrée OTE pour continuation haussière"}
     else:
         return {"ote_low": round(swing_low + 0.62 * diff, 2),
                 "ote_high": round(swing_low + 0.79 * diff, 2),
                 "sweet_spot": round(swing_low + 0.705 * diff, 2),
-                "note": "Zone de vente sur rebond (0.62-0.79) — entrée OTE pour continuation baissière"}
+                "note": "Zone de vente sur rebond (0.62-0.79), entrée OTE pour continuation baissière"}
 
 
 # ── Raja Banks : détection de liquidity sweep ("tap & snap") ─────────────────
@@ -137,7 +136,7 @@ def best_setup(direction, entry, atr, swing_high, swing_low, candles=None):
 
 
 if __name__ == "__main__":
-    print("RR forcé — exemple GOLD LONG @4460, stop 4452 :")
+    print("RR forcé, exemple GOLD LONG @4460, stop 4452 :")
     print(build_levels("LONG", 4460, 4452))
     print("\nValidation du trade user (LONG 4460, SL 4456, TP 4470) :")
     print(validate_rr(4460, 4456, 4470, "LONG"))

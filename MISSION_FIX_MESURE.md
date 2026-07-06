@@ -1,4 +1,4 @@
-# MISSION — Fiabiliser la mesure du protocole Prime avant toute optimisation
+# MISSION, Fiabiliser la mesure du protocole Prime avant toute optimisation
 
 Contexte : projet /Users/sam/trading. Le journal (journal.json) montre IA 79.2% WR n=24
 et OTE_RETRACEMENT 100% n=9, mais ces stats sont gonflées par quatre biais identifiés :
@@ -23,7 +23,7 @@ py_compile + un petit test après chaque étape.
 
 ---
 
-## Étape 1 — Déduplication par position (nouveau module `clusters.py`)
+## Étape 1, Déduplication par position (nouveau module `clusters.py`)
 
 Règle : tant qu'une position virtuelle (asset + direction) est OPEN dans le journal,
 tout nouveau signal IA identique (même asset, même direction, entrée à moins de
@@ -45,7 +45,7 @@ Implémentation :
 Critère d'acceptation : après migration, `python3 prime_strategy.py` affiche un n IA et
 un n OTE nettement réduits (attendu : OTE passe de 9 à ~2-3). Imprimer avant/après.
 
-## Étape 2 — Coûts de transaction (nouveau module `costs.py`)
+## Étape 2, Coûts de transaction (nouveau module `costs.py`)
 
 Constantes par actif, en points, configurables en tête de module :
 
@@ -57,7 +57,7 @@ COSTS = {
 ```
 
 (valeurs de départ prudentes côté CFD retail, à ajuster sur les fills réels Revolut
-de Sam plus tard — prévoir une fonction `calibrate_from_user_trades()` en stub.)
+de Sam plus tard, prévoir une fonction `calibrate_from_user_trades()` en stub.)
 
 Application :
 - `journal.evaluate_open()` : sortie TP → exit_price = tp1 - sign*spread ;
@@ -69,7 +69,7 @@ Application :
   l'ancien historique du nouveau. Les stats affichent les deux populations séparément
   tant que l'historique n'est pas re-simulé.
 
-## Étape 3 — Fills intrabar via bougies 1m
+## Étape 3, Fills intrabar via bougies 1m
 
 Dans le cycle du watcher (prime_watcher.py et track.py) :
 - Pour chaque signal OPEN, fetch les bougies 1m de l'actif depuis le dernier check
@@ -80,14 +80,14 @@ Dans le cycle du watcher (prime_watcher.py et track.py) :
 - Si l'historique 1m ne couvre pas tout l'intervalle (week-end, trou), logger un
   warning dans le signal (`"fill_quality": "PARTIAL"`).
 
-## Étape 4 — WIN_TIME hors de la catégorie WIN
+## Étape 4, WIN_TIME hors de la catégorie WIN
 
 - Partout où on calcule un WR (journal._recompute_stats, prime_strategy._stats_for,
   edge_lab.stats, position_policy._stats) : le WR principal = WIN / (WIN+LOSS) décisifs
   par touche TP/SL uniquement. WIN_TIME/LOSS_TIME comptés dans l'espérance (pnl réel)
   mais affichés à part : `WR_tp_sl` et `time_exits: {n, exp}`.
 
-## Étape 5 — Incertitude affichée (modifier `prime_summary.py` et `prime_strategy._print`)
+## Étape 5, Incertitude affichée (modifier `prime_summary.py` et `prime_strategy._print`)
 
 - Intervalle de Wilson 95% sur chaque WR affiché. Format : `WR 79% [IC95 59-91] n=24`.
 - Bootstrap par blocs JOURNALIERS (regrouper les trades effectifs par date Paris,
@@ -96,7 +96,7 @@ Dans le cycle du watcher (prime_watcher.py et track.py) :
 - `should_replace_user_strategy()` : passer MIN_OTE_SAMPLE de 6 à 15 trades EFFECTIFS
   (post-dédup) et exiger que la borne BASSE de l'IC Wilson de l'IA dépasse le WR user.
 
-## Étape 6 — Durcir adaptive_edge
+## Étape 6, Durcir adaptive_edge
 
 - Réduire l'espace de candidats : supprimer les fenêtres horaires glissantes
   (72 x 3 largeurs). Garder uniquement : asset, direction, asset+direction, strategy,
@@ -108,7 +108,7 @@ Dans le cycle du watcher (prime_watcher.py et track.py) :
 - Correction de comparaisons multiples simple : MIN_IMPROVEMENT_PCT exigé =
   3.0 x sqrt(nombre de candidats testés / 25), planché à 3.0.
 
-## Étape 7 — Garde-fous d'exécution
+## Étape 7, Garde-fous d'exécution
 
 - `scanner.quality_setup()` : stop minimum = max(stop SMC, 0.6 x ATR15m de l'actif).
   Si le stop SMC est plus serré que le plancher, élargir le stop ET recalculer le RR ;
@@ -120,7 +120,7 @@ Dans le cycle du watcher (prime_watcher.py et track.py) :
   quart-de-Kelly : f = 0.25 x (WR_effectif - (1-WR_effectif)/RR), borné à [0, cap 4%/SL_x20].
   Si n effectif < 15, forcer le sizing minimum (1% de risque compte).
 
-## Étape 8 — Re-simulation et rapport
+## Étape 8, Re-simulation et rapport
 
 - Script `resim_report.py` : recalcule tout le journal IA avec dédup + coûts +
   WIN_TIME séparé, et imprime un tableau avant/après :

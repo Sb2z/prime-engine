@@ -45,7 +45,7 @@ CE QUE FAIT CE SCRIPT (et ce qu'il NE fait PAS) :
     l'invariant dedup (cellule deja jugee re-soumise -> DUPLICATE, 0 effet de
     bord, lab inchange) -> backlog #5 toujours bloque cote dedup.
 
-PROPOSITION POUR SAM (token Sam, fichiers proteges — je ne touche pas) :
+PROPOSITION POUR SAM (token Sam, fichiers proteges, je ne touche pas) :
   1. Fingerprint-cle (propose 28/06) pour lever le BLOCAGE dedup du re-test 1d.
   2. Filtre d'integrite a l'ingestion : rejeter/interpoler les 55 barres GC_F_1d
      plates (O=H=L=C) avant tout backtest 1d. NB : la frontiere COURANTE est

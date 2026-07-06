@@ -32,7 +32,7 @@ passive du gold haussier, US500 infirme, rien ne paie net de couts". J'ATTENDS
 des donnees : apres cette nuit, ichimoku sera juge EXHAUSTIVEMENT sur les DEUX
 actifs tradables -> le constat "ichimoku epuise" cesse d'etre une assertion avec
 3 cellules vides et devient un fait demontre. Si l'un passe, c'est un signal a
-revalider en PAPER (jamais promu ici) — surprise a prendre au serieux, pas a lisser.
+revalider en PAPER (jamais promu ici), surprise a prendre au serieux, pas a lisser.
 
 Sources HOMOGENES (US500 <-> ES=F, jamais melangees).
 """

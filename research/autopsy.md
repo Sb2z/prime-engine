@@ -1,4 +1,4 @@
-# AUTOPSIE — prévu vs réalisé, jour par jour (append-only)
+# AUTOPSIE, prévu vs réalisé, jour par jour (append-only)
 
 ## 2026-06-10 (premier run, manuel)
 
@@ -7,18 +7,18 @@
   follow-through propre. Verdict : armement overnight sur liquidité fine,
   non confirmé en session. Question ouverte → backlog : "les armements
   overnight (22h-08h) sous-performent-ils ceux de session ?" (besoin de
-  plus d'armements pour tester — compter d'abord).
+  plus d'armements pour tester, compter d'abord).
 - **Prime** : aucun A_SETUP depuis le 09/06 23:25 (veto session OVERNIGHT
-  a tué les setups nocturnes US500 — comportement voulu post-V1).
+  a tué les setups nocturnes US500, comportement voulu post-V1).
 - **PAPER** : aucune stratégie active (les tests synthétiques du juge ont
   été retirés).
 - **Contexte macro** : jour CPI (14:30 Paris). Veto PRÉ-EVENT attendu à
-  14:00 — première validation live de la chaîne calendrier (A3/V2).
+  14:00, première validation live de la chaîne calendrier (A3/V2).
 
-## 2026-06-12 (run n°2, nocturne — 1re session qui DÉMARRE réellement)
+## 2026-06-12 (run n°2, nocturne, 1re session qui DÉMARRE réellement)
 
 - **Infrastructure** : les sessions des 10/06 23:30 et 11/06 23:30 n'ont PAS
-  tourné (FileNotFoundError sur claude.exe — PATH des tâches planifiées sans
+  tourné (FileNotFoundError sur claude.exe, PATH des tâches planifiées sans
   npm). Corrigé dans les commits du 12/06 (chemins absolus, candidats
   multiples). Cette session est la PREMIÈRE à démarrer (06:57:41, exe résolu
   via %USERPROFILE%\.local\bin\claude.exe).
@@ -31,7 +31,7 @@
   n'a pas pu trancher) ; les 3 hypothèses du jour sont CODÉES et prêtes
   (exp_2026_06_12.py) mais en attente d'une approbation humaine. Registry
   volontairement intact : pas de verdict sans le juge.
-- **Trading** : journal.json inchangé depuis le 09/06 21:43 UTC — aucun trade
+- **Trading** : journal.json inchangé depuis le 09/06 21:43 UTC, aucun trade
   réel, aucun signal Prime, aucune stratégie PAPER (none active) sur la
   fenêtre 10→12/06. Rien à autopsier côté exécution.
 - **Prime / trend-day** : aucun A_SETUP ni armement trend-day enregistré
@@ -39,10 +39,10 @@
 - **Contexte macro** : CPI US du 10/06 SOFT (Core CPI m/m 0.2 vs 0.3 attendu,
   surprise −0.1 ; CPI y/y 4.2 conforme). ECB Main Refinancing Rate du 11/06
   12:15 conforme (2.4, surprise 0). Aucune surprise exploitable en dérive
-  post-event — le silence macro est lui-même l'information : pas de fenêtre
+  post-event, le silence macro est lui-même l'information : pas de fenêtre
   événementielle à miner cette semaine.
 
-## 2026-06-12 (run n°3, nocturne — CORRECTION du run n°2)
+## 2026-06-12 (run n°3, nocturne, CORRECTION du run n°2)
 
 - **Rectification** : le run n°2 avait conclu « 0 hypothèse testée » (blocage
   permissions au moment de l'écriture du rapport). En réalité le blocage a été
@@ -52,7 +52,7 @@
 - **Autopsie des 3 verdicts** :
   - HA (momentum conditionné régime ER>=0.45 ET ADX>=30) : exp +0.0017% ~ 0,
     t 0.019, IC à cheval sur 0. Le filtre de régime ne crée AUCUN edge sur
-    l'or — il réduit n (71) sans déplacer l'espérance. Réponse négative.
+    l'or, il réduit n (71) sans déplacer l'espérance. Réponse négative.
   - HB (dérive overnight LONG, 23h-08h) : exp -0.114%, t -6.71, 0/3 fenêtres
     positives. L'anomalie overnight des métaux NE se reproduit PAS sur GC=F
     net de coûts. SIGN-FLIP INTERDIT noté : le short n'est PAS une conclusion
@@ -64,7 +64,7 @@
   exp -0.001% ; fenêtre récente n=8 décisifs (insuffisant, exp +0.361% IC
   (0.005,0.64) à confirmer en forward-test). feature_store gate 72/500,
   apprentissage gelé. journal inchangé depuis 09/06 21:43 UTC.
-- **Macro** : CPI US 10/06 soft, ECB 11/06 conforme — aucune surprise
+- **Macro** : CPI US 10/06 soft, ECB 11/06 conforme, aucune surprise
   exploitable, pas de dérive post-event à miner.
 
 ## 2026-06-13 (run n°4, nocturne)
@@ -87,15 +87,15 @@
     fenêtre 3 SANS extrême (0 trade). Sur 2024-26 l'or est en marché HAUSSIER
     structurel : se mettre contrarian SHORT contre un positionnement spéculatif
     extrême-long a perdu, et l'échantillon est sous le plancher. Le COT contrarian
-    inconditionnel ne tient pas sur l'or — résultat honnête, pas un bug de câblage.
+    inconditionnel ne tient pas sur l'or, résultat honnête, pas un bug de câblage.
   - **HE (cot_extreme US500/ES, contrarian, daily, 2e test famille z 1.96)** :
     exp **+0.027 % ≈ 0**, t 0.07, n_eff **21** (< 30), IC (−0.75, +0.83) à
     cheval sur 0. Aucun edge, échantillon insuffisant. La thèse COT contrarian
     ne se généralise pas non plus au S&P. Déflation Bonferroni correctement
     appliquée (z 1.645→1.96 car HD compte déjà dans la famille).
   - **HF (ichimoku_tk_cross GOLD, 1h, 1er test famille z 1.645)** : la plus
-    "vivante" des trois — n_eff **161**, **2/3 fenêtres positives**, exp
-    +0.066 % — mais **IC bas −0.094 < 0** et **t 0.78 ≪ 1.645**. Le croisement
+    "vivante" des trois, n_eff **161**, **2/3 fenêtres positives**, exp
+    +0.066 %, mais **IC bas −0.094 < 0** et **t 0.78 ≪ 1.645**. Le croisement
     TK confirmé par le nuage n'est pas significatif net de coûts. 2e mécanisme
     Ichimoku réfuté après la cassure de nuage (HC) : ni cassure ni croisement
     canonique ne produisent d'edge mesurable sur l'or horaire.
@@ -108,12 +108,12 @@
   insuffisant). feature_store : **2430 features** (vs 1916) mais toujours **72
   outcomes** → gate **72/500 figé** (l'export grossit, les outcomes ne se
   bouclent pas). Macro 13→14/06 : rien de neuf depuis le PPI chaud du 11/06
-  (signal d'inflation mixte déjà digéré) — aucune surprise propre exploitable.
+  (signal d'inflation mixte déjà digéré), aucune surprise propre exploitable.
 - **DEUX CORRECTIONS DE FOND découvertes ce run (autopsie méthodo) :**
   1. **HA était en 1h, PAS en daily.** Les rapports 12/06 et 13/06 et l'entrée
      autopsie du 12/06 décrivent HA comme un test « daily ». FAUX : `exp_2026_
      06_12.py` le définit `timeframe:"1h"`. Les **statistiques** de HA
-     (+0.0017 %, t 0.019, n=71) étaient correctes — seul le **label de
+     (+0.0017 %, t 0.019, n=71) étaient correctes, seul le **label de
      timeframe** était erroné, propagé sur 3 runs faute de relire la source.
      Conséquence directe ci-dessous (HH).
   2. **HH est un DOUBLON économique exact de HA.** Conçu ce soir sur la prémisse
@@ -133,7 +133,7 @@
     < 0. Le pullback-rejet sur Kijun (acheter le repli en tendance) PERD
     robustement net de coûts : la bougie de rejet a déjà capturé le rebond, on
     entre en haut de la mèche, et le coût 1h fait le reste. **3e mécanisme
-    Ichimoku réfuté** (après kumo_break HC et tk_cross HF) — et le seul à edge
+    Ichimoku réfuté** (après kumo_break HC et tk_cross HF), et le seul à edge
     nettement négatif, pas seulement nul.
   - **HH (momentum_regime GOLD 1h)** : doublon de HA (cf. ci-dessus). exp
     +0.0017 % ≈ 0, t 0.019, n=71. N'apporte aucune information nouvelle ; ne
@@ -142,7 +142,7 @@
     *réellement nouveau* de la famille sur l'indice. exp **−0.042 %**, t
     **−0.449**, n_eff **46**, 1/3 fenêtres positives, IC (−0.230, +0.130). Le
     filtre de régime ne crée pas davantage d'edge sur le S&P en 1h que sur l'or.
-    KILLED au z déflaté 2.128 (durci par l'entrée HH) — mais KILLED aussi à
+    KILLED au z déflaté 2.128 (durci par l'entrée HH), mais KILLED aussi à
     1.96 : t 0.449 ≪ les deux seuils, verdict insensible à la faille.
 - **Bilan honnête** : 3 testées / 3 tuées, mais **2 réellement nouvelles**
   (HG, HI) + 1 doublon involontaire (HH). La vraie valeur du run est ailleurs :
@@ -159,15 +159,14 @@
   Figé à 72/500 sur 4 runs (12→14/06), le gate apprentissage saute à **489/500**
   (2942 features, grades NO_TRADE 2643 / A_SETUP 244 / WATCH 55). Les outcomes
   se bouclent enfin ; `apprentissage_autorise` reste **false** mais à ~11
-  outcomes du seuil — il devrait franchir 500 d'ici 1-2 runs. C'est le fait
+  outcomes du seuil, il devrait franchir 500 d'ici 1-2 runs. C'est le fait
   saillant de la nuit côté infra : une source de mining (les issues des
   A_SETUP/WATCH de Prime) s'ouvre bientôt. Je n'ai PAS pu la miner ce soir
   (gate fermé + ce n'est pas un signal strategy_families testable par le juge).
 - **Mining trades réels TENTÉ, négatif** : les métadonnées par trade sont
   dégénérées (session="REAL" sur les 66 trades GOLD, score=None, ADX<30
   uniforme, RSI mid uniforme) → aucun régime exploitable à extraire. Sam trade
-  GOLD à 66/78 (SHORT 43 / LONG 23, WR ~60 % chaque sens, exp +0.015/+0.019 % —
-  quasi nul net). Confirme backlog #5 : attendre n≈150 ET des métadonnées
+  GOLD à 66/78 (SHORT 43 / LONG 23, WR ~60 % chaque sens, exp +0.015/+0.019 %, quasi nul net). Confirme backlog #5 : attendre n≈150 ET des métadonnées
   réellement renseignées. Ce constat a motivé le CHOIX D'ACTIF de HK (l'or).
 - **Macro 12→15/06** : aucune surprise RÉALISÉE à miner (actuals nuls sur la
   fenêtre). Gros bloc banques centrales À VENIR (BoJ/RBA 16/06, **FOMC 17/06**) ;
@@ -176,23 +175,21 @@
 - **Autopsie des 2 verdicts de cette nuit (tous deux KILLED, réellement nouveaux) :**
   - **HJ (ichimoku_chikou_confirm GOLD 1h, 1er test famille z 1.645)** : n_eff
     **614**, exp **−0.106 %**, t **−2.567**, **0/3 fenêtres positives**, IC95
-    (−0.199, −0.005) entièrement < 0. La triple confluence Ichimoku — le setup
-    "haute conviction" canonique (Chikou dégagée + prix vs nuage + Tenkan>Kijun)
-    — n'est pas seulement non significative : elle est **significativement
+    (−0.199, −0.005) entièrement < 0. La triple confluence Ichimoku, le setup
+    "haute conviction" canonique (Chikou dégagée + prix vs nuage + Tenkan>Kijun), n'est pas seulement non significative : elle est **significativement
     perdante** net de coûts. **4e mécanisme Ichimoku réfuté** (après kumo_break
     HC, tk_cross HF, kijun_reject HG) et **2e franchement négatif** (avec HG). Le
     filtre de confluence le plus strict échoue comme les triggers uniques : sur
     l'or 1h, l'alignement des composantes Ichimoku ne crée aucun edge. Périmètre
-    Ichimoku **quasi clos** — ne reste que `twist` (changement de couleur du
+    Ichimoku **quasi clos** : ne reste que `twist` (changement de couleur du
     nuage), mécanisme distinct, au backlog.
   - **HK (mean_reversion GOLD 1h, variant_of=H2, z 1.96)** : n_eff **556**, exp
     **−0.039 %**, t **−1.502**, **0/3 fenêtres positives**, IC95 (−0.088, +0.014)
     à cheval sur 0 (borne haute à peine positive). Le fade d'un excès ±1 %/6h ne
-    survit pas aux coûts sur l'or non plus — robustesse cross-asset NÉGATIVE du
+    survit pas aux coûts sur l'or non plus, robustesse cross-asset NÉGATIVE du
     résultat de H2 (déjà tué sur l'ES). Pas de famine (n=556) : c'est bien
     l'absence d'edge net, pas l'échantillon, qui tue. La réversion intraday
-    existe peut-être en brut, mais le spread/slippage 1h la mange entièrement —
-    cohérent avec l'intuition "fader coûte cher".
+    existe peut-être en brut, mais le spread/slippage 1h la mange entièrement, cohérent avec l'intuition "fader coûte cher".
 - **Bilan honnête** : 2 testées / 2 tuées, **2 réellement nouvelles** (pas de
   doublon ce soir). Nuit volontairement RESSERRÉE à 2 hypothèses : le périmètre
   des familles existantes est largement épuisé (momentum, mean_reversion,
@@ -200,7 +197,7 @@
   aurait été cosmétique. La vraie info neuve de la nuit est l'ingestion (gate
   489/500 imminent). Mortalité 100 % = santé.
 
-## 2026-06-16 13h — autopsie midday (PRIME ANALYST)
+## 2026-06-16 13h, autopsie midday (PRIME ANALYST)
 - **Matinée 09h->13h : 0 trade, 9 cycles NO_TRADE.** GOLD forecast LONG fort
   (tf_15m 0.84->0.92) MAIS regime TENDANCE HACHEE -> abstention CORRECTE : le
   momentum directionnel sans regime tendanciel propre = faux ami (= edge nul
@@ -218,7 +215,7 @@
   hors hypothesis_key ; ZN famine ; DX inaccessible ; pas de 15m au lake).
   Pas de test cosmetique sur le compteur de deflation GLOBAL. SPEC momentum_breakout livree a Sam.
 
-## 2026-06-16 17h (PRIME ANALYST, slot evening) — outcomes intraday + test priorite (a)
+## 2026-06-16 17h (PRIME ANALYST, slot evening), outcomes intraday + test priorite (a)
 
 - **Sante VERTE** : watcher cycle 17:00 (frais <12m), datafeed tradingview pur,
   gate apprentissage 840/500 (progresse depuis 754 a 13h), 0 outcome MIXED
@@ -247,13 +244,13 @@
   Mais bruit dominant (IC large, t faible). Resultat utile : oriente priorite
   (a) vers TP large, n'autorise PAS de promotion.
 
-## 2026-06-16 23h (PRIME ANALYST, slot evening) — bilan séance + validité externe HL
+## 2026-06-16 23h (PRIME ANALYST, slot evening), bilan séance + validité externe HL
 
 - **Santé VERTE** : watcher cycle 22:59 (frais <12 min), datafeed tradingview
   pur (6 flux GOLD/US500 15m/1h/1m), gate apprentissage 970/500 (progresse
   depuis 840 à 17h, 754 à 13h), 0 outcome MIXED exclu (ret_4h corrigé tient),
   0 erreur dans prime_watcher.log, lab 19/18/0/0 -> 20/19/0/0 après ce run.
-- **Bilan séance du bot** : 485 NO_TRADE, 5 A_SETUP, 4 WATCH — **TOUS LONG**,
+- **Bilan séance du bot** : 485 NO_TRADE, 5 A_SETUP, 4 WATCH, **TOUS LONG**,
   sur une séance **baissière/plate** (GOLD 4347->4331 ~-0.37%, US500
   7560->7508 ~-0.69%). Régimes dominants côté GOLD : TRANSITION 86 / RANGE 86 /
   HACHÉE 53 / MOYENNE 22 ; côté US500 : HACHÉE 106 / RANGE 96 / TRANSITION 31 /
@@ -264,7 +261,7 @@
   Lecon : un filtre de régime trend (ER>=0.45/ADX>=30) aurait EXCLU l'essentiel
   de la journée (HACHÉE/RANGE/TRANSITION) -> il PROTÈGE ; le momentum brut
   long-only en régime non-trend aurait saigné. Renforce la conditionnalité HH/HI.
-- **Test HM (priorité a — validité externe de HL)** : US500/ES=F 1h,
+- **Test HM (priorité a, validité externe de HL)** : US500/ES=F 1h,
   momentum_regime k4/thr0.3, régime trend 0.45/30, exit "laisser courir"
   TP 2.0%/stop 0.8%/h48 (RR 2.5), variant_of=HL. -> **KILLED** (n=39, exp_net
   **-0.1134%**, IC95 (-0.420, 0.209), t=-0.746 < z 2.326, fenêtres
@@ -278,16 +275,15 @@
   déjà livrée à Sam) plutôt que vers l'optimisation du TP sur un signal faible.
 - **Reco promotion** : 0 stratégie en PAPER -> section muette (vérifiée).
 
-## 2026-06-16 nocturne (CHERCHEUR, slot 23h30) — clôture Ichimoku + edge signaux Prime
+## 2026-06-16 nocturne (CHERCHEUR, slot 23h30), clôture Ichimoku + edge signaux Prime
 
 - **Ingestion** : pas de research/PAUSE. Lake frais (GC=F/ES=F 1h = 13733/13695
   barres, dernière bougie 2026-06-16T04:00Z). **GATE APPRENTISSAGE FRANCHI** :
   feature_store 975/500, `apprentissage_autorise=true` (était 489 le 15/06, 72
-  figé avant — le saut du 15/06 est CONFIRMÉ, pas un artefact). resim USER
+  figé avant, le saut du 15/06 est CONFIRMÉ, pas un artefact). resim USER
   inchangé (WR 57.7% n=78, exp -0.001% ; fenêtre récente 8 décisifs < 15,
   insuffisant). journal.json figé (rien de neuf à autopsier côté exécution).
-- **Edge des signaux Prime eux-mêmes (backlog #1, source ouverte ce soir)** —
-  mesure OBSERVATIONNELLE (hors harness, pas un verdict), join features+outcomes
+- **Edge des signaux Prime eux-mêmes (backlog #1, source ouverte ce soir)** : mesure OBSERVATIONNELLE (hors harness, pas un verdict), join features+outcomes
   ret signé par direction, IC bootstrap-jours :
   - **A_SETUP** (n=135, **100% LONG**) : ret_1h +0.012% (IC -0.024,+0.013),
     **ret_4h -0.021% IC95 (-0.223, -0.014) borne haute < 0 → NÉGATIF** sur la
@@ -300,7 +296,7 @@
     des A_SETUP reflète le biais long persistant contre le réalisé baissier
     (même histoire que le forecast qui n'a basculé qu'à 22:59), pas une preuve
     d'anti-edge. À re-mesurer quand la direction se diversifiera et n_jours croît.
-- **2 tests harness — clôture du périmètre Ichimoku** (backlog #2 du 15/06).
+- **2 tests harness, clôture du périmètre Ichimoku** (backlog #2 du 15/06).
   Raison spécifique vérifiée AVANT de tester : `twist` est le SEUL mécanisme de
   DÉBUT de tendance (vs les 4 entrées de continuation déjà mortes) → hypothèse
   distincte, pas cosmétique. Exit = convention continuation identique HF/HG/HJ
@@ -323,15 +319,15 @@
   consommé (famille épuisée, forcer aurait dilué).
 
 ## 2026-06-17 13h (PRIME ANALYST midday)
-- **Contexte : JOUR FOMC** — décision Fed 18:00 UTC (20:00 Paris) + dot plot +
+- **Contexte : JOUR FOMC** : décision Fed 18:00 UTC (20:00 Paris) + dot plot +
   press conf 18:30 ; US Retail Sales 14:30 Paris. Pré-FOMC = attentisme.
 - **Matinée→midi (09:02→12:59, 43 cycles) : 43 NO_TRADE sur les DEUX actifs.**
   GOLD TRANSITION(36)/RANGE(6), px 4330→4331 (**+0.02%, PLAT**), forecast
   LONG(28)/SHORT(11). US500 RANGE(20)/TRANSITION(12)/HACHÉE(11), px 7535→7518
   (**-0.23%**), forecast SHORT(21)/NEUTRAL(15). AUCUNE tendance propre.
 - **Lecture momentum** : chop pré-FOMC, rien à capter. Le bot reste correctement
-  à l'écart — cohérent avec la thèse (le momentum exige de la tendance, absente).
-- **HQ (test du jour) — momentum_regime à HORIZON SWING 1d** : KILLED sur
+  à l'écart, cohérent avec la thèse (le momentum exige de la tendance, absente).
+- **HQ (test du jour), momentum_regime à HORIZON SWING 1d** : KILLED sur
   n_eff=12<30, MAIS point estimate fortement positif (+1.55% net, t 3.70 > z
   2.45, IC95 (0.66,2.32)>0, fenêtres 0/+0.86/+1.90). **1er momentum_regime à
   passer 3/4 checks.** Contraste net avec l'intraday 1h (plat à tout knob). À
@@ -341,16 +337,15 @@
 - **Lab après run : 24 testées / 23 tuées / 0 papier / 0 promues** (~96%).
 
 ## 2026-06-17 17h (PRIME ANALYST evening)
-- **Contexte : JOUR FOMC** — décision Fed 20:00 Paris (dans ~3h) ; séance ENTIÈRE
+- **Contexte : JOUR FOMC** : décision Fed 20:00 Paris (dans ~3h) ; séance ENTIÈRE
   pré-FOMC, attentisme.
 - **Séance 13:05→17:04 (43 cycles) : 43 NO_TRADE sur les DEUX actifs.** GOLD RANGE
   (43/43), px 4328→4347 (**+0.44%**, dérive haussière modeste), forecast LONG(32)/
   NEUTRAL(11). US500 **TENDANCE HACHÉE (43/43)**, px 7518→7502 (**−0.21%**), forecast
-  **SHORT(40)/NEUTRAL(3)** — biais baissier net mais HACHÉ, jamais gradé. Aucune
+  **SHORT(40)/NEUTRAL(3)** : biais baissier net mais HACHÉ, jamais gradé. Aucune
   tendance PROPRE de la séance.
-- **Lecture momentum** : chop pré-FOMC, rien à capter. Bot correctement à l'écart —
-  cohérent avec la thèse. Bilan du jour : ~180 NO_TRADE cumulés sur 4 slots, 0 trade USER.
-- **HR (test du jour) — momentum_regime SWING 1d sur ES=F** (backlog #1 du 13h,
+- **Lecture momentum** : chop pré-FOMC, rien à capter. Bot correctement à l'écart, cohérent avec la thèse. Bilan du jour : ~180 NO_TRADE cumulés sur 4 slots, 0 trade USER.
+- **HR (test du jour), momentum_regime SWING 1d sur ES=F** (backlog #1 du 13h,
   variant_of=HQ, config + exit IDENTIQUES, seul l'actif change GOLD→ES) : **KILLED,
   exp −0.4025%** (NÉGATIF), n_eff=8, t −0.695 ≪ z 2.498, IC95 (−1.30,0.92), fenêtres
   1/3 (0/4 checks). **TRANCHE le confound de HQ** : même config, +1.55% sur GOLD vs
@@ -361,26 +356,26 @@
 - **Cause structurelle** : gate ER45/ADX30 sur 1d → trop peu d'épisodes indépendants
   (GOLD n_eff=12, ES n_eff=8) ; un seul actif n'atteint jamais n_eff≥30 sur 5 ans.
 - **Edge Prime report-only** : INCHANGÉ vs 09h (6 jours, 135 A_SETUP/42 WATCH, 100%
-  LONG dégénéré) — aucune conclusion nouvelle, reconduit. Script 17h corrige le chemin
+  LONG dégénéré), aucune conclusion nouvelle, reconduit. Script 17h corrige le chemin
   feature_exports (le 09h pointait à tort vers research/).
 - **Familles existantes épuisées pour momentum_regime** : intraday 1h plat (HH→HP),
   swing 1d non généralisable (HQ/HR), Ichimoku clos. Reste = nouvelles familles (token
   Sam) : momentum_breakout (#1), momentum_regime_session (#2), swing 1d multi-actifs.
 - **Lab après run : 25 testées / 24 tuées / 0 papier / 0 promues** (~96%).
 
-## 2026-06-17 23h (PRIME ANALYST evening — post-FOMC)
-- **Contexte : POST-FOMC** — décision Fed tombée à 20:00 Paris. Bascule RISK-OFF
+## 2026-06-17 23h (PRIME ANALYST evening, post-FOMC)
+- **Contexte : POST-FOMC** : décision Fed tombée à 20:00 Paris. Bascule RISK-OFF
   nette : VIX +12.2%, DXY +0.85%, 10Y +1.04%. Forecast SHORT sur les DEUX actifs
   (GOLD repasse SHORT après LONG l'aprem ; US500 SHORT conf 10/10 aligné 6/6).
   Régime TENDANCE HACHÉE 🔴 sur les deux. px US500 ~7502→7436 (−0.9%).
 - **Séance 17:04→22:56 (~2000 cycles) : tous NO_TRADE.** Vetoes = session OVERNIGHT
-  (spreads élargis) + RR<2.0. Setups OTE_RETRACEMENT SHORT à RR 1.0–1.6 (entry_capped),
+  (spreads élargis) + RR<2.0. Setups OTE_RETRACEMENT SHORT à RR 1.0-1.6 (entry_capped),
   jamais gradés. Bilan jour : ~230 NO_TRADE cumulés / 4 slots, 0 trade USER.
 - **Lecture momentum** : la bascule post-FOMC est le type de mouvement directionnel
   que la thèse voudrait capter, MAIS (a) survient en OVERNIGHT (vetoée), (b) régime
   classé HACHÉ pas tendance propre, (c) repricing en gap sur news ≠ tendance
   persistante intraday. Bot correctement à l'écart.
-- **HS/HT (tests du soir) — 1er test de la famille `momentum_breakout`** (approuvée
+- **HS/HT (tests du soir), 1er test de la famille `momentum_breakout`** (approuvée
   par token Sam, commit 51a0e61 ; backlog #1 des 4 slots ; spec 13/06). Entrée-marché
   sur cassure Donchian20 + gate ER0.45/ADX30 + exit stop0.6/tp1.0/24h (canonique HH).
   DEUX actifs testés d'emblée (pré-emption du confound cross-asset HQ→HR), config
@@ -402,7 +397,7 @@
   Les SHORT post-FOMC (ret_4h non bouclé) seront le 1er vrai lot SHORT demain → slot 09h.
 - **Lab après run : 27 testées / 26 tuées / 0 papier / 0 promues** (~96%).
 
-## 2026-06-17 23h30 (CHERCHEUR NOCTURNE — attaque la PUISSANCE du 1d par pool GOLD+ES)
+## 2026-06-17 23h30 (CHERCHEUR NOCTURNE, attaque la PUISSANCE du 1d par pool GOLD+ES)
 - **Fait neuf méthodo** : l'analyste avait refermé l'horizon 1d sur un MANQUE DE
   PUISSANCE (HQ n=12, HR n=8) en croyant l'agrégation multi-actifs « hors lake ».
   FAUX : GC=F+ES=F 1d sont dans le lake et `harness.evaluate` POOLE nativement les
@@ -410,7 +405,7 @@
   unique de la nuit : pooler GOLD+ES en 1d, triggers/exits TOUS hérités (zéro DOF neuf).
 - **HU momentum_regime 1d POOLÉ (variant_of HQ) → KILLED, 2/4 checks** : n_eff=**20**
   (de 12+8, TOUJOURS <30 même poolé !), exp **+0.769%** (effondré depuis +1.55% de HQ),
-  IC95 **(0.037, 1.497)** — **borne basse > 0**, fenêtres **2/3 +**, MAIS t=1.93 < z=**2.539**
+  IC95 **(0.037, 1.497)** : **borne basse > 0**, fenêtres **2/3 +**, MAIS t=1.93 < z=**2.539**
   (9e test famille) et n<30. Double lecture : (a) la dilution +1.55→+0.77 par
   l'échantillon bear-inclus d'ES **corrobore que HQ était en grande partie le bull du
   gold** ; (b) MAIS un **résidu positif underpowered survit** (IC_bas 0.037>0, 2/3 fen+) :
@@ -427,7 +422,7 @@
   morte H2 −0.065 / HK −0.039 ; le 1d est même un peu PLUS négatif). Réversion **close
   à tout horizon** sur GOLD/ES.
 - **Synthèse 1d** : les deux mécanismes MOMENTUM (regime, breakout) restent
-  **sous-puissants même poolés** (n 20 / 14 < 30) — le seul chemin honnête est PLUS
+  **sous-puissants même poolés** (n 20 / 14 < 30), le seul chemin honnête est PLUS
   d'instruments / un historique plus long (PAS un sweep, PAS DXY/VIX/ZN non-tradés).
   Le momentum 1d garde un **résidu positif intrigant** (HU IC_bas>0) qui mérite la
   puissance ; la mean_reversion 1d est, elle, **réfutée nette** (powered, négative).
@@ -435,10 +430,9 @@
   buckets régime ≈1 jour → non interprétables). Lot SHORT post-FOMC pas encore bouclé.
 - **Lab après run : 30 testées / 29 tuées / 0 papier / 0 promues** (~97%).
 
-## 2026-06-18 09h (matin) — momentum 1d clôturé avec puissance
+## 2026-06-18 09h (matin), momentum 1d clôturé avec puissance
 - **Prod** : 100 cycles 00h→09h = 100 NO_TRADE (GOLD TRANSITION 80%, US500 HACHÉE/
-  TRANSITION), forecast sans conviction, 0 trade USER. Abstention CORRECTE en chop —
-  le momentum intraday n'a rien à capter. Dernier setup prod = 16/06 (tous LONG) ;
+  TRANSITION), forecast sans conviction, 0 trade USER. Abstention CORRECTE en chop, le momentum intraday n'a rien à capter. Dernier setup prod = 16/06 (tous LONG) ;
   rien le 17 ni le 18 (~2 j de grille NO_TRADE, risk-off post-FOMC résiduel).
 - **Juge** : HX (GOLD 1d momentum INCONDITIONNEL, k6/thr0.5) KILLED **POWERED**
   n_eff=181, exp **+0.144 %** (n.s., IC [−0.10, +0.40]) ; HY (ES contrôle) KILLED
@@ -448,7 +442,7 @@
   avec puissance** (après 1h, breakout, regime, pool). Rouvrir = donnée (tâche Sam),
   pas knob. Pistes restantes : SESSION (token Sam) et confluences hors-momentum.
 
-## 2026-06-18 13h (midi) — bascule downtrend GOLD + session descriptive referme l'angle
+## 2026-06-18 13h (midi), bascule downtrend GOLD + session descriptive referme l'angle
 - **Prod** : 143 cycles 00h→13h. Matinée 100 % NO_TRADE (chop), puis dès ~11h Paris
   **downtrend GOLD intraday naissant** : 4307→4260 (−1.1 %), régime HACHÉE/MOYENNE,
   forecast **SHORT 22/22 cycles**, orderflow delta ≈ −21 500, prix sous le VAL. Premiers
@@ -457,7 +451,7 @@
 - **Cohérence (à suivre)** : WATCH SHORT GOLD affichent des drivers **pro-LONG**
   (taux↓, silver↑) à côté d'une direction SHORT (technique/orderflow priment). Interne
   (WATCH ne pousse pas d'alerte Telegram → Sam ne l'a pas vu). Diff+test à proposer evening.
-- **Juge** : **0 hypothèse soumise** — discipline. Les 7 familles exprimables sont
+- **Juge** : **0 hypothèse soumise** : discipline. Les 7 familles exprimables sont
   TOUTES KILLED (28 hyp réelles), momentum clos avec puissance ce matin. Re-sweep =
   durcir Bonferroni à vide. Max 2 ≠ minimum 2.
 - **Diagnostic DESCRIPTIF session** (`exp_2026_06_18_13h.py`, hors coûts/IC/WF) : momentum
@@ -467,9 +461,9 @@
   session. **L'intuition NY=tendanciel n'est PAS corroborée.** → motivation FAIBLE pour la
   famille `momentum_regime_session` : NE PAS prioriser. Angle session refermé (descriptif).
 - **Reco promo** : NON (0 paper réel). **Lab 32/31/0/0.** Piste vivante restante :
-  confluences HORS-momentum (mining des ~80 trades USER) — cible evening.
+  confluences HORS-momentum (mining des ~80 trades USER), cible evening.
 
-## 2026-06-18 23h (soir) — 1er A_SETUP du jour : direction juste, entrée OTE NOFILL
+## 2026-06-18 23h (soir), 1er A_SETUP du jour : direction juste, entrée OTE NOFILL
 - **Prod** : ~70 cycles 17h→23h. Après 38 WATCH SHORT GOLD étalés (RR serrés), **premier
   A_SETUP de la journée** à 21:04→21:21 Paris (4 cycles) : **GOLD SHORT OTE_RETRACEMENT**,
   conf 7.2, entrées 4225.95→4218.62, stop ~4238, TP ~4174, **RR 2.74→3.05**, régime TENDANCE
@@ -488,7 +482,7 @@
 - **Juge** : **0 hypothèse** (espace exprimable épuisé, 28 KILLED). **Reco promo** : NON
   (paper = 1 fixture retirée). **Santé VERTE** (cycle 22:59, gate 1940/500, 0 erreur). **Lab 32/31/0/0.**
 
-## 2026-06-18 23h30 (chercheur nocturne) — cassure Donchian PURE bien-powered : referme "turtles naïfs"
+## 2026-06-18 23h30 (chercheur nocturne), cassure Donchian PURE bien-powered : referme "turtles naïfs"
 - **Levier neuf de la nuit** : la cassure Donchian-20 SANS filtre de régime (er_min=0/adx_min=0
   → la cassure de canal canonique, Turtle System 1). Tout l'arc breakout antérieur (HS/HT 1h,
   HV 1d poolé) imposait le gate ER≥0.45/ADX≥30 → si sélectif que HV n'avait que **n_eff=14**
@@ -499,7 +493,7 @@
   - **HZ_gold_donchian_nogate_1d → KILLED**, mais **enfin BIEN-POWERED** : n_eff=**63**,
     exp_net **+0.419 %**, **3/3 fenêtres positives**, MAIS IC95 **(−0.011, 0.846)** borne basse
     juste < 0, t=1.924 < z déflaté **2.965** (33e test famille). Résidu GOLD positif, sous le mur
-    de la déflation — **exactement le motif HU/HQ** (le 1d gold montre un + non démontrable).
+    de la déflation, **exactement le motif HU/HQ** (le 1d gold montre un + non démontrable).
   - **IA_es_donchian_nogate_1d → KILLED** propre négatif : n_eff=**64**, exp_net **−0.107 %**,
     **0/3 fenêtres positives**, t=−0.55. Le contrôle ES **infirme** l'edge.
 - **Cross-read (bull-gold)** : la positivité n'existe **que** sur GOLD, l'ES la contredit →
@@ -513,14 +507,14 @@
   le trade suivant une LOSS → WR **51.5 %** (17/33) vs **61.4 %** (27/44) après un gain (~−10 pts),
   cohérent avec un léger tilt, mais exp ≈ plat des deux côtés et n petit → **descriptif, aucune
   conclusion** (pas d'IC, non jugeable sur le lake). (3) Direction : LONG 54.8 %/−0.073 % vs
-  SHORT 59.6 %/+0.047 % — dans le bruit, **aucun sign-flip**.
+  SHORT 59.6 %/+0.047 %, dans le bruit, **aucun sign-flip**.
 - **Reco promo** : NON (0 paper réel). **Lab 34/33/0/0** (mortalité ~97 % maintenue). Prod GELÉE.
 
-## 2026-06-19 09h (analyst) — GOLD overnight : direction JUSTE, capture ~NULLE (récidive §81b)
+## 2026-06-19 09h (analyst), GOLD overnight : direction JUSTE, capture ~NULLE (récidive §81b)
 - **Prod** : séquence dense de **GOLD SHORT `OTE_RETRACEMENT`** (18/06 19:05 → 19/06 05:30, entries
   4226 → 4138). GOLD a chuté **~4226 → ~4137 (~−2.1 %)**, régime affiché **TENDANCE PROPRE 🟢**
   04:37-05:05 (A_SETUP conf 7.8, RR 2.0-2.4) puis MOYENNE 🟡. **Direction SHORT excellente.**
-- **Réalisé** : **6 entrées / 7 EXPIRED (NOFILL)** — les limites OTE posées AU-DESSUS d'un marché
+- **Réalisé** : **6 entrées / 7 EXPIRED (NOFILL)** : les limites OTE posées AU-DESSUS d'un marché
   qui descend en ligne, le repli de remplissage n'est jamais venu. La seule remplie (05:30) sur un
   micro-rebond s'est refermée sans gain net notable. **Capture ~nulle malgré ~2 % directionnels dispo.**
 - **Diagnostic** : RÉCIDIVE EXACTE du 18/06 soir. Pas la direction, la **CAPTURE** → **PRIORITÉ §81(b)
@@ -534,11 +528,11 @@
   2134/500, ret_4h OK, outbox 39/39, 1 crash 18/06 auto-cicatrisé). **Lab 36/35/0/0.** Macro légère ;
   19/06 = OPEX triple-witching (pinning US500 PM à surveiller). Prod GELÉE.
 
-## 2026-06-19 13h (analyst midday) — beta-gold TRANCHÉ par 3ᵉ instrument (dollar)
+## 2026-06-19 13h (analyst midday), beta-gold TRANCHÉ par 3ᵉ instrument (dollar)
 - **Prod matin (09h→13h)** : A_SETUP GOLD SHORT 07:59 (entry 4171.61, RR 1.82) rempli ~08:21
   → GOLD descend ~4150 (profit latent) puis re-chope ~4162, **trade TOUJOURS OUVERT** (ni TP
   4141 ni SL 4188). US500 : WATCH SHORT OTE conf 7.0 mais **entry CAPPED → RR ~1.04**, jamais
-  A_SETUP, **aucun fill** — marché **pinné max-pain 7500** (OPEX triple-witching). Régime = chop
+  A_SETUP, **aucun fill** : marché **pinné max-pain 7500** (OPEX triple-witching). Régime = chop
   pur (HACHÉE 🔴 / TRANSITION 🟡), F&G 14, VIX +5 %.
 - **Verdict momentum du jour** : régime HOSTILE au momentum (pinning + Extreme Fear + chop) ;
   rien à capter. La prod a bien lu (RR-floor a filtré les OTE US500 non-réachables). Rien que le
@@ -546,7 +540,7 @@
 - **Cohérence (non-bug)** : le fill overnight 05:30 (GOLD SHORT 4138.42) a été **STOPPÉ**
   (−0.406 %, exit 4155.22 > stop), pas « flat » comme écrit à 09h. Sémantique, conclusion
   inchangée (capture overnight négative).
-- **Juge — PAIRE neuve (3ᵉ instrument = DOLLAR DX-Y.NYB, arbitre du confond beta-gold)** :
+- **Juge, PAIRE neuve (3ᵉ instrument = DOLLAR DX-Y.NYB, arbitre du confond beta-gold)** :
   substitution d'instrument PURE des tests gold 1h KILLED (params/exit identiques, aucune valeur
   pêchée), aux 2 modes d'entrée.
   - **ID_dollar_momentum_regime_1h → KILLED** : n=16 (sous-powered), exp **−0.10 %**, 1/3 fenêtres,
@@ -557,21 +551,20 @@
     bien-powered** → 3 instruments × 2 familles. **Le momentum de tendance intraday n'est pas un
     edge net de coûts sur les macros liquides** ; la positivité gold = beta passive. **Arc
     momentum-intraday-lake-exprimable FERMÉ.** Caveat : DOLLAR sur coûts FALLBACK génériques (sonde
-    de facteur, pas reco — le bot ne trade pas le DXY).
+    de facteur, pas reco, le bot ne trade pas le DXY).
 - **Reco promo** : NON (0 paper). **Lab 38/37/0/0** (~97 %). Prod GELÉE. Marge restante = CAPTURE
   §81b (non lake-jugeable) → spec data Option A pour Sam.
 
-## 2026-06-19 17h (analyst après-midi) — le TP à 0.16 pt : §81a, pas seulement §81b
+## 2026-06-19 17h (analyst après-midi), le TP à 0.16 pt : §81a, pas seulement §81b
 - **Le trade vivant** : A_SETUP GOLD SHORT 07:59 / fill 08:21 (entry 4171.61, stop 4188.25,
   tp1 4141.40, RR 1.82) **TOUJOURS OUVERT** à 17h. Champs réalisés (journal) : **mfe 0.72 %**,
-  mae −0.26 %, `lo_since=4141.56` — le plus-bas est venu mourir à **0.16 pt** du TP (4141.40)
+  mae −0.26 %, `lo_since=4141.56` : le plus-bas est venu mourir à **0.16 pt** du TP (4141.40)
   **sans le déclencher**, puis l'or a reflué vers ~4148.8 (+0.56 % latent, RANGE ⚪ PM). Stop
   (4188.25) jamais menacé (hi 4182.48).
-- **Diagnostic — la nuance qui manquait** : depuis 3 jours l'autopsie blâme la CAPTURE D'ENTRÉE
-  (§81b, OTE NOFILL). Aujourd'hui l'entrée A REMPLI et la direction était JUSTE — et on a quand
+- **Diagnostic, la nuance qui manquait** : depuis 3 jours l'autopsie blâme la CAPTURE D'ENTRÉE
+  (§81b, OTE NOFILL). Aujourd'hui l'entrée A REMPLI et la direction était JUSTE, et on a quand
   même rendu le gain. La cause ici n'est PAS l'entrée mais le **placement du TP (§81a)** : un TP
-  posé pile sur la MFE attendue (0.726 % vs MFE réalisée 0.72 %) est, en pratique, **inatteignable**
-  — il faut que le marché aille STRICTEMENT au-delà de son extrême réalisé. Un TP marginalement
+  posé pile sur la MFE attendue (0.726 % vs MFE réalisée 0.72 %) est, en pratique, **inatteignable** : il faut que le marché aille STRICTEMENT au-delà de son extrême réalisé. Un TP marginalement
   plus proche, OU un verrou partiel / trail au-delà de +0.5 %, capturait ce trade. C'est la 1ʳᵉ
   preuve intraday (n=1, donc indicative) que la marge n'est pas QUE l'entrée : c'est aussi
   l'**exit/lock**.
@@ -591,7 +584,7 @@
   PAR SESSION) exige une famille COMPOSÉE → **spec pour Sam** (rapport 17h). **Lab 38/37/0/0.**
   Reco promo NON (0 paper). Santé VERTE. Prod GELÉE.
 
-## 2026-06-19 ~23h45 (CHERCHEUR nocturne) — le lake est ÉPUISÉ, et c'est mesurable
+## 2026-06-19 ~23h45 (CHERCHEUR nocturne), le lake est ÉPUISÉ, et c'est mesurable
 
 Slot chercheur nocturne (après les 4 slots analyste 09/13/17/23h). Mon autopsie
 porte sur le **lab** (l'intraday du jour est couvert ci-dessus par l'analyste) :
@@ -605,11 +598,11 @@ pourquoi l'espace lake-jugeable est clos, et ce que disent les 291 setups prod.
   `journal.json` exécution figée (dernier USER 08/06), **0 PAPER** → `check_demotions`
   sans objet. Aucune injection externe (news/calendrier traités comme donnée).
 
-- **AUTOPSIE LAB — épuisement DÉMONTRÉ, pas supposé** : les **11 familles** de
+- **AUTOPSIE LAB, épuisement DÉMONTRÉ, pas supposé** : les **11 familles** de
   `strategy_families.py` ont toutes été jugées et **toutes tuées** (registry 38/37).
   La dernière famille à n'avoir que 2 instances, `cot_extreme`, est **épuisée sur
   le lake** : `cot_5y.parquet` ne contient de COT que pour **GOLD et US500**, et les
-  deux sont tués (HD gold exp −0.46 % n=29 ; HE es exp +0.03 % n=21 — contrarian
+  deux sont tués (HD gold exp −0.46 % n=29 ; HE es exp +0.03 % n=21, contrarian
   10/90, négatif/plat des deux côtés, sous-powered). Le relancer voudrait dire soit
   **sweeper l'exit** (ce qu'aurait fait `IF_gold_cot_extreme_1d`, écrit au slot 17h
   mais à juste titre **non soumis** : changer tp 2.5→4.0/h 10→15 pour sauver HD mort),
@@ -618,10 +611,10 @@ pourquoi l'espace lake-jugeable est clos, et ce que disent les 291 setups prod.
 
 - **MINING 291 setups (report-only, score prod HORS-lake → NON jugeable)** : deux
   anomalies contre-intuitives à signaler à Sam (descriptif, pas d'IC, proxy ret_4h
-  signé 4h sans stops/coûts, comparaisons multiples — **aucune conclusion**) :
+  signé 4h sans stops/coûts, comparaisons multiples, **aucune conclusion**) :
   1. **WATCH (+0.21 %, n=134) > A_SETUP (−0.06 %, n=157)** : les setups de conviction
      SUPÉRIEURE rendent MOINS à 4h. Indice possible d'**entrée tardive sur extension**
-     des A_SETUP — à creuser, pas à conclure.
+     des A_SETUP, à creuser, pas à conclure.
   2. **TENDANCE PROPRE 🟢 NÉGATIVE (−0.23 %, n=60)** vs TENDANCE MOYENNE 🟡 (+0.24 %,
      n=123) : le régime « tendance propre » sous-performe (drag concentré sur
      **ASIAN×PROPRE −0.28 %, n=54**). Cohérent avec un effet d'**épuisement de
@@ -638,7 +631,7 @@ pourquoi l'espace lake-jugeable est clos, et ce que disent les 291 setups prod.
   zéro information neuve. **Lab 38/37/0/0**, mortalité ~97 % maintenue = santé.
   Reco promo NON (0 paper). Prod GELÉE ; rien ici n'autorise de changement live.
 
-## 2026-06-20 ~23h45 (CHERCHEUR nocturne) — fermeture de la matrice ichimoku × US500 (3 cellules comblées, 3 KILLED)
+## 2026-06-20 ~23h45 (CHERCHEUR nocturne), fermeture de la matrice ichimoku × US500 (3 cellules comblées, 3 KILLED)
 
 Slot chercheur nocturne (après les 4 slots analyste week-end 09/13/17/23h, tous
 🟢 santé verte / 0 trade / marché fermé samedi). Mon autopsie porte sur le **lab** :
@@ -649,14 +642,14 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
   exp −0.001 %/trade ; fenêtre récente **8 décisifs**, IC boot-jours (0.055, 0.64)
   → < 15, **insuffisant**, statu quo, aucune décision avant 1 mois forward-test).
   `feature_store.py` → gate **2378/500**, apprentissage autorisé, **0 MIXED**,
-  **291 setups avec outcome** (inchangé vs 19/06 — week-end, 0 donnée neuve).
+  **291 setups avec outcome** (inchangé vs 19/06, week-end, 0 donnée neuve).
   `journal.json` exécution figée (dernier USER 08/06), **0 PAPER** → `check_demotions`
   sans objet. Lake rafraîchi 07:00 (mêmes 6 actifs + COT). Aucune injection externe.
 
 - **DÉCOUVERTE (révision du « lake épuisé »)** : la batterie ichimoku a été jugée
   **5/5 KILLED sur GOLD** (HC kumo, HF tk_cross, HG kijun_reject, HJ chikou, HN twist)
   mais seulement **2/5 généralisée à US500** : kumo (IC, 1d) et twist (HO, 1h). Les
-  reports nocturnes parlaient de « 11/11 familles tuées » — vrai au niveau **famille**,
+  reports nocturnes parlaient de « 11/11 familles tuées », vrai au niveau **famille**,
   mais **3 cellules ichimoku × US500-1h étaient VIDES** : tk_cross, kijun_reject,
   chikou_confirm. US500 est tradé par le bot (on-thème), ES=F est dans le lake
   (13719 barres 1h, yfinance homogène) → **jugeable cette nuit**. Précédent exact :
@@ -673,7 +666,7 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
     fenêtres (+0.02, −0.01, −0.07). variant_of HJ.
   Tous **bien powered** (n≫30), tous exp≈0 / t≈0, aucun ne passe le moindre check.
   Lecture : sur US500 ces 3 signaux sont **du bruit centré sur zéro** (moins négatifs
-  que sur GOLD où kijun_reject saignait −0.28 % — pas un edge pour autant : exp net ≤ 0,
+  que sur GOLD où kijun_reject saignait −0.28 %, pas un edge pour autant : exp net ≤ 0,
   IC chevauche 0). Le cross-read habituel tient : ichimoku ne paie pas net de coûts.
 
 - **CE QUE ÇA FERME** : ichimoku est désormais jugé **EXHAUSTIVEMENT sur les 2 actifs
@@ -686,7 +679,7 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
   **Lab 41/40/0/0**, mortalité ~98 % maintenue = santé. Reco promo **NON** (0 paper).
   Prod **GELÉE** ; rien ici n'autorise de changement live. Le juge tranche, Sam promeut.
 
-## 2026-06-21 09h — Analyst matinal (dimanche, marché fermé)
+## 2026-06-21 09h, Analyst matinal (dimanche, marché fermé)
 
 - **Santé 🟢 6/6** : cycle 08:57 (<12 min, 100 cycles/j), resim USER inchangé (WR 57.7 %
   n=78, fenêtre 8<15 insuffisante), gate 2378/500 0 MIXED, ret_4h se remplit (2538/9009),
@@ -704,7 +697,7 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
   `momentum_regime_session` fournie (momentum gaté ER/ADX restreint fenêtre cash US, variant_of HH).
 - **Reco promo NON** (0 PAPER). Lab 41/40/0/0. Prod GELÉE.
 
-## 2026-06-21 23h30 — Chercheur nocturne (dimanche soir, lake figé vendredi)
+## 2026-06-21 23h30, Chercheur nocturne (dimanche soir, lake figé vendredi)
 
 - **Ingestion** : pas de `research/PAUSE`. resim Gate-1 USER **inchangé** (WR 57.7 % n=78
   exp −0.001 %, fenêtre récente 8 décisifs < 15 = insuffisante, statu quo). feature_store
@@ -728,25 +721,25 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
     de la sélection 1h sur gold, pas un effet stable.
 - **Ce que ça ferme** : ichimoku est désormais jugé sur **{1h,1d} × {GOLD,US500}** pour **4/5
   signaux** (kumo, tk_cross, kijun_reject, chikou). Seul **twist_1d** reste vide (4ᵉ signal,
-  hors budget 3/nuit, prior le plus faible — HN/HO twist à plat en 1h) → résidu unique, déféré.
+  hors budget 3/nuit, prior le plus faible, HN/HO twist à plat en 1h) → résidu unique, déféré.
   « Ichimoku épuisé au swing » cesse d'être une assertion : c'est un **fait mesuré bien-powered**.
 - **Verdict nocturne** : **3 KILLED** par complétude jugeable (cellule réellement vide, clean,
   precedent exact IB/IC + HU/HV/HW ; ni re-knob, ni sign-flip, ni hors-thème). **Lab 44/43/0/0**,
   mortalité ~98 % maintenue = santé. Reco promo **NON** (0 paper). Prod **GELÉE** ; rien ici
   n'autorise de changement live. Le juge tranche, Sam promeut.
 
-## 2026-06-22 09h — Analyst matinal (lundi, 1re surface lake NEUVE)
+## 2026-06-22 09h, Analyst matinal (lundi, 1re surface lake NEUVE)
 
 - **Santé** : VERTE 6/6. Watcher cycle 08:55 (<12 min), 0 erreur prime_watcher.log, datafeed
   tradingview 6/6, briefing 09:00 cohérent (GOLD 4198 MIXED / US500 7492 MIXED / PRUDENCE / F&G 20).
   feature_store gate 2486/500 (+108 vs nocturne), 0 MIXED, 299 setups, ret_4h se remplit (2648/4171).
   resim USER inchangé (WR 57.7% n=78 exp -0.001%, récent 8<15 décisifs = insuffisant).
 - **Autopsie** : journal inchangé depuis vendredi (week-end+lundi matin 100% NO_TRADE) → aucun trade
-  live à autopser. Régime d'ouverture TRANSITION/RANGE MIXED, NO_TRADE des 2 côtés à raison — terrain
+  live à autopser. Régime d'ouverture TRANSITION/RANGE MIXED, NO_TRADE des 2 côtés à raison, terrain
   hostile au momentum. Pas de catalyseur US 1er rang (CAD CPI+Lagarde 14:30, Flash PMI US = mardi).
 - **Lake enfin frais** : dernier bar lundi 22/06 04:00 UTC (vs vendredi 19/06 gelé tout le week-end),
   +1.5 jour. La surface neuve promise par le nocturne 21/06 est arrivée à l'heure.
-- **1 soumission, 1 KILLED — dernière cellule de la matrice ichimoku** :
+- **1 soumission, 1 KILLED, dernière cellule de la matrice ichimoku** :
   - **IL_pool_ichimoku_twist_1d** (pool GOLD+US500, 1d, exit stop1.2/tp2.4/h10, speed standard,
     variant_of HN, famille test #45) : n_eff **30**, exp_net **+0.5612%**, IC95 **(−0.007, +1.178)**,
     t **1.792** vs z déflaté **3.059**, fenêtres (12;−0.074)(11;+0.953)(7;+1.035) = 2/3 positives.
@@ -754,18 +747,18 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
     2/3 fenêtres à ~+1%), mais **KILLED proprement** : IC95 borne basse effleure zéro (−0.007 → effet
     non distinguable de zéro) et t≪z déflaté. Twist = événement rare (n=30 même poolé). Aucun
     sign-flip, aucun re-knob. À re-vérifier SI le lake 1d s'épaissit nettement, pas avant (sinon mining).
-- **Ce que ça ferme** : ichimoku jugé **5/5 sur {1h,1d}×{GOLD,US500}** — plus aucune cellule vide,
+- **Ce que ça ferme** : ichimoku jugé **5/5 sur {1h,1d}×{GOLD,US500}** : plus aucune cellule vide,
   plus aucun résidu déféré. « Ichimoku épuisé au swing » est un fait mesuré COMPLET et bien-powered.
 - **Verdict** : Lab **45/44/0/0**, mortalité ~98% = santé. Reco promo NON (0 paper ; le near-miss
   twist n'autorise rien). Prod GELÉE ; rien ici n'autorise de changement live. Le juge tranche, Sam promeut.
 
-## 2026-06-22 17h — Analyst après-midi (trigger momentum LIVE raté, ON-THÈSE)
+## 2026-06-22 17h, Analyst après-midi (trigger momentum LIVE raté, ON-THÈSE)
 
 - **Santé** : VERTE 6/6. Cycle 17:01 (<6 min), 0 erreur log, datafeed tradingview 6/6. feature_store
   gate 2664/500 (+90 vs 13h), 0 MIXED, 299 setups, ret_4h se backfille. resim USER inchangé
   (WR 57.7% n=78 exp -0.001%, 8<15 décisifs = insuffisant). Lake TOUJOURS byte-identique 07:00.
 - **ÉVÉNEMENT LIVE ON-THÈSE** : à 16:00 (14:00 UTC) le bot a émis une alerte scalp `trend_day`
-  **US500 LONG** — ADX15m 35.9 (>30), ER 0.475 (>0.45), 15m/1h alignés, **TENDANCE PROPRE 🟢 @ 7527.7**,
+  **US500 LONG** : ADX15m 35.9 (>30), ER 0.475 (>0.45), 15m/1h alignés, **TENDANCE PROPRE 🟢 @ 7527.7**,
   zones rebond EMA20 15m 7503.5 / EMA50 15m 7493.2. **Réalisé** : retournement en 28 min, régime
   PROPRE→HACHÉE, cassure NETTE des deux zones de rebond, bas **7466.6** (−0.81%), rebond partiel 7480
   (−0.63%) à 17h. **Aucun catalyseur macro** (Waller Low 13:00 UTC, pas d'event US 1er rang) → reversal
@@ -782,18 +775,18 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
   interdit. Nouvelle spec déposée : `momentum_trend_invalidation` (trend-day + invalidation structurelle).
 - **Verdict** : Lab 45/44/0/0, reco promo NON (0 paper). Prod GELÉE. Le juge tranche, Sam promeut.
 
-## 2026-06-22 23h — Analyst soir (clôture de séance : le reversal n'a jamais été repris)
+## 2026-06-22 23h, Analyst soir (clôture de séance : le reversal n'a jamais été repris)
 
 - **Santé** : VERTE 6/6. Cycle 22:55 Paris (<5 min), 0 erreur log, watchdog 0 o, datafeed
   tradingview 6/6 (pas de fallback). feature_store gate **2796/500** (+132 vs 17h), 0 MIXED,
   299 setups, ret_4h continue de se backfiller. journal inchangé depuis 19/06 16:21 (120 signals,
-  WR 59.3% exp +0.059% — week-end + lundi sans trade live tracké). Outbox tout ok:true, cohérent.
+  WR 59.3% exp +0.059%, week-end + lundi sans trade live tracké). Outbox tout ok:true, cohérent.
   Lake **byte-identique 07:00** (4e passage consécutif).
 - **CLÔTURE DE L'AUTOPSIE DE 16:00** : après le retournement (signal LONG @ 7527.7 → bas 7466.6),
   US500 **n'a JAMAIS repris** le niveau du signal sur le reste de la séance. Trajectoire 15:00→21:00 UTC :
-  régime HACHÉE 🔴 → TRANSITION 🟡 → RANGE ⚪, chop **7460–7488**, clôture **7471.6** (≈ **−0.74%**
+  régime HACHÉE 🔴 → TRANSITION 🟡 → RANGE ⚪, chop **7460-7488**, clôture **7471.6** (≈ **−0.74%**
   sous le signal, jamais retesté). **Un momentum « achat sur repli » entré à 7503/7493 serait resté
-  sous l'eau toute la soirée** — le reversal n'était pas un bruit ré-absorbé, mais un vrai changement
+  sous l'eau toute la soirée** : le reversal n'était pas un bruit ré-absorbé, mais un vrai changement
   de pied tenu jusqu'à la clôture. Renforce (n=1 toujours) le constat : le filtre ER/ADX seul ne
   protège pas, et ici même un trailing-stop large n'aurait pas sauvé un LONG.
 - **GOLD** : dérive 4199.95 → 4189.67 (bas **4172.0**), TRANSITION 🟡 → RANGE ⚪, NO_TRADE toute la
@@ -808,7 +801,7 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
   n°1). Spec `momentum_trend_invalidation` reste sur le token de Sam.
 - **Verdict** : Lab 45/44/0/0, reco promo NON (0 paper). Prod GELÉE. Le juge tranche, Sam promeut.
 
-## 2026-06-22 nocturne — Chercheur (verif registry-vs-code + blocage infra COT poole)
+## 2026-06-22 nocturne, Chercheur (verif registry-vs-code + blocage infra COT poole)
 
 - **Surface lake byte-identique 07:00** (5e passage de la journee, apres les 4 slots analyste).
   resim USER inchange (WR 57.7% n=78 exp -0.001%), feature_store gate 2803/500 (0 MIXED, 299
@@ -816,7 +809,7 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
 - **Verif directe** : les 11 familles du registry == les 11 de strategy_families.FAMILIES, toutes
   judged-and-KILLED sur cette surface (matrice ichimoku close 5/5 sur 1h/1d x GOLD/US500).
   "11 familles toutes KILLED" est donc EXACT, pas approxime.
-- **Angle neuf envisage et ECARTE — power-remedy COT poole GOLD+US500** : HD (gold COT n=29 exp
+- **Angle neuf envisage et ECARTE, power-remedy COT poole GOLD+US500** : HD (gold COT n=29 exp
   -0.46%) et HE (es COT n=21 exp +0.027%) ont ete KILLED le 13/06 pour SOUS-PUISSANCE (extremes
   COT rares). Pooler les deux (~50 trades) est le remede de puissance approuve du lab (cf II/IJ/IK,
   HU/HV/HW). MAIS : harness.evaluate passe UN ctx_fn keye sur le timestamp seul, partage par tous
@@ -829,23 +822,23 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
   contamine). VIX-vol-conditional ecarte aussi (aucune famille ne lit un champ ctx de vol).
 - **Verdict** : Lab 45/44/0/0, reco promo NON (0 paper). Prod GELEE. Le juge tranche, Sam promeut.
 
-## 2026-06-23 09h (analyst midday) — momentum SHORT du matin : la BONNE direction (n=1), miroir du LONG raté d'hier
-- **Contexte régime** : nuit/matin RISK-OFF net — VIX +3.1%, NASDAQ -2.23%, F&G 23 (Extreme Fear),
+## 2026-06-23 09h (analyst midday), momentum SHORT du matin : la BONNE direction (n=1), miroir du LONG raté d'hier
+- **Contexte régime** : nuit/matin RISK-OFF net, VIX +3.1%, NASDAQ -2.23%, F&G 23 (Extreme Fear),
   forecast Prime SHORT sur GOLD ET US500 (toutes TF). Les DEUX actifs ont chuté : GOLD ~4133→4114
   (-0.7% sur la fenetre 05:24→09:00, briefing 09:00 -1.91% j), US500 ~7438→7381 (-0.77%), US500
   passe TENDANCE PROPRE 🟢 a partir de ~07:41 (downtrend qui se nettoie).
 - **Evenement ON-THESE** : 05:36 alerte 🔥 SCALP TENDANCE **US500 SHORT** (ADX15m 40.3 >30, ER 0.451
-  >0.45, 15m/1h alignes — "conditions du 5 juin reunies") + setups Prime **GOLD SHORT** repetes
+  >0.45, 15m/1h alignes, "conditions du 5 juin reunies") + setups Prime **GOLD SHORT** repetes
   05:14→06:09 (entry ~4142, tp 4114.92 ; 06:09 entry 4130.5 tp 4092.2). **Cette fois la direction
   momentum etait BONNE** : GOLD a touche la zone TP1 (4114), US500 SHORT ~-0.74%. La tendance a
-  PERSISTE apres le trigger — exactement l'inverse du LONG @7527.7 d'hier 16:00 (reversal, -0.81%).
+  PERSISTE apres le trigger, exactement l'inverse du LONG @7527.7 d'hier 16:00 (reversal, -0.81%).
 - **MAIS le bot n'a pas trade** : alertes en session OVERNIGHT/PRE_NY ; grade retombe A_SETUP→WATCH→
   NO_TRADE des 08:31 sans conversion A_SETUP propre en session NY. Donc "would-have", pas un trade
   tracke. Ironie honnete du registre vivant : le scalp QUE le bot pouvait trader (hier 16:00 NY) a
   PERDU ; celui qui a GAGNE (ce matin 05:36) etait correctement veto overnight. n=2 split, aucun
   des deux ne valide le scalp momentum live.
 - **Lecture** : l'edge du scalp depend ENTIEREMENT de la persistance post-entree, que ER/ADX
-  (retrogrades) ne predisent pas — hier non, aujourd'hui oui. C'est precisement le KILL de HA
+  (retrogrades) ne predisent pas, hier non, aujourd'hui oui. C'est precisement le KILL de HA
   (filtre de regime SEUL insuffisant) et l'argument pour la confluence trend_invalidation : on ne
   predit pas la persistance, mais on peut COUPER vite a la cassure (aurait sauve hier, aurait
   laisse courir aujourd'hui). Le FORECAST directionnel (SHORT/SHORT) etait juste en live (+1 sur 2
@@ -858,7 +851,7 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
   momentum×session intraday) NON exprimables / token Sam + lake 15m.
 - **Verdict** : Lab 45/44/0/0, reco promo NON (0 paper). Prod GELEE. Le juge tranche, Sam promeut.
 
-## 2026-06-23 17h — Analyst (PRIME momentum intraday)
+## 2026-06-23 17h, Analyst (PRIME momentum intraday)
 
 - **Contexte live** : risk-off net cet apres-midi (VIX +11.9%, NASDAQ -2.74%, F&G 23 Extreme
   Fear). US500 hache-baissier ; GOLD range/transition. Bot 100% US500 SHORT A_SETUP en continu
@@ -881,7 +874,7 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
   defaillance recurrent, et il echoue de DEUX facons OPPOSEES le meme jour : (a) en down-drift
   persistant -> NO-FILL (cas 1 & 3) ; (b) quand le retracement arrive enfin -> FILL pile au sommet
   d'un spike haché -> drawdown immediat (cas 2). La DIRECTION (SHORT) reste juste toute la journee ;
-  l'edge n'est NI dans la direction NI dans "attendre un meilleur prix" — c'est le MODE D'ENTREE
+  l'edge n'est NI dans la direction NI dans "attendre un meilleur prix", c'est le MODE D'ENTREE
   (sell-limit OTE) qui est mal apparie au regime haché. Renforce en live : (i) le KILL de HA
   (filtre de regime seul insuffisant), (ii) l'argument momentum_trend_invalidation (entree au
   marche/breakout a la cassure + coupe rapide), (iii) le besoin du lake 15m pour JUGER fill+TP.
@@ -894,174 +887,174 @@ contrairement aux nuits précédentes (« 0 soumise, lake épuisé »), un audit
 - **Verdict** : Lab 45/44/0/0, reco promo NON (0 paper reel ; l'entree "PAPER" du registry =
   sentinel TEST_JUDGE_pass, exclu par lab_counters, pas une strategie). Prod GELEE.
 
-## 2026-06-23 23h (evening) — FILL réussi, TP non livré (dissociation des 2 failles)
+## 2026-06-23 23h (evening), FILL réussi, TP non livré (dissociation des 2 failles)
 - **US500 SHORT entry 7396.46 (OTE, OPEN)** : high soir 7406.9 > entry -> **FILL ce soir** (le retracement absent à 13h arrive). Bas 7363.3 = ~33 pts en faveur, MAIS **TP 7352.74 (VAL) raté de ~11 pts** (= même écart qu'à 13h : 7363.5 vs 7353.9). Stop 7422.28 jamais menacé. Position OPEN, ~+21 pts latents (7375.5), hold overnight.
 - **GOLD SHORT entry 4142.47 (signal 17:42)** : high 4142.3 -> **rate le fill de 0.17 pt**, puis -> 4107.9 (aurait filé ~35 pts). NO-FILL near-miss (réplique du US500 16:01).
 - **Chiffre clé** : journal.stats `ai_fill_rate=25.9%`, 20 `expired_nofill`. Le fill est le goulot structurel, désormais quantifié.
 - **Lecture** : 5e jour, DIRECTION SHORT juste. Les 2 failles DISSOCIÉES aujourd'hui : (1) FILL (sell-limit OTE au-dessus, NO-FILL ou near-miss), (2) TP (cible VAL trop lointaine pour l'amplitude livrée en régime haché, ~11 pts manquants x2). Injugeable sans lake 15m.
 - **Hypotheses** : 0 (lake byte-identique 07:00, pas de 15m, 11 familles KILLED -> doublon interdit). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELEE.
 
-## 2026-06-23 nocturne — Chercheur (mining journal réel : la distribution MFE NUANCE la lecture "TP trop loin")
-- **Ingestion re-vérifiée** : pas de PAUSE ; lake tous `*.parquet` mtime **2026-06-23 07:00** (5e passage, surface identique aux runs 09h/13h/17h/23h, **toujours 1h/1d, pas de 15m**) ; resim USER WR 57.7% [IC95 46.6–68.0] n=78 exp −0.001% (figé, journal sans trade live tracké) ; feature_store **3301/500**, **0 MIXED**, 458 setups, ret_4h backfill OK ; 11 familles registry == `strategy_families.FAMILIES` (vérifié), 44 KILLED + 1 sentinel PAPER (`TEST_JUDGE_pass`). Aucune injection dans news/calendrier (donnée traitée comme telle).
-- **Mining descriptif (journal.json, lecture seule — PAS un verdict-juge)** : sur les signaux IA avec entry+tp+mfe (n=44) : **20 NOFILL** (le goulot, cf. `ai_fill_rate=25.9%`) et **24 fillés**. Parmi les 24 fillés : TP touchée 13/24 ; ≥50% de la distance TP 16/24. Distribution **BIMODALE** : les 4 perdants fillés ont une **MFE médiane 0.11% (max 0.20%)** vs TP-dist médiane 0.71% — ils bougent à peine en faveur (≈ dans la bande de coût/spread) avant de se retourner ; les 15 gagnants ont une **MFE médiane 2.06%** — ils filent loin.
-- **Lecture qui CORRIGE l'intuition du jour** : le cas live de ce soir (US500, MFE ~0.45% / TP ~0.6%, raté de ~11 pts → ratio ~0.75) ressemble à "TP trop loin", mais sur les 44 trades du journal les **near-miss 0.5–0.9× sont RARES**. Le mode d'échec dominant reste le **NO-FILL (20)**, puis des **reversals à très faible MFE (~0.1%)** qu'une TP rapprochée ne sauve PAS (sous le coût). Rapprocher la TP **caperait surtout les gagnants à ~2%** qui portent l'espérance. → Le tradeoff (hit-rate ↑ vs reward ↓, coûts fixes) est **ambigu et doit être JUGÉ en espérance nette sur lake 15m**, pas estimé à l'œil sur 1 cas live. Item backlog "TP par régime" **reframé** : prix potentiel faible, risque (caper les 2%) élevé.
+## 2026-06-23 nocturne, Chercheur (mining journal réel : la distribution MFE NUANCE la lecture "TP trop loin")
+- **Ingestion re-vérifiée** : pas de PAUSE ; lake tous `*.parquet` mtime **2026-06-23 07:00** (5e passage, surface identique aux runs 09h/13h/17h/23h, **toujours 1h/1d, pas de 15m**) ; resim USER WR 57.7% [IC95 46.6-68.0] n=78 exp −0.001% (figé, journal sans trade live tracké) ; feature_store **3301/500**, **0 MIXED**, 458 setups, ret_4h backfill OK ; 11 familles registry == `strategy_families.FAMILIES` (vérifié), 44 KILLED + 1 sentinel PAPER (`TEST_JUDGE_pass`). Aucune injection dans news/calendrier (donnée traitée comme telle).
+- **Mining descriptif (journal.json, lecture seule, PAS un verdict-juge)** : sur les signaux IA avec entry+tp+mfe (n=44) : **20 NOFILL** (le goulot, cf. `ai_fill_rate=25.9%`) et **24 fillés**. Parmi les 24 fillés : TP touchée 13/24 ; ≥50% de la distance TP 16/24. Distribution **BIMODALE** : les 4 perdants fillés ont une **MFE médiane 0.11% (max 0.20%)** vs TP-dist médiane 0.71%, ils bougent à peine en faveur (≈ dans la bande de coût/spread) avant de se retourner ; les 15 gagnants ont une **MFE médiane 2.06%** : ils filent loin.
+- **Lecture qui CORRIGE l'intuition du jour** : le cas live de ce soir (US500, MFE ~0.45% / TP ~0.6%, raté de ~11 pts → ratio ~0.75) ressemble à "TP trop loin", mais sur les 44 trades du journal les **near-miss 0.5-0.9× sont RARES**. Le mode d'échec dominant reste le **NO-FILL (20)**, puis des **reversals à très faible MFE (~0.1%)** qu'une TP rapprochée ne sauve PAS (sous le coût). Rapprocher la TP **caperait surtout les gagnants à ~2%** qui portent l'espérance. → Le tradeoff (hit-rate ↑ vs reward ↓, coûts fixes) est **ambigu et doit être JUGÉ en espérance nette sur lake 15m**, pas estimé à l'œil sur 1 cas live. Item backlog "TP par régime" **reframé** : prix potentiel faible, risque (caper les 2%) élevé.
 - **Hypothèses : 0** (surface identique → re-soumettre = DUPLICATE ; re-knob/sign-flip interdits ; objet le plus riche injugeable sans 15m). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE.
 
-## 2026-06-24 13h — Analyst (GOLD : le goulot FILL en direct, OTE incompatible avec le momentum sens-unique)
+## 2026-06-24 13h, Analyst (GOLD : le goulot FILL en direct, OTE incompatible avec le momentum sens-unique)
 - **Santé VERTE 6/6** : watcher cycle 12:59 ; feature_store 3574/500 (+88 vs 09h), 0 MIXED, 487 setups ; resim figé (exp +0.318% IC95 0.017-0.578) ; journal 143 sig WR 58.6% exp +0.056% ; 0 ERROR ; 0 ok:false. Lab 45/44/0/0.
 - **GOLD = no-fill systématique en direct** : 4 A_SETUP SHORT (07:37/08:48/09:42/10:42), TOUS EXPIRED (no-fill), entries chassées 4089→4076 pendant que le prix dérivait 4090→4055 (−35 pts, sens unique, prix sous le VAL 4080.85, recent_delta −60k). L'entrée OTE = sell-limit AU-DESSUS du marché : en dérive baissière le retracement n'arrive jamais → fill jamais obtenu. Direction JUSTE (Silver −1.66%, forecast 15m/1h/4h tous négatifs) mais capture ZÉRO. ai_expired_nofill 20→23, ai_fill_rate 25.9%→23.3%.
 - **Lecture (racine commune des 2 goulots)** : hier US500 = goulot TP (fillé, TP-VAL trop loin) ; aujourd'hui GOLD = goulot FILL (jamais fillé). Même racine : OTE_RETRACEMENT est une entrée mean-reversion appliquée à une thèse momentum. Trend fort → OTE ne fille pas ; haché → fille mais TP loin pas atteint. Dans les deux cas momentum non monétisé. → backlog `momentum_trend_invalidation` (entrée marché/breakout) monte en priorité n°2.
 - **Nuance régime** : GOLD labellisé TRANSITION/RANGE mais réalisé = dérive directionnelle −35 pts → le label ER/ADX sous-estime la directionnalité ; un déclencheur d'entrée marché devrait s'appuyer aussi sur l'alignement forecast multi-TF (ici 3/3 négatifs).
 - **Hypothèses : 0** (lake byte-stable 07:00, 1h/1d, pas de 15m ; 11 familles KILLED ; objet entrée-marché injugeable sans 15m + famille pas encore approuvée). Reco promo NON, prod GELÉE.
 
-## 2026-06-24 23h (evening) — Analyst : l'OTE A monétisé le momentum (2 TP), corrige la lecture 17h
+## 2026-06-24 23h (evening), Analyst : l'OTE A monétisé le momentum (2 TP), corrige la lecture 17h
 - **Fait neuf (corrige le 17h "la seule monétisation décisive est une PERTE")** : les 2 fills OPEN au 17h ont clôturé GAGNANTS sur TP. GOLD a trendé ~4090→3959.97 (−3.2 %, SHORT confirmé : Silver −6.7 %, forecast 15m/1h/4h négatifs). **3 fills décisifs** : 15:42 entry 4009.01→stop 4025.3 = **−0.406 %** ; 15:51 entry 4026.51→TP 3997.22 = **+0.727 %** (RR 1.85) ; 17:19 entry 4009.80→TP 3965.00 = **+1.117 %** (RR **2.83**). Somme +1.438 %, moy +0.48 %/trade, **2 TP/3 dont une RR 2.83**.
-- **Ce que ça tranche (LIVE n=3)** : (1) thèse "OTE ne monétise jamais le momentum" = FAUX cet ap-m/soir ; (2) "TP trop loin" = spécifique au RÉGIME HACHÉ — sur un vrai trend-day la TP RR 2.83 est touchée (confirme reframe chercheur 23/06) ; (3) entrée-marché et OTE sont COMPLÉMENTAIRES : market-entry aurait capté la dérive sens-unique du MATIN (7 no-fills), l'OTE a capté la continuation à retracements de l'ap-m. → AJOUTER l'entrée-marché, pas remplacer l'OTE.
+- **Ce que ça tranche (LIVE n=3)** : (1) thèse "OTE ne monétise jamais le momentum" = FAUX cet ap-m/soir ; (2) "TP trop loin" = spécifique au RÉGIME HACHÉ, sur un vrai trend-day la TP RR 2.83 est touchée (confirme reframe chercheur 23/06) ; (3) entrée-marché et OTE sont COMPLÉMENTAIRES : market-entry aurait capté la dérive sens-unique du MATIN (7 no-fills), l'OTE a capté la continuation à retracements de l'ap-m. → AJOUTER l'entrée-marché, pas remplacer l'OTE.
 - **Tension métrique** : ai_expired_nofill 29→34, ai_fill_rate 23.7→22.7 % (soir : 18:13 GOLD, 18:40/18:51 US500 EXPIRED). Le fill-rate brut baisse MAIS les fills réalisés sont fortement rentables → fill-rate à pondérer par l'espérance/fill, pas lu seul.
 - **Soir** : GOLD rebond 3959→~4000 (mean-rev post −3.2 %) ; US500 NO_TRADE toute la journée (HACHÉ, 0 fill) ; veto OVERNIGHT → NO_TRADE 2 actifs. Risk-off 6e jour (VIX 19.5, F&G 17).
 - **Hypothèses : 0** (lake byte-stable 07:00, 1h/1d, pas de 15m ; 11 familles KILLED ; entrée-marché injugeable sans 15m + famille pas approuvée). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE.
 
-## 2026-06-24 nuit (chercheur nocturne) — l'ADX-à-l'entrée ne sépare PAS gagnants/perdants OTE
+## 2026-06-24 nuit (chercheur nocturne), l'ADX-à-l'entrée ne sépare PAS gagnants/perdants OTE
 - **Re-vérif surface** : lake byte-stable 07:00 (1h/1d, **pas de 15m**), 11 familles registry == `strategy_families.FAMILIES`, **toutes KILLED** (44 verdicts + 1 sentinel `TEST_JUDGE_pass` synthétique exclu par `lab_counters`). `lab_counters()` = **45/44/0/0**. Santé OK : resim equity x20 1407.31€ (== events, pas de dérive), feature_store **3795/500 0 MIXED 0 ERROR**. Aucune injection (token `'edit '` du calendrier = "Credit Card Spending", bénin).
-- **Mining descriptif (journal complet, feed CFD ≠ lake, PAS un verdict-juge)** : sur les **21 fills CLOSED IA** (OTE_RETRACEMENT), 12 WIN / 6 LOSS / 3 FLAT. Parmi les 13 décisifs avec ADX-à-l'entrée enregistré : **ADX ne discrimine pas** — WIN médiane ADX 32.7 vs LOSS médiane **36.05** (les pertes sont si possible à ADX *plus haut* : pertes à 47.0 et 52.1). ADX<25 (haché) WR 2/3 ; ADX≥25 (trend) WR 7/10 — pas de séparation nette.
-- **Le vrai discriminateur est le MFE réalisé** (tautologique avec l'issue) : **MFE≥0.5 % → 6/6 gagnants ; MFE<0.5 % → 3/7**. Les perdants se définissent par "à peine bougé en faveur (MFE 0.0/0.07/0.11/0.21) puis retournement" — confirme la bimodalité du chercheur 23/06.
+- **Mining descriptif (journal complet, feed CFD ≠ lake, PAS un verdict-juge)** : sur les **21 fills CLOSED IA** (OTE_RETRACEMENT), 12 WIN / 6 LOSS / 3 FLAT. Parmi les 13 décisifs avec ADX-à-l'entrée enregistré : **ADX ne discrimine pas** : WIN médiane ADX 32.7 vs LOSS médiane **36.05** (les pertes sont si possible à ADX *plus haut* : pertes à 47.0 et 52.1). ADX<25 (haché) WR 2/3 ; ADX≥25 (trend) WR 7/10, pas de séparation nette.
+- **Le vrai discriminateur est le MFE réalisé** (tautologique avec l'issue) : **MFE≥0.5 % → 6/6 gagnants ; MFE<0.5 % → 3/7**. Les perdants se définissent par "à peine bougé en faveur (MFE 0.0/0.07/0.11/0.21) puis retournement", confirme la bimodalité du chercheur 23/06.
 - **Ce que ça TEMPÈRE** : le narratif analyste n=3 "trend-day → l'OTE gagne" est juste *ex post*, mais le **label de régime disponible À L'ENTRÉE (ADX) ne prédit pas la qualité du fill**. On ne peut pas gater l'entrée sur l'ADX. → argument pour conditionner une future `momentum_trend_invalidation` sur **l'alignement forecast multi-TF** (instinct analyste correct) PLUTÔT que sur le label ADX. Caveats : n=13, feed CFD, MFE/issue tautologique, descriptif.
 - **Hypothèses : 0** (surface byte-identique → re-soumission = DUPLICATE, re-knob = data-mining interdit, sign-flip interdit ; pooled-COT bloqué par `simulate` qui appelle `ctx_fn(ts)` sans `asset` = fix dans harness.py protégé). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE.
 
-## 2026-06-25 09h — Analyst (nuit+matin RANGE bilatéral, 0 trade ; breakout multi-TF bloqué par l'API famille, pas que le 15m)
+## 2026-06-25 09h, Analyst (nuit+matin RANGE bilatéral, 0 trade ; breakout multi-TF bloqué par l'API famille, pas que le 15m)
 - **Santé VERTE 6/6** : watcher cycle 08:57 ; feature_store **3977/500** (+189 vs 23h), 0 MIXED/0 ERROR, 624 setups, ret_4h OK ; resim equity x20 1407.31€ (== events, pas de dérive) ; journal 156 sig WR 58.4% exp +0.062%, 0 open (last_updated 24/06 19:40, aucun trade overnight = veto OVERNIGHT) ; prime_watcher.log 1.08 MB 0 error ; Telegram 1 msg (briefing 09:00) 0 ok:false. Lab 45/44/0/0. Injection : token bénin « Cr**edit** Card Spending » (pas un ordre).
 - **Autopsie** : fenêtre 23:03→08:57 (219 cycles) = **0 A_SETUP, 0 fill, 0 trigger** ; 2 GOLD WATCH SHORT (05:18/08:02) jamais promus. **GOLD ~3978** (rebond 3959.97→~4000 puis re-dérive, forecast 4h −0.77 SHORT mais prix DANS la value area POC 3984.83/VAL 3965.75 → pas de cassure) ; **US500 ~7409** RANGE (15m/1h +0.3/+0.4 LONG mais 4h plat → pas d'alignement multi-TF). RANGE bilatéral → le bot n'a RIEN pris = comportement voulu (coût faux signal > espérance en range), pas une faille. Métriques fill inchangées (expired_nofill 34, fill_rate 22.7 %).
-- **Catalyseur du jour (à autopsier 13h/17h)** : Core PCE m/m **14:30 Paris** (f 0.3 % vs p 0.2 %, High USD) + Final GDP q/q — jauge Fed, potentiel trend-maker. Question ouverte : l'OTE fille-t-elle la cassure post-PCE ou la rate comme le matin du 24/06 ? Risk-off 7e jour : F&G **12** (↓ vs 17, stress s'approfondit), gold_bias +7 / spx_bias −7.
-- **Constat code neuf (affine le backlog)** : la confluence breakout multi-TF (chercheur 24/06) **n'est pas bloquée QUE par le lake 15m** — la famille `momentum_breakout` **ignore `ctx`** (`strategy_families.py:351`, `fn(window, ctx=None)` ne lit que `window`), alors que le harness câble bien `ctx_fn(ts)→signal_fn(window, ctx)` (`harness.py:146`). Le breakout 1h gaté par la tendance 1d (calculable sur lake 1h+1d EXISTANT, sans 15m) exige donc une famille **ctx-aware** → spec `momentum_breakout_htf` posée dans le rapport (token Sam). Breakout déjà KILLED 6× en inconditionnel (gated ER/ADX + Donchian no-gate).
+- **Catalyseur du jour (à autopsier 13h/17h)** : Core PCE m/m **14:30 Paris** (f 0.3 % vs p 0.2 %, High USD) + Final GDP q/q, jauge Fed, potentiel trend-maker. Question ouverte : l'OTE fille-t-elle la cassure post-PCE ou la rate comme le matin du 24/06 ? Risk-off 7e jour : F&G **12** (↓ vs 17, stress s'approfondit), gold_bias +7 / spx_bias −7.
+- **Constat code neuf (affine le backlog)** : la confluence breakout multi-TF (chercheur 24/06) **n'est pas bloquée QUE par le lake 15m** : la famille `momentum_breakout` **ignore `ctx`** (`strategy_families.py:351`, `fn(window, ctx=None)` ne lit que `window`), alors que le harness câble bien `ctx_fn(ts)→signal_fn(window, ctx)` (`harness.py:146`). Le breakout 1h gaté par la tendance 1d (calculable sur lake 1h+1d EXISTANT, sans 15m) exige donc une famille **ctx-aware** → spec `momentum_breakout_htf` posée dans le rapport (token Sam). Breakout déjà KILLED 6× en inconditionnel (gated ER/ADX + Donchian no-gate).
 - **Hypothèses : 0** (lake byte-stable 07:00 1h/1d sans 15m ; 11 familles KILLED ; breakout multi-TF injugeable tant que la famille ne lit pas `ctx`). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE.
 
-## 2026-06-25 13h — Analyst (midday RANGE, GOLD en COIL pré-PCE : alignement multi-TF qui se forme)
+## 2026-06-25 13h, Analyst (midday RANGE, GOLD en COIL pré-PCE : alignement multi-TF qui se forme)
 - **Santé VERTE 6/6** : watcher cycle 12:58 ; feature_store **4065/500** (+88 vs 09h), 0 MIXED/0 ERROR, 626 setups, ret_4h OK ; resim equity x20 1407.31€ (== events, pas de dérive) ; journal 156 sig WR 58.4% exp +0.062%, 0 open (last_updated 24/06 19:40) ; datafeed tradingview tous flux ; Telegram 3 msg (briefings 09:00/12:00 + analyst 09h) 0 ok:false. Lab 45/44/0/0. `ai_expired_nofill` 34 / `ai_fill_rate` 22.7 % inchangés (0 fill/expiry depuis hier soir). Injection : token bénin « Cr**edit** Card Spending » (pas un ordre).
 - **Autopsie** : 09h→13h = **0 A_SETUP, 0 fill, 0 trigger** (143 cycles). **Fait neuf GOLD ~3982** : pour la 1re fois today le forecast est **3/3 SHORT-aligné** (15m −0.32 / 1h −0.09 / 4h −0.70 ; le 15m s'est retourné dans le sens du 4h depuis 09h) ET `recent_delta` fortement négatif (−65k/−83k), **POURTANT label RANGE ⚪ + prix collé au POC 3984 (DANS la value area, VAL 3973.86 non touché)** = **dérive vendeuse absorbée sans cassure = coiling pré-catalyseur**. NO_TRADE justifié (déclencheur VAL non donné). **US500 ~7414** : RANGE→TRANSITION 🟡 mais forecast conflictuel (15m −0.16 / 1h +0.245 / 4h −0.13) = NEUTRAL, aucun alignement → NO_TRADE.
 - **Catalyseur imminent (post-session)** : Core PCE m/m **14:30 Paris** (f 0.3 % vs p 0.2 %, High USD, `actual:null` confirmé non publié) + Final GDP q/q 1.6 %. Potentiel trend-maker. **Cas-test live du backlog n°2** : si le PCE résout le coil par une jambe SHORT, l'OTE_RETRACEMENT fillera-t-elle la cassure ou la ratera-t-elle comme le matin du 24/06 ? → à autopsier au 17h avec l'`actual`. Risk-off 7e jour (F&G 12, gold_bias +9 / spx_bias −8).
-- **Hypothèses : 0** (lake byte-stable 07:00 1h/1d sans 15m, surface identique au 09h → re-soumission = DUPLICATE, re-knob = data-mining interdit, sign-flip interdit ; spec `momentum_breakout_htf` déjà posée au 09h, attend token Sam — non re-posée). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE.
+- **Hypothèses : 0** (lake byte-stable 07:00 1h/1d sans 15m, surface identique au 09h → re-soumission = DUPLICATE, re-knob = data-mining interdit, sign-flip interdit ; spec `momentum_breakout_htf` déjà posée au 09h, attend token Sam, non re-posée). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE.
 
-## 2026-06-25 17h — Analyst (post-PCE, le coil a résolu À LA HAUSSE : thèse SHORT du 13h falsifiée)
+## 2026-06-25 17h, Analyst (post-PCE, le coil a résolu À LA HAUSSE : thèse SHORT du 13h falsifiée)
 - **Santé VERTE 6/6** : watcher cycle 17:00 ; feature_store **4151/500** (+86 vs 13h), 0 MIXED/0 ERROR, 627 setups, ret_4h OK ; resim equity x20 1407.31€ (== events, 0 dérive) ; journal 156 sig WR 58.4% 0 open (last_updated 24/06 19:40, 0 trade neuf) ; Lab 45/44/0/0 ; Telegram 10 msg today 0 ok:false ; watchdog.log 0 o, prime_watcher.log 1.1 Mo 0 error. `ai_expired_nofill` 34 / `ai_fill_rate` 22.7% inchangés. Injection token bénin « Credit Card Spending ».
-- **Autopsie** : 187 cycles, **0 A_SETUP / 0 fill / 0 trigger**, 6 WATCH non promus. **FAIT NEUF** : le cas-test live posé au 13h a tranché — au 13h GOLD coilait à 3984 forecast **3/3 SHORT-aligné**, j'avais demandé si le PCE résoudrait le coil par une jambe SHORT fillable. **Réalité : résolution À LA HAUSSE** — GOLD 3984 (13h) → max 4033 (briefing 15:30 : 4026 +0.87%, Silver +1.76%) → 4011 (17h). VAL 3973 effleuré (low 3967.99) mais cassure durable UP au-dessus de VAH 4008. Forecast SHORT du 13h **wrong-footé** → **NO_TRADE correct = victoire défensive**. US500 dérive baissière hachée 7412→low 7323→7377 (~−0.5%), forecast SHORT-aligné, 0 setup. PCE `actual` toujours null dans le cache mais prix = vérité-terrain (gold+/spx−/USD faible = dovish/refuge). Risk-off 7e jour (F&G 12).
-- **Mise en garde backlog n°2** : le lake GC_F 1d ferme 4181.9→4129.9→3990.3→~4008 = tendance 1d **DOWN** au début du 25/06. Un gate `momentum_breakout_htf` « breakout dans le sens de la tendance 1d » aurait autorisé SHORT / bloqué LONG = mauvais côté de la résolution UP. **Le gate 1d lagge le retournement 24→25.** Ne tue pas la spec (injugeable, famille inexistante, token Sam) mais documente son talon d'Achille — à éprouver par le juge, pas présumer gagnant.
+- **Autopsie** : 187 cycles, **0 A_SETUP / 0 fill / 0 trigger**, 6 WATCH non promus. **FAIT NEUF** : le cas-test live posé au 13h a tranché, au 13h GOLD coilait à 3984 forecast **3/3 SHORT-aligné**, j'avais demandé si le PCE résoudrait le coil par une jambe SHORT fillable. **Réalité : résolution À LA HAUSSE** : GOLD 3984 (13h) → max 4033 (briefing 15:30 : 4026 +0.87%, Silver +1.76%) → 4011 (17h). VAL 3973 effleuré (low 3967.99) mais cassure durable UP au-dessus de VAH 4008. Forecast SHORT du 13h **wrong-footé** → **NO_TRADE correct = victoire défensive**. US500 dérive baissière hachée 7412→low 7323→7377 (~−0.5%), forecast SHORT-aligné, 0 setup. PCE `actual` toujours null dans le cache mais prix = vérité-terrain (gold+/spx−/USD faible = dovish/refuge). Risk-off 7e jour (F&G 12).
+- **Mise en garde backlog n°2** : le lake GC_F 1d ferme 4181.9→4129.9→3990.3→~4008 = tendance 1d **DOWN** au début du 25/06. Un gate `momentum_breakout_htf` « breakout dans le sens de la tendance 1d » aurait autorisé SHORT / bloqué LONG = mauvais côté de la résolution UP. **Le gate 1d lagge le retournement 24→25.** Ne tue pas la spec (injugeable, famille inexistante, token Sam) mais documente son talon d'Achille, à éprouver par le juge, pas présumer gagnant.
 - **Hypothèses : 0** (lake byte-stable 07:00 1h/1d sans 15m, 11 familles toutes KILLED, re-soumission=DUPLICATE, re-knob/sign-flip interdits ; spec breakout_htf déjà posée 09h). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE.
 
-## 2026-06-25 nuit (chercheur nocturne) — la TP n'est PAS le goulot côté pertes : les LOSS sont des réversions immédiates
+## 2026-06-25 nuit (chercheur nocturne), la TP n'est PAS le goulot côté pertes : les LOSS sont des réversions immédiates
 - **Re-vérif surface** : lake byte-stable **2026-06-25 07:00** (1h/1d, **toujours pas de 15m**), 11 familles registry == `strategy_families.FAMILIES`, **toutes KILLED**. `lab_counters()` = **45/44/0/0**. Santé OK : resim equity x20 **1407.31 €** (== baseline, 0 dérive), feature_store **4288/500 · 0 ERROR · 1 MIXED exclu**, journal 157 sig (+1 vs nuit dernière). Aucune injection (calendar/news : 0 token impératif ; « Credit Card Spending » bénin).
 - **Autopsie position live US500 SHORT (le trade que l'analyste 23h demandait de suivre)** : `AI_US500_1782407233`, entry 7369.09 fillé 19:15 Paris, stop 7394.81, TP1 7322.3 (RR 1.82). À 23:30 Paris (dernier intrabar 21:30 UTC) **TOUJOURS OPEN ~flat** : MFE +0.38 % (low 7341.1, **TP1 à −0.635 % NON atteint, manque ~0.25 pt-%**), MAE −0.27 % (high 7389.3, stop NON touché), `fill_quality=PARTIAL`. Ni TP ni stop ⇒ candidat **WIN_TIME** (sortie horizon ~flat-positif), pas une perte.
-- **Mining non-redondant (TP-distance, backlog n°3 ; ≠ ADX du 24/06)** : sur les **16 fills CLOSED IA dé-dupliqués par (asset, entry)** — re-émissions du même setup collapsées, ex. 7 lignes US500 entry 7510.33 → 1 — **9 WIN / 4 LOSS / 3 WIN_TIME**. Séparation **nette à MFE ≈ 0.5 %** :
+- **Mining non-redondant (TP-distance, backlog n°3 ; ≠ ADX du 24/06)** : sur les **16 fills CLOSED IA dé-dupliqués par (asset, entry)** : re-émissions du même setup collapsées, ex. 7 lignes US500 entry 7510.33 → 1, **9 WIN / 4 LOSS / 3 WIN_TIME**. Séparation **nette à MFE ≈ 0.5 %** :
 
 | Bucket | n | MFE réalisé | TP-distance posée | Lecture |
 |---|---|---|---|---|
-| **LOSS** | 4 | **0.03–0.20 %** (méd 0.11) | 0.63–1.11 % | réversion immédiate, MFE **sous la TP la plus serrée** |
-| **WIN** | 9 | 0.56–2.41 % (méd ~0.78) | 0.38–1.40 % | TP atteinte |
-| **WIN_TIME** | 3 | 0.60–2.06 % | 0.63–2.11 % | 2 near-miss à <0.04 % de leur propre TP |
+| **LOSS** | 4 | **0.03-0.20 %** (méd 0.11) | 0.63-1.11 % | réversion immédiate, MFE **sous la TP la plus serrée** |
+| **WIN** | 9 | 0.56-2.41 % (méd ~0.78) | 0.38-1.40 % | TP atteinte |
+| **WIN_TIME** | 3 | 0.60-2.06 % | 0.63-2.11 % | 2 near-miss à <0.04 % de leur propre TP |
 
-- **Ce que ça tranche (descriptif, feed CFD ≠ lake, PAS un verdict-juge)** : côté PERTES, **la distance de TP n'est pas le goulot** — les 4 LOSS ont un MFE max 0.20 %, soit **sous la TP la plus serrée jamais posée (0.63 %)** : aucune TP plus proche ne les convertit, elles **se retournent avant de bouger** (MAE −0.38/−0.54 %) = **échec de qualité d'ENTRÉE, pas de gestion TP**. Côté WIN_TIME, resserrer la TP ne capte que des gains marginaux (near-miss ~0.6–0.7 %) = second ordre. ⇒ **backlog n°3 « placement TP par régime » reste DÉPRIORISÉ** ; le levier est à l'entrée (éviter les fills à réversion immédiate) = **backlog n°2 (entrée-marché / alignement forecast multi-TF)**. Confirme la bimodalité (23/06) et complète le mining ADX (24/06 : l'ADX ne gate pas) — **même racine : le discriminateur est le momentum POST-entrée, pas un paramètre de gestion**. *Caveats : n=16 (4 LOSS seulement), feed CFD, MFE/issue tautologique, descriptif → cadre les specs, ne valide rien.*
+- **Ce que ça tranche (descriptif, feed CFD ≠ lake, PAS un verdict-juge)** : côté PERTES, **la distance de TP n'est pas le goulot** : les 4 LOSS ont un MFE max 0.20 %, soit **sous la TP la plus serrée jamais posée (0.63 %)** : aucune TP plus proche ne les convertit, elles **se retournent avant de bouger** (MAE −0.38/−0.54 %) = **échec de qualité d'ENTRÉE, pas de gestion TP**. Côté WIN_TIME, resserrer la TP ne capte que des gains marginaux (near-miss ~0.6-0.7 %) = second ordre. ⇒ **backlog n°3 « placement TP par régime » reste DÉPRIORISÉ** ; le levier est à l'entrée (éviter les fills à réversion immédiate) = **backlog n°2 (entrée-marché / alignement forecast multi-TF)**. Confirme la bimodalité (23/06) et complète le mining ADX (24/06 : l'ADX ne gate pas), **même racine : le discriminateur est le momentum POST-entrée, pas un paramètre de gestion**. *Caveats : n=16 (4 LOSS seulement), feed CFD, MFE/issue tautologique, descriptif → cadre les specs, ne valide rien.*
 - **Hypothèses : 0** (surface byte-identique → re-soumission = DUPLICATE ; re-knob = data-mining interdit ; sign-flip interdit ; breakout gated ER/ADX déjà KILLED 6× ; `momentum_breakout_htf` ctx-aware = famille inexistante, token Sam ; placement TP = `position_policy`, **non jugeable par `harness.evaluate`** qui juge les entrées). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE.
 
-## 2026-06-26 09h — Analyst (la prod a TRADÉ la nuit : 1 WIN_TIME US500 + 1 LOSS GOLD à réversion immédiate = manuel live « le levier est à l'entrée »)
+## 2026-06-26 09h, Analyst (la prod a TRADÉ la nuit : 1 WIN_TIME US500 + 1 LOSS GOLD à réversion immédiate = manuel live « le levier est à l'entrée »)
 - **Santé VERTE 6/6** : watcher cycle 08:57 ; feature_store **4471/500** (+183 vs nuit), 1 MIXED exclu / 0 ERROR, 672 setups, ret_4h OK ; resim equity x20 1407.31€ (== baseline, 0 dérive) ; journal 159 sig 0 open WR 58.4% exp +0.063% ; prime_watcher.log 1.16Mo 0 error ; Telegram 6 msg today 0 ok:false. Lab 45/44/0/0. Injection : token bénin « Cr*edit* Card Spending ».
-- **Autopsie — 2 fills (1re activité depuis 4 sessions)** : (1) **US500 SHORT `AI_US500_1782407233`** (carry-over 25/06) CLOSED 03:16 Paris exit 7360.9 = **+0.11% WIN_TIME** : ni TP1 (7322.3, MFE +0.38% manqué ~19pts) ni stop touchés, sortie horizon ~flat-positif → exactement la classe prédite par le chercheur 23h30. En régime HACHÉ la TP plein-R au prior-low sous-remplit (bémol backlog n°3, gestion). (2) **GOLD SHORT `AI_GOLD_1782442535`** (A_SETUP 02:55 RANGE ⚪) CLOSED 06:56 exit 4015.11 = **STOP-OUT ≈ −0.41%** : MFE +0.16% SEULEMENT puis retournement → **réversion immédiate**, MFE sous la TP la plus serrée (0.63%) → aucune TP ne le sauve = **échec d'ENTRÉE pas de gestion** (LE pattern du mining 25/06, live). SHORT GOLD pris en RANGE alors que le marché est bid (coil résolu UP 25/06) = momentum contre le flux. (3) GOLD SHORT 4008.02 EXPIRED no-fill. `ai_fill_rate` 22.7→25.5%, `ai_expired_nofill` 34→35.
+- **Autopsie, 2 fills (1re activité depuis 4 sessions)** : (1) **US500 SHORT `AI_US500_1782407233`** (carry-over 25/06) CLOSED 03:16 Paris exit 7360.9 = **+0.11% WIN_TIME** : ni TP1 (7322.3, MFE +0.38% manqué ~19pts) ni stop touchés, sortie horizon ~flat-positif → exactement la classe prédite par le chercheur 23h30. En régime HACHÉ la TP plein-R au prior-low sous-remplit (bémol backlog n°3, gestion). (2) **GOLD SHORT `AI_GOLD_1782442535`** (A_SETUP 02:55 RANGE ⚪) CLOSED 06:56 exit 4015.11 = **STOP-OUT ≈ −0.41%** : MFE +0.16% SEULEMENT puis retournement → **réversion immédiate**, MFE sous la TP la plus serrée (0.63%) → aucune TP ne le sauve = **échec d'ENTRÉE pas de gestion** (LE pattern du mining 25/06, live). SHORT GOLD pris en RANGE alors que le marché est bid (coil résolu UP 25/06) = momentum contre le flux. (3) GOLD SHORT 4008.02 EXPIRED no-fill. `ai_fill_rate` 22.7→25.5%, `ai_expired_nofill` 34→35.
 - **Nuance backlog n°2 (contre-exemple au caveat 25/06 17h)** : lake GC_F 1d = 3990.3→4030.5→**4025.0** = dernière barre 1d **UP** → un gate `momentum_breakout_htf` « pas de short si 1d monte » aurait **BLOQUÉ le GOLD SHORT perdant** = miroir inverse du 25/06 (où le 1d laggait DOWN et aurait autorisé un short au mauvais moment). ES_F 1d DOWN → gate aurait autorisé le US500 WIN_TIME (neutre). **n=2, injugeable, famille inexistante (token Sam), lag 24→25 = talon d'Achille persistant.** On documente, on ne présume rien.
-- **Régime 08:57** : GOLD ~4030 RANGE forecast conflictuel (15m +0.47/1h +0.35/4h −0.23, DANS value area POC 4021) → NO_TRADE validé ex-post (rebond UP post stop-out) ; US500 ~7338 HACHÉ forecast SHORT mais RR 1.12–1.62 + veto OVERNIGHT → NO_TRADE. F&G 13. **0 High-impact today** (2 Medium UoM 16:00 + Kashkari Low) → journée calme/range, peu favorable à l'OTE plein-R.
+- **Régime 08:57** : GOLD ~4030 RANGE forecast conflictuel (15m +0.47/1h +0.35/4h −0.23, DANS value area POC 4021) → NO_TRADE validé ex-post (rebond UP post stop-out) ; US500 ~7338 HACHÉ forecast SHORT mais RR 1.12-1.62 + veto OVERNIGHT → NO_TRADE. F&G 13. **0 High-impact today** (2 Medium UoM 16:00 + Kashkari Low) → journée calme/range, peu favorable à l'OTE plein-R.
 - **Hypothèses : 0** (lake byte-stable 07:00 1h/1d sans 15m, 11 familles KILLED, re-soumission=DUPLICATE, re-knob/sign-flip interdits ; breakout_htf = token Sam ; TP par régime = position_policy hors harness.evaluate). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE.
 
-## 2026-06-26 nuit (chercheur nocturne) — biais 66/66 SHORT quantifié + mining MFE rafraîchi (la 1re LOSS qui casse la séparation propre) + preuve code des 2 verrous token-Sam
+## 2026-06-26 nuit (chercheur nocturne), biais 66/66 SHORT quantifié + mining MFE rafraîchi (la 1re LOSS qui casse la séparation propre) + preuve code des 2 verrous token-Sam
 - **Re-vérif surface** : lake byte-stable **2026-06-26 07:00:0X** (vérifié mtime, 1h/1d, **toujours pas de 15m**). Week-end devant (samedi 27/06 marchés FERMÉS) → **pas de nouvelle surface avant lundi 29/06 07:00**. 11 familles registry == `strategy_families.FAMILIES` (`momentum, mean_reversion, session_hour, cot_extreme, momentum_regime, momentum_breakout, ichimoku ×5`), **44 KILLED + 1 sentinelle synthétique** (`TEST_JUDGE_pass`, exclue) → `lab_counters()` = **45/44/0/0** (vérifié en direct). Santé : resim equity x20 **1348.81 €** (== 23h analyst, 0 nouveau décisif ; n décisifs **12 < 15** insuffisant assumé), feature_store **4779/500 · 0 ERROR · 1 MIXED exclu**, 731 setups outcome, 7 jours order-flow, modèle gelé ; journal **162 sig** (INCHANGÉ vs 23h), **0 open / 0 pending**. Aucune injection (`news_cache` + `calendar_cache` : 0 token impératif sur le scan `ignore|exec|commit|delete|override|edit|run…`).
-- **Contribution 1 — biais directionnel QUANTIFIÉ (cadre, pas redondant)** : sur **TOUS les 66 signaux IA** (03/06→26/06, GOLD 34 + US500 32), **66/66 = SHORT, ZÉRO LONG jamais émis** (64 OTE_RETRACEMENT + 1 SHORT_CONTINUATION_FIB + 1 INTRADAY-SHORT-MOMENTUM). Le seul trend-day de la fenêtre (GOLD +1.5% le 26/06, clôture sur les plus-hauts) était **LONG et n'a jamais pu être tradé** : le moteur n'a structurellement aucun chemin vers un long. C'est la **caution chiffrée la plus forte** du levier backlog n°2 (`momentum_breakout_htf` ctx-aware = autoriser un long quand le 1d monte) — passe le « short-biaisé » qualitatif des analystes à un **fait : 0/66**.
-- **Contribution 2 — mining MFE/réversion RAFRAÎCHI (n=19 dédup vs 16 au 25/06, +2 LOSS du jour ; descriptif feed CFD ≠ lake, PAS un verdict-juge)** : 19 fills CLOSED IA dé-dupliqués par (asset, entry) = **10 WIN / 6 LOSS / 3 WIN_TIME**.
+- **Contribution 1, biais directionnel QUANTIFIÉ (cadre, pas redondant)** : sur **TOUS les 66 signaux IA** (03/06→26/06, GOLD 34 + US500 32), **66/66 = SHORT, ZÉRO LONG jamais émis** (64 OTE_RETRACEMENT + 1 SHORT_CONTINUATION_FIB + 1 INTRADAY-SHORT-MOMENTUM). Le seul trend-day de la fenêtre (GOLD +1.5% le 26/06, clôture sur les plus-hauts) était **LONG et n'a jamais pu être tradé** : le moteur n'a structurellement aucun chemin vers un long. C'est la **caution chiffrée la plus forte** du levier backlog n°2 (`momentum_breakout_htf` ctx-aware = autoriser un long quand le 1d monte), passe le « short-biaisé » qualitatif des analystes à un **fait : 0/66**.
+- **Contribution 2, mining MFE/réversion RAFRAÎCHI (n=19 dédup vs 16 au 25/06, +2 LOSS du jour ; descriptif feed CFD ≠ lake, PAS un verdict-juge)** : 19 fills CLOSED IA dé-dupliqués par (asset, entry) = **10 WIN / 6 LOSS / 3 WIN_TIME**.
 
 | Bucket | n | MFE réalisé | Lecture |
 |---|---|---|---|
-| **LOSS** | 6 | **0.03–0.54 %** (méd 0.16) | réversions ; **mais la queue monte à 0.54 %** (US500 26/06) |
-| **WIN** | 10 | 0.56–2.41 % (méd 1.22) | TP atteinte |
-| **WIN_TIME** | 3 | 0.38–0.72 % (méd 0.60) | sorties horizon ~flat-positif |
+| **LOSS** | 6 | **0.03-0.54 %** (méd 0.16) | réversions ; **mais la queue monte à 0.54 %** (US500 26/06) |
+| **WIN** | 10 | 0.56-2.41 % (méd 1.22) | TP atteinte |
+| **WIN_TIME** | 3 | 0.38-0.72 % (méd 0.60) | sorties horizon ~flat-positif |
 
-- **Ce que ça TEMPÈRE honnêtement** : le 25/06 montrait une séparation **propre** LOSS≤0.20 % vs WIN≥0.56 % (gap 0.20→0.56). La **LOSS US500 du 26/06 13:53 (MFE 0.54 %, MAE −0.35, pnl −0.363)** est **la 1re perte à percer ce plafond** : elle a couru **+0.54 % = quasi un MFE de gagnant** avant de se retourner plein stop. Le gap discriminant s'effondre à 0.54→0.56 → **le MFE précoce n'est PLUS un séparateur propre** entre futur-gagnant et futur-perdant. **Ce qui SURVIT quand même** : les 6 LOSS ont **toutes** un MFE **sous la TP la plus serrée jamais posée (0.63 %)** → aucune TP réalistement plaçable ne convertit le **bucket** perte en gains → **le levier reste à l'ENTRÉE**, pas dans la distance de TP (backlog n°3 toujours dépriorisé). *Réserve anti-data-mining : choisir une TP à 0.50 % APRÈS avoir vu ce MFE = peeking ; n=1 ; une TP ≤0.54 % toucherait aussi les WIN_TIME (0.38–0.72) → c'est une `position_policy`, non jugeable par `harness.evaluate`. On documente, on ne prescrit pas.*
-- **Contribution 3 — PREUVE au niveau code des 2 verrous token-Sam (plus seulement asserté)** : (a) **breakout_htf ctx-aware** : `evaluate()` construit `signal_fn = strategy_families.build_signal(family, params)` (harness.py:239) → impossible d'injecter un signal_fn custom lisant ctx depuis une expérience ; **seule `_cot_extreme` lit `ctx`** (strategy_families.py:159, `cot_pctile`), `_momentum_breakout` accepte mais **ignore** ctx (:351). Donc gater le breakout 1h par la tendance 1d **exige** une famille modifiée = **strategy_families.py protégé = token Sam**. (b) **`ctx_fn` par actif (backlog n°4, pool COT)** : les 2 `cot_extreme` existants sont **mono-actif et sous-powered** — `HD_gold` n_eff **29**, exp −0.46 ; `HE_es` n_eff **21**, exp +0.03 ; les deux **n_eff < 30** → KILLED par manque de puissance autant que d'edge. Pooler GOLD+US500 1d (même direction contrarian, **PAS un sign-flip**) donnerait 29+21=50 raw → **seul chemin vers n_eff≥30** ; clé non-duplicate (assets diffèrent). **MAIS** `simulate` appelle `ctx_fn(float(bar[0]))` (harness.py:146) = **timestamp seul, sans asset** ; GOLD et US500 1d partagent les **mêmes timestamps quotidiens** → le ctx_fn **ne peut pas** distinguer quel `cot_pctile` rendre → pooling **impossible** sans signature `ctx_fn(ts, asset)`. **Fix = ~1 ligne dans harness.py (protégé) = token Sam.** Le verrou est mécanique, pas conceptuel.
+- **Ce que ça TEMPÈRE honnêtement** : le 25/06 montrait une séparation **propre** LOSS≤0.20 % vs WIN≥0.56 % (gap 0.20→0.56). La **LOSS US500 du 26/06 13:53 (MFE 0.54 %, MAE −0.35, pnl −0.363)** est **la 1re perte à percer ce plafond** : elle a couru **+0.54 % = quasi un MFE de gagnant** avant de se retourner plein stop. Le gap discriminant s'effondre à 0.54→0.56 → **le MFE précoce n'est PLUS un séparateur propre** entre futur-gagnant et futur-perdant. **Ce qui SURVIT quand même** : les 6 LOSS ont **toutes** un MFE **sous la TP la plus serrée jamais posée (0.63 %)** → aucune TP réalistement plaçable ne convertit le **bucket** perte en gains → **le levier reste à l'ENTRÉE**, pas dans la distance de TP (backlog n°3 toujours dépriorisé). *Réserve anti-data-mining : choisir une TP à 0.50 % APRÈS avoir vu ce MFE = peeking ; n=1 ; une TP ≤0.54 % toucherait aussi les WIN_TIME (0.38-0.72) → c'est une `position_policy`, non jugeable par `harness.evaluate`. On documente, on ne prescrit pas.*
+- **Contribution 3, PREUVE au niveau code des 2 verrous token-Sam (plus seulement asserté)** : (a) **breakout_htf ctx-aware** : `evaluate()` construit `signal_fn = strategy_families.build_signal(family, params)` (harness.py:239) → impossible d'injecter un signal_fn custom lisant ctx depuis une expérience ; **seule `_cot_extreme` lit `ctx`** (strategy_families.py:159, `cot_pctile`), `_momentum_breakout` accepte mais **ignore** ctx (:351). Donc gater le breakout 1h par la tendance 1d **exige** une famille modifiée = **strategy_families.py protégé = token Sam**. (b) **`ctx_fn` par actif (backlog n°4, pool COT)** : les 2 `cot_extreme` existants sont **mono-actif et sous-powered** : `HD_gold` n_eff **29**, exp −0.46 ; `HE_es` n_eff **21**, exp +0.03 ; les deux **n_eff < 30** → KILLED par manque de puissance autant que d'edge. Pooler GOLD+US500 1d (même direction contrarian, **PAS un sign-flip**) donnerait 29+21=50 raw → **seul chemin vers n_eff≥30** ; clé non-duplicate (assets diffèrent). **MAIS** `simulate` appelle `ctx_fn(float(bar[0]))` (harness.py:146) = **timestamp seul, sans asset** ; GOLD et US500 1d partagent les **mêmes timestamps quotidiens** → le ctx_fn **ne peut pas** distinguer quel `cot_pctile` rendre → pooling **impossible** sans signature `ctx_fn(ts, asset)`. **Fix = ~1 ligne dans harness.py (protégé) = token Sam.** Le verrou est mécanique, pas conceptuel.
 - **Hypothèses : 0** (surface byte-identique → re-soumission = DUPLICATE ; re-knob = data-mining interdit ; sign-flip après 2 shorts perdants + GOLD clos haut = INTERDIT ; les 2 leviers éclairés ce soir = token Sam prouvé au code ; placement TP = `position_policy` hors `harness.evaluate`). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE. **À autopsier lundi 29/06 09h** : le refresh lake 07:00 capte-t-il enfin la cassure GOLD (close 1d > 4025) rendant le gate 1d-UP jugeable, et le moteur sort-il du 0/66-short si le 4h GOLD bascule LONG ?
 
-## 2026-06-27 09h (analyst, samedi week-end) — le refresh 07:00 capte la cassure 1d GOLD, mais la barre est DÉGÉNÉRÉE
+## 2026-06-27 09h (analyst, samedi week-end), le refresh 07:00 capte la cassure 1d GOLD, mais la barre est DÉGÉNÉRÉE
 - **Santé VERTE 6/6** : watcher cycle 08:55 (<12min) ; feature_store **4779/500** INCHANGÉ, 731 setups, 0 ERROR / 1 MIXED exclu, ret_4h OK, 7j order-flow ; resim equity x20 **1348.81€** (== 23h/nuit, 0 dérive, n décisifs 12<15 assumé) ; journal **162 sig** INCHANGÉ 0 open/pending WR 57.8% exp +0.058% ; prime_watcher.log 1.23Mo 0 error ; watchdog 0 octet depuis 17/06 ; datafeed tradingview 0 fallback ; Telegram 1 msg (briefing week-end) 0 ok:false cohérent. Injection : news/calendar 0 token impératif.
 - **FAIT NEUF (répond à moitié à la question du chercheur nocturne)** : le refresh lake **07:00 samedi** ajoute la barre `GC_F_1d` vendredi 26/06 → close **4078.70 > 4025**, séquence 1d **3990.3→4030.5→4078.70 = 2 clôtures UP**, lag lake↔live **s'effondre ~63→~10 pts** (live 4088.87). La prémisse du gate 1d-UP (backlog n°2) est désormais VISIBLE en donnée. ES_F_1d vendredi = OHLC réel close **7401.75 DOWN** → divergence : gate autoriserait long GOLD / bloquerait long US500.
 - **MAIS la barre 1d GOLD est DÉGÉNÉRÉE** : O=H=L=C=4078.70, **volume 2724 recopié de jeudi** = single-print plat, zéro amplitude intraday. Contraste ES_F_1d a une vraie amplitude (7459.5/7357.25). → la « cassure 1d » GOLD est un **instantané de close, pas une séance réglée** : la close (4078.70) est exploitable, mais le **high/low/volume de la barre fraîche = bruit**. Le talon d'Achille du 1d ne disparaît pas, il **MUTE : de lag (vendredi) à dégénérescence de barre fraîche (ce matin)**. Un gate breakout qui lirait le RANGE 1d serait nourri d'une bougie plate sur GOLD au pire moment → exiger qu'il lise la **close 1d**. On documente, on ne présume rien avant le refresh réglé de lundi.
 - **Autopsie : RIEN** (week-end, 0 fill, journal/feature_store inchangés). Cycles sur quotes figées (GOLD 4088.87 / US500 7332.7, TRANSITION 🟡, forecast GOLD 15m+0.48/1h+0.53/**4h −0.41** = confluence multi-TF toujours absente). Verdict vendredi tient : moteur short-biaisé (0/66 long), GOLD trend-day LONG jamais tradé.
 - **Hypothèses : 0** (surface +1 barre 1d dégénérée ≠ test neuf → re-soumission DUPLICATE ; 15m absent ; 11 familles KILLED ; re-knob/sign-flip interdits ; 2 leviers = token Sam prouvés au code ; TP par régime hors harness ; week-end → pas de surface tradeable avant lundi 07:00). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE. **À autopsier lundi 09h** : le refresh réglé remplace-t-il la barre plate par une vraie OHLC (cassure confirmée vs artefact) ? GOLD continue/réverse ? le 4h bascule-t-il LONG (sortie du 0/66-short) ?
 
-## 2026-06-27 13h (analyst, samedi week-end) — RIEN à autopsier (0 fill) ; le 4h GOLD reste −0.41 (le moteur ne sort pas du 0/66-short) ; volume-recopie bilatérale = artefact systématique du refresh
+## 2026-06-27 13h (analyst, samedi week-end), RIEN à autopsier (0 fill) ; le 4h GOLD reste −0.41 (le moteur ne sort pas du 0/66-short) ; volume-recopie bilatérale = artefact systématique du refresh
 - **Santé VERTE 6/6** (tout == 09h) : watcher cycle 12:56 (<12 min) ; feature_store **4779/500** INCHANGÉ, 731 setups, 0 ERROR/1 MIXED, ret_4h OK, 7 j ; resim equity x20 **1348.81€** (0 dérive, n décisifs 12<15) ; journal **162 sig** INCHANGÉ 0 open/pending WR 57.8% exp +0.058% ; prime_watcher.log 1.24Mo 0 error ; watchdog 0 octet depuis 17/06 ; datafeed tradingview 0 fallback ; Telegram 3 msg today 0 ok:false (l'unique ok:false de l'outbox date du 21/06). Injection : news/calendar 0 token impératif. Lab 45/44/0/0.
 - **Autopsie : RIEN** (week-end, 0 fill, journal/feature_store byte-identiques). Cycles 12:51/12:56 sur quotes FIGÉES (GOLD 4088.87 TRANSITION 🟡 forecast 15m+0.48/1h+0.53/**4h −0.41** recent_delta +40430 acheteur ; US500 7332.7 TRANSITION 🟡 forecast 15m−0.58/1h−0.29/**4h −0.77** recent_delta +579 ≈plat), les 2 NO_TRADE.
 - **Réponse 13h à la question du chercheur nocturne** (« le 4h GOLD bascule-t-il LONG → sortie du 0/66-short ? ») : **NON.** Sur un week-end entier de quotes figées, le 4h GOLD reste **−0.41** (== 09h) alors que le live 4088 est AU-DESSUS de la close 1d 4078.70 et que 15m/1h sont positifs. Le non-événement EST un résultat : **le laggard est le forecast 4h lui-même** → re-cadre backlog n°2 (gate HTF plus rapide = `momentum_breakout_htf` ctx-aware, token Sam). Pas une hyp neuve, une confirmation.
 - **Précision sur la barre 1d dégénérée (affine 09h)** : GC_F_1d vendredi O=H=L=C=**4078.70** vol 2724 (FLAT, single-print) ; ES_F_1d vendredi 7431/7459.5/7357.25/**7401.75** vol 1670252 (vraie amplitude, close DOWN). Séquence close GOLD 1d 3990.3→4030.5→4078.70 = 2 clôtures UP (confirmé). **Détail neuf** : le **volume de la barre fraîche est recopié de la barre précédente sur LES DEUX actifs** (GC 2724==2724, ES 1670252==1670252) → recopie volume = **artefact SYSTÉMATIQUE du refresh 07:00**, pas spécifique GOLD. Propre à GOLD = l'**OHLC flat**. ⇒ close 1d exploitable, high/low GOLD + volume des deux = bruit ; un gate breakout doit lire la **close 1d**. Talon d'Achille 1d a muté (lag → bougie plate + volume recopié), pas disparu. Injugeable jusqu'au refresh réglé lundi.
 - **Hypothèses : 0** (surface byte-stable depuis 07:00, 15m absent, 11 familles KILLED, re-soumission DUPLICATE, re-knob/sign-flip interdits, 2 leviers = token Sam prouvés au code, TP par régime hors harness, week-end → pas de surface tradeable avant lundi 07:00, 0 fill → 0 test harness). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE.
 
-## 2026-06-27 17h (analyst, samedi week-end) — RIEN à autopsier (0 fill, 3ᵉ lecture figée) ; le 4h GOLD reste −0.41 pour la 3ᵉ fois ; recent_delta passe à None (order-flow gelé)
+## 2026-06-27 17h (analyst, samedi week-end), RIEN à autopsier (0 fill, 3ᵉ lecture figée) ; le 4h GOLD reste −0.41 pour la 3ᵉ fois ; recent_delta passe à None (order-flow gelé)
 - **Santé VERTE 6/6** (tout == 09h/13h) : watcher cycle 16:58 (<12 min, 189 cycles aujourd'hui) ; feature_store **4779/500** INCHANGÉ, 731 setups, 0 ERROR/1 MIXED, ret_4h OK, 7 j ; resim equity x20 **1348.81€** (0 dérive, n décisifs 12<15) ; journal **162 sig** INCHANGÉ (last_updated 26/06 14:10) 0 open/pending WR 57.8% exp +0.058% ; prime_watcher.log 1.26Mo (+0.02 cycling) 0 error ; watchdog 0 octet depuis 17/06 ; datafeed tradingview 0 fallback ; Telegram 5 msg today 0 ok:false (l'unique ok:false outbox date du 21/06). Injection news/calendar 0 token impératif. Lab 45/44/0/0.
 - **Note audit** : `test_skeptic_scope.py` non-suivi en RACINE (hors research/), script d'analyse de scope GOLD+US500 sur user_trades, antérieur à la session, inoffensif mais mal placé → signalé à Sam (déplacer dans research/ ou supprimer) ; je n'y touche pas (hors périmètre), non committé.
 - **Autopsie : RIEN** (week-end, 0 fill, journal/feature_store byte-identiques). Cycles 16:53/16:58 sur quotes FIGÉES strictement == 13h (GOLD 4088.87 TRANSITION 🟡 forecast 15m+0.48/1h+0.53/**4h −0.41** ; US500 7332.7 TRANSITION 🟡 forecast 15m−0.58/1h−0.29/**4h −0.77**), les 2 NO_TRADE. **recent_delta = None** au dernier cycle = order-flow cesse d'actualiser week-end gelé (cohérent, pas un bug : pas de tape marchés fermés).
 - **Réponse 17h (3ᵉ lecture)** à « le 4h GOLD bascule-t-il LONG → sortie du 0/66-short ? » : **NON, 3ᵉ fois consécutive.** Le 4h GOLD reste **−0.41** (== 09h == 13h) malgré live 4088 > close 1d 4078.70 et 15m/1h positifs. Le laggard EST le forecast 4h lui-même → re-cadre backlog n°2 (gate HTF plus rapide = momentum_breakout_htf ctx-aware, token Sam). Confirmation, pas hyp neuve.
 - **Hypothèses : 0** (surface byte-stable depuis 07:00, 15m absent, barre 1d dégénérée ≠ test neuf=DUPLICATE, 11 familles KILLED, re-knob/sign-flip interdits, 2 leviers = token Sam prouvés au code, TP par régime hors harness, week-end → pas de surface tradeable avant lundi 07:00, 0 fill → 0 test harness). **Verdict** : Lab 45/44/0/0, reco promo NON, prod GELÉE. **À autopsier 23h / lundi 09h** : refresh réglé 07:00 lundi remplace-t-il la barre plate par une vraie OHLC ? GOLD continue/réverse le gain week-end ? le 4h bascule-t-il LONG = sortie du 0/66-short ?
 
-## 2026-06-27 — CHERCHEUR NOCTURNE (samedi→dimanche week-end) — mining du dataset USER élargi par l'import CSV (n=180) : breakeven, AUCUNE structure conditionnable ne survit à un IC
+## 2026-06-27, CHERCHEUR NOCTURNE (samedi→dimanche week-end), mining du dataset USER élargi par l'import CSV (n=180) : breakeven, AUCUNE structure conditionnable ne survit à un IC
 - **Contexte** : depuis le 23h analyst, l'import CSV a porté la référence USER (fills réels Revolut) de **78 → 180 CLOSED** (09/06→26/06 ; le mining couvre 19/05→26/06). Lake byte-stable depuis 07:00 (1h/1d, **toujours pas de 15m**), week-end → **0 surface tradeable avant lundi 29/06 07:00**. AI **66/66 SHORT** inchangé (import = 0 AI, 0 fill 27/06). Injection news/calendar = 0 token impératif. Lab 45/44/0/0, 11 familles registry == `strategy_families.FAMILIES` (re-vérifié en direct ce run).
-- **Mine du protocole §3 sur n=180 (descriptif feed réel, PAS un verdict-juge ; ICs Wilson/bootstrap partout)** : GLOBAL WR **56.7 %** [49.4–63.7], **meanpnl +0.002 %** CI[−0.049,+0.053] = **discrétionnaire de Sam strictement breakeven net** sur un échantillon 2,3× plus grand. Décomposition — **AUCUN sous-groupe ne sort son IC de zéro** :
+- **Mine du protocole §3 sur n=180 (descriptif feed réel, PAS un verdict-juge ; ICs Wilson/bootstrap partout)** : GLOBAL WR **56.7 %** [49.4-63.7], **meanpnl +0.002 %** CI[−0.049,+0.053] = **discrétionnaire de Sam strictement breakeven net** sur un échantillon 2,3× plus grand. Décomposition, **AUCUN sous-groupe ne sort son IC de zéro** :
   - par actif : GOLD n=137 (56.2 %, −0.002 %), US500 n=36 (58.3 %, +0.029 %), reste n≤2 (bruit).
-  - par direction : **SHORT n=114 (59.6 %, +0.027 %) vs LONG n=66 (51.5 %, −0.041 %)** — les deux CI straddle 0.
-  - par stratégie : SCALP_CFD n=102 (+0.005 %), HISTORIQUE_IMPORT n=57 (+0.005 %), SCALP_REBOND n=20 (−0.007 %) — tous CI⊃0.
+  - par direction : **SHORT n=114 (59.6 %, +0.027 %) vs LONG n=66 (51.5 %, −0.041 %)** : les deux CI straddle 0.
+  - par stratégie : SCALP_CFD n=102 (+0.005 %), HISTORIQUE_IMPORT n=57 (+0.005 %), SCALP_REBOND n=20 (−0.007 %), tous CI⊃0.
   - séquentiel : after_WIN n=97 (58.8 %, −0.021 %) vs after_LOSS n=75 (53.3 %, +0.037 %) = **pas de tilt revanche/discipline** significatif.
-- **FAIT NEUF #1 (limite dure de l'import)** : les lignes importées **ne portent PAS les champs de régime** — `adx` manquant/zéro sur **180/180**, `vix`/`dxy` idem, `session='REAL'` sur 180/180, `mfe_pct` non-None sur **1/180**. ⇒ la « donnée neuve » **ne peut PAS être conditionnée à un régime/session** (le cœur même de la conditionnalité-de-régime du protocole) ni minée en MFE. L'import grossit l'échantillon **mais n'ajoute aucun axe de conditionnement** : il confirme le breakeven, il n'ouvre aucune hypothèse régime-conditionnée.
-- **FAIT NEUF #2 (affine backlog n°2, le 0/66-short)** : le **même humain, sur les mêmes instruments, a pris 66 LONGs** (51.5 % WR, −0.041 %) là où le moteur IA a émis **0 long / 66 short**. ⇒ le 0/66-AI-short est un **artefact du MOTEUR, pas une propriété du marché** (les longs sont prenables et l'ont été). Ça **renforce** « le moteur n'a aucun chemin vers le long » comme **lacune structurelle** (backlog n°2 = `momentum_breakout_htf` ctx-aware, token Sam) ; **mais ça TEMPÈRE** toute présomption que le long gaté serait gagnant : les 66 longs humains sont **breakeven négatif (−0.041 %)**, pas un edge. Le gate 1d-UP reste à **éprouver par le juge**, pas à présumer gagnant — cohérent avec le caveat lag/dégénérescence-1d des analystes.
+- **FAIT NEUF #1 (limite dure de l'import)** : les lignes importées **ne portent PAS les champs de régime** : `adx` manquant/zéro sur **180/180**, `vix`/`dxy` idem, `session='REAL'` sur 180/180, `mfe_pct` non-None sur **1/180**. ⇒ la « donnée neuve » **ne peut PAS être conditionnée à un régime/session** (le cœur même de la conditionnalité-de-régime du protocole) ni minée en MFE. L'import grossit l'échantillon **mais n'ajoute aucun axe de conditionnement** : il confirme le breakeven, il n'ouvre aucune hypothèse régime-conditionnée.
+- **FAIT NEUF #2 (affine backlog n°2, le 0/66-short)** : le **même humain, sur les mêmes instruments, a pris 66 LONGs** (51.5 % WR, −0.041 %) là où le moteur IA a émis **0 long / 66 short**. ⇒ le 0/66-AI-short est un **artefact du MOTEUR, pas une propriété du marché** (les longs sont prenables et l'ont été). Ça **renforce** « le moteur n'a aucun chemin vers le long » comme **lacune structurelle** (backlog n°2 = `momentum_breakout_htf` ctx-aware, token Sam) ; **mais ça TEMPÈRE** toute présomption que le long gaté serait gagnant : les 66 longs humains sont **breakeven négatif (−0.041 %)**, pas un edge. Le gate 1d-UP reste à **éprouver par le juge**, pas à présumer gagnant, cohérent avec le caveat lag/dégénérescence-1d des analystes.
 - **Hypothèses : 0** (discipliné). Le mining est **descriptif sur feed production CFD ≠ lake** → nourrit specs/backlog, **n'ouvre AUCUN test `harness.evaluate`** (qui juge des familles de signaux sur le lake, pas les fills discrétionnaires). Surface lake byte-identique → re-soumission = DUPLICATE ; re-knob = data-mining ; sign-flip INTERDIT (les 66 shorts humains à +0.027 % ne « prouvent » pas un long perdant, ni l'inverse) ; 2 leviers riches = token Sam prouvés au code (analyste 26/06). **Verdict : Lab 45/44/0/0, reco promo NON, prod GELÉE.**
 - **À autopsier lundi 29/06 09h** : (a) refresh **réglé** 07:00 remplace-t-il la barre GC_F_1d plate (O=H=L=C 4078.70, vol recopié) par une vraie OHLC = cassure confirmée vs artefact ? (b) GOLD continue/réverse le gain week-end ? (c) le **4h GOLD bascule-t-il LONG** = 1re sortie du 0/66-short ? (d) si Sam tranche l'import (garder/revert backup) : re-mesurer si les rows ré-importées portent enfin adx/vix/session (sinon le mine reste non-conditionnable).
 
-## 2026-06-28 17h (analyst, dimanche week-end) — RIEN à autopsier (0 fill) ; 1re entrée autopsy du jour ; le 4h est le SEUL composant byte-constant (15m/1h toggle entre 2 états, 4h figé) → laggard 4h renforcé
-- **Santé VERTE 6/6** : watcher cycle **16:57** (<12 min, **186 cycles** aujourd'hui, duration ~21 s) ; feature_store **4779/500** INCHANGÉ (731 setups, 0 ERROR/1 MIXED, ret_4h OK, 7 j order-flow) ; resim equity x20 **1348.81€** (0 dérive, 12 décisifs<15, exp +0.277% [0.039–0.49]) ; prime_watcher.log **1.327 Mo** (+0.01 cycling) 0 error ; datafeed **tradingview** 4/4 streams 0 fallback ; Telegram **7 msg today** 0 ok:false (unique ok:false outbox = 21/06). Injection news/calendar **0 token impératif**. Lab **45/44/0/0** (déflation test n°46, z requis 3.07).
-- **Autopsie : RIEN** (week-end, 0 fill, journal/feature_store byte-identiques). **FAIT NEUF 17h — la surface n'est PAS strictement byte-figée** : sur les 186 cycles du jour, les forecasts prennent **exactement 2 états discrets** par actif (prix byte-figé 4088.87/7332.7) — GOLD ∈ {15m+0.33/1h+0.38, 15m+0.48/1h+0.53}, US500 ∈ {15m−0.58/1h−0.29, 15m−0.43/1h−0.14}. **Le 4h est le SEUL composant BYTE-CONSTANT toute la journée** (GOLD **−0.413**, US500 **−0.767**). Le toggle 15m/1h = recompute moteur sur candles cachées (2 fenêtres), pas un mouvement de marché (close fermé). Les 2 actifs restent TRANSITION 🟡 / NO_TRADE dans les deux états.
-- **Réponse 17h** à « le 4h GOLD bascule-t-il LONG ? » : **NON** — et le 17h le durcit : le 4h GOLD n'est pas seulement figé à −0.41, il est le **point fixe** de toute la surface du jour pendant que le reste oscille. Le laggard structurel **EST** le gate 4h lui-même (live 4088 > close 1d 4078.70, 15m/1h positifs dans un des 2 états, 4h refuse). Re-cadre backlog n°2 (`momentum_breakout_htf` ctx-aware, token Sam). Confirmation, pas hyp neuve.
+## 2026-06-28 17h (analyst, dimanche week-end), RIEN à autopsier (0 fill) ; 1re entrée autopsy du jour ; le 4h est le SEUL composant byte-constant (15m/1h toggle entre 2 états, 4h figé) → laggard 4h renforcé
+- **Santé VERTE 6/6** : watcher cycle **16:57** (<12 min, **186 cycles** aujourd'hui, duration ~21 s) ; feature_store **4779/500** INCHANGÉ (731 setups, 0 ERROR/1 MIXED, ret_4h OK, 7 j order-flow) ; resim equity x20 **1348.81€** (0 dérive, 12 décisifs<15, exp +0.277% [0.039-0.49]) ; prime_watcher.log **1.327 Mo** (+0.01 cycling) 0 error ; datafeed **tradingview** 4/4 streams 0 fallback ; Telegram **7 msg today** 0 ok:false (unique ok:false outbox = 21/06). Injection news/calendar **0 token impératif**. Lab **45/44/0/0** (déflation test n°46, z requis 3.07).
+- **Autopsie : RIEN** (week-end, 0 fill, journal/feature_store byte-identiques). **FAIT NEUF 17h, la surface n'est PAS strictement byte-figée** : sur les 186 cycles du jour, les forecasts prennent **exactement 2 états discrets** par actif (prix byte-figé 4088.87/7332.7), GOLD ∈ {15m+0.33/1h+0.38, 15m+0.48/1h+0.53}, US500 ∈ {15m−0.58/1h−0.29, 15m−0.43/1h−0.14}. **Le 4h est le SEUL composant BYTE-CONSTANT toute la journée** (GOLD **−0.413**, US500 **−0.767**). Le toggle 15m/1h = recompute moteur sur candles cachées (2 fenêtres), pas un mouvement de marché (close fermé). Les 2 actifs restent TRANSITION 🟡 / NO_TRADE dans les deux états.
+- **Réponse 17h** à « le 4h GOLD bascule-t-il LONG ? » : **NON** : et le 17h le durcit : le 4h GOLD n'est pas seulement figé à −0.41, il est le **point fixe** de toute la surface du jour pendant que le reste oscille. Le laggard structurel **EST** le gate 4h lui-même (live 4088 > close 1d 4078.70, 15m/1h positifs dans un des 2 états, 4h refuse). Re-cadre backlog n°2 (`momentum_breakout_htf` ctx-aware, token Sam). Confirmation, pas hyp neuve.
 - **Hypothèses : 0** (surface toggle entre 2 états déjà vus = pas de surface tradeable NEUVE → re-soumission DUPLICATE ; 15m lake absent ; 11 familles KILLED ; re-knob/sign-flip interdits ; import USER non-conditionnable faute champs régime ; 2 leviers = token Sam prouvés au code ; TP par régime hors harness ; dimanche → pas de surface tradeable avant lundi 29/06 07:00 ; 0 fill → 0 test harness ouvert). **Verdict : Lab 45/44/0/0, reco promo NON, prod GELÉE.**
 - **À autopsier 23h / lundi 09h** : (a) refresh **réglé** 07:00 lundi remplace-t-il la barre GC_F_1d plate (O=H=L=C 4078.70) par une vraie OHLC = cassure confirmée vs artefact ? (b) GOLD continue/réverse le gain week-end ? (c) le **4h GOLD bascule-t-il enfin LONG** = 1re sortie du 0/66-short ? (d) **nouveau muet** cette nuit (pattern ~3-4 j → risque vers 01-02/07 ; `powercfg /lastwake` à relever si oui).
 
-### 2026-06-28 23h (evening — bilan dimanche, marché fermé)
-- **Santé VERTE 6/6** : watcher cycle **22:57** (<12 min, **253 cycles** aujourd'hui, duration ~18-23 s) ; continuité PARFAITE depuis le muet 04:24 (seul gap >12 min du jour = **26.3 min @03:58**, déjà root-causé veille OS, AUCUN nouveau muet entre 17h et 23h) ; feature_store **4779/500** INCHANGÉ (731 setups, 0 ERROR, ret_4h OK, 7 j order-flow) ; resim equity x20 **1348.81€** (0 dérive, 12 décisifs<15, exp +0.277% [0.039–0.49]) ; USER n=180 WR 56.7% exp +0.002% ; prime_watcher.log **1.344 Mo** (+0.017 vs 17h = cycling normal) **0 error** ; datafeed **tradingview** 4/4 0 fallback ; Telegram **11 msg today** 0 ok:false. Injection news/calendar **0 token impératif**. Lab **45/44/0/0** (déflation test n°46, z requis 3.07).
-- **Autopsie : RIEN de neuf** (week-end, 0 fill). Le **FAIT NEUF du 17h est CONFIRMÉ sur le JOUR COMPLET** (253 cycles vs 186 à 17h) : prix byte-figés (GOLD 4088.87 ×253, US500 7332.7 ×253), forecasts en **exactement 2 états discrets** par actif — GOLD {(15m+0.48/1h+0.53)×137, (15m+0.33/1h+0.38)×116}, US500 {(15m−0.58/1h−0.29)×205, (15m−0.43/1h−0.14)×48}. **4h BYTE-CONSTANT toute la journée** : GOLD **−0.413** ×253, US500 **−0.767** ×253. Le 4h est l'**unique point fixe** de la surface ; laggard structurel = le gate 4h lui-même. Confirmation sur N complet, pas hyp neuve.
+### 2026-06-28 23h (evening, bilan dimanche, marché fermé)
+- **Santé VERTE 6/6** : watcher cycle **22:57** (<12 min, **253 cycles** aujourd'hui, duration ~18-23 s) ; continuité PARFAITE depuis le muet 04:24 (seul gap >12 min du jour = **26.3 min @03:58**, déjà root-causé veille OS, AUCUN nouveau muet entre 17h et 23h) ; feature_store **4779/500** INCHANGÉ (731 setups, 0 ERROR, ret_4h OK, 7 j order-flow) ; resim equity x20 **1348.81€** (0 dérive, 12 décisifs<15, exp +0.277% [0.039-0.49]) ; USER n=180 WR 56.7% exp +0.002% ; prime_watcher.log **1.344 Mo** (+0.017 vs 17h = cycling normal) **0 error** ; datafeed **tradingview** 4/4 0 fallback ; Telegram **11 msg today** 0 ok:false. Injection news/calendar **0 token impératif**. Lab **45/44/0/0** (déflation test n°46, z requis 3.07).
+- **Autopsie : RIEN de neuf** (week-end, 0 fill). Le **FAIT NEUF du 17h est CONFIRMÉ sur le JOUR COMPLET** (253 cycles vs 186 à 17h) : prix byte-figés (GOLD 4088.87 ×253, US500 7332.7 ×253), forecasts en **exactement 2 états discrets** par actif, GOLD {(15m+0.48/1h+0.53)×137, (15m+0.33/1h+0.38)×116}, US500 {(15m−0.58/1h−0.29)×205, (15m−0.43/1h−0.14)×48}. **4h BYTE-CONSTANT toute la journée** : GOLD **−0.413** ×253, US500 **−0.767** ×253. Le 4h est l'**unique point fixe** de la surface ; laggard structurel = le gate 4h lui-même. Confirmation sur N complet, pas hyp neuve.
 - **Hypothèses : 0** (surface toggle 2 états déjà vus = pas de surface tradeable NEUVE → DUPLICATE ; 15m lake absent ; 11 familles KILLED ; re-knob/sign-flip interdits ; import USER non-conditionnable ; 2 leviers token Sam ; dimanche → pas de surface tradeable avant lundi 29/06 07:00 ; 0 fill → 0 test harness ouvert). **Verdict : Lab 45/44/0/0, reco promo NON, prod GELÉE.**
 - **À autopsier lundi 29/06 09h** : (a) refresh 07:00 lundi remplace-t-il la barre GC_F_1d plate (O=H=L=C 4078.70) par une vraie OHLC ? (b) GOLD continue/réverse le gain week-end (live 4088.87 > close 1d 4078.70) ? (c) le **4h GOLD bascule-t-il enfin LONG** = 1re sortie du moteur hors 0/66-short ? (d) **nouveau muet** cette nuit (pattern ~3-4 j, dernier 04:24 le 28/06 → prochain risque ~01-02/07 ; `powercfg /lastwake` à relever si oui).
 
-## 2026-06-28 — CHERCHEUR NOCTURNE (dimanche→lundi, week-end · marché fermé) — le backlog #5 ("re-tester twist_1d sur lake épaissi") est INACTIONNABLE par le harness tel quel (dédup code-vérifié + démontré empiriquement)
-- **Contexte ingestion (re-vérifié ce run)** : pas de `PAUSE`. Lab `lab_counters()` = **45/44/0/0** (déflation test n°46 → z_req ~3.07). Lake = 13 parquet mtime 07:00 ; **frontière réelle vérifiée (ts epoch→UTC)** : 1d GC_F/ES_F dernier bar = **vendredi 26/06** (OHLC RÉELLE — GC dernier 1d O4044/H4111/L3998/C4096, semaine volatile low 3963 le 24/06 → close 4096), 1h dernier bar = **26/06 20:00 UTC**. **Toujours aucun 15m.** resim USER WR 56.7% n=180 exp +0.002%, equity x20 **1348.81€** (0 dérive). feature_store 4779/500, 731 setups, 0 ERROR. journal 264 sig (USER 180/AI 66/None 18), 0 fill 28/06. Injection news/calendar **0 hit**.
+## 2026-06-28, CHERCHEUR NOCTURNE (dimanche→lundi, week-end · marché fermé), le backlog #5 ("re-tester twist_1d sur lake épaissi") est INACTIONNABLE par le harness tel quel (dédup code-vérifié + démontré empiriquement)
+- **Contexte ingestion (re-vérifié ce run)** : pas de `PAUSE`. Lab `lab_counters()` = **45/44/0/0** (déflation test n°46 → z_req ~3.07). Lake = 13 parquet mtime 07:00 ; **frontière réelle vérifiée (ts epoch→UTC)** : 1d GC_F/ES_F dernier bar = **vendredi 26/06** (OHLC RÉELLE, GC dernier 1d O4044/H4111/L3998/C4096, semaine volatile low 3963 le 24/06 → close 4096), 1h dernier bar = **26/06 20:00 UTC**. **Toujours aucun 15m.** resim USER WR 56.7% n=180 exp +0.002%, equity x20 **1348.81€** (0 dérive). feature_store 4779/500, 731 setups, 0 ERROR. journal 264 sig (USER 180/AI 66/None 18), 0 fill 28/06. Injection news/calendar **0 hit**.
 - **CORRECTION DE CADRAGE** : la barre 1d "plate" O=H=L=C=4078.70 vue par les analystes ce week-end est le feed **PRODUCTION TradingView CFD** (figé week-end), **PAS le lake yfinance** (distinct, voulu). Le lake **n'est pas figé sur du Friday-19 périmé** : il porte la **semaine complète de trading** jusqu'au 26/06. "Lake byte-stable depuis 07:00" reste vrai (0 bar neuf sur le week-end, normal) mais la frontière est **courante-au-vendredi**, pas stale.
 - **FAIT NEUF (structurel, code-vérifié harness.py:66-70 + 228-231)** : `hypothesis_key = sha256(family, params, sorted(assets), timeframe)[:16]`. (1) **`exit_rule` n'est PAS dans la clé** → changer stop/tp/horizon ne crée pas une hypothèse neuve (re-knob déguisé). (2) un doublon de clé retourne `{"verdict":"DUPLICATE"}` et **RETOURNE AVANT tout `_registry_append`** → le harness **ne ré-évalue JAMAIS** une cellule déjà jugée, **même si le lake a gagné des barres**.
-- **COROLLAIRE — backlog #5 inactionnable** : `IL_pool_ichimoku_twist_1d` (twist pool 1d) jugé le **22/06** KILLED, **n_eff=30 PILE au seuil**, exp **+0.56%** (le "seul point estimate positif" du backlog), IC **[−0.007, 1.178]** (borne basse <0), t=1.79 ≪ z_req=3.06. Le lake 1d a depuis gagné ~4 barres/actif (frontière 22/06→26/06) = **exactement la condition du backlog #5** — mais re-soumettre la même clé = DUPLICATE, pas de nouveau verdict.
+- **COROLLAIRE, backlog #5 inactionnable** : `IL_pool_ichimoku_twist_1d` (twist pool 1d) jugé le **22/06** KILLED, **n_eff=30 PILE au seuil**, exp **+0.56%** (le "seul point estimate positif" du backlog), IC **[−0.007, 1.178]** (borne basse <0), t=1.79 ≪ z_req=3.06. Le lake 1d a depuis gagné ~4 barres/actif (frontière 22/06→26/06) = **exactement la condition du backlog #5** : mais re-soumettre la même clé = DUPLICATE, pas de nouveau verdict.
 - **DÉMONSTRATION EMPIRIQUE** (`exp_2026_06_28_nocturne.py`) : re-soumission de la cellule IL (params/assets/tf identiques au verdict 22/06) → `verdict=DUPLICATE` (collision avec `IL_pool_ichimoku_twist_1d` du 2026-06-22), **lab_counters inchangé** (45/44/0/0 avant=après), **registry len inchangé** (45=45), invariant **0-effet-de-bord OK**. Le chemin DUPLICATE retourne avant l'append → **0 déflation brûlée** (re-tester ne coûte rien mais ne donne rien).
-- **PROPOSITION (token Sam, harness.py protégé — je ne touche pas)** : pour rendre #5 actionnable sans ouvrir la porte au re-knob, ajouter une **empreinte de données** à `hypothesis_key` (fingerprint lake : nb barres + ts du dernier bar par actif/tf). Lake inchangé → reste DUPLICATE (bon) ; après N barres neuves → cellule distincte = re-test honnête sur donnée fraîche (family/params/exit identiques, donc pas un re-knob). Spec only.
+- **PROPOSITION (token Sam, harness.py protégé, je ne touche pas)** : pour rendre #5 actionnable sans ouvrir la porte au re-knob, ajouter une **empreinte de données** à `hypothesis_key` (fingerprint lake : nb barres + ts du dernier bar par actif/tf). Lake inchangé → reste DUPLICATE (bon) ; après N barres neuves → cellule distincte = re-test honnête sur donnée fraîche (family/params/exit identiques, donc pas un re-knob). Spec only.
 - **Hypothèses : 0** (matrice fermée ; 2 leviers riches = token Sam derrière fichiers protégés : `momentum_breakout_htf` ctx-aware strategy_families.py:351 + pool COT via `ctx_fn(ts,asset)` harness.py:146 ; dédup bloque le re-test sur lake épaissi ; re-knob/sign-flip interdits ; import USER non-conditionnable ; 15m absent ; dimanche → 0 surface tradeable avant lundi 07:00). **Verdict : Lab 45/44/0/0, reco promo NON, prod GELÉE.**
-- **À autopsier lundi 29/06 09h** : (a) refresh 07:00 lundi — vraie OHLC sur la prod ? (b) GOLD continue/réverse le gain week-end ? (c) le **4h GOLD bascule-t-il LONG** ? (d) **nouveau muet** cette nuit (pattern ~3-4 j, dernier 04:24 le 28/06 → risque ~01-02/07) ? (e) Sam tranche-t-il l'import journal.json (garder/revert) et le fingerprint-clé du backlog #5 ?
+- **À autopsier lundi 29/06 09h** : (a) refresh 07:00 lundi, vraie OHLC sur la prod ? (b) GOLD continue/réverse le gain week-end ? (c) le **4h GOLD bascule-t-il LONG** ? (d) **nouveau muet** cette nuit (pattern ~3-4 j, dernier 04:24 le 28/06 → risque ~01-02/07) ? (e) Sam tranche-t-il l'import journal.json (garder/revert) et le fingerprint-clé du backlog #5 ?
 
-### 2026-06-29 13h (midday — lundi, séance Europe, marché ouvert)
-- **Santé VERTE 6/6** : watcher cycle **12:56** (<12 min, **286 events** today, duration ~16-21 s) ; feature_store **4977/500** (vs 4889 à 09h, **+88 outcomes**, 731 setups, 0 ERROR/1 MIXED, 8 j order-flow) ; resim equity x20 **1348.81€** (0 dérive, 12 décisifs<15 exp +0.277% [0.039–0.49]) ; USER n=180 WR 56.7% exp +0.002% ; prime_watcher.log **1.384 Mo** (+0.011 vs 09h) **0 error** today ; datafeed **tradingview** 6/6 0 fallback ; Telegram **3 msg today** (briefing 09:00, Analyst 09h, briefing 12:00) 0 ok:false (unique=21/06). Injection news/calendar **0 token**. Lab **45/44/0/0** (déflation test n°46, z_req 3.07). 0 muet ce matin (risque ~04:00 non matérialisé → prochaine fenêtre ~01-02/07).
-- **Autopsie — 0 fill, 0 A_SETUP, 0 WATCH (tout NO_TRADE)**. Régime du jour : GOLD 240 RANGE / 38 TRANSITION / **8 TENDANCE HACHÉE** (dernière heure) ; US500 134 RANGE / 9 TRANSITION / 0 HACHÉE.
-- **FAIT NEUF 1 — GOLD = mouvement directionnel du jour (baissier)** : ~4 058 (09h) → **~4 036** (12:56), −1.4% jour. Régime bascule **RANGE→TRANSITION→TENDANCE HACHÉE** en accélérant la baisse ; 4h passe −0.40→**−0.547** SHORT-aligné (15m −0.77/1h −0.50). **Confirme la nuance 09h backlog n°2** : 4h-short directionnellement CORRECT (prix descend) → le grief « gate 4h trop lent » est régime-dépendant (ne mord QUE quand prix MONTE plus vite que la bougie 4h). **MAIS TENDANCE HACHÉE = whipsaw = le PIRE régime momentum** ; scanner NO_TRADE → rester plat est défendable, évidence **CONTRE** une entrée momentum-short, pas pour une hyp.
-- **FAIT NEUF 2 — US500 = test live du grief n°2 en marché HAUSSIER** (question (c) du 09h) : ~7 378 (+0.64%) → **~7 396 (+0.79%)**, NASDAQ +1.34% en tête ; 15m +0.4/1h +0.20 LONG mais **4h NÉGATIF toute la matinée** (−0.013→−0.163→−0.313) → LONG gated. **Nuance décisive** : 4h près de ZÉRO (pas blocage fort), régime classé **RANGE ⚪** (pas tendance), hausse = **dérive de range** sous résistance 7 398 (pas cassure propre). → grief ne mord que sur **vraie tendance haussière rapide** ; US500 n'en fournit pas une → **ni confirmation ni réfutation, test propre toujours PENDANT**.
+### 2026-06-29 13h (midday, lundi, séance Europe, marché ouvert)
+- **Santé VERTE 6/6** : watcher cycle **12:56** (<12 min, **286 events** today, duration ~16-21 s) ; feature_store **4977/500** (vs 4889 à 09h, **+88 outcomes**, 731 setups, 0 ERROR/1 MIXED, 8 j order-flow) ; resim equity x20 **1348.81€** (0 dérive, 12 décisifs<15 exp +0.277% [0.039-0.49]) ; USER n=180 WR 56.7% exp +0.002% ; prime_watcher.log **1.384 Mo** (+0.011 vs 09h) **0 error** today ; datafeed **tradingview** 6/6 0 fallback ; Telegram **3 msg today** (briefing 09:00, Analyst 09h, briefing 12:00) 0 ok:false (unique=21/06). Injection news/calendar **0 token**. Lab **45/44/0/0** (déflation test n°46, z_req 3.07). 0 muet ce matin (risque ~04:00 non matérialisé → prochaine fenêtre ~01-02/07).
+- **Autopsie, 0 fill, 0 A_SETUP, 0 WATCH (tout NO_TRADE)**. Régime du jour : GOLD 240 RANGE / 38 TRANSITION / **8 TENDANCE HACHÉE** (dernière heure) ; US500 134 RANGE / 9 TRANSITION / 0 HACHÉE.
+- **FAIT NEUF 1, GOLD = mouvement directionnel du jour (baissier)** : ~4 058 (09h) → **~4 036** (12:56), −1.4% jour. Régime bascule **RANGE→TRANSITION→TENDANCE HACHÉE** en accélérant la baisse ; 4h passe −0.40→**−0.547** SHORT-aligné (15m −0.77/1h −0.50). **Confirme la nuance 09h backlog n°2** : 4h-short directionnellement CORRECT (prix descend) → le grief « gate 4h trop lent » est régime-dépendant (ne mord QUE quand prix MONTE plus vite que la bougie 4h). **MAIS TENDANCE HACHÉE = whipsaw = le PIRE régime momentum** ; scanner NO_TRADE → rester plat est défendable, évidence **CONTRE** une entrée momentum-short, pas pour une hyp.
+- **FAIT NEUF 2, US500 = test live du grief n°2 en marché HAUSSIER** (question (c) du 09h) : ~7 378 (+0.64%) → **~7 396 (+0.79%)**, NASDAQ +1.34% en tête ; 15m +0.4/1h +0.20 LONG mais **4h NÉGATIF toute la matinée** (−0.013→−0.163→−0.313) → LONG gated. **Nuance décisive** : 4h près de ZÉRO (pas blocage fort), régime classé **RANGE ⚪** (pas tendance), hausse = **dérive de range** sous résistance 7 398 (pas cassure propre). → grief ne mord que sur **vraie tendance haussière rapide** ; US500 n'en fournit pas une → **ni confirmation ni réfutation, test propre toujours PENDANT**.
 - **Hypothèses : 0** (mouvement du jour GOLD atterrit en HACHÉE = whipsaw, perdant attendu pour momentum ; régime live non-backtestable faute de 15m lake ; US500 = range-drift sans tendance ; 45 familles KILLED→DUPLICATE ; re-knob/sign-flip interdits ; import USER non-conditionnable ; 2 leviers neufs = token Sam : `momentum_breakout_htf` ctx-aware sf:351 + pool COT harness:146, + fingerprint-clé pour débloquer backlog #5). **Verdict : Lab 45/44/0/0, reco promo NON, prod GELÉE.**
-- **À autopsier au 17h (ouverture US 15:30)** : (a) GOLD — tendance hachée se résout en TENDANCE propre (test momentum-short) ou réverse en RANGE (whipsaw confirmé) ? (b) US500 — casse-t-il 7 398–7 405 en tendance haussière propre avec 4h LONG = test grandeur nature backlog n°2 en marché haussier, toujours pendant ? (c) un A_SETUP à l'ouverture US (1re occasion momentum réelle de la semaine) ? (d) feature_store reprogresse, equity stable ?
+- **À autopsier au 17h (ouverture US 15:30)** : (a) GOLD, tendance hachée se résout en TENDANCE propre (test momentum-short) ou réverse en RANGE (whipsaw confirmé) ? (b) US500, casse-t-il 7 398-7 405 en tendance haussière propre avec 4h LONG = test grandeur nature backlog n°2 en marché haussier, toujours pendant ? (c) un A_SETUP à l'ouverture US (1re occasion momentum réelle de la semaine) ? (d) feature_store reprogresse, equity stable ?
 
-## 2026-06-29 — CHERCHEUR NOCTURNE (lundi→mardi, US clôturé) — FAIT NEUF de DONNÉES : la barre GOLD 1d de frontière est CORROMPUE (plate), défaut systématique GC_F_1d (55 barres) / absent ES → SECOND blocage indépendant sur le backlog #5 + correction honnête du cadrage 28/06
+## 2026-06-29, CHERCHEUR NOCTURNE (lundi→mardi, US clôturé), FAIT NEUF de DONNÉES : la barre GOLD 1d de frontière est CORROMPUE (plate), défaut systématique GC_F_1d (55 barres) / absent ES → SECOND blocage indépendant sur le backlog #5 + correction honnête du cadrage 28/06
 - **Contexte ingestion (re-vérifié ce run)** : pas de `PAUSE`. Lab `lab_counters()` = **45/44/0/0** (déflation test n°46 → z_req ~3.07). Lake = 13 parquet mtime **2026-06-29 07:00** (refresh lundi). Frontière (ts epoch→UTC) : 1d GC_F (1257)/ES_F (1258) dernier bar = **29/06 EN FORMATION**, dernière COMPLÈTE = **26/06** ; 1h dernier bar = **29/06 04:00 UTC**. **Toujours aucun 15m.** resim USER WR 56.7% n=180 exp +0.002%, equity x20 **1348.81€** (0 dérive, 12 décisifs<15). feature_store **5202/500** (+5 vs 5197 bilan 23h), 733 setups, 0 ERROR/1 MIXED, 8j order-flow. journal 264 sig (USER 180/AI 66/None 18), **0 fill 29/06**, last_updated 26/06 (artefact import, hors research/). Injection news/calendar = **0 token impératif** (4 hits "edit" = "Cr-edit" ForexFactory, bénins).
 - **Décision-prod 29/06 (rien à rouvrir, 0 fill)** : chop des DEUX côtés, **0 A_SETUP / 2 WATCH** non escaladés. GOLD TENDANCE HACHÉE 🔴 (119 cyc), −1.5% via whipsaw jamais tendance propre → momentum-short perdant attendu. US500 RANGE ⚪ toute la montée (219/254), +1.2% range-drift, 4h LONG seulement à 19h (après moitié du move) → filtre ADX/ER (= HA tué 12/06) n'aurait pas pris ; entrée tardive ≈ +0.2% brut ≈ coûts. NO_TRADE défendable, « could-have » US500 le + net de la semaine **mais sous le bruit**.
-- **FAIT NEUF (structurel, code+donnée-vérifié) — backlog #5 DOUBLEMENT bloqué** :
+- **FAIT NEUF (structurel, code+donnée-vérifié), backlog #5 DOUBLEMENT bloqué** :
   - **BLOCAGE 1 (établi 28/06, re-confirmé)** : dédup gèle le re-test. `hypothesis_key = sha256(family,params,sorted(assets),tf)[:16]` (harness.py:66-70) ; doublon → `DUPLICATE` **avant** `_registry_append` (harness.py:228-231) → jamais de ré-évaluation même si le lake gagne des barres.
   - **BLOCAGE 2 (NEUF)** : la donnée de frontière GOLD 1d est **CORROMPUE**. Après le refresh lundi 07:00, `GC_F_1d` du **26/06** n'est plus la vraie OHLC (28/06 : O4044/H4111/L3998/C4096) mais **PLATE O=H=L=C=4078.70** (== valeur figée du feed production week-end). Défaut **systématique et spécifique à l'or** : **GC_F_1d = 55 barres plates / 1257 (~4.4%)**, **ES_F_1d = 0 / 1258**. Barre plate = range vrai NUL → signal ichimoku/twist 1d dégénère (Tenkan=Kijun=close). Donc même si BLOCAGE 1 était levé, re-tester twist_1d sur le lake « épaissi » injecterait une barre GOLD corrompue à la frontière.
 - **CORRECTION HONNÊTE de mon cadrage 28/06** : j'avais écrit « la barre plate 4078.70 est le feed PRODUCTION, PAS le lake (distinct) ». **Faux en partie** : le refresh lundi a fait FUIR cette valeur plate DANS le lake GC_F_1d du 26/06. Le lake n'est pas immunisé contre l'artefact plat de l'or (55 exemplaires) ; ES reste propre (0).
 - **DÉMONSTRATION EMPIRIQUE** (`exp_2026_06_29_nocturne.py`) : (a) audit plat → GC_F_1d 55 plates (frontière 26/06 range=0.00 CORROMPUE), ES_F_1d 0 plates (frontière 26/06 range=102.25 réelle) ; (b) re-soumission cellule IL (key 7184c7acc424e5ef) → **verdict=DUPLICATE** (collision IL_pool_ichimoku_twist_1d du 22/06), lab_counters inchangé (45/44/0/0 avant=après), registry len 45=45, **invariant 0-effet-de-bord OK**. Les deux blocages sont **indépendants et tous deux actifs**.
-- **PROPOSITIONS (token Sam, fichiers protégés — je ne touche pas)** : (1) **filtre d'intégrité à l'ingestion** : rejeter/interpoler les barres GC_F_1d plates avant tout backtest 1d ; (2) **fingerprint-clé** (déjà proposé 28/06). **À coupler** : sans #1 le re-test resterait contaminé, sans #2 il resterait DUPLICATE — il faut **les deux** pour ressusciter #5. Spec only.
+- **PROPOSITIONS (token Sam, fichiers protégés, je ne touche pas)** : (1) **filtre d'intégrité à l'ingestion** : rejeter/interpoler les barres GC_F_1d plates avant tout backtest 1d ; (2) **fingerprint-clé** (déjà proposé 28/06). **À coupler** : sans #1 le re-test resterait contaminé, sans #2 il resterait DUPLICATE, il faut **les deux** pour ressusciter #5. Spec only.
 - **Hypothèses : 0** (matrice fermée 44 KILLED → DUPLICATE ; journée non-backtestable faute 15m lake ; évidence du jour CONTRE momentum des 2 côtés ; re-knob/sign-flip interdits ; import USER non-conditionnable ; 2 leviers riches = token Sam prouvés au code : `momentum_breakout_htf` ctx-aware sf:351 + pool COT `ctx_fn(ts,asset)` harness:146 ; re-test 1d doublement bloqué). **Verdict : Lab 45/44/0/0, reco promo NON, prod GELÉE.**
 - **À autopsier mardi 30/06 09h** : (a) la barre GC_F_1d 29/06 (forming) se complète-t-elle en vraie OHLC ou retombe-t-elle dans le défaut plat ? (b) US500 dérive haussière continue en tendance propre (ADX qualifie) ou réverte ? (c) GOLD hachée baissière résout-elle en tendance ? (d) nouveau muet cette nuit (pattern ~3-4 j, dernier 28/06 04:24 → fenêtre ~01-02/07) ? (e) Sam tranche-t-il fingerprint-clé (#3) + filtre intégrité GOLD (#2) qui, ENSEMBLE, ressusciteraient #5 ?
 
 ---
 
-## 2026-06-30 09h (Analyst) — RÉFUTATION EMPIRIQUE : momentum short en HACHÉE sous le VAL
+## 2026-06-30 09h (Analyst), RÉFUTATION EMPIRIQUE : momentum short en HACHÉE sous le VAL
 
 **Le forward-test a TRADÉ et PERDU 3 fois.** Première matérialisation de fills
 depuis des jours. De 05:50 à 08:24 Paris, le scanner a émis **23 cycles A_SETUP
@@ -1099,13 +1092,13 @@ après-midi (persistance du biais short en haché) ? (c) US500 sort-il du RANGE 
 
 ---
 
-## 2026-06-30 13h (Analyst) — SUITE : le scanner s'est AUTO-ARRÊTÉ à la reprise de la valeur
+## 2026-06-30 13h (Analyst), SUITE : le scanner s'est AUTO-ARRÊTÉ à la reprise de la valeur
 
 Résolution des 4 questions ouvertes du 09h. **(a)** GOLD a réverté à la valeur :
 low 3952 (03:16) → high 4032.8 (08:35) → **4030.4 (12:58) AU-DESSUS du POC
 (4022.84)**, VAL 4001.68 / VAH 4052.47 → POC-aimant haussier CONFIRMÉ live.
 **(b)** Le biais short n'a PAS persisté : dès la reprise du VAL (~08:30) le
-scanner a CESSÉ d'émettre — dernier `AI_SIGNAL` 08:14 (le 9.8 perdant), **0
+scanner a CESSÉ d'émettre, dernier `AI_SIGNAL` 08:14 (le 9.8 perdant), **0
 nouvel A_SETUP / 0 fill l'après-midi** (84 NO_TRADE, 13 WATCH). Auto-correction.
 **(c)** US500 RANGE/TRANSITION toute la journée, **NO_TRADE 120/120**, 7430→7454
 au VAH. **(d)** 0 nouveau fill ; seuls fills du jour = 3 pertes GOLD du matin.
@@ -1142,7 +1135,7 @@ Lab 45/44/0/0, prod GELÉE, 0 hyp, reco promo NON).
 
 **(a) US500 = 186/186 NO_TRADE sur la JOURNÉE.** Aprem : plus-haut **7477 (16:38)**
 au-dessus du VAH matin 7454, **4h basculé LONG +0.16→+0.35** (15m +0.77), MAIS
-**régime resté TRANSITION/RANGE** toute la séance — jamais tendance propre. Gain
+**régime resté TRANSITION/RANGE** toute la séance, jamais tendance propre. Gain
 réalisé ~+0.5 % brut en grind. Could-have momentum-long le plus net du jour mais
 **marginal net** et hors signature tendancielle → NO_TRADE défendable. Ré-occurrence
 ATTÉNUÉE du grief n°2 : ce n'est PAS un gate lent (le 4h a suivi) mais le régime
@@ -1169,7 +1162,7 @@ brut non fiable seul → pondérer par réalisé/order-flow, jamais inverser.
 
 **NOUVEAU artefact (périmètre Sam) :** module SWING (`swing_scanner.py`/`swing_book.py`/
 `swing_portfolio.json`/`run_swing.bat` à 15:36 + Telegram SWING ACTIONS 13:47, 7
-tickers) — hors périmètre momentum-intraday, non audité, aucun lien Gate-1.
+tickers), hors périmètre momentum-intraday, non audité, aucun lien Gate-1.
 
 **Verdict momentum du jour :** ne bat PAS la prod nette de coûts (GOLD = 3 pertes
 matin + 4h faux ; US500 = grind de range marginal). NO_TRADE de l'aprem = correct.
@@ -1184,17 +1177,17 @@ nouveaux fills AI soir ? (d) le module SWING émet-il d'autres signaux ?
 
 ---
 
-## 2026-06-30 23h — Analyst evening (bilan de séance, clôture US)
+## 2026-06-30 23h, Analyst evening (bilan de séance, clôture US)
 
 Les 4 questions ouvertes du 17h tranchées sur la séance US complète.
 
-**(a) US500 — n'a PAS reflué (≠ 29/06), mais grind, pas tendance propre.** Le
+**(a) US500, n'a PAS reflué (≠ 29/06), mais grind, pas tendance propre.** Le
 plus-haut 7477 du 17h a TENU et s'est ÉTENDU : 7487 (18h) → 7496 (19h) → 7500.6
 (21h, plus-haut du jour) → 7490 (22h), soit ~+0.85 % depuis le midi (7437) et le
 4h LONG-aligné (+0.31/+0.35) tout l'après-midi/soir. **MAIS le régime n'a JAMAIS
 qualifié une vraie tendance pendant la montée** : TRANSITION 🟡 (18h) → TENDANCE
-HACHÉE 🔴 (19-20h) → un seul flicker TENDANCE MOYENNE 🟡 à 21h — **APRÈS** que le
-prix ait atteint 7500 (le sommet) — puis re-HACHÉE à 22h. **229/229 NO_TRADE.**
+HACHÉE 🔴 (19-20h) → un seul flicker TENDANCE MOYENNE 🟡 à 21h, **APRÈS** que le
+prix ait atteint 7500 (le sommet), puis re-HACHÉE à 22h. **229/229 NO_TRADE.**
 C'est la ré-occurrence (4e soir) du grief backlog n°2 : le « could-have momentum
 long » le plus net du jour, mais la qualification tendancielle arrive AU SOMMET,
 pas au départ → une entrée momentum à la qualification = achat du plus-haut.
@@ -1202,7 +1195,7 @@ NO_TRADE défendable. Divergence notable : `recent_delta` order-flow US500 NÉGA
 (-1599) alors que le prix MONTE = montée sans flux acheteur net (grind short-squeeze/
 faible volume), cohérent avec « pas une tendance propre ».
 
-**(b) GOLD — re-haché/RANGE en soirée, 4h SHORT directionnellement moins faux mais
+**(b) GOLD, re-haché/RANGE en soirée, 4h SHORT directionnellement moins faux mais
 non-actionnable.** Après la reprise > POC de l'après-midi (4047 @16:38), GOLD est
 retombé en RANGE ⚪ (18-22h), dérive 4028 → 4018 → **4007 en fin (SOUS le POC
 4028.64, AU-DESSUS du VAL 3993.85 → toujours dans la zone de valeur)** ; le 4h est resté SHORT
@@ -1231,13 +1224,13 @@ belle signature momentum-long du jour MAIS qualifiée tendancielle seulement au
 sommet (7500) → entrée = achat du plus-haut. **NO_TRADE de l'après-midi/soir = la
 bonne réponse.** Manque structurel inchangé = (i) porte order-flow `value_gate`
 (token Sam + ≥20 j order-flow ; 9 j seulement) et (ii) détecteur de transition
-range→tendance PRÉCOCE (qualifier la tendance AVANT le sommet, pas après) — aucun
+range→tendance PRÉCOCE (qualifier la tendance AVANT le sommet, pas après), aucun
 des deux n'est un re-knob de `momentum_regime` (HA tué 12/06). **0 hyp soumise
 (honnête).**
 
 ---
 
-## 2026-06-30 (nuit mardi -> mercredi) — chercheur nocturne
+## 2026-06-30 (nuit mardi -> mercredi), chercheur nocturne
 
 **Decision-prod du 30/06 (rien a rouvrir ; deja autopsie par les analystes 09/13/17/23h).**
 Journee a 3 fills, tous GOLD short du MATIN (05:50-08:24 Paris), 3 LOSS (-0.407/-0.406/
@@ -1268,7 +1261,7 @@ value_gate ; detecteur transition range->tendance precoce) = famille NOUVELLE = 
 + order-flow 9j = walk-forward sous-puissant. Accumuler l'order-flow (9 -> ~20j) = levier #1.
 
 
-## 2026-07-01 09h (mercredi, ouverture Europe) — analyst momentum intraday
+## 2026-07-01 09h (mercredi, ouverture Europe), analyst momentum intraday
 
 **Fait neuf, OPPOSE a hier.** Le forward-test a repris sa campagne GOLD SHORT
 (24 A_SETUP 01:33-08:59, scores 7.0->8.3, OTE_RETRACEMENT). Fills : 02:07 SHORT
@@ -1303,7 +1296,7 @@ Sante VERTE 6/6. Question tranchee a 13h : les 4 shorts ouverts finissent gagnan
 ou clippes ?
 
 
-## 2026-07-01 13h (mercredi, seance Europe) — analyst momentum intraday
+## 2026-07-01 13h (mercredi, seance Europe), analyst momentum intraday
 
 **Question ouverte du 09h TRANCHEE, verdict brutal.** Les 4 shorts GOLD OUVERTS ont
 TOUS PERDU : 3965.41 -> LOSS -0.408% (stop 10:21), 3984.19 -> LOSS -0.408% (stop
@@ -1348,10 +1341,10 @@ Order-flow stationnaire 10j : levier #1. Reco promo NON. Sante VERTE 6/6.
 
 ---
 
-## 2026-07-01 17h — RÉTRACTATION : la "bonne direction" du 09h était fausse
+## 2026-07-01 17h, RÉTRACTATION : la "bonne direction" du 09h était fausse
 
 À 09h/13h je concluais : shorts perdants MAIS direction baissière (3961) juste, seuls
-les stops dans VAL↔POC clippés. **À 17h : RÉTRACTÉ.** GOLD cote 4093 — remonté 3961→4093
+les stops dans VAL↔POC clippés. **À 17h : RÉTRACTÉ.** GOLD cote 4093, remonté 3961→4093
 (+3.3 %) depuis le plus-bas du matin, recent_delta +65k à 16:57, POC ~3977 en dessous,
 prix loin AU-DESSUS du VAH 4030. Ce n'était NI tendance NI direction juste : bruit dans
 une value-area, POC-aimant réaspire puis dépasse par le haut. Les 5 shorts (02:07/02:18/
@@ -1362,7 +1355,7 @@ survécu aux stops. Thèse momentum-short réfutée à l'exécution ET en direct
 stop 4000 dans VAL↔POC clippé par rebond-POC), 02:18 score 8.3 MFE +0.44 % (sorti-temps
 à −0.152 % après avoir été +0.44 % en faveur). Les trades AVAIENT un edge en vol ; c'est
 le stop-dans-la-valeur + la sortie-temps qui les ont convertis en pertes. Stop correct =
-au-delà du VAH — mais alors RR sous plancher = signal que le setup n'a pas sa place ici.
+au-delà du VAH, mais alors RR sous plancher = signal que le setup n'a pas sa place ici.
 
 Grief order-flow value_gate = **quadruplement confirmé** (30/06 entrée + 01/07 09h + 13h
 + 17h réaspiration complète). Étiquette régime "TENDANCE PROPRE 🟢" sur un aller-retour
@@ -1373,7 +1366,7 @@ POC = angle mort persistant (chop classé tendance). 0 hyp soumise (value_gate =
 
 ## 2026-07-01 23h (mercredi, bilan de séance, clôture US)
 
-**LE FAIT DU 23h — REFUTATION SYMÉTRIQUE.** La journée GOLD s'est bouclée en
+**LE FAIT DU 23h, REFUTATION SYMÉTRIQUE.** La journée GOLD s'est bouclée en
 oscillation dans une value-area à POC STABLE (~3977 toute la journée) : prix
 3961 (plus-bas matin) → 4093 (17h) → **4031 (22:59)**. **LES DEUX trend-days du
 jour auraient PERDU :**
@@ -1386,7 +1379,7 @@ C'est la réfutation la plus forte possible : **le même jour, le trend-day
 labeler a émis "TENDANCE PROPRE 🟢" des DEUX côtés d'une oscillation autour d'un
 POC-aimant, et les deux directions ont perdu.** Ce n'était ni une tendance short
 ni une tendance long : du BRUIT dans une VA stable. À 22:59 le régime affiche
-enfin **"TENDANCE HACHÉE 🔴"** — le système a rattrapé la réalité, mais un jour
+enfin **"TENDANCE HACHÉE 🔴"** : le système a rattrapé la réalité, mais un jour
 trop tard.
 
 **POINT DE SANTÉ POSITIF (divergence utile) :** malgré le trend_day LONG de
@@ -1402,33 +1395,33 @@ porte d'entrée A_SETUP.
 L'angle mort "chop classé tendance" est désormais démontré SYMÉTRIQUEMENT.
 Le correctif conceptuel pointe vers l'étiqueteur de régime (VETO "TENDANCE" quand
 POC plat + prix oscillant dans une VA non-expansive), famille order-flow, token
-Sam — DÉCRIT, PAS soumis (lake incompatible + order-flow 10j stationnaire).
+Sam, DÉCRIT, PAS soumis (lake incompatible + order-flow 10j stationnaire).
 0 hyp soumise. Reco promo NON. Santé VERTE 6/6.
 
 ---
 
-## 2026-07-01 (nuit mercredi → jeudi) — CHERCHEUR NOCTURNE
+## 2026-07-01 (nuit mercredi → jeudi), CHERCHEUR NOCTURNE
 
 **Rien de nouveau côté décision-prod** (0 fill depuis 13h Paris, journal
 `last_updated` 11:00 UTC ; les 5 pertes GOLD SHORT du matin déjà autopsiées
 09h/13h/17h/23h). Valeur de la nuit = **re-vérif ingestion à l'octet** +
 **résolution empirique de 2 questions ouvertes du 30/06** :
 
-- **(c) RÉSOLUE — frontière GOLD 1d 01/07 = VRAIE OHLC** (O 4025 / H 4032 / L
+- **(c) RÉSOLUE, frontière GOLD 1d 01/07 = VRAIE OHLC** (O 4025 / H 4032 / L
   3983 / C 3992, range **49.0**) **malgré que le 01/07 soit un MERCREDI**, le
   jour-semaine le plus chargé en barres plates (17/55). Enseignement : être
-  mercredi n'est **PAS suffisant** pour une plate — il faut que le jour soit
+  mercredi n'est **PAS suffisant** pour une plate, il faut que le jour soit
   **ABSENT** du feed. Ceci **confirme et raffine** la théorie 30/06 "jours
   manquants backfillés par un settle unique" et **réfute définitivement** la
   théorie 29/06 "fuite settle week-end". Dernière plate = 26/06, désormais à
   **3 barres** de la frontière (INTÉRIEURE). Frontière **PROPRE**, intérieur
   encore pollué ~4.4 % (spécifique or ; ES_F_1d = 0 plate).
-- **(d) RÉSOLUE — AUCUN nouveau MUET** dans la fenêtre prédite ~01-02/07
+- **(d) RÉSOLUE, AUCUN nouveau MUET** dans la fenêtre prédite ~01-02/07
   (pattern ~3-4 j, dernier 28/06 04:24). `prime_watcher.log` cycle **23:27
   Paris**, cadence ~5 min continue, **0 error/traceback** (grep=0).
   `watchdog.log` 0 octet depuis 17/06 (muet-par-conception, primaire sain).
 
-**Autopsie signal (confirmée) :** la réfutation symétrique du 23h tient — 2
+**Autopsie signal (confirmée) :** la réfutation symétrique du 23h tient, 2
 trend-days OPPOSÉS le même jour (SHORT 01:33 @3982 / LONG 13:40 @4077), tous deux
 "TENDANCE PROPRE 🟢", tous deux PERDANTS, autour d'un POC stable ~3977 = bruit de
 value-area classé tendance des DEUX côtés. Le filtre A_SETUP (0 A_SETUP LONG
@@ -1437,14 +1430,14 @@ value-area classé tendance des DEUX côtés. Le filtre A_SETUP (0 A_SETUP LONG
 token Sam, INJUGEABLE (lake 1h-1d incompatible + order-flow 10j stationnaire).
 
 **Injection externe :** news_cache (7665 ch.) + calendar_cache (18810 ch.)
-scannés — 3 hits = sous-chaînes bénignes ("US commitment", "Private Sector
+scannés, 3 hits = sous-chaînes bénignes ("US commitment", "Private Sector
 Credit", "BOE Credit Conditions"), **0 impératif**. Traité en donnée.
 
 0 hyp soumise (discipline, matrice fermée). Reco promo NON. Santé VERTE.
 
 ---
 
-## 2026-07-02 13h (jeudi, séance Europe, T−90 min NFP) — ANALYST midday
+## 2026-07-02 13h (jeudi, séance Europe, T−90 min NFP), ANALYST midday
 
 **0 fill, 0 A_SETUP, 0 trend_day today.** Rien à autopsier côté décision : la
 prod est restée **flat en RANGE ⚪** toute la matinée (142 cycles NO_TRADE) avant
@@ -1453,23 +1446,21 @@ le NFP de 14:30 Paris. Comportement attendu et sain.
 **Observation de CONTRÔLE (négatif du grief order-flow) :** hier (01/07) le
 labeler a classé « TENDANCE PROPRE 🟢 » les 2 jambes d'une oscillation autour d'un
 POC stable (whipsaw symétrique). **Aujourd'hui, dans un range tout aussi collé au
-POC** (prix 4064 ≈ POC 4067, dans la VA 4033–4087, recent_delta −45k), le labeler
+POC** (prix 4064 ≈ POC 4067, dans la VA 4033-4087, recent_delta −45k), le labeler
 dit **RANGE** et le scanner tient **NO_TRADE**. La différence n'est donc PAS « prix
 près du POC » (vrai les deux jours) mais la **poussée ADX/ER transitoire** qui
-faisait hier basculer l'étiquette. **Le filtre n'est pas cassé en général** —
-il est aveugle au seul cas *POC plat + prix dans la VA + poussée ADX/ER SANS
+faisait hier basculer l'étiquette. **Le filtre n'est pas cassé en général** : il est aveugle au seul cas *POC plat + prix dans la VA + poussée ADX/ER SANS
 expansion de largeur de VA*. Le veto order-flow décrit doit cibler précisément ce
 cas (distinguer vraie expansion de VA d'un rebond-POC véloce).
 
 **Santé VERTE 6/6.** feature_store 6467/500 (+276), order-flow **10 → 11 jours**
 (levier #1, encore < seuil ~20). resim inchangé (edge non prouvé, IC contient 0).
-**Nouvelle obs non bloquante :** `macro_calendar mode:null` à T−90 min du NFP —
-à confirmer au 17h que le verrou-event s'est armé autour de 14:30. 0 hyp soumise.
+**Nouvelle obs non bloquante :** `macro_calendar mode:null` à T−90 min du NFP, à confirmer au 17h que le verrou-event s'est armé autour de 14:30. 0 hyp soumise.
 Reco promo NON.
 
 ---
 
-## 2026-07-02 23h (jeudi, bilan séance, jour NFP) — ANALYST evening
+## 2026-07-02 23h (jeudi, bilan séance, jour NFP), ANALYST evening
 
 **LE FAIT DU JOUR : la prod a tradé après le NFP, et perdu.** Matinée = 142 NO_TRADE
 RANGE pré-NFP (contrôle sain). Soir US = **10 A_SETUP US500 SHORT OTE_RETRACEMENT,
@@ -1490,7 +1481,7 @@ fader la réaspiration.
 2. **Volet A (veto delta≥0) re-confirmé** : aurait tué les shorts 20:27→21:50
    (delta +103 → +1743).
 3. **Nuance honnête** : le fill PERDANT était le short de 19:38 (delta −2115 =
-   order-flow-correct à l'entrée) — Volet A ne l'attrape PAS, il a perdu quand même
+   order-flow-correct à l'entrée), Volet A ne l'attrape PAS, il a perdu quand même
    par réaspiration POC → argument pour **Volet B** (veto SHORT sous VAL vers POC
    au-dessus quand VA non-expansive). A+B ⇒ 0 short ⇒ 0 perte le 02/07.
 
@@ -1501,7 +1492,7 @@ CSV) WR 56.2 % exp −0.004 %. feature_store 6685/500, order-flow 11 j (stationn
 **0 hyp soumise** (matrice fermée, order-flow injugeable <20 j + absente registry).
 Reco promo NON (lab papier 0).
 
-## 2026-07-02 (nuit jeudi → vendredi, post-NFP) — CHERCHEUR NOCTURNE
+## 2026-07-02 (nuit jeudi → vendredi, post-NFP), CHERCHEUR NOCTURNE
 
 **Verdict d'une ligne :** pipeline **sain**, **0 hypothèse soumise** (discipliné,
 matrice fermée), et **question ouverte (c) du backlog RÉSOLUE** : la frontière 1d
@@ -1522,7 +1513,7 @@ watchdog.log 0 octet depuis 17/06 (muet-par-conception). **0 nouveau MUET**
 observé. **0 injection** : news_cache (4384 ch.) + calendar_cache (18810 ch.)
 scannés → 2 hits = sous-chaînes bénignes ("Cr**edit**").
 
-**Autopsie — rien de neuf à rouvrir (0 fill depuis 23h).** Le fait du jour
+**Autopsie, rien de neuf à rouvrir (0 fill depuis 23h).** Le fait du jour
 (prod a tradé post-NFP et perdu, grief order-flow côté BAS sur US500) est déjà
 couvert par l'analyst 23h. Ma valeur cette nuit = (a) re-vérif octet de
 l'ingestion, (b) résolution empirique de la question frontière (c). **0 hyp
@@ -1535,11 +1526,11 @@ triplement bloqué (famille absente du registry token Sam + lake 1h-1d incompati
 ---
 ## 2026-07-03 09h (vendredi, US Bank Holiday)
 
-**Matinée : 0 A_SETUP / 0 trigger / 0 trend_day / 0 fill** — tous cycles NO_TRADE
+**Matinée : 0 A_SETUP / 0 trigger / 0 trend_day / 0 fill** : tous cycles NO_TRADE
 en TENDANCE MOYENNE 🟡, prod correctement flat un jour férié US (4 juillet observé
 le vendredi 3). Journal last_updated 02/07 22:39 Paris (aucun fill depuis).
 
-**Grief order-flow — confirmation SYMÉTRIQUE côté LONG.** GOLD grimpe 4165→4173
+**Grief order-flow, confirmation SYMÉTRIQUE côté LONG.** GOLD grimpe 4165→4173
 vers le VAH (4192, POC 4122.5, VAL 4099) avec `recent_delta` PERSISTANT NÉGATIF
 tout le matin (-44k → -20k) et forecast 15m négatif (-0.06) pendant que 1h/4h
 positifs. Montée de prix SANS confirmation order-flow (delta vendeur = distribution
@@ -1547,16 +1538,16 @@ positifs. Montée de prix SANS confirmation order-flow (delta vendeur = distribu
 (côté SHORT : prix vers un aimant pendant que delta contredit). Un momentum-follower
 naïf achèterait ; le scanner tient NO_TRADE = bon comportement. Le
 `orderflow_value_gate` Volet A s'applique symétriquement (veto LONG si delta<0,
-comme veto SHORT si delta≥0) — la montée GOLD sans delta acheteur = cas-test propre
+comme veto SHORT si delta≥0), la montée GOLD sans delta acheteur = cas-test propre
 côté haut. Injugeable via lake 1h-1d (pas de POC/VAL/delta 15m) ; décrit non soumis.
 
 **Santé** : VERTE 6/6. Order-flow 11→12 jours (+1). 2 caveats non bloquants :
 (i) disque C 38 Go (auto-résolu >15) ; (ii) burst DNS yahoo-fallback isolé à 04:36
-(~10 `Could not resolve host` GC=F/ES=F/^GSPC/XAUUSD=X) — primaire tradingview
+(~10 `Could not resolve host` GC=F/ES=F/^GSPC/XAUUSD=X), primaire tradingview
 resté 7/7, cycles ininterrompus, à reconfirmer isolé au 13h.
 
 ---
-## 2026-07-03 13h (vendredi, US Bank Holiday) — ANALYST midday
+## 2026-07-03 13h (vendredi, US Bank Holiday), ANALYST midday
 
 **Fait du midi :** la prod a émis 1 A_SETUP GOLD LONG à 10:39 Paris (conf 8.0, aligned
 5/5, entry 4169.99 stop 4153.26 tp 4195.65 RR 1.53, OTE_RETRACEMENT, TENDANCE MOYENNE) →
@@ -1572,7 +1563,7 @@ PASSER ce LONG (Volet A : delta +56k confirme LONG → pas de veto ; Volet B : c
 trends 30/06→02/07 (delta contredisant) ET pass ce LONG delta-confirmé. Preuve par
 l'exemple qu'un bon filtre laisse passer les bons.
 
-**Honnêteté :** l'entrée-repli n'a ni manqué un gros gagnant ni sauvé une perte — le
+**Honnêteté :** l'entrée-repli n'a ni manqué un gros gagnant ni sauvé une perte, le
 momentum s'est dégonflé (delta +56k→+5k, prix 4182→4177) = NEUTRE. La journée ne tranche
 PAS « breakout vs repli en régime à fort delta » (mouvement fizzled). Backlog, non jugeable
 via lake.
@@ -1587,7 +1578,7 @@ Reco promo NON (lab papier 0).
 
 ---
 
-## 2026-07-03 23h (evening) — bilan de séance, jour férié US
+## 2026-07-03 23h (evening), bilan de séance, jour férié US
 
 **INCIDENT** : passage ANALYST 17h PERDU (exit 1) = quota de session Claude épuisé
 (`You've hit your session limit · resets 8:20pm`), PAS un bug du bot. Watcher non affecté
@@ -1597,7 +1588,7 @@ réinitialisé 20:20 → session 23h OK. Gap d'audit humain 13h→23h repris ce 
 **Prod du jour** : 1 seul signal (GOLD LONG conf 8.0 de 10:39 Paris, OTE_RETRACEMENT) =
 EXPIRED/NOFILL, 0 fill/0 P&L (déjà autopsié au 13h). Rien depuis (journal figé 11:28).
 GOLD en consolidation 4164-4182 SOUS le VAH toute la journée, jamais de trend-day ; US500
-range 7495-7505. **Momentum n'avait rien à trader** (range férié) — scanner correct à tenir
+range 7495-7505. **Momentum n'avait rien à trader** (range férié), scanner correct à tenir
 NO_TRADE. À 23h : delta +26k (acheteurs) mais prix 4174.76 collé SOUS le POC 4177.7 = aimant-POC
 sans expansion → cohérent avec le grief order-flow (pas de cassure VAH = pas de trade).
 
@@ -1615,12 +1606,12 @@ incompatible). Reco promo NON (lab papier 0). Levier #1 = accumuler order-flow 1
 
 ---
 
-## 2026-07-03 nuit (chercheur nocturne) — vendredi férié US -> samedi
+## 2026-07-03 nuit (chercheur nocturne), vendredi férié US -> samedi
 
 **0 hyp soumise** (matrice fermée 44 KILLED, jour férié 0 trend-day, order-flow
 triplement bloqué). Lab 45/44/0/0. Prod GELÉE. Reco promo NON.
 
-**Backlog #2 RECONFIRMÉ — la dérive resim s'est ARRÊTÉE.** Mon run est byte-identique
+**Backlog #2 RECONFIRMÉ, la dérive resim s'est ARRÊTÉE.** Mon run est byte-identique
 à l'analyst 23h (16 déc, 6TP/10SL, exp +0.084 %, equity x20 1034.59 €). La dérive
 17->16 déc signalée à 23h ne progresse plus -> c'était une re-simulation VIVANTE
 (1 position TP -> sortie-horizon quand les chandelles intraday se sont mises à jour),
@@ -1628,7 +1619,7 @@ PAS une régression du pipeline. Journal figé 11:28 (1 signal today, EXPIRED, n
 décisif). Verdict INCHANGÉ : edge net non prouvé (IC bootstrap-jours (-0.153, 0.286)
 contient 0). USER Revolut n=201 WR 56.2 % exp -0.004 %.
 
-**FAIT NEUF (données) — la barre-FRONTIÈRE 1d est PARTIELLE (en cours), pas une OHLC
+**FAIT NEUF (données), la barre-FRONTIÈRE 1d est PARTIELLE (en cours), pas une OHLC
 arrêtée.** Preuve par la même barre à 24 h : GC_F_1d 02/07 lu range 43.5 EN FRONTIÈRE
 hier -> 78.1 FINALISÉE aujourd'hui ; ES_F_1d 02/07 35.25 -> 114.25 (!). Les 3 nuits
 précédentes ont dit "frontière vraie OHLC" = vrai mais INCOMPLET (range tronqué). La
@@ -1662,7 +1653,7 @@ RÉGLÉ (burst confiné cycle 04:36-04:42, fail-safe INDÉTERMINÉ, 0 récurrenc
 
 ---
 
-## 2026-07-04 09h (analyst) — SAMEDI, marché fermé (week-end)
+## 2026-07-04 09h (analyst), SAMEDI, marché fermé (week-end)
 
 **Autopsie NÉANT** : marché fermé (vendredi = US Bank Holiday, aujourd'hui samedi).
 Le watcher cycle sur prix GELÉS du close vendredi (GOLD 4174.76, US500 7504.2,
@@ -1681,7 +1672,7 @@ Injection RAS (news 0 item ; calendar 2× « edit » = fragments de « Credit »
 week-end injugeable). Reco promo NON (papier 0). Levier #1 = order-flow 12→20 j.
 
 ---
-## 2026-07-04 13h (SAMEDI, marché fermé) — AUTOPSIE NÉANT
+## 2026-07-04 13h (SAMEDI, marché fermé), AUTOPSIE NÉANT
 Week-end : 0 signal / 0 fill / 0 décision à confronter au réalisé. Prix gelés du
 close vendredi (GOLD 4174.76, US500 7504.2). Prod 0 A_SETUP = correct (rien à
 trader). Santé VERTE 6/6 : resim byte-identique (exp +0.084%, IC (-0.153,0.286)⊃0,
@@ -1692,24 +1683,24 @@ outbox 3/3 ok:true. Backlog #3 DNS reconfirmé réglé (burst 03/07 04:36-04:42 
 fragments Credit/non-farm bénins). 0 hyp (discipline : matrice fermée + order-flow
 triplement bloqué + week-end injugeable). Reco promo NON.
 
-## 2026-07-04 23h (analyst, SAMEDI marché fermé) — NÉANT
+## 2026-07-04 23h (analyst, SAMEDI marché fermé), NÉANT
 Week-end : 254 cycles 254/254 NO_TRADE sur prix GELÉS du close vendredi (GOLD 4174.76,
-US500 7504.2 — identiques 09h/13h/17h), datafeed 1524/1524 PURE tradingview. 0 A_SETUP /
+US500 7504.2, identiques 09h/13h/17h), datafeed 1524/1524 PURE tradingview. 0 A_SETUP /
 0 WATCH / 0 trigger / 0 fill : aucune décision à confronter au réalisé. Dernier événement
 décisionnel = A_SETUP GOLD LONG conf 8.0 vendredi 10:39 (EXPIRED/NOFILL, déjà autopsié).
 Verdict momentum du jour : injugeable (0 trend-day, 0 expansion, prix figés). Santé VERTE
 6/6, resim byte-identique (24/16/6TP-10SL/exp+0.084%/IC(-0.153,0.286)⊃0), journal INCHANGÉ
 (03/07 09:28). Anomalies logs confinées lignes 7049-7079 (incident DNS clos), 0 récurrence.
 
-## 2026-07-04 nocturne (samedi->dimanche, marché FERMÉ week-end) — AUTOPSIE NÉANT + fait données
+## 2026-07-04 nocturne (samedi->dimanche, marché FERMÉ week-end), AUTOPSIE NÉANT + fait données
 Week-end : 0 signal / 0 fill / 0 décision à confronter au réalisé (journal figé au
 03/07 09:28, 302 entrées, 0 trade le 04/07). Dernier événement décisionnel = A_SETUP
 GOLD LONG conf 8.0 vendredi 10:39 (EXPIRED/NOFILL, déjà autopsié 13h/23h). Verdict
 momentum : injugeable (0 trend-day, 0 expansion, prix gelés du close vendredi).
 FAIT DE DONNÉES (résout "à autopsier (c)" d'hier) : la frontière lake reste 03/07
-(Fri) pour GC ET ES — AUCUNE barre samedi 04/07. Théorie jours-manquants TRANCHÉE :
+(Fri) pour GC ET ES, AUCUNE barre samedi 04/07. Théorie jours-manquants TRANCHÉE :
 un jour de marché FERMÉ (week-end) est ABSENT du feed, PAS backfillé plat (les 55
-plates GC sont 100% mid-week — Mon6/Tue14/Wed17/Thu5/Fri13, 0 samedi/dimanche).
+plates GC sont 100% mid-week, Mon6/Tue14/Wed17/Thu5/Fri13, 0 samedi/dimanche).
 Frontière partielle (backlog #4) confirmée puis FIGÉE : ES_F_1d 03/07 lue 33.0 hier
 (barre en cours) → 41.5 finalisée ce run (settle vendredi passé, week-end sans donnée).
 Santé VERTE : resim byte-identique (24/16/6TP-10SL/exp+0.084%/IC(-0.153,0.286)⊃0/
@@ -1717,7 +1708,7 @@ Santé VERTE : resim byte-identique (24/16/6TP-10SL/exp+0.084%/IC(-0.153,0.286)�
 23:29 NO_TRADE (0 anomalie 250 dernières lignes), disque 40 Go. Injection RAS (news 0
 hit, calendar 5 sous-chaînes "Credit" bénignes). 0 hyp (discipline). Reco promo NON.
 
-## 2026-07-05 09h (DIMANCHE — marché fermé week-end)
+## 2026-07-05 09h (DIMANCHE, marché fermé week-end)
 NÉANT. 100 cycles 00:01→08:56 Paris, 100/100 NO_TRADE, prix gelés close vendredi
 (GOLD 4174.76, US500 7504.2), datafeed tradingview pur. 0 signal/fill/décision à
 confronter au réalisé. Dernier événement décisionnel = A_SETUP GOLD LONG conf 8.0
@@ -1733,7 +1724,7 @@ RIEN à trader = correct. Dernier événement décisionnel = A_SETUP GOLD LONG c
 vendredi 10:39 (EXPIRED/NOFILL, déjà autopsié). Verdict momentum : injugeable (0 trend-day,
 0 expansion, prix figés tout le week-end).
 FAIT NEUF (durcissement, code exp_2026_07_05_nocturne.py) : hier avait tranché « samedi
-absent du feed » ; ce run étend au WEEK-END ENTIER — après ~2 jours (close vendredi 03/07
+absent du feed » ; ce run étend au WEEK-END ENTIER, après ~2 jours (close vendredi 03/07
 -> dimanche soir), le lake a ajouté ZÉRO barre, frontière GC ET ES TOUJOURS 2026-07-03
 (Fri) range 74.5 / 41.5. Week-end = TROU (ni plate ni barre) ; les 55 plates GC restent
 100% mid-week (Mon6/Tue14/Wed17/Thu5/Fri13, 0 week-end). Frontière partielle (backlog #4)

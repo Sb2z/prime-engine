@@ -7,12 +7,12 @@ FAIL = []
 
 
 def chk(n, ok, d=""):
-    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f" — {d}" if d else ""))
+    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f", {d}" if d else ""))
     if not ok:
         FAIL.append(n)
 
 
-print("P6 — Bonferroni GLOBAL (déflation sur le total des tests, pas par famille)")
+print("P6, Bonferroni GLOBAL (déflation sur le total des tests, pas par famille)")
 orig = harness.registry
 harness.registry = lambda: [{"family": "a"} for _ in range(5)]
 z_a, _, n_a = harness.required_z("momentum")
@@ -23,7 +23,7 @@ z_20, _, n_20 = harness.required_z("x")
 chk("plus de tests à vie -> seuil z plus dur", z_20 > z_a and n_20 == 21, f"z {z_a:.2f}->{z_20:.2f}")
 harness.registry = orig
 
-print("P5 — t-stat par JOUR (dégonfle l'autocorrélation intraday)")
+print("P5, t-stat par JOUR (dégonfle l'autocorrélation intraday)")
 trades = [{"pnl_pct": 1.0, "paris": "2026-06-10 10:00"} for _ in range(5)]
 trades += [{"pnl_pct": -0.5, "paris": "2026-06-11 11:00"} for _ in range(5)]
 t_trade = harness._tstat([t["pnl_pct"] for t in trades])
@@ -36,4 +36,4 @@ print()
 if FAIL:
     print(f"X ÉCHEC(S): {FAIL}")
     raise SystemExit(1)
-print("OK — intégrité du juge (P5 + P6) validée.")
+print("OK, intégrité du juge (P5 + P6) validée.")

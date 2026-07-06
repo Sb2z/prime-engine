@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-1er MODÈLE — edge personnel de Sam (user_trade_context, 15 jours / 114 captures).
+1er MODÈLE, edge personnel de Sam (user_trade_context, 15 jours / 114 captures).
 ═══════════════════════════════════════════════════════════════════════════════
 PROTOCOLE PRÉ-ENREGISTRÉ (figé le 2026-07-02 AVANT d'avoir vu le moindre résultat) :
 
   TARGET   y = 1 si ret_1h > 0 (la direction prise était la bonne à 1h de marché).
            ret_1h = outcome marché signé par la direction, ANTI-lookahead, backfillé
            depuis le parquet. PAS le pnl réel (confondu par la gestion des sorties).
-  FEATURES (10, fixées d'avance — dérivées des règles minées, aucune ajoutée après) :
+  FEATURES (10, fixées d'avance, dérivées des règles minées, aucune ajoutée après) :
     us_hours       session ∈ {PRE_NY, NY, NY_PM, US_AM, US_PM, US_OPEN, US_CLOSE}
     asia_eu        session ∈ {ASIAN, EU_PREMARKET, OVERNIGHT}   (référence: LONDON)
     reg_transition « TRANSITION » dans le régime
@@ -21,13 +21,13 @@ PROTOCOLE PRÉ-ENREGISTRÉ (figé le 2026-07-02 AVANT d'avoir vu le moindre rés
   MODÈLE   régression logistique L2 (Newton, lambda=1.0), features standardisées.
            Simple et interprétable À DESSEIN : n=114 / 15 jours, tout modèle plus
            gros mémoriserait les jours.
-  VALIDATION leave-one-day-out (15 folds) — l'unité statistique est le JOUR.
+  VALIDATION leave-one-day-out (15 folds), l'unité statistique est le JOUR.
   MÉTRIQUES  AUC LODO, accuracy LODO vs base rate, et le TEST EN $ : PnL réel
            (pnl_usd des imports CSV) gardé en ne tradant que si p̂ ≥ 0.5, comparé
            (a) au total sans filtre et (b) à la RÈGLE SIMPLE « us_hours seulement ».
   CRITÈRE DE RÉTENTION (honnêteté) : le modèle n'est retenu QUE s'il bat la règle
            simple en LODO sur le $ ET l'AUC. Sinon verdict = « les règles simples
-           suffisent, pas de modèle » — un non-résultat est un résultat.
+           suffisent, pas de modèle », un non-résultat est un résultat.
   SORTIE   research/models/user_edge_model_v1.json + rapport console.
            RIEN n'est branché en prod (le chercheur propose, Sam promeut).
 """
@@ -170,7 +170,7 @@ def main():
         "standardize": {"mean": mu.tolist(), "std": sd.tolist()},
         "weights_bias_first": w.tolist(),
         "lodo": {"auc": a, "accuracy": acc, "base_rate": float(base)},
-        "status": "PROPOSÉ — non branché en prod (Sam promeut)",
+        "status": "PROPOSÉ, non branché en prod (Sam promeut)",
     }, open(OUT_MODEL, "w", encoding="utf-8"), indent=1)
     print(f"\nartefact -> {OUT_MODEL}")
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""DATAFEED — interface unique prix/bougies avec chaîne de fallback.
+"""DATAFEED, interface unique prix/bougies avec chaîne de fallback.
 
 Problème : tout reposait sur le websocket TradingView non officiel, qui peut
 casser sans préavis et n'a pas de volume réel pour les CFD. Ici :
@@ -11,7 +11,7 @@ Chaque réponse porte `source` et `latency_ms` ; si la donnée vient du cache,
 `stale: true`. Le watcher logge la source utilisée à chaque cycle via
 last_sources().
 
-Sous-jacents réels : GOLD ↔ futures COMEX GC, US500 ↔ futures CME ES — c'est
+Sous-jacents réels : GOLD ↔ futures COMEX GC, US500 ↔ futures CME ES, c'est
 là qu'existent le volume réel et le carnet. ATTENTION basis : GC=F et ES=F
 cotent au-dessus du spot/CFD (contango). Tant que les niveaux d'entrée/stop
 des signaux sont posés sur les prix TradingView, le fallback yfinance sert à
@@ -45,7 +45,7 @@ _last_sources = {}  # {"GOLD:price": "tradingview", "US500:candles:1m": "yfinanc
 
 # Yahoo rate-limite aussi : si TradingView tombe durablement, le watcher à
 # 5 min ne doit pas marteler yfinance. 60 s minimum entre deux appels réseau
-# PAR CLÉ (asset, kind) — un throttle global affamerait le backfill, qui a
+# PAR CLÉ (asset, kind), un throttle global affamerait le backfill, qui a
 # besoin de plusieurs actifs dans le même cycle. La fenêtre n'est consommée
 # que sur appel réussi (un échec ne brûle pas la minute).
 YF_MIN_INTERVAL_S = 60

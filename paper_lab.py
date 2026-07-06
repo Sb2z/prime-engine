@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 """
-PAPER LAB — validation forward AUTOMATIQUE des hypothèses du mining (2026-07-02).
+PAPER LAB, validation forward AUTOMATIQUE des hypothèses du mining (2026-07-02).
 ═══════════════════════════════════════════════════════════════════════════════
 Le mining multi-agents a produit 2 hypothèses fortes mais NON prouvées (t-stats
 sous le seuil après déflation, fenêtres courtes). Notre règle : on ne trade RIEN
 en réel sans validation forward. Ce module journalise donc chaque signal EN PAPIER,
-tout seul, chaque cycle du watcher — dans 15-20 jours on aura le verdict.
+tout seul, chaque cycle du watcher, dans 15-20 jours on aura le verdict.
 
   H1 « gold_ny_fade » : à 16h30 Paris, prendre l'INVERSE du mouvement GOLD
      15h30->16h30 ; sorties mesurées à 17h30 ET 20h00. (mesuré : +0,21 à +0,49%/
-     trade, t=2,8-3,3 AVANT déflation, 16 jours — réversion d'ouverture NY + fixing Londres.)
+     trade, t=2,8-3,3 AVANT déflation, 16 jours, réversion d'ouverture NY + fixing Londres.)
   H2 « us500_value_reversion » : LONG US500 quand of_imbalance < 0.12 (prix sous
      la Value Area) en heures US (15h30-22h Paris) ; sorties 1h et 4h.
      (mesuré : +0,10%/trade net @1h, 7 jours, 18 trades.)
 
 ANTI-LOOKAHEAD : ne lit que feature_exports/features.parquet (lignes <= maintenant),
 jamais prime.duckdb. État/trades dans SES fichiers (aucune écriture partagée).
-Appelé par prime_watcher à chaque cycle (~5 min) via tick() — jamais bloquant.
+Appelé par prime_watcher à chaque cycle (~5 min) via tick(), jamais bloquant.
 CLI :  python paper_lab.py          -> tick manuel
        python paper_lab.py summary  -> verdict par stratégie (net des coûts)
 """
@@ -132,7 +132,7 @@ def _h2_us500_value_reversion(con, now_p, recs):
 
 def _h3_gold_imb_fade(con, now_p, recs):
     """H3 (mining 02-07, règle FIGÉE avant les données) : fade de l'ÉTAT étiré
-    GOLD — SHORT si of_imbalance>+1, LONG si <-1 ; sortie quand |imb|<1 ou 22h
+    GOLD, SHORT si of_imbalance>+1, LONG si <-1 ; sortie quand |imb|<1 ou 22h
     Paris ; flat overnight ; 1 position à la fois. Gère AUSSI sa clôture.
     (mesuré : +0,15%/j brut, 6/11 jours seulement -> paper obligatoire.)"""
     if now_p.weekday() >= 5:

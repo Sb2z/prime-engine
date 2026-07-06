@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AURUM — Internals OR (l'edge spécifique XAUUSD)
+AURUM, Internals OR (l'edge spécifique XAUUSD)
 ══════════════════════════════════════════════════════════════════
 1. DXY MOMENTUM : corrélation inverse #1 de l'or (DXY↓ = OR↑)
 2. RATIO OR/ARGENT : régime risk / confirmation des métaux
@@ -40,21 +40,21 @@ def analyze(internals):
     else:
         signals.append(f"⚪ DXY {dxy_c:+.2f}% plat → corrélation inverse inactive")
 
-    # Ratio or/argent (régime risk) — INFO + petit score régime
+    # Ratio or/argent (régime risk), INFO + petit score régime
     g, s = p("GOLD"), p("SILVER")
     silver_c = c("SILVER"); gold_c = c("GOLD")
     if g and s:
         ratio = g / s
         regime = "RISK-OFF (or surperforme)" if ratio >= 88 else ("RISK-ON (argent surperforme)" if ratio <= 72 else "neutre")
         signals.append(f"⚪ Ratio or/argent {ratio:.1f} → {regime}")
-    # Silver : INFO seulement (la couche MACRO score déjà l'argent — pas de double comptage)
+    # Silver : INFO seulement (la couche MACRO score déjà l'argent, pas de double comptage)
     if abs(gold_c) > 0.1:
         if (gold_c > 0) == (silver_c > 0):
             signals.append(f"🟢 Argent {silver_c:+.2f}% confirme l'or ({gold_c:+.2f}%)")
         else:
             signals.append(f"🟠 Argent {silver_c:+.2f}% DIVERGE de l'or → move fragile")
 
-    # Taux : INFO seulement (la couche MACRO score déjà US10Y — pas de double comptage)
+    # Taux : INFO seulement (la couche MACRO score déjà US10Y, pas de double comptage)
     y = c("US10Y")
     signals.append(f"{'🔴' if y>=0.4 else ('🟢' if y<=-0.5 else '⚪')} Taux 10Y {y:+.2f}% (scoré dans la couche macro)")
 
@@ -77,6 +77,6 @@ def full_edge():
 
 if __name__ == "__main__":
     e = full_edge()
-    print(f"\n🥇 INTERNALS OR — score {e['score']:+.2f} {e['direction']}\n")
+    print(f"\n🥇 INTERNALS OR, score {e['score']:+.2f} {e['direction']}\n")
     for s in e["signals"]:
         print(f"   {s}")

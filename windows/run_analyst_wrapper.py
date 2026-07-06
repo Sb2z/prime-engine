@@ -1,4 +1,4 @@
-"""Wrapper de la session PRIME ANALYST (momentum intraday) — 12h & 23h.
+"""Wrapper de la session PRIME ANALYST (momentum intraday), 12h & 23h.
 
 Miroir durci de run_nightly_wrapper.py. Le mode (midday/evening) est déduit de
 l'heure ; le timeout du soir est dimensionné pour FINIR avant le chercheur
@@ -22,7 +22,7 @@ CANDIDATES = [
 
 
 def log(m):
-    print(f"{datetime.datetime.now():%F %T} — {m}", flush=True)
+    print(f"{datetime.datetime.now():%F %T}, {m}", flush=True)
 
 
 now = datetime.datetime.now()
@@ -34,7 +34,7 @@ date = datetime.date.today().isoformat()
 report = f"research/reports/analyst_{date}_{slot}.md"
 
 PROMPT = (
-    "Tu es le PRIME ANALYST — analyste momentum intraday du Research Lab. "
+    "Tu es le PRIME ANALYST, analyste momentum intraday du Research Lab. "
     f"Session {slot} ({now:%F %H:%M} Paris). Lis et applique STRICTEMENT "
     "research/ANALYST_PROTOCOL.md ET research/RESEARCH_PROTOCOL.md (cadre "
     "constitutionnel : signal-only, tu n'écris QUE dans research/, le juge "
@@ -70,7 +70,7 @@ try:
         timeout=timeout_min * 60, cwd=r"C:\Users\sam\trading", stdin=subprocess.DEVNULL)
     rc = r.returncode
 except subprocess.TimeoutExpired:
-    log(f"TIMEOUT {timeout_min}min — session coupée (budget)")
+    log(f"TIMEOUT {timeout_min}min, session coupée (budget)")
     rc = 124
 except OSError as exc:
     log(f"échec du lancement : {type(exc).__name__} {exc}")
@@ -78,12 +78,11 @@ except OSError as exc:
 
 log(f"analyst {slot} terminé (exit {rc})")
 if rc != 0:
-    # audit 07-02 : le créneau 09h a échoué en silence (session limit Claude) —
-    # un passage de surveillance sur 4 perdu sans que personne ne le sache.
+    # audit 07-02 : le créneau 09h a échoué en silence (session limit Claude), # un passage de surveillance sur 4 perdu sans que personne ne le sache.
     try:
         sys.path.insert(0, r"C:\Users\sam\trading")
         import notify
-        notify.send(f"⚠️ Prime Analyst {slot} en ÉCHEC (exit {rc}) — passage de "
+        notify.send(f"⚠️ Prime Analyst {slot} en ÉCHEC (exit {rc}), passage de "
                     f"surveillance perdu (quota/timeout ?). Voir research/analyst.log.",
                     silent=True)
     except Exception:

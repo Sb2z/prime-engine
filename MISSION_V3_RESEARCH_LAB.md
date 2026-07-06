@@ -1,4 +1,4 @@
-# MISSION V3 — PRIME RESEARCH LAB : recherche autonome, promotion sous contrôle
+# MISSION V3, PRIME RESEARCH LAB : recherche autonome, promotion sous contrôle
 
 Objectif : donner au système la capacité de chercher, tester et améliorer des
 stratégies DE LUI-MÊME, sans jamais lui donner la capacité de se mentir.
@@ -8,12 +8,12 @@ c'est qu'il "améliore" ses propres garde-fous jusqu'à valider du bruit
 
 ## Principe constitutionnel : séparation des pouvoirs
 
-1. LE CHERCHEUR (autonome, libre) — propose des hypothèses, fouille les
+1. LE CHERCHEUR (autonome, libre), propose des hypothèses, fouille les
    données, lit internet, code des expériences dans research/. Il peut tout
    essayer, il ne peut rien promouvoir.
-2. LE JUGE (harness.py, gelé) — valide ou tue chaque expérience selon des
+2. LE JUGE (harness.py, gelé), valide ou tue chaque expérience selon des
    règles immuables. Le chercheur ne peut pas modifier le juge.
-3. LE PROMOTEUR (Sam, humain) — seul habilité à faire passer une stratégie
+3. LE PROMOTEUR (Sam, humain), seul habilité à faire passer une stratégie
    du papier aux alertes réelles, sur dossier présenté par le chercheur
    et tamponné par le juge.
 
@@ -61,11 +61,11 @@ plafonné (tokens + durée max 45 min + kill switch fichier research/PAUSE).
 La session a accès à internet (lecture), au data lake, à research/.
 
 RESEARCH_PROTOCOL.md (à écrire dans cette mission) impose le cycle :
-1. INGESTION — lire le rapport du jour : resim_report, nouvelles lignes
+1. INGESTION, lire le rapport du jour : resim_report, nouvelles lignes
    feature store, trades réels de Sam du jour, événements macro.
-2. AUTOPSIE — chaque signal de la veille (Prime, trend-day, paper
+2. AUTOPSIE, chaque signal de la veille (Prime, trend-day, paper
    strategies) : prévu vs réalisé. Mettre à jour research/autopsy.md.
-3. HYPOTHÈSES — proposer max 3 hypothèses NOUVELLES (le registry refuse
+3. HYPOTHÈSES, proposer max 3 hypothèses NOUVELLES (le registry refuse
    les doublons, similarité sur hypothesis_text + family + params).
    Sources d'inspiration autorisées : familles d'effets documentés
    (momentum intraday, mean reversion post-excès, dérive post-événement
@@ -74,11 +74,11 @@ RESEARCH_PROTOCOL.md (à écrire dans cette mission) impose le cycle :
    et SURTOUT le mining des données propres : les 80+ trades réels de Sam
    et le feature store (ex. "le WR de Sam chute après 2 pertes
    consécutives ?", "les A_SETUP en EVENT_DAY surperforment ?").
-4. EXPÉRIENCES — coder chaque hypothèse au format standard, soumettre au
+4. EXPÉRIENCES, coder chaque hypothèse au format standard, soumettre au
    harness, archiver le verdict. Interdit de re-soumettre une variante
    mineure d'une idée KILLED sans la déclarer comme variante (le registry
    compte les familles).
-5. RAPPORT — research/reports/YYYY-MM-DD.md : ce qui a été testé, tué,
+5. RAPPORT, research/reports/YYYY-MM-DD.md : ce qui a été testé, tué,
    passé en papier, + le backlog priorisé pour demain. Résumé en 5 lignes
    envoyé sur Telegram dans le résumé quotidien.
 
@@ -125,7 +125,7 @@ IDEA → BACKTEST (harness) → PAPER → CANDIDATE → LIVE-ALERTES
 - Transparence : tout est committé (recherche incluse), Telegram quotidien
   résume, et l'historique des verdicts est append-only.
 - Réalisme affiché : le rapport quotidien commence par le compteur
-  "hypothèses testées / tuées / en papier / promues" — le taux de mortalité
+  "hypothèses testées / tuées / en papier / promues", le taux de mortalité
   attendu est >90% et c'est un signe de SANTÉ du système, pas d'échec.
 
 ## Ordre d'exécution

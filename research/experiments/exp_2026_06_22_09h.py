@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Experience ANALYST 09h du 2026-06-22 (slot matinal, lundi — 1re surface NEUVE).
+"""Experience ANALYST 09h du 2026-06-22 (slot matinal, lundi, 1re surface NEUVE).
 
 === DERNIERE CELLULE DE LA MATRICE ICHIMOKU : twist_1d POOLE GOLD+US500 ===
 
@@ -15,7 +15,7 @@ POURQUOI CETTE HYPOTHESE, ET UNE SEULE :
     tk_cross II ; kijun_reject IJ ; chikou_confirm IK), tous POOLES GOLD+US500,
     tous KILLED bien-powered (n_eff 36/69/249, exp≈0, IC chevauche 0). Le SEUL
     residu nomme et DEFERE etait twist_1d (4e signal, hors budget 3/nuit, prior
-    le plus faible — HN/HO twist a plat en 1h). C'est la derniere cellule vide.
+    le plus faible, HN/HO twist a plat en 1h). C'est la derniere cellule vide.
   - Les familles momentum (momentum, momentum_breakout, momentum_regime) sont
     KILLED sur {GOLD, ES, dollar, pool} x {1h, 1d}, exp≈0. Re-juger sur +1.5 jour
     de lake ne bougera pas un verdict poole bien-powered (et le registry dedoublonne).
@@ -32,7 +32,7 @@ POURQUOI POOLER GOLD+US500 (remede de puissance nomme par le lab, 17/06 HU/HV/HW
     Le pool peut malgre tout rester sous-puissant ; si KILLED "faute de n", c'est
     un fait mesure ("twist 1d trop rare meme poole"), pas une defaite a lisser.
 
-ISOLEMENT DES DEGRES DE LIBERTE — aucun parametre invente :
+ISOLEMENT DES DEGRES DE LIBERTE, aucun parametre invente :
   - Trigger : speed="standard" = perimetre FERME 9/26/52/26 (= tout le reste de
     la matrice ichimoku). Aucune valeur balayee, aucun knob.
   - Exit : l'UNIQUE exit 1d deja calibre du lab stop1.2/tp2.4/horizon10

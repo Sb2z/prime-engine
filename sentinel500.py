@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ╔══════════════════════════════════════════════════════════════════╗
-║   SENTINEL-500  —  IA de trading intraday S&P 500 (US500)         ║
+║   SENTINEL-500, IA de trading intraday S&P 500 (US500)         ║
 ║   Discipline · vigilance macro · gestion du risque                ║
 ╚══════════════════════════════════════════════════════════════════╝
 Assemble : prix T0 + TA multi-TF (15m/1H/4H/1D) + macro actions + news live
@@ -9,7 +9,7 @@ Assemble : prix T0 + TA multi-TF (15m/1H/4H/1D) + macro actions + news live
 
 Leçons intégrées (héritées du gold, conservées) :
   • ANTI-FADE : pas de contre-tendance si ADX>35
-  • NE PAS CHASSER l'OB (RSI>70 / StochK>90) — attendre le pullback
+  • NE PAS CHASSER l'OB (RSI>70 / StochK>90), attendre le pullback
   • ALIGNEMENT HTF : long intraday contre 1D baissier = conviction réduite
   • Stops calibrés à la volatilité réelle (ATR)
 """
@@ -36,16 +36,16 @@ def get_session():
     if wd >= 5:
         return {"session": "WEEKEND", "tradeable": False, "note": "Marché fermé"}
     if 15 <= h < 16:
-        return {"session": "US_OPEN", "tradeable": True, "note": "Ouverture cash US — volatilité, setups principaux"}
+        return {"session": "US_OPEN", "tradeable": True, "note": "Ouverture cash US, volatilité, setups principaux"}
     if 16 <= h < 18:
-        return {"session": "US_AM", "tradeable": True, "note": "Matinée US — tendance s'établit"}
+        return {"session": "US_AM", "tradeable": True, "note": "Matinée US, tendance s'établit"}
     if 18 <= h < 20:
         return {"session": "US_PM", "tradeable": True, "note": "Après-midi US"}
     if 20 <= h < 22:
-        return {"session": "US_CLOSE", "tradeable": True, "note": "Dernière heure — squaring, volatilité"}
+        return {"session": "US_CLOSE", "tradeable": True, "note": "Dernière heure, squaring, volatilité"}
     if 9 <= h < 15:
-        return {"session": "EU_PREMARKET", "tradeable": True, "note": "Pré-market US (futures) — direction se dessine"}
-    return {"session": "OVERNIGHT", "tradeable": False, "note": "Hors séance cash — futures fins"}
+        return {"session": "EU_PREMARKET", "tradeable": True, "note": "Pré-market US (futures), direction se dessine"}
+    return {"session": "OVERNIGHT", "tradeable": False, "note": "Hors séance cash, futures fins"}
 
 
 # ── Scoring technique d'un timeframe ────────────────────────────────────────
@@ -87,21 +87,21 @@ def analyze_psychology(ta_1h, ta_4h, macro):
     adx1 = (ta_1h or {}).get("adx", 0); stk = (ta_1h or {}).get("stoch_k", 50)
     vix = (macro.get("VIX", {}) or {}).get("price", 0) or 0
     if rsi1 > 72:
-        score -= 1.0; signals.append(f"😬 EUPHORIE (RSI {rsi1:.0f}) — risque de pullback")
+        score -= 1.0; signals.append(f"😬 EUPHORIE (RSI {rsi1:.0f}), risque de pullback")
     elif rsi1 < 28:
-        score += 1.0; signals.append(f"😰 CAPITULATION (RSI {rsi1:.0f}) — rebond possible")
+        score += 1.0; signals.append(f"😰 CAPITULATION (RSI {rsi1:.0f}), rebond possible")
     if stk > 92:
-        score -= 0.6; signals.append(f"📍 StochK {stk:.0f} surchauffe — ne pas chasser")
+        score -= 0.6; signals.append(f"📍 StochK {stk:.0f} surchauffe, ne pas chasser")
     elif stk < 8:
         score += 0.6; signals.append(f"📍 StochK {stk:.0f} survente extrême")
     if abs(rsi1 - rsi4) > 15:
         signals.append(f"⚠️ Divergence RSI 1H/4H ({rsi1:.0f} vs {rsi4:.0f})")
     if adx1 > 35:
-        signals.append(f"⚠️ ADX {adx1:.0f} très fort — NE PAS counter-trader (anti-fade)")
+        signals.append(f"⚠️ ADX {adx1:.0f} très fort, NE PAS counter-trader (anti-fade)")
     if vix and vix < 14:
-        signals.append(f"🟢 VIX bas {vix:.1f} — complaisance, marché porteur mais fragile")
+        signals.append(f"🟢 VIX bas {vix:.1f}, complaisance, marché porteur mais fragile")
     elif vix and vix > 22:
-        signals.append(f"🔴 VIX élevé {vix:.1f} — peur, prudence longs")
+        signals.append(f"🔴 VIX élevé {vix:.1f}, peur, prudence longs")
     return {"signals": signals, "score": round(score, 2)}
 
 
@@ -300,7 +300,7 @@ def _print_report(R):
     macro = R.get("macro", {}).get("data", {}); ms = R.get("macro", {}).get("score", {})
     news = R.get("news", {}); price = R.get("price")
     print("═" * 66)
-    print(f"  🛡️  SENTINEL-500 — {paris.strftime('%H:%M')} Paris  |  {R['session']['session']}")
+    print(f"  🛡️  SENTINEL-500, {paris.strftime('%H:%M')} Paris  |  {R['session']['session']}")
     print("═" * 66)
     emoji = "🟢" if (R.get("chg") or 0) > 0 else "🔴"
     print(f"  {emoji} S&P 500  {price}  ({R.get('chg'):+.2f}%)  |  H={R.get('high')} L={R.get('low')}")
@@ -366,7 +366,7 @@ def _print_report(R):
 
     sm = R.get("smc", {})
     if sm.get("signals"):
-        print(f"\n  🧠 SMC ({sm.get('score'):+.2f} {sm.get('bias')}) — structure {sm.get('structure')}")
+        print(f"\n  🧠 SMC ({sm.get('score'):+.2f} {sm.get('bias')}), structure {sm.get('structure')}")
         for s in sm.get("signals", [])[:5]:
             print(f"   {s}")
     of = R.get("orderflow", {})
@@ -376,21 +376,21 @@ def _print_report(R):
             print(f"   {s}")
     op = R.get("options")
     if op:
-        print(f"\n  🎰 OPTIONS (SPX/CBOE) — régime {op['gex_regime']}")
+        print(f"\n  🎰 OPTIONS (SPX/CBOE), régime {op['gex_regime']}")
         print(f"   🎯 Max Pain {op['max_pain']} · 🟥 Call wall {op['call_wall']} · 🟩 Put wall {op['put_wall']} · P/C {op['pcr']} · IV {op['iv']}%")
 
     # Intraday : VWAP + Opening Range
     intra = R.get("intraday", {})
     if intra and "error" not in intra:
         print(f"\n  📊 VWAP / OPENING RANGE ({intra.get('score', 0):+.2f})")
-        print(f"   VWAP {intra.get('vwap')} | OR {intra.get('or_low')}–{intra.get('or_high')} ({intra.get('or_state')})")
+        print(f"   VWAP {intra.get('vwap')} | OR {intra.get('or_low')}-{intra.get('or_high')} ({intra.get('or_state')})")
         for s in intra.get("signals", [])[:3]:
             print(f"   {s}")
     strat = R.get("strategy")
     if strat and strat.get("levels"):
         lv = strat["levels"]; ote = strat["ote"]
         print(f"\n  🎯 STRATÉGIE : {strat['name']} (retracement double-flux, RR forcé)")
-        print(f"   Zone OTE (entrée sur repli) : {ote.get('ote_low')}–{ote.get('ote_high')} (sweet spot {ote.get('sweet_spot')})")
+        print(f"   Zone OTE (entrée sur repli) : {ote.get('ote_low')}-{ote.get('ote_high')} (sweet spot {ote.get('sweet_spot')})")
         print(f"   Stop {lv['stop']} | TP1 {lv['tp1']} (RR 2:1) | TP2 {lv['tp2']} (3:1) | TP3 {lv['tp3']} (4:1)")
     print("─" * 66)
     bar = "█" * int(c.get("score", 0)) + "░" * (10 - int(c.get("score", 0)))
@@ -400,7 +400,7 @@ def _print_report(R):
     if c.get("score", 0) >= THRESHOLDS["valid"]:
         print(f"  ✅ SIGNAL VALIDE")
     else:
-        print(f"  ❌ NON — confluence insuffisante ({c.get('score')}/10 < {THRESHOLDS['valid']})")
+        print(f"  ❌ NON, confluence insuffisante ({c.get('score')}/10 < {THRESHOLDS['valid']})")
     print("═" * 66)
 
 

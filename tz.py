@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TZ — heure de Paris DST-correcte, CENTRALISÉE.
+"""TZ, heure de Paris DST-correcte, CENTRALISÉE.
 
 Remplace le hack `datetime.now(utc) + timedelta(hours=2)` éparpillé dans le projet :
 correct SEULEMENT en heure d'été (CEST = UTC+2), mais FAUX d'1 h en heure d'hiver
@@ -10,7 +10,7 @@ Deux primitives :
   • to_paris(d)  -> convertit un datetime (aware, ou naïf supposé UTC) en heure de Paris.
 
 Fallback +2h fixe si la base tz IANA est absente (ne devrait pas arriver : tzdata
-présent sur ce poste) — uniquement pour ne jamais crasher.
+présent sur ce poste), uniquement pour ne jamais crasher.
 """
 import datetime
 

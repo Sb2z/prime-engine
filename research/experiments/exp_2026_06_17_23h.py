@@ -1,30 +1,30 @@
 #!/usr/bin/env python3
-"""Expérience PRIME ANALYST du 2026-06-17 23h — slot EVENING (bilan séance, post-FOMC).
+"""Expérience PRIME ANALYST du 2026-06-17 23h, slot EVENING (bilan séance, post-FOMC).
 
 DEUX hypothèses NOUVELLES, falsifiables, données du lake (source homogène par
 test : GOLD<->GC=F 1h, US500<->ES=F 1h ; aucune 2e source mélangée).
 
-POURQUOI ce test — la famille `momentum_breakout` vient d'être APPROUVÉE par Sam
+POURQUOI ce test, la famille `momentum_breakout` vient d'être APPROUVÉE par Sam
 (token, commit 51a0e61 du 17/06) : c'était le backlog #1 explicite des 4 derniers
 slots, "le seul angle « signal » intraday encore non réfuté". Spec analyste du
 13/06. C'est le PREMIER test de cette famille au registry.
 
   Thèse de Sam, formulée proprement : le momentum intraday se capte par ENTRÉE-
   MARCHÉ SUR CASSURE (close franchit le plus-haut/plus-bas des `lookback` bougies
-  ANTÉRIEURES) CONFIRMÉE par une tendance propre (ER>=0.45 ET ADX>=30) — l'OPPOSÉ
+  ANTÉRIEURES) CONFIRMÉE par une tendance propre (ER>=0.45 ET ADX>=30), l'OPPOSÉ
   d'OTE_RETRACEMENT (la prod, qui attend un repli et RATE les jours de tendance).
   Si le momentum intraday a un edge net de coûts quelque part dans les familles
   exprimables, c'est ICI qu'il doit apparaître : on suit la cassure au lieu de la
   fader. momentum_regime (ret>thr en régime) testait la PERSISTANCE ; le breakout
-  teste le DÉCLENCHEMENT structurel (canal Donchian) — mécanisme distinct.
+  teste le DÉCLENCHEMENT structurel (canal Donchian), mécanisme distinct.
 
-ISOLEMENT DES DEGRÉS DE LIBERTÉ — aucun sweep, paramètres tous hérités :
+ISOLEMENT DES DEGRÉS DE LIBERTÉ, aucun sweep, paramètres tous hérités :
   - Gate de régime ER0.45/ADX30 = la porte CANONIQUE de toute la famille
     momentum_regime (HH..HR). Réutilisée TELLE QUELLE, pas re-tunée.
   - lookback=20 = canal Donchian classique (Turtle), valeur par défaut de la
     famille, choisie A PRIORI, pas balayée.
   - exit stop0.6/tp1.0/horizon24 = l'exit 1h CANONIQUE de HH (le momentum_regime
-    1h GOLD) — réutilisé tel quel, calibré sur la vol horaire GOLD/ES. Aucun
+    1h GOLD), réutilisé tel quel, calibré sur la vol horaire GOLD/ES. Aucun
     nouveau degré de liberté introduit ce soir.
 
 PRÉ-EMPTION DU CONFOUND CROSS-ASSET (leçon HQ->HR) : un positif sur un SEUL actif

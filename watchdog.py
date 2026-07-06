@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""WATCHDOG — détecte un watcher mort, gelé OU en crash-loop.
+"""WATCHDOG, détecte un watcher mort, gelé OU en crash-loop.
 
 Le risque couvert : le prime_watcher plante/gèle et le silence Telegram
 ressemble à "pas de setup" alors que c'est "système éteint". Lancé toutes les
@@ -12,7 +12,7 @@ fraîcheur du DERNIER CYCLE réel (event type=cycle dans le jsonl) + la présenc
 du process. On distingue ainsi : process absent (mort), process vivant mais ne
 cycle plus (gel / crash-loop). Si le watcher est franchement MORT (aucun
 process prime_watcher.py), on tente une relance auto (schtasks /Run) en plus de
-l'alerte — le superviseur start_watcher.bat couvre déjà le crash de python ;
+l'alerte, le superviseur start_watcher.bat couvre déjà le crash de python ;
 ceci couvre le cas où le superviseur lui-même a disparu.
 
 Anti-spam : une alerte par épisode, rappel toutes les 2h max. Alerte de
@@ -118,11 +118,11 @@ def main():
         else:
             npart = "?" if nproc is None else str(nproc)
             diag = (f"{npart} python présent(s) mais aucun cycle frais "
-                    "(gel ou crash-loop) — intervention requise")
+                    "(gel ou crash-loop), intervention requise")
         if not state["silent"] or now - state["last_alert"] > REMIND_EVERY_S:
             age_txt = "jamais" if cycle_age == float("inf") else f"{cycle_age/60:.0f} min"
             notify.send(
-                f"⚠️ WATCHER MUET — dernier cycle il y a {age_txt} — {diag}. "
+                f"⚠️ WATCHER MUET, dernier cycle il y a {age_txt}, {diag}. "
                 f"Le silence n'est pas 'pas de setup', c'est 'système en panne'.")
             state = {"silent": True, "last_alert": now}
     elif state.get("silent"):
@@ -137,7 +137,7 @@ def main():
         free_gb = shutil.disk_usage("C:/").free / 1024**3
         if free_gb < 15:
             if not state.get("disk_alert") or now - state.get("disk_last", 0) > REMIND_EVERY_S:
-                notify.send(f"⚠️ DISQUE C: {free_gb:.0f} Go libres (<15) — risque "
+                notify.send(f"⚠️ DISQUE C: {free_gb:.0f} Go libres (<15), risque "
                             f"d'asphyxie du pipeline, fais du ménage.")
                 state["disk_alert"] = True
                 state["disk_last"] = now

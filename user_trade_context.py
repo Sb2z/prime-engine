@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-USER TRADE CONTEXT — capture le CONTEXTE au moment exact où Sam trade.
+USER TRADE CONTEXT, capture le CONTEXTE au moment exact où Sam trade.
 ═══════════════════════════════════════════════════════════════════════════
 But (analyse 2026-06-19) : l'edge de Sam n'est PAS modélisable aujourd'hui car
 ses trades n'ont AUCUN contexte capturé (adx/rsi/of_*/session/heure tous NULL).
@@ -143,7 +143,7 @@ def summary(out=OUT):
     # comptage HONNÊTE (audits 02-03/07) : records marqués exclus ; contexte plus
     # vieux que 15 min exclu (appariement ts<= sans plafond = contexte du vendredi
     # sur un trade du dimanche) ; et le compteur qui commande le modèle v2 = jours
-    # AVEC order-flow (of_delta non-null) — les captures pré-18/06 n'ont pas les
+    # AVEC order-flow (of_delta non-null), les captures pré-18/06 n'ont pas les
     # features of_* et ne peuvent pas entraîner un modèle qui s'en sert.
     clean = [r for r in recs if not r.get("quality")]
     with_ctx = [r for r in clean if r.get("context")

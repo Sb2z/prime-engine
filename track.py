@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TRACK — Runner du journal auto-apprenant
+TRACK, Runner du journal auto-apprenant
 ══════════════════════════════════════════════════════════════════
 Pipeline complet à chaque scan :
   1. Fetch prix T0 (WebSocket) + TA 1H (WebSocket) pour tous les actifs
@@ -57,7 +57,7 @@ def current_session():
 def main():
     ts = paris_now().strftime("%H:%M:%S")
     print(f"\n{'═'*66}")
-    print(f"  📓 TRACK — Journal auto-apprenant — {ts} Paris")
+    print(f"  📓 TRACK, Journal auto-apprenant, {ts} Paris")
     print(f"{'═'*66}")
 
     # 1. Prix T0
@@ -111,7 +111,7 @@ def main():
 
         flag = ""
         if no_fade:
-            flag = " ⛔ ANTI-FADE (ADX fort, contre-tendance — non loggé)"
+            flag = " ⛔ ANTI-FADE (ADX fort, contre-tendance, non loggé)"
         elif direc != "NEUTRAL" and score >= LOG_THRESHOLD and lp:
             sid = journal.log_signal(name, lp, direc, score, d, session, vix, dxy)
             if sid:

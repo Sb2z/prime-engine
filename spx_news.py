@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SENTINEL-500 — Couche News S&P 500
+SENTINEL-500, Couche News S&P 500
 Base de réactions ACTIONS + classification auto du ton + flux live (Finnhub).
 Score positif = bullish S&P, négatif = bearish.
 
@@ -188,7 +188,7 @@ def news_score_for_spx():
 
 if __name__ == "__main__":
     r = news_score_for_spx()
-    print(f"\n📰 SENTINEL-500 News — score {r['score']:+.2f} {r['direction']}")
+    print(f"\n📰 SENTINEL-500 News, score {r['score']:+.2f} {r['direction']}")
     print(f"  Posture Fed : {r['context']['fundamental_bias']['fed_posture']}  (bonus {r['fundamental_bonus']:+.2f})")
     for ev in r["sentiment"]["breakdown"]:
         mk = "🟢" if ev["score"] > 0 else ("🔴" if ev["score"] < 0 else "⚪")

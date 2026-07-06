@@ -19,7 +19,7 @@ POURQUOI ce test (et non du re-knob cosmetique) :
   - NON-DOUBLON : hypothesis_key = hash(family, params, exit, assets, tf). HH/HI
     ont exit {stop0.6/tp1.0/h24}. Ici exit {stop0.5/tp0.7/h6} = cle NOUVELLE.
   - variant_of = HH (GOLD) / HI (ES) : prolongation d'idees KILLED, deflation
-    GLOBALE comprise (z requis encore durci — c'est le cout assume).
+    GLOBALE comprise (z requis encore durci, c'est le cout assume).
 
 EXIT calibre A PRIORI (AUCUN sweep) sur la magnitude d'une bougie GOLD 1h
 (ATR ~0.4-0.5%) et la consigne LIVE "sortie rapide, stop ATR" :
@@ -56,7 +56,7 @@ STRATEGIES = [
         "hypothesis_text": "Le momentum clean-trend GOLD 1h (er>=0.45 & adx>=30, "
                            "trigger IDENTIQUE a HH) avec une SORTIE RAPIDE de scalp "
                            "(stop0.5/tp0.7/horizon 6 bars au lieu du HOLD 24h de HH) "
-                           "degage une esperance nette POSITIVE — i.e. la sortie "
+                           "degage une esperance nette POSITIVE, i.e. la sortie "
                            "rapide prescrite par l'alerte live 'MODE SCALP TENDANCE' "
                            "sauve l'edge que le hold 24h (HH, KILLED) n'avait pas.",
         "family": "momentum_regime",

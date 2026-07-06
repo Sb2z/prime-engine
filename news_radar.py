@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-NEWS RADAR — Détecteur de news temps réel multi-sources (ton bouclier fondamental)
+NEWS RADAR, Détecteur de news temps réel multi-sources (ton bouclier fondamental)
 ══════════════════════════════════════════════════════════════════
 Agrège en continu : GDELT (géopolitique) + Finnhub (news/calendrier) +
 Marketaux (news+sentiment) + Fear&Greed + StockTwits. Score chaque news par
@@ -77,7 +77,7 @@ def score_item(headline):
 
 # ── Sources ─────────────────────────────────────────────────────────────────
 def fetch_gdelt(query="(inflation OR \"federal reserve\" OR recession OR war OR gold OR \"stock market\")"):
-    """GDELT — événements mondiaux temps quasi-réel (gratuit, sans clé)."""
+    """GDELT, événements mondiaux temps quasi-réel (gratuit, sans clé)."""
     try:
         q = urllib.parse.quote(query)
         url = (f"https://api.gdeltproject.org/api/v2/doc/doc?query={q}"
@@ -122,7 +122,7 @@ def fetch_marketaux():
 
 
 def fetch_feargreed():
-    """Fear & Greed Index (CNN, actions) — psychologie du marché."""
+    """Fear & Greed Index (CNN, actions), psychologie du marché."""
     try:
         d = _get("https://production.dataviz.cnn.io/index/fearandgreed/graphdata")
         fg = d.get("fear_and_greed", {})
@@ -142,7 +142,7 @@ def radar():
     for fn in (fetch_gdelt, fetch_finnhub, fetch_marketaux):
         items += fn()
 
-    # Calendrier macro structuré (consensus vs actual) — fenêtres pré/post event
+    # Calendrier macro structuré (consensus vs actual), fenêtres pré/post event
     try:
         import calendar_feed
         macro_cal = calendar_feed.event_mode()
@@ -183,25 +183,25 @@ def _window_alert(r):
     # (le 🔴 déclenche le veto majeur de prime_strategy)
     cal = r.get("macro_calendar") or {}
     if cal.get("mode") == "PRE_EVENT":
-        return ("🔴 PRÉ-EVENT", f"Chiffre high-impact US imminent: {cal.get('detail')} — pas de nouveau trade")
+        return ("🔴 PRÉ-EVENT", f"Chiffre high-impact US imminent: {cal.get('detail')}, pas de nouveau trade")
     unc = r["uncertain_count"]; n = len(r["items"])
     if n == 0:
-        return ("⚪ CALME", "Peu de news impactantes — contexte neutre")
+        return ("⚪ CALME", "Peu de news impactantes, contexte neutre")
     if unc >= max(3, n * 0.4):
-        return ("🔴 NE PAS TRADER", f"{unc} news incertaines/contradictoires — risque de faux mouvement")
+        return ("🔴 NE PAS TRADER", f"{unc} news incertaines/contradictoires, risque de faux mouvement")
     suffix = ""
     if cal.get("mode") == "EVENT_DAY":
         suffix = f" · EVENT DAY ({cal.get('detail')})"
     if abs(r["gold_bias"]) >= 3 or abs(r["spx_bias"]) >= 3:
-        return ("🟢 FENÊTRE CLAIRE", "Flux news directionnel net — contexte exploitable" + suffix)
-    return ("🟡 PRUDENCE", "Flux mitigé — attendre confirmation" + suffix)
+        return ("🟢 FENÊTRE CLAIRE", "Flux news directionnel net, contexte exploitable" + suffix)
+    return ("🟡 PRUDENCE", "Flux mitigé, attendre confirmation" + suffix)
 
 
 if __name__ == "__main__":
     r = radar()
     alert, msg = _window_alert(r)
-    print(f"\n{'='*64}\n  📡 NEWS RADAR — {datetime.datetime.now().strftime('%H:%M:%S')}\n{'='*64}")
-    print(f"  {alert} — {msg}")
+    print(f"\n{'='*64}\n  📡 NEWS RADAR, {datetime.datetime.now().strftime('%H:%M:%S')}\n{'='*64}")
+    print(f"  {alert}, {msg}")
     fg = r["fear_greed"]
     if fg:
         print(f"  😱 Fear & Greed : {fg['score']}/100 ({fg['rating']})")

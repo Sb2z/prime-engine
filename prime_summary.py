@@ -99,7 +99,7 @@ def main():
             pass
     s = summarize(days)
     print("═" * 66)
-    print(f"  PRIME SUMMARY — derniers {s['days']} jours")
+    print(f"  PRIME SUMMARY, derniers {s['days']} jours")
     print("═" * 66)
     print(f"  Cycles analysés: {s['cycles']} | triggers: {s['triggers']} | uniques: {len(s['unique_triggers'])} | erreurs: {len(s['errors'])}")
     for asset in sorted(s["by_asset_grade"]):

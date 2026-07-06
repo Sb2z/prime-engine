@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """TEST telegram_inbox : parsing des commandes + capture + SÉCURITÉ (chat de Sam
-uniquement). Tout mocké — aucun réseau, aucune donnée live, aucun envoi réel."""
+uniquement). Tout mocké, aucun réseau, aucune donnée live, aucun envoi réel."""
 import datetime as dt
 import json
 import os
@@ -14,7 +14,7 @@ FAIL = []
 
 
 def chk(n, ok, d=""):
-    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f" — {d}" if d else ""))
+    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f", {d}" if d else ""))
     if not ok:
         FAIL.append(n)
 
@@ -69,4 +69,4 @@ print()
 if FAIL:
     print(f"X ÉCHEC(S): {FAIL}")
     raise SystemExit(1)
-print("OK — telegram_inbox : parsing + capture + sécurité chat validés.")
+print("OK, telegram_inbox : parsing + capture + sécurité chat validés.")

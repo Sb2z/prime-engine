@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""COT FEED — positionnement spéculatif CFTC hebdomadaire (gratuit).
+"""COT FEED, positionnement spéculatif CFTC hebdomadaire (gratuit).
 
 Source : API Socrata publique de la CFTC (Legacy Futures Only, dataset
 6dca-aqww), rapport publié le vendredi soir sur les positions du mardi.

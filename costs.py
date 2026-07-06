@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""COSTS — coûts de transaction CFD appliqués à la mesure.
+"""COSTS, coûts de transaction CFD appliqués à la mesure.
 
 Le journal clôturait à exit_price = tp1/stop exact : zéro spread, slippage,
-swap. Les trades USER sont des fills réels Revolut — la comparaison était
+swap. Les trades USER sont des fills réels Revolut, la comparaison était
 biaisée en faveur de l'IA. Ce module centralise des coûts de départ prudents
 (CFD retail), à calibrer plus tard sur les tickets d'exécution réels.
 
@@ -71,8 +71,7 @@ def adjust_exit(asset, level, direction, session, kind):
 
 def adjust_entry(asset, level, direction, session):
     """Fill MARKET à l'ENTRÉE : on paie le spread du mauvais côté (LONG achète à
-    l'ask = plus haut, SHORT vend au bid = plus bas). Symétrique d'adjust_exit —
-    sans ça le juge ne facturait que la MOITIÉ du spread aller-retour (audit 06-18).
+    l'ask = plus haut, SHORT vend au bid = plus bas). Symétrique d'adjust_exit, sans ça le juge ne facturait que la MOITIÉ du spread aller-retour (audit 06-18).
     NB : ne concerne QUE le backtest (entrées market) ; le live utilise des entrées
     LIMITE OTE qui fillent AU niveau (pas de spread à l'entrée) -> journal inchangé."""
     sign = 1 if direction == "LONG" else -1

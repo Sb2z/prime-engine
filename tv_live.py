@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TradingView WebSocket Client — Prix T0 via le même flux que ton navigateur
+TradingView WebSocket Client, Prix T0 via le même flux que ton navigateur
 Usage : python3 tv_live.py [--symbols NASDAQ:AVGO,NASDAQ:TSLA] [--timeout 12] [--json]
 """
 
@@ -194,7 +194,7 @@ def paris_now():
 def print_prices(prices: dict):
     ts = paris_now()
     print(f"\n{'─'*62}")
-    print(f"  📡 TRADINGVIEW WebSocket T0 — {ts} Paris (UTC+2)")
+    print(f"  📡 TRADINGVIEW WebSocket T0, {ts} Paris (UTC+2)")
     print(f"{'─'*62}")
     print(f"  {'SYM':<7} {'PRIX':>9}  {'CHG':>8}  {'CHG%':>7}  {'VOL':>10}  {'HIGH':>9}  {'LOW':>9}")
     print(f"  {'─'*58}")
@@ -244,7 +244,7 @@ def main():
     prices  = TVLiveClient(symbols=symbols, timeout=args.timeout).fetch()
 
     if not prices:
-        print("⚠️  Aucune donnée — vérifie ta connexion.", file=sys.stderr)
+        print("⚠️  Aucune donnée, vérifie ta connexion.", file=sys.stderr)
         sys.exit(1)
 
     if args.json:

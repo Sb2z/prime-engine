@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """TEST du protocole (lot 2026-06-18) :
-  P4  — plus de plancher RR FIXE ; garde-fou artefact sur RR trop haut.
-  P4b — GARDE-FOU D'ESPÉRANCE au grade A (décision Sam 06-18) : espérance
+  P4, plus de plancher RR FIXE ; garde-fou artefact sur RR trop haut.
+  P4b, GARDE-FOU D'ESPÉRANCE au grade A (décision Sam 06-18) : espérance
         historique >= 0 si échantillon suffisant, sinon prior RR>=RR_A_PRIOR ;
         plancher de santé RR_A_MIN dans tous les cas.
-  P4c — frontières inclusives des bornes RR.
-  P1  — source dégradée -> NO_TRADE d'office, price_source propagé.
-  P1b — branche « aucun setup » (non dégradée) propage aussi price_source.
-  Edge — A_SETUP rétrogradé en WATCH par une politique edge ACTIVE non conforme.
+  P4c, frontières inclusives des bornes RR.
+  P1, source dégradée -> NO_TRADE d'office, price_source propagé.
+  P1b, branche « aucun setup » (non dégradée) propage aussi price_source.
+  Edge, A_SETUP rétrogradé en WATCH par une politique edge ACTIVE non conforme.
 Isolé : scanner/news_radar/adaptive_edge/position_policy stubbés, aucun appel
 réseau, aucun effet sur le live."""
 import prime_strategy as ps
@@ -16,26 +16,26 @@ FAIL = []
 
 
 def chk(n, ok, d=""):
-    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f" — {d}" if d else ""))
+    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f", {d}" if d else ""))
     if not ok:
         FAIL.append(n)
 
 
 fc = {"tf": {"15m": 0.2, "1h": 0.2, "4h": 0.2}}
 
-print("P4 — plus de RR fixe : un setup haute-proba à RR modeste n'est plus tué")
+print("P4, plus de RR fixe : un setup haute-proba à RR modeste n'est plus tué")
 s_lowrr = {"direction": "LONG", "rr": 1.5, "conf": 8.0}
 v = ps._major_veto("GOLD", s_lowrr, fc, "🟢")
 chk("RR 1.5 n'est plus un veto", not any("RR" in r for r in v), str(v))
 chk("RR 1.5 + conf 8 + TF alignés -> A_SETUP", ps._grade(s_lowrr, [], fc) == "A_SETUP")
 
-print("P4 — garde-fou artefact : RR aberrant (stop microscopique) rejeté")
+print("P4, garde-fou artefact : RR aberrant (stop microscopique) rejeté")
 s_hi = {"direction": "LONG", "rr": 12.0, "conf": 8.0}
 v2 = ps._major_veto("GOLD", s_hi, fc, "🟢")
 chk("RR 12 vetoé (artefact)", any("RR" in r and "artefact" in r for r in v2), str(v2))
 chk("RR 12 -> NO_TRADE", ps._grade(s_hi, v2, fc) == "NO_TRADE")
 
-print("P4b — garde-fou d'espérance au grade A (remplace le RR fixe)")
+print("P4b, garde-fou d'espérance au grade A (remplace le RR fixe)")
 _orig_stats = ps._stats_for
 # Cold start : pas d'historique fiable -> prior RR_A_PRIOR (=1.5)
 ps._stats_for = lambda strategy=None, trader=None, direction=None: {"n": 0, "expectancy": None}
@@ -55,7 +55,7 @@ chk("strat gagnante (exp>=0) RR 1.3 -> A_SETUP",
     ps._grade({"direction": "LONG", "rr": 1.3, "conf": 8.0, "strategy": "WINNER"}, [], fc) == "A_SETUP")
 ps._stats_for = _orig_stats
 
-print("P4c — frontières inclusives des bornes RR")
+print("P4c, frontières inclusives des bornes RR")
 chk("RR exactement 8.0 n'est PAS un veto artefact (borne stricte `>`)",
     not any("RR" in r for r in ps._major_veto("GOLD", {"direction": "LONG", "rr": 8.0, "conf": 8.0}, fc, "🟢")))
 chk("RR 8.01 -> veto artefact",
@@ -68,7 +68,7 @@ def _stub_market():
     ps._adaptive_policy = lambda: {"mode": "TEST", "label": "stub", "reason": "", "filters": {}}
 
 
-print("P1 — source dégradée -> NO_TRADE d'office + price_source propagé")
+print("P1, source dégradée -> NO_TRADE d'office + price_source propagé")
 _stub_market()
 ps.scanner.scan = lambda: {
     "setups": [{"asset": "GOLD", "direction": "LONG", "conf": 8.0, "rr": 2.0,
@@ -84,7 +84,7 @@ chk("dégradé GOLD -> NO_TRADE malgré un setup présent", gold["grade"] == "NO
 chk("price_source propagé dans la décision", gold.get("price_source") == "STALE", str(gold.get("price_source")))
 chk("aucun setup attaché en source dégradée", "setup" not in gold)
 
-print("P1b — branche « aucun setup » (non dégradée) propage price_source")
+print("P1b, branche « aucun setup » (non dégradée) propage price_source")
 _stub_market()
 ps.scanner.scan = lambda: {"setups": [], "regimes": {"GOLD": {"regime": "RANGE"}, "US500": {"regime": "RANGE"}}}
 ps._forecast_bias = lambda asset: (
@@ -97,7 +97,7 @@ for a in ("GOLD", "US500"):
     chk(f"{a} sans setup -> price_source propagé", d.get("price_source") == "yfinance", str(d.get("price_source")))
     chk(f"{a} sans setup -> aucun setup attaché", "setup" not in d)
 
-print("Edge — A_SETUP rétrogradé en WATCH par une politique edge ACTIVE non conforme")
+print("Edge, A_SETUP rétrogradé en WATCH par une politique edge ACTIVE non conforme")
 _stub_market()
 ps.adaptive_edge.current_session = lambda asset, *a, **k: "NY"
 ps.position_policy.policy_for = lambda decision: {}
@@ -121,4 +121,4 @@ print()
 if FAIL:
     print(f"X ÉCHEC(S): {FAIL}")
     raise SystemExit(1)
-print("OK — P4/P4b/P4c (RR souple + garde-fou espérance) + P1/P1b + downgrade edge validés.")
+print("OK, P4/P4b/P4c (RR souple + garde-fou espérance) + P1/P1b + downgrade edge validés.")

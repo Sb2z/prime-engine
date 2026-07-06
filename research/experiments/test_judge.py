@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""ON TESTE LE TESTEUR — validation du juge sur deux stratégies-bidons.
+"""ON TESTE LE TESTEUR, validation du juge sur deux stratégies-bidons.
 
 A. momentum sur série SYNTHÉTIQUE AUTOCORRÉLÉE (edge injecté par
    construction) → le juge DOIT rendre PAPER. S'il tue un edge réel,
    il est trop dur (faux négatif).
 B. la MÊME stratégie sur MARCHE ALÉATOIRE pure (zéro edge) → le juge
    DOIT rendre KILLED. S'il la laisse passer, il valide du bruit
-   (faux positif — le danger n°1).
+   (faux positif, le danger n°1).
 
 Les deux entrées restent dans le registry à vie (append-only assumé : elles
 durcissent légèrement le seuil de la famille momentum, c'est conservateur).
@@ -43,7 +43,7 @@ def make_series(n=9000, autocorr=0.0, seed=7, start_price=100.0, vol=0.0011):
 
 # NB : un premier passage (k=4, thr 0.30, autocorr 0.45) a produit un edge
 # MARGINAL (+0.10%/trade, IC contenant 0, t=1.60 < z=1.645) que le juge a
-# correctement tué — preuve que les edges faibles meurent. Ce passage-ci
+# correctement tué, preuve que les edges faibles meurent. Ce passage-ci
 # injecte un edge NON AMBIGU pour tester la sensibilité (faux négatifs).
 COMMON = {
     "family": "momentum",
@@ -54,23 +54,23 @@ COMMON = {
 
 
 def main():
-    # A — edge réel injecté (autocorrélation 0.45) : attendu PAPER
+    # A, edge réel injecté (autocorrélation 0.45) : attendu PAPER
     sA = dict(COMMON, id="TEST_JUDGE_pass", assets=["SYNTH_TREND"],
               hypothesis_text="STRATÉGIE-TEST DU JUGE: momentum sur série "
-                              "autocorrélée synthétique — doit passer")
+                              "autocorrélée synthétique, doit passer")
     rA = harness.evaluate(sA, {"SYNTH_TREND": make_series(autocorr=0.60, seed=7)},
                           sources={"SYNTH_TREND": "synthetic"})
 
-    # B — zéro edge (marche aléatoire) : attendu KILLED
+    # B, zéro edge (marche aléatoire) : attendu KILLED
     sB = dict(COMMON, id="TEST_JUDGE_kill", assets=["SYNTH_RW"],
               hypothesis_text="STRATÉGIE-TEST DU JUGE: même momentum sur "
-                              "marche aléatoire pure — doit mourir")
+                              "marche aléatoire pure, doit mourir")
     rB = harness.evaluate(sB, {"SYNTH_RW": make_series(autocorr=0.0, seed=11)},
                           sources={"SYNTH_RW": "synthetic"})
 
     for name, r, expected in (("A (edge réel)", rA, "PAPER"), ("B (bruit pur)", rB, "KILLED")):
         ok = r["verdict"] == expected
-        print(f"\n— Stratégie-test {name} : verdict {r['verdict']} "
+        print(f"\n- Stratégie-test {name} : verdict {r['verdict']} "
               f"(attendu {expected}) {'✅' if ok else '❌'}")
         print(f"  n_eff={r['n_eff']} exp_net={r['expectancy_net']}% "
               f"IC95={r['ci95_bootstrap_days']} t={r['t_stat']} z_requis={r['z_required']}")
@@ -87,7 +87,7 @@ def main():
         json.dump(papers, open(harness.PAPER_FILE, "w"), indent=1, ensure_ascii=False)
 
     passed = rA["verdict"] == "PAPER" and rB["verdict"] == "KILLED"
-    print(f"\nVERDICT SUR LE JUGE : {'VALIDE ✅' if passed else 'CASSÉ ❌ — ne pas continuer'}")
+    print(f"\nVERDICT SUR LE JUGE : {'VALIDE ✅' if passed else 'CASSÉ ❌, ne pas continuer'}")
     sys.exit(0 if passed else 1)
 
 

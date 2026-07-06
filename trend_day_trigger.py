@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TREND DAY TRIGGER — détecteur du mode scalp-tendance.
+"""TREND DAY TRIGGER, détecteur du mode scalp-tendance.
 
 L'edge documenté de Sam (LESSONS.md, 57 trades réels) : scalp des
 micro-rebonds DANS LE SENS les jours de tendance propre (ADX>30, ER élevé).
@@ -106,7 +106,7 @@ def alert_text(state):
     sens = "shorts sur rebonds" if d == "SHORT" else "longs sur replis"
     z = state["zones_rebond"]
     lines = [
-        f"🔥 MODE SCALP TENDANCE — {state['asset']} {d}",
+        f"🔥 MODE SCALP TENDANCE, {state['asset']} {d}",
         f"Conditions du 5 juin réunies : ADX15m {state['adx_15m']} (>30), "
         f"ER {state['er']} (>0.45), 15m/1h alignés. Régime {state['regime']}.",
         f"Prix {state['price']} · zones de rebond : EMA20 15m {z['ema20_15m']} / "
@@ -115,12 +115,12 @@ def alert_text(state):
         f"stop ATR, pas de contre-tendance.",
     ]
     if state.get("event_day"):
-        lines.append(f"⚡ EVENT DAY confirmé ({state['event_detail']}) — "
+        lines.append(f"⚡ EVENT DAY confirmé ({state['event_detail']}), "
                      f"le profil du 5 juin avait aussi une surprise macro.")
     lines.append(
         "⚠️ Rappel échantillon : la référence = 1 SEUL jour à 89% + stats "
         "agrégées ADX>30 de tes 57 trades. SIZING NORMAL, pas de doublement "
-        "— le forward-test dira si le pattern tient."
+        "- le forward-test dira si le pattern tient."
     )
     return "\n".join(lines)
 
@@ -134,5 +134,5 @@ if __name__ == "__main__":
         if s["armed"]:
             print(s["message"])
         else:
-            print(f"{s['asset']}: pas armé — ADX15m {s.get('adx_15m')} ER {s.get('er')} "
+            print(f"{s['asset']}: pas armé, ADX15m {s.get('adx_15m')} ER {s.get('er')} "
                   f"regime {s.get('regime')} cond={s.get('conditions')}")

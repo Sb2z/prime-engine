@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SENTINEL-500 — Edge intraday : VWAP + Opening Range
+SENTINEL-500, Edge intraday : VWAP + Opening Range
 ══════════════════════════════════════════════════════════════════
 VWAP de session (ancré à l'ouverture cash US 15:30 Paris / 13:30 UTC) :
   le prix de référence des institutions. Au-dessus = biais haussier intraday.
@@ -81,7 +81,7 @@ def analyze_vwap_or(timeframe="5m"):
         signals.append(f"🔴 Cassure BASSE de l'Opening Range ({or_low:.1f}) → momentum vendeur")
         or_state = "BREAKOUT_DOWN"
     else:
-        signals.append(f"⚪ Dans l'Opening Range ({or_low:.1f}–{or_high:.1f}) → indécision, attendre la cassure")
+        signals.append(f"⚪ Dans l'Opening Range ({or_low:.1f}-{or_high:.1f}) → indécision, attendre la cassure")
         or_state = "INSIDE"
 
     # Extension (loin du VWAP = risque de retour à la moyenne)
@@ -101,9 +101,9 @@ if __name__ == "__main__":
     if "error" in r:
         print("⚠️", r["error"])
     else:
-        print(f"\n📊 VWAP/OR S&P — score {r['score']:+.2f}  ({r['n_bars']} bougies session)\n")
-        print(f"  VWAP {r['vwap']} (bandes {r['vwap_lower']}–{r['vwap_upper']})")
-        print(f"  Opening Range {r['or_low']}–{r['or_high']} → {r['or_state']}")
+        print(f"\n📊 VWAP/OR S&P, score {r['score']:+.2f}  ({r['n_bars']} bougies session)\n")
+        print(f"  VWAP {r['vwap']} (bandes {r['vwap_lower']}-{r['vwap_upper']})")
+        print(f"  Opening Range {r['or_low']}-{r['or_high']} → {r['or_state']}")
         print(f"  Prix {r['price']} ({r['dist_vwap_pct']:+.2f}% vs VWAP)\n")
         for s in r["signals"]:
             print(f"   {s}")

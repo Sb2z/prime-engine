@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""MARKET BRIEF — briefing de tendance plusieurs fois/jour (signal-only).
+"""MARKET BRIEF, briefing de tendance plusieurs fois/jour (signal-only).
 
 EN PLUS des alertes de trade/setup, envoie sur le même bot Telegram un point
 de tendance par actif suivi (GOLD, US500), structuré en 3 lectures (Sam,
@@ -15,7 +15,7 @@ de tendance par actif suivi (GOLD, US500), structuré en 3 lectures (Sam,
                              Ichimoku, haut/bas du jour) et range projeté (ATR)
 
 LECTURE SEULE : appelle forecast.dual() (qui ne touche PAS DuckDB) et le feed
-de bougies. N'écrit rien, ne verrouille rien — totalement découplé du watcher
+de bougies. N'écrit rien, ne verrouille rien, totalement découplé du watcher
 de production. L'échec d'un calcul de niveaux n'empêche jamais l'envoi.
 """
 
@@ -128,7 +128,7 @@ def _asset_block(f):
         if parts:
             L.append("    Niveaux: " + " · ".join(parts))
         if lv["proj_lo"] and lv["proj_hi"]:
-            L.append(f"    Range projeté jour: [{_fmt(lv['proj_lo'])} — {_fmt(lv['proj_hi'])}]")
+            L.append(f"    Range projeté jour: [{_fmt(lv['proj_lo'])}, {_fmt(lv['proj_hi'])}]")
     drv = f.get("drivers") or []
     if drv:
         L.append("    Drivers: " + " · ".join(drv[:2]))
@@ -142,7 +142,7 @@ def build_brief():
     now_paris = tz.paris_now()
     weekend = " · ⚠️ week-end (marché fermé, lecture indicative)" if now_paris.weekday() >= 5 else ""
     head = [
-        f"🧭 BRIEFING TENDANCE — {now_paris.strftime('%H:%M')}{weekend}",
+        f"🧭 BRIEFING TENDANCE, {now_paris.strftime('%H:%M')}{weekend}",
         f"📡 {rd.get('alert', '')} · F&G {fg.get('score', '?')} ({fg.get('rating', '')}) "
         f"· biais news OR {rd.get('gold_bias', 0):+d} / S&P {rd.get('spx_bias', 0):+d}",
         "",

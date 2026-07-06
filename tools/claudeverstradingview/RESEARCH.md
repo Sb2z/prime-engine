@@ -2,7 +2,7 @@
 
 ## Motivation
 
-Agent-forward trading represents an emerging paradigm where LLM agents assist — but do not replace — human traders. This project is a practical exploration of the interface layer required to make that possible.
+Agent-forward trading represents an emerging paradigm where LLM agents assist, but do not replace, human traders. This project is a practical exploration of the interface layer required to make that possible.
 
 The Model Context Protocol (MCP) provides a standardized way for LLMs to interact with external tools. Financial desktop applications like TradingView are among the most complex, stateful, real-time interfaces that exist. Connecting the two raises genuine research questions about agent reliability, context management, and human-AI collaboration that have not been well-studied.
 
@@ -22,13 +22,13 @@ How does an agent reason about data that may be stale by the time it responds? W
 
 ### 3. Tool Granularity
 
-Should an agent have one `read_chart` tool or 78 granular tools? This project chose granularity — separate tools for quote, OHLCV, indicator values, pine lines, pine labels, pine tables, pine boxes, etc.
+Should an agent have one `read_chart` tool or 78 granular tools? This project chose granularity, separate tools for quote, OHLCV, indicator values, pine lines, pine labels, pine tables, pine boxes, etc.
 
 The tradeoff: granular tools give the agent precise control and small payloads, but require the agent to know which tool to call (solved via `CLAUDE.md` decision trees and MCP server instructions). A single coarse tool would be simpler but would waste context on unneeded data.
 
 ### 4. Failure Transparency
 
-When an agent misreads a chart — interpreting a label incorrectly, reading stale data, or misunderstanding indicator values — how should it communicate uncertainty?
+When an agent misreads a chart, interpreting a label incorrectly, reading stale data, or misunderstanding indicator values, how should it communicate uncertainty?
 
 This project surfaces raw data and lets the agent reason about it, rather than pre-interpreting. This means failures are visible in the agent's reasoning trace rather than hidden behind an abstraction.
 
@@ -54,7 +54,7 @@ The most impactful design decision was making all tools return compact output by
 
 ### Tool Count Does Not Confuse the Agent
 
-78 tools seems excessive, but with clear MCP server instructions and a `CLAUDE.md` decision tree, Claude consistently selects the right tools. The key is descriptive tool names and the instruction block — not reducing tool count.
+78 tools seems excessive, but with clear MCP server instructions and a `CLAUDE.md` decision tree, Claude consistently selects the right tools. The key is descriptive tool names and the instruction block, not reducing tool count.
 
 ### Pine Script Development is the Strongest Use Case
 
@@ -71,13 +71,13 @@ When streaming data changes faster than the agent can respond, the agent's reaso
 - Agent performance varies significantly by model and context length
 - Real-time streaming introduces race conditions in agent reasoning
 - TradingView Desktop updates can break any tool at any time
-- No formal evaluation framework — findings are observational
+- No formal evaluation framework, findings are observational
 
 ## Related Work
 
-- **Model Context Protocol** — Anthropic (2024). The protocol this project implements for LLM-tool communication.
-- **ReAct: Synergizing Reasoning and Acting in Language Models** — Yao et al. (2022). The reasoning-action paradigm that underlies how agents use these tools.
-- **FinAgent: A Multimodal Foundation Agent for Financial Trading** — Zhang et al. (2024). Explores LLM agents in financial contexts with multimodal inputs.
-- **Toolformer: Language Models Can Teach Themselves to Use Tools** — Schick et al. (2023). Foundational work on LLMs learning to use external tools.
-- **FinGPT: Open-Source Financial Large Language Models** — Yang et al. (2023). Open-source LLMs fine-tuned for financial applications.
-- **Can Large Language Models Provide Useful Advice on How to Invest?** — Pelster & Val (2024). Studies LLM capability in financial reasoning.
+- **Model Context Protocol** : Anthropic (2024). The protocol this project implements for LLM-tool communication.
+- **ReAct: Synergizing Reasoning and Acting in Language Models** : Yao et al. (2022). The reasoning-action paradigm that underlies how agents use these tools.
+- **FinAgent: A Multimodal Foundation Agent for Financial Trading** : Zhang et al. (2024). Explores LLM agents in financial contexts with multimodal inputs.
+- **Toolformer: Language Models Can Teach Themselves to Use Tools** : Schick et al. (2023). Foundational work on LLMs learning to use external tools.
+- **FinGPT: Open-Source Financial Large Language Models** : Yang et al. (2023). Open-source LLMs fine-tuned for financial applications.
+- **Can Large Language Models Provide Useful Advice on How to Invest?** : Pelster & Val (2024). Studies LLM capability in financial reasoning.

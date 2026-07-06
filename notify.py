@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""NOTIFY — alertes Telegram du Prime Engine.
+"""NOTIFY, alertes Telegram du Prime Engine.
 
-Token et chat_id dans .env (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID — jamais en
+Token et chat_id dans .env (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, jamais en
 clair dans le repo). Sans credentials, send() est un no-op silencieux : le
 watcher ne casse pas, le log reste la source fiable.
 
@@ -110,7 +110,7 @@ def send(text, silent=False, timeout=10):
 
 
 if __name__ == "__main__":
-    ok = send("✅ Prime Engine — canal d'alerte Telegram opérationnel.\n"
+    ok = send("✅ Prime Engine, canal d'alerte Telegram opérationnel.\n"
               "Tu recevras ici : A_SETUP, mode scalp-tendance, pré-event macro, "
               "résumé quotidien. Signal-only, aucune exécution automatique.")
     print("envoi:", "OK" if ok else "ÉCHEC (credentials manquants ou API)")

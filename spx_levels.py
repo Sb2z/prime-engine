@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SENTINEL-500 — Niveaux clés S&P 500 (US500)
+SENTINEL-500, Niveaux clés S&P 500 (US500)
 Niveaux psychologiques (grille 25/50/100), liquidité, Fibonacci, stops ATR.
 """
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""POSITION POLICY — durée et invalidation des setups Prime.
+"""POSITION POLICY, durée et invalidation des setups Prime.
 
 Objectif : décider si un setup doit être tenu jusqu'au TP/SL ou géré avec une
 invalidation manuelle. La règle est dérivée du journal, puis appliquée aux
@@ -321,10 +321,10 @@ def main():
     ev = evidence()
     target = target_selection()
     print("═" * 72)
-    print("  POSITION POLICY — analyse durée / invalidation")
+    print("  POSITION POLICY, analyse durée / invalidation")
     print("═" * 72)
     print(f"  IA globale: {ev['all_ai']}")
-    print(f"  Cible actuelle: {target['preferred']} — {target['reason']}")
+    print(f"  Cible actuelle: {target['preferred']}, {target['reason']}")
     print(f"   TP1: {target['tp1']}")
     print(f"   TP2: {target['tp2']}")
     print("\n  Par stratégie")

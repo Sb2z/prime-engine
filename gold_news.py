@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Gold AI — Couche News : calendrier économique, sentiment, catalyseurs
+Gold AI, Couche News : calendrier économique, sentiment, catalyseurs
 Flux temps réel via news_feed.py (Finnhub) + fallback codé en dur.
 """
 
 import json, datetime, time
 
-# Flux live optionnel — ne casse jamais si indisponible
+# Flux live optionnel, ne casse jamais si indisponible
 try:
     import news_feed
     _HAS_LIVE = True
@@ -14,7 +14,7 @@ except Exception:
     _HAS_LIVE = False
 
 # ── Base de connaissance : impact des nouvelles sur GOLD ─────────────────────
-# Enrichie à chaque trade — apprentissage continu
+# Enrichie à chaque trade, apprentissage continu
 NEWS_IMPACT_DB = {
     # ─── Banques centrales ────────────────────────────────────────────────────
     "FOMC":       {"impact": "CRITICAL", "delay": "0h",  "duration": "4-12h",
@@ -354,7 +354,7 @@ if __name__ == "__main__":
 
     print("\n  Prochains événements HIGH impact :")
     for ev in result["context"]["upcoming_high_impact"]:
-        print(f"  ⏰ {ev['date']} {ev['time']} — {ev['event']} [{ev['gold_impact']}]")
+        print(f"  ⏰ {ev['date']} {ev['time']}, {ev['event']} [{ev['gold_impact']}]")
         print(f"     → {ev['note']}")
 
     print(f"\n  Biais fondamental : {result['context']['fundamental_bias']['note']}")

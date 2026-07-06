@@ -13,7 +13,7 @@ FAIL = []
 
 
 def chk(n, ok, d=""):
-    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f" — {d}" if d else ""))
+    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f", {d}" if d else ""))
     if not ok:
         FAIL.append(n)
 
@@ -22,7 +22,7 @@ def candles(closes):
     return [[i, c, c + 0.5, c - 0.5, c, 1000.0] for i, c in enumerate(closes)]
 
 
-print("regime — trou ADX 22-25 fermé")
+print("regime, trou ADX 22-25 fermé")
 up = candles([100 + i * 0.5 for i in range(40)])        # monotone -> ER ~1.0 (>=0.45)
 chop = candles([100 + (i % 2) for i in range(40)])      # alterné -> ER ~0.03 (<=0.30)
 r_mod = regime.detect(up, adx=23)
@@ -35,7 +35,7 @@ chk("ADX 23 + choppy (ER<=0.30) -> TRANSITION", "TRANSITION" in r_chop["regime"]
 r_range = regime.detect(up, adx=15)
 chk("ADX 15 -> RANGE", "RANGE" in r_range["regime"], r_range["regime"])
 
-print("notify — compteur d'échecs Telegram consécutifs")
+print("notify, compteur d'échecs Telegram consécutifs")
 notify.STATE = os.path.join(tempfile.gettempdir(), "test_tgstate.json")
 if os.path.exists(notify.STATE):
     os.remove(notify.STATE)
@@ -56,4 +56,4 @@ print()
 if FAIL:
     print(f"X ÉCHEC(S): {FAIL}")
     raise SystemExit(1)
-print("OK — fix régime ADX 22-25 + compteur Telegram validés.")
+print("OK, fix régime ADX 22-25 + compteur Telegram validés.")

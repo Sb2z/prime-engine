@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TEST famille momentum_breakout (strategy_families) — exigé avant commit.
+"""TEST famille momentum_breakout (strategy_families), exigé avant commit.
 
 Prouve : cassure en tendance → signal dans le sens ; porte de régime qui bloque
 hors tendance ; anti-lookahead (canal = bougies AVANT la décision, clôture seule
@@ -13,7 +13,7 @@ FAIL = []
 
 
 def chk(name, ok, detail=""):
-    print(f"  {'PASS' if ok else 'FAIL'}  {name}" + (f" — {detail}" if detail else ""))
+    print(f"  {'PASS' if ok else 'FAIL'}  {name}" + (f", {detail}" if detail else ""))
     if not ok:
         FAIL.append(name)
 
@@ -73,4 +73,4 @@ print()
 if FAIL:
     print(f"X {len(FAIL)} ÉCHEC(S): {FAIL}")
     raise SystemExit(1)
-print("OK — momentum_breakout validée.")
+print("OK, momentum_breakout validée.")

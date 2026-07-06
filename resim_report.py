@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""RESIM REPORT — le verdict honnête sur le protocole Prime.
+"""RESIM REPORT, le verdict honnête sur le protocole Prime.
 
 Recalcule tout le journal IA avec déduplication + coûts + WIN_TIME séparé,
 et imprime le tableau avant/après :
 
   AVANT  = ce que le journal affichait (signaux bruts, sorties au prix exact,
-           WIN_TIME compté comme win) — la base du "remplace ta stratégie".
+           WIN_TIME compté comme win), la base du "remplace ta stratégie".
   APRÈS  = trades effectifs (1 position = 1 trade), sorties nettes de spread/
            slippage/swap, WR = touches TP/SL uniquement, IC affichés.
 
@@ -138,7 +138,7 @@ def main():
     u_exp = round(sum(t.get("pnl_pct") or 0 for t in user) / len(user), 3) if user else None
 
     print("═" * 74)
-    print("  RESIM REPORT — protocole Prime, mesure corrigée")
+    print("  RESIM REPORT, protocole Prime, mesure corrigée")
     print("═" * 74)
     print(f"  Référence USER (fills réels Revolut): WR {u_wr}% "
           f"[IC95 {uncertainty.wilson(u_wins, u_wins + u_losses)}] n={len(user)} exp {u_exp:+.3f}%")
@@ -168,9 +168,9 @@ def main():
               f"(minimum {uncertainty.MIN_EFFECTIVE_N}).")
     lo_ok = after["boot"] and after["boot"][0] > 0
     print("  Verdict : " + (
-        "edge net de coûts encore non prouvé — l'IC de l'espérance contient 0."
+        "edge net de coûts encore non prouvé, l'IC de l'espérance contient 0."
         if not lo_ok else
-        "espérance nette positive sur l'IC — à confirmer par forward-test."
+        "espérance nette positive sur l'IC, à confirmer par forward-test."
     ))
     print("  Aucune décision de remplacement avant 1 mois de forward-test avec cette mesure.")
     print("═" * 74)

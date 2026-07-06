@@ -2,7 +2,7 @@
 """Migration one-shot : marque les doublons IA existants dans journal.json.
 
 Backup horodaté avant écriture. Persiste duplicate_of ; les doublons encore
-OPEN passent en status DUPLICATE (ils ne seront plus évalués — la racine l'est).
+OPEN passent en status DUPLICATE (ils ne seront plus évalués, la racine l'est).
 Les signaux CLOSED gardent leur status, duplicate_of suffit à les exclure.
 """
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""CALENDAR FEED — calendrier macro structuré (consensus vs actual).
+"""CALENDAR FEED, calendrier macro structuré (consensus vs actual).
 
 Source primaire : JSON hebdo public ForexFactory (ff_calendar_thisweek.json),
 cache local 1h. ATTENTION : ce feed gratuit ne contient PAS la valeur "actual"
 (vérifié le 10/06/2026, même les événements passés n'en portent pas).
 L'enrichissement actual passe par l'API JBlanked si JBLANKED_API_KEY est dans
 .env (clé gratuite, limitée → cache 1 jour) ; sinon surprise_z reste None et
-seul le veto PRÉ-event fonctionne — ce qui est déjà l'essentiel du risque.
+seul le veto PRÉ-event fonctionne, ce qui est déjà l'essentiel du risque.
 
 Expose :
   fetch_events()            événements normalisés {event,currency,impact,time_utc,forecast,previous,actual}
@@ -142,7 +142,7 @@ def fetch_events(force=False):
             _save_cache(cache)
             cache = dict(cache, stale=True)
     events = cache.get("events", [])
-    # Ré-applique les actuals déjà en cache (AUCUN réseau ici — le fetch
+    # Ré-applique les actuals déjà en cache (AUCUN réseau ici, le fetch
     # JBlanked est réservé au job quotidien, quota free = 1 req/jour)
     _apply_jb_cache(events, cache)
     return events

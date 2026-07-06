@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Adaptive Edge — auto-evaluation x20 des regles Prime.
+"""Adaptive Edge, auto-evaluation x20 des regles Prime.
 
 Le module compare le baseline a des politiques plus restrictives:
 actif, sens, strategie, session et plages horaires. Une restriction ne devient
@@ -442,7 +442,7 @@ def main():
     baseline = report["baseline"]
 
     print("═" * 78)
-    print("  ADAPTIVE EDGE — auto-evaluation x20")
+    print("  ADAPTIVE EDGE, auto-evaluation x20")
     print("═" * 78)
     print(
         f"  Target {report['target']} | levier x{report['leverage']} | "

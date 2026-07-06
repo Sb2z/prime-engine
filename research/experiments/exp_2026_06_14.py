@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Expériences du 14/06/2026 — run nocturne n°5.
+"""Expériences du 14/06/2026, run nocturne n°5.
 
 Trois hypothèses NOUVELLES, falsifiables, données du lake (source homogène
 par test : prix yfinance ; aucune 2e source mélangée). Exits fixés A PRIORI,
@@ -18,8 +18,7 @@ HG (ichimoku_kijun_reject, GOLD, 1h, 1er test famille → z 1.645) :
      espérance nette positive sur l'or 1h." Backlog #3 du 13/06. Mécanisme de
      CONTINUATION-PAR-REPLI, structurellement DIFFÉRENT des deux cassures déjà
      réfutées (kumo_break HC, tk_cross HF) : ni une cassure de bord ni un
-     croisement de moyennes, mais un rejet de support dynamique en tendance —
-     précisément le setup qui DEVRAIT payer en marché directionnel si un
+     croisement de moyennes, mais un rejet de support dynamique en tendance, précisément le setup qui DEVRAIT payer en marché directionnel si un
      signal Ichimoku paie. Périmètre Ichimoku fermé, speed 'standard'.
 
 HH (momentum_regime, GOLD, 1h, variant_of=HA → z 1.960) :
@@ -29,7 +28,7 @@ HH (momentum_regime, GOLD, 1h, variant_of=HA → z 1.960) :
      l'espérance). MAIS Prime arme ses trend-days en INTRADAY, pas en daily :
      HA testait le bon mécanisme sur le MAUVAIS timeframe. HH teste la thèse
      trend-day de Prime sur son TF NATIF. Paramètres canoniques identiques à
-     HA (ER 0.45 / ADX 30, k 6, thr 0.5) — seul le TF change, ce qui ISOLE la
+     HA (ER 0.45 / ADX 30, k 6, thr 0.5), seul le TF change, ce qui ISOLE la
      question du timeframe (clé d'hypothèse distincte car tf=1h ≠ 1d).
      variant_of=HA_gold_momentum_regime, déflation comprise.
 
@@ -38,17 +37,17 @@ HI (momentum_regime, US500, 1h, variant_of=HA → z 2.128 après HH) :
      en 1h (robustesse cross-asset de HH)." Paire cross-asset exactement comme
      HD/HE l'ont fait pour le COT (précédent endossé). Mêmes paramètres
      canoniques, aucun tuning. La déflation Bonferroni durcit z à 2.128 (3e
-     test à vie de la famille momentum_regime) — assumé.
+     test à vie de la famille momentum_regime), assumé.
 
-NON TESTÉ ce soir, et POURQUOI (backlog #1 — COT conditionné au régime range) :
+NON TESTÉ ce soir, et POURQUOI (backlog #1, COT conditionné au régime range) :
     On POURRAIT le composer sans toucher aux fichiers protégés (un ctx_fn qui
     n'expose cot_pctile QUE si l'ER calculé à ts est bas). Mais (a) il famine
     par construction : l'inconditionnel HD ne donnait déjà que n_eff=29 (<30) ;
     le filtrer par régime le passe SOUS le plancher → KILLED garanti par
-    l'échantillon, pas par l'edge — zéro information nouvelle au-delà de la
+    l'échantillon, pas par l'edge, zéro information nouvelle au-delà de la
     famine déjà établie le 13/06 ; et (b) un 3e enregistrement cot_extreme au
     registry DÉFLATERAIT À VIE la famille (z 2.13 → 2.34), durcissant le futur
-    test COT MULTI-ACTIFS — le seul qui guérirait vraiment la famine. Le coût
+    test COT MULTI-ACTIFS, le seul qui guérirait vraiment la famine. Le coût
     net est négatif. Donc : SPEC d'une famille cot_extreme_regime décrite dans
     le rapport pour approbation de Sam, et PAS de test cot_extreme ce soir.
     SIGN-FLIP toujours interdit : aucun "COT-follow" gratuit n'est dérivé du
@@ -80,7 +79,7 @@ STRATEGIES = [
     {
         "id": "HH_gold_momentum_regime_1h",
         "hypothesis_text": "Momentum conditionné au régime de tendance (ER>=0.45 "
-                           "ET ADX>=30) en INTRADAY 1h sur l'or — thèse trend-day "
+                           "ET ADX>=30) en INTRADAY 1h sur l'or, thèse trend-day "
                            "de Prime sur son TF natif (HA l'avait testée en daily).",
         "family": "momentum_regime",
         "params": {"k": 6, "thr_pct": 0.5, "er_min": 0.45, "adx_min": 30.0},

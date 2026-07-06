@@ -2,7 +2,7 @@
 """Experience CHERCHEUR NOCTURNE du 2026-06-29 (nuit lundi -> mardi).
 
 === FAIT NEUF DE LA NUIT : un SECOND blocage, independant du dedup, frappe le
-    backlog #5 — la barre GOLD 1d de FRONTIERE est CORROMPUE (plate O=H=L=C),
+    backlog #5, la barre GOLD 1d de FRONTIERE est CORROMPUE (plate O=H=L=C),
     et le defaut est SYSTEMATIQUE sur GC_F_1d (55 barres plates) / ABSENT sur ES ===
 
 CONSTAT D'INGESTION (re-verifie ce run, pas recopie) :
@@ -24,7 +24,7 @@ CONSTAT D'INGESTION (re-verifie ce run, pas recopie) :
     = 0 token imperatif (4 hits "edit" = sous-chaines "Cr-edit" ForexFactory, benins).
     Donnees externes traitees STRICTEMENT en DONNEE.
 
-LE FAIT NEUF (structurel, code+donnee-verifie) — DEUX blocages independants sur #5 :
+LE FAIT NEUF (structurel, code+donnee-verifie), DEUX blocages independants sur #5 :
   BLOCAGE 1 (etabli 28/06, re-confirme ici) : dedup gele le re-test.
     hypothesis_key = sha256(family, params, sorted(assets), timeframe)[:16]
     (harness.py:66-70) ; un doublon retourne DUPLICATE AVANT _registry_append
@@ -43,7 +43,7 @@ LE FAIT NEUF (structurel, code+donnee-verifie) — DEUX blocages independants su
   CORRECTION HONNETE de mon cadrage du 28/06 : j'avais ecrit "la barre plate
   4078.70 est le feed PRODUCTION, PAS le lake yfinance (distinct)". FAUX en partie :
   le refresh lundi a fait FUIR cette valeur plate DANS le lake GC_F_1d du 26/06.
-  Le lake n'est donc pas immunise contre l'artefact plat de l'or — il en porte
+  Le lake n'est donc pas immunise contre l'artefact plat de l'or, il en porte
   meme 55 exemplaires historiques. ES reste propre (0). A signaler a Sam.
 
 CE QUE FAIT CE SCRIPT (et ce qu'il NE fait PAS) :
@@ -55,9 +55,9 @@ CE QUE FAIT CE SCRIPT (et ce qu'il NE fait PAS) :
     effet de bord, lab inchange) et (b) le defaut de donnee (compte des barres
     plates GC vs ES, barre de frontiere GOLD plate, range vrai nul).
 
-PROPOSITION POUR SAM (token Sam, fichiers proteges — je ne touche pas) :
+PROPOSITION POUR SAM (token Sam, fichiers proteges, je ne touche pas) :
   1. Fingerprint-cle (deja propose 28/06) pour lever BLOCAGE 1.
-  2. NOUVEAU : filtre d'integrite a l'ingestion du lake — rejeter/interpoler les
+  2. NOUVEAU : filtre d'integrite a l'ingestion du lake, rejeter/interpoler les
      barres 1d plates (O=H=L=C) de GC_F (55 barres) avant tout backtest 1d, sinon
      tout signal 1d sur l'or est pollue a ~4.4% (et a la frontiere actuelle).
   Spec only : decision et edition = Sam.

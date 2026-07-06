@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-SENTINEL-500 — Couche macro-systémique (FRED)
+SENTINEL-500, Couche macro-systémique (FRED)
 ══════════════════════════════════════════════════════════════════
 Le signal de stress que le prix ne montre pas encore :
-  • HY OAS (spreads crédit haut rendement) — l'écartement = stress systémique
-  • 2s10s (courbe des taux) — inversion/re-steepening = signal de cycle
-  • NFCI (conditions financières Chicago Fed) — resserrement = frein
+  • HY OAS (spreads crédit haut rendement), l'écartement = stress systémique
+  • 2s10s (courbe des taux), inversion/re-steepening = signal de cycle
+  • NFCI (conditions financières Chicago Fed), resserrement = frein
 Données quotidiennes/hebdo → cache 12h. Score positif = bullish S&P.
 """
 
@@ -125,7 +125,7 @@ def score_fred():
 
 if __name__ == "__main__":
     r = score_fred()
-    print(f"\n🏛️ MACRO-SYSTÉMIQUE (FRED) — score {r['score']:+.2f} {r.get('direction')}\n")
+    print(f"\n🏛️ MACRO-SYSTÉMIQUE (FRED), score {r['score']:+.2f} {r.get('direction')}\n")
     for s in r["signals"]:
         print(f"   {s}")
     print("\n  Données brutes :")

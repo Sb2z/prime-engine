@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AURUM — Moteur d'étude d'événements GOLD (XAUUSD)
+AURUM, Moteur d'étude d'événements GOLD (XAUUSD)
 ══════════════════════════════════════════════════════════════════
 Signes OR (≠ actions) : refuge → géo escalade = HAUSSIER ; taux réels↑ = baissier ;
 Fed dovish = haussier ; USD fort = baissier.

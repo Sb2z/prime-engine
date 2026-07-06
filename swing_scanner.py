@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SWING EQUITY SCANNER — portefeuille actions moyen terme (2-8 sem), HORS CFD.
+SWING EQUITY SCANNER, portefeuille actions moyen terme (2-8 sem), HORS CFD.
 ═══════════════════════════════════════════════════════════════════════════════
 But (Sam 2026-06-30) : book LONG-ONLY d'actions Revolut (10 achats gratuits/sem),
 rotation momentum, benchmarké QQQ, objectif battre l'ETF net.
@@ -8,14 +8,14 @@ rotation momentum, benchmarké QQQ, objectif battre l'ETF net.
 PHILOSOPHIE (leçons edge_lab / audit 30-06) : on ne TIME PAS le pic, on suit des
 RÈGLES. Score = composite de facteurs STANDARDS et transparents, pas du sur-ajusté.
 
-ÉTAGE 1 — momentum cross-sectionnel + force relative vs QQQ.
-ÉTAGE 2 — TIMING D'ENTRÉE SUR REPLI (on n'achète pas le blow-off top mais le repli
+ÉTAGE 1, momentum cross-sectionnel + force relative vs QQQ.
+ÉTAGE 2, TIMING D'ENTRÉE SUR REPLI (on n'achète pas le blow-off top mais le repli
   dans une tendance) + OVERRIDE CATALYSEUR (un titre haut MAIS adossé à un vrai
-  catalyseur structuré — upside analystes, beat de résultats, croissance — voit sa
+  catalyseur structuré, upside analystes, beat de résultats, croissance, voit sa
   pénalité parabolique atténuée, jamais annulée) + CAPS SECTORIELS (diversification).
 
 Catalyseur = données STRUCTURÉES yfinance (objectifs/reco analystes, surprise BPA,
-croissance) — PAS du sentiment de gros titres (bruité + surface d'injection).
+croissance), PAS du sentiment de gros titres (bruité + surface d'injection).
 
 Données : yfinance (daily + fondamentaux, gratuit). Lecture seule.
 CLI :  python swing_scanner.py          -> liste d'achat encadrée (7 lignes, caps secteur)
@@ -201,7 +201,7 @@ def _print_reco(res):
         print("ERREUR:", res["error"]); return
     b = res["bench"]
     print(f"Benchmark {BENCHMARK}: 1m {b['ret21']*100:+.1f}%  3m {b['ret63']*100:+.1f}%   "
-          f"({res['n']} titres) — portefeuille {N_LINES} lignes équipondérées, max {MAX_PER_SECTOR}/secteur\n")
+          f"({res['n']} titres), portefeuille {N_LINES} lignes équipondérées, max {MAX_PER_SECTOR}/secteur\n")
     print(f"  LISTE D'ACHAT (encadrée) :")
     print(f"  {'#':>2} {'ticker':6s} {'final':>6s} {'px':>9s} {'3m%':>7s} {'vsQQQ':>6s} "
           f"{'RSI':>4s} {'repli':>6s} {'cat':>4s} {'upside':>7s} {'secteur':16s}")

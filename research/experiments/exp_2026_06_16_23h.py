@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Expérience PRIME ANALYST du 2026-06-16 23h — slot evening.
+"""Expérience PRIME ANALYST du 2026-06-16 23h, slot evening.
 
 UNE hypothèse NOUVELLE, falsifiable, données du lake (source homogène :
 prix yfinance ES=F ; aucune 2e source mélangée). Exit fixé A PRIORI.
@@ -8,14 +8,14 @@ Contexte d'ingestion (cf. rapport analyst_2026-06-16_23h.md) :
   - Santé bot VERTE : watcher cycle 22:59 (frais <12 min), datafeed
     tradingview pur, gate apprentissage 970/500 (progresse depuis 840 à 17h,
     754 à 13h), 0 outcome MIXED exclu (ret_4h reste corrigé), lab 19/18/0/0.
-  - Journée du bot : 485 NO_TRADE, 5 A_SETUP, 4 WATCH — TOUS LONG, sur une
+  - Journée du bot : 485 NO_TRADE, 5 A_SETUP, 4 WATCH, TOUS LONG, sur une
     séance baissière/plate (GOLD 4347->4331, US500 7560->7508). Régimes
     dominants HACHÉE/RANGE/TRANSITION. Le forecast LONG a persisté toute la
     journée CONTRE le réalisé ; au dernier cycle 22:59 le forecast US500 a
     enfin basculé SHORT (15m -0.84 / 1h -0.68). Le filtre de régime trend
     (ER>=0.45/ADX>=30) aurait EXCLU l'essentiel de la journée -> protège.
 
-POURQUOI ce test (et pas un sweep) — clôture du backlog explicite du 17h :
+POURQUOI ce test (et pas un sweep), clôture du backlog explicite du 17h :
   HL (GOLD momentum_regime 1h, k4/thr0.3, régime trend 0.45/30, exit
   "laisser courir" TP 2.0%/stop 0.8%/48h, RR 2.5) est mort sur SIGNIFICATIVITÉ
   (n=58, exp_net +0.1851%, IC95 (-0.112, 0.492), t=1.115 < z 2.241) mais
@@ -66,7 +66,7 @@ STRATEGIES = [
                            "(ER>=0.45/ADX>=30), un trigger momentum sensible "
                            "(k=4, thr=0.3) couplé à un exit 'laisser courir' "
                            "(TP 2.0%/stop 0.8%/48h, RR 2.5) a une espérance nette "
-                           "POSITIVE sur l'US500 1h (ES=F) — si l'edge queue-droite "
+                           "POSITIVE sur l'US500 1h (ES=F), si l'edge queue-droite "
                            "vu sur l'or se généralise à un 2e actif, faisceau "
                            "convergent pour la priorité (a) placement du TP.",
         "family": "momentum_regime",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Expérience PRIME ANALYST du 2026-06-17 17h — slot EVENING (bilan séance).
+"""Expérience PRIME ANALYST du 2026-06-17 17h, slot EVENING (bilan séance).
 
 UNE hypothèse NOUVELLE, falsifiable, données du lake (source homogène :
 prix yfinance ES=F 1d ; aucune 2e source mélangée).
@@ -16,10 +16,10 @@ Contexte d'ingestion (cf. rapport analyst_2026-06-17_17h.md) :
     Cycles depuis 13h = NO_TRADE sur les DEUX actifs. Bot correctement à
     l'écart : rien à capter en attentisme pré-FOMC (thèse cohérente).
 
-POURQUOI ce test — backlog #1 du 13h, l'OUT-OF-SAMPLE qui attaque le confound :
+POURQUOI ce test, backlog #1 du 13h, l'OUT-OF-SAMPLE qui attaque le confound :
   HQ (13h) a montré le PREMIER momentum_regime du registry à passer 3/4 checks
   à horizon SWING 1d (GOLD : exp +1.55% net, t 3.70 > z 2.45, IC95 (0.66,2.32),
-  fenêtres 0/+0.86/+1.90) — KILLED uniquement sur n_eff=12<30. MAIS artefact
+  fenêtres 0/+0.86/+1.90), KILLED uniquement sur n_eff=12<30. MAIS artefact
   reconnu d'avance : 37 LONG / 2 SHORT sur 5 ans de BULL SÉCULAIRE du gold
   (1800->4300). L'espérance positive PEUT ÊTRE le bull, pas un edge momentum
   généralisable ; n_eff=12 trop fin pour trancher.
@@ -74,8 +74,8 @@ STRATEGIES = [
         "id": "HR_es_momentum_regime_1d_swing",
         "hypothesis_text": "Le momentum_regime à horizon SWING 1d (ER>=0.45 ET "
                            "ADX>=30, trigger k=6/thr=0.5, exit stop1.2%/tp2.4%/10j "
-                           "identique à HQ) — qui a passé 3/4 checks sur GOLD 1d "
-                           "(KILLED sur n_eff=12) — RÉAPPARAÎT sur ES=F 1d s'il "
+                           "identique à HQ), qui a passé 3/4 checks sur GOLD 1d "
+                           "(KILLED sur n_eff=12), RÉAPPARAÎT sur ES=F 1d s'il "
                            "s'agit d'un edge momentum réel et non du seul bull "
                            "séculaire du gold ; ES a connu le bear 2022 (SHORT "
                            "propres) -> diversité directionnelle qui sépare edge "

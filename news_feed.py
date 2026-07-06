@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-NEWS FEED TEMPS RÉEL — Finnhub (gratuit) + fallback
+NEWS FEED TEMPS RÉEL, Finnhub (gratuit) + fallback
 ══════════════════════════════════════════════════════════════════
 Branche le calendrier économique + les news marché en temps réel.
 
-Clé API (gratuite, 60 req/min) — l'une de ces 3 méthodes :
+Clé API (gratuite, 60 req/min), l'une de ces 3 méthodes :
   1. Variable d'env : export FINNHUB_API_KEY=xxxxx
   2. Fichier        : /Users/sam/trading/.env       →  FINNHUB_API_KEY=xxxxx
   3. Fichier JSON   : /Users/sam/trading/api_keys.json → {"finnhub": "xxxxx"}
@@ -18,7 +18,7 @@ import os, json, urllib.request, urllib.parse, datetime, time
 KEY_FILE_ENV  = "/Users/sam/trading/.env"
 KEY_FILE_JSON = "/Users/sam/trading/api_keys.json"
 CACHE_FILE    = "/Users/sam/trading/news_cache.json"
-CACHE_TTL     = 600  # 10 min — respecte le quota gratuit
+CACHE_TTL     = 600  # 10 min, respecte le quota gratuit
 
 # Mots-clés → mapping vers la base de réaction NEWS_IMPACT_DB (macro + actions)
 GOLD_KEYWORDS = {
@@ -131,8 +131,7 @@ def fetch_market_news(limit=15) -> list:
 
 def fetch_economic_calendar() -> list:
     """
-    Calendrier économique temps réel. Endpoint premium sur Finnhub —
-    si 403/erreur, retourne [] et le système utilise le calendrier codé en dur.
+    Calendrier économique temps réel. Endpoint premium sur Finnhub, si 403/erreur, retourne [] et le système utilise le calendrier codé en dur.
     """
     key = _load_key()
     if not key:
@@ -181,12 +180,12 @@ def status() -> dict:
 if __name__ == "__main__":
     import sys
     st = status()
-    print("═══ NEWS FEED — ÉTAT ═══")
+    print("═══ NEWS FEED, ÉTAT ═══")
     print(json.dumps(st, indent=2, ensure_ascii=False))
     if st["connected"]:
         print("\n═══ NEWS GOLD-PERTINENTES (24h) ═══")
         for n in fetch_market_news():
-            print(f"  [{n['hours_ago']}h] {n['tags']} — {n['headline']}")
+            print(f"  [{n['hours_ago']}h] {n['tags']}, {n['headline']}")
         cal = fetch_economic_calendar()
         if cal:
             print("\n═══ CALENDRIER ÉCO US (temps réel) ═══")

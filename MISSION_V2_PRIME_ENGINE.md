@@ -1,4 +1,4 @@
-# MISSION V2 — PRIME ENGINE : data fiable, feature store, event engine
+# MISSION V2, PRIME ENGINE : data fiable, feature store, event engine
 
 Prérequis : MISSION_FIX_MESURE.md est terminée (mesure honnête, dédup, coûts,
 fills 1m, IC affichés). Cette mission V2 construit l'infrastructure qui permettra
@@ -11,7 +11,7 @@ c'est (1) la qualité/fiabilité des données, (2) la taille d'échantillon,
 
 ---
 
-## PHASE A — Couche données fiable (remplace les sources fragiles)
+## PHASE A, Couche données fiable (remplace les sources fragiles)
 
 ### A1. Prix et bougies : redondance + officialisation
 Problème actuel : tout repose sur le websocket TradingView non officiel (tv_live,
@@ -70,7 +70,7 @@ Le MCP Revolut X donne carnet L2, trades publics et bougies BTC/ETH en live.
   comme capteur risk-on/risk-off intrajournalier (corrélation BTC/ES en régime
   risk-off) et, si Sam trade BTC/ETH, comme order flow natif pour ces actifs.
 
-## PHASE B — Feature store (la condition de tout apprentissage futur)
+## PHASE B, Feature store (la condition de tout apprentissage futur)
 
 Problème : les poids de forecast.py (0.55/0.30/0.15...) sont inventés à la main et
 invérifiables, car les snapshots ne sont pas stockés de façon requêtable.
@@ -87,7 +87,7 @@ invérifiables, car les snapshots ne sont pas stockés de façon requêtable.
   manuels par des poids appris en walk-forward. Interdit avant : < 500 lignes
   exploitables = pas d'apprentissage.
 
-## PHASE C — Event engine et mode "jour de tendance"
+## PHASE C, Event engine et mode "jour de tendance"
 
 L'edge documenté de Sam (LESSONS.md, validé sur ses 57 trades réels) :
 shorts en downtrend fort + scalp micro-rebond les jours ADX>30 propres (ER élevé).
@@ -103,7 +103,7 @@ shorts en downtrend fort + scalp micro-rebond les jours ADX>30 propres (ER élev
 - Alerting : `notify.py` via bot Telegram (token en .env) : A_SETUP, trend-day armé,
   pré-event T-30, et résumé quotidien (stats effectives + IC).
 
-## PHASE D — Validation et apprentissage (gates stricts)
+## PHASE D, Validation et apprentissage (gates stricts)
 
 - Gate 1 (immédiat) : 4 semaines de forward-test avec la mesure V1 corrigée.
   Aucun changement de seuils pendant la fenêtre. resim_report.py hebdomadaire.
@@ -120,11 +120,11 @@ shorts en downtrend fort + scalp micro-rebond les jours ADX>30 propres (ER élev
 
 ## Ordre d'exécution et budget
 
-1. A1 datafeed + fallback (0 €) — fiabilité d'abord.
+1. A1 datafeed + fallback (0 €), fiabilité d'abord.
 2. A3 calendrier consensus/actual (0 €) + B feature store (0 €).
-3. C trend_day_trigger + Telegram (0 €) — exploite l'edge déjà documenté de Sam.
+3. C trend_day_trigger + Telegram (0 €), exploite l'edge déjà documenté de Sam.
 4. A4 COT (0 €), A5 crypto pulse (0 €).
-5. A2 order flow réel — SEUL poste payant. Recommandation : commencer par
+5. A2 order flow réel, SEUL poste payant. Recommandation : commencer par
    l'option IBKR éco ; passer Databento seulement si l'order flow démontre,
    dans le feature store, un pouvoir prédictif (corrélation outcome) qui le justifie.
 6. D : les gates, dans l'ordre, sans exception.

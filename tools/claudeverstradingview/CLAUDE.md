@@ -1,8 +1,8 @@
-# TradingView MCP — Claude Instructions
+# TradingView MCP, Claude Instructions
 
 68 tools for reading and controlling a live TradingView Desktop chart via CDP (port 9222).
 
-## Decision Tree — Which Tool When
+## Decision Tree, Which Tool When
 
 ### "What's on my chart right now?"
 1. `chart_get_state` → symbol, timeframe, chart type, list of all indicators with entity IDs
@@ -89,13 +89,13 @@ Use `study_filter` parameter to target a specific indicator by name substring (e
 These tools can return large payloads. Follow these rules to avoid context bloat:
 
 1. **Always use `summary: true` on `data_get_ohlcv`** unless you specifically need individual bars
-2. **Always use `study_filter`** on pine tools when you know which indicator you want — don't scan all studies unnecessarily
+2. **Always use `study_filter`** on pine tools when you know which indicator you want, don't scan all studies unnecessarily
 3. **Never use `verbose: true`** on pine tools unless the user specifically asks for raw drawing data with IDs/colors
-4. **Avoid calling `pine_get_source`** on complex scripts — it can return 200KB+. Only read if you need to edit the code.
-5. **Avoid calling `data_get_indicator`** on protected/encrypted indicators — their inputs are encoded blobs. Use `data_get_study_values` instead for current values.
-6. **Use `capture_screenshot`** for visual context instead of pulling large datasets — a screenshot is ~300KB but gives you the full visual picture
-7. **Call `chart_get_state` once** at the start to get entity IDs, then reference them — don't re-call repeatedly
-8. **Cap your OHLCV requests** — `count: 20` for quick analysis, `count: 100` for deeper work, `count: 500` only when specifically needed
+4. **Avoid calling `pine_get_source`** on complex scripts, it can return 200KB+. Only read if you need to edit the code.
+5. **Avoid calling `data_get_indicator`** on protected/encrypted indicators, their inputs are encoded blobs. Use `data_get_study_values` instead for current values.
+6. **Use `capture_screenshot`** for visual context instead of pulling large datasets, a screenshot is ~300KB but gives you the full visual picture
+7. **Call `chart_get_state` once** at the start to get entity IDs, then reference them, don't re-call repeatedly
+8. **Cap your OHLCV requests** : `count: 20` for quick analysis, `count: 100` for deeper work, `count: 500` only when specifically needed
 
 ### Output Size Estimates (compact mode)
 | Tool | Typical Output |
@@ -113,7 +113,7 @@ These tools can return large payloads. Follow these rules to avoid context bloat
 ## Tool Conventions
 
 - All tools return `{ success: true/false, ... }`
-- Entity IDs (from `chart_get_state`) are session-specific — don't cache across sessions
+- Entity IDs (from `chart_get_state`) are session-specific, don't cache across sessions
 - Pine indicators must be **visible** on chart for pine graphics tools to read their data
 - `chart_manage_indicator` requires **full indicator names**: "Relative Strength Index" not "RSI", "Moving Average Exponential" not "EMA", "Bollinger Bands" not "BB"
 - Screenshots save to `screenshots/` directory with timestamps

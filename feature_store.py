@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""FEATURE STORE — chaque cycle du watcher devient une ligne requêtable.
+"""FEATURE STORE, chaque cycle du watcher devient une ligne requêtable.
 
 Les poids de forecast.py (0.55/0.30/0.15) sont inventés à la main. Tant que
 les snapshots ne sont pas persistés AVEC leur outcome réalisé, impossible
@@ -29,7 +29,7 @@ EXPORT_DIR = "/Users/sam/trading/feature_exports"
 MIN_ROWS_FOR_LEARNING = 500
 MIN_ORDERFLOW_DAYS = 15   # jours-semaine DISTINCTS d'order-flow avant tout 1er modèle
 #                           appris (les lignes du gate sont autocorrélées ; ce sont les
-#                           JOURS indépendants qui comptent contre l'overfit — analyse 06-19)
+#                           JOURS indépendants qui comptent contre l'overfit, analyse 06-19)
 
 HORIZONS = {"ret_15m": 15 * 60, "ret_1h": 3600, "ret_4h": 4 * 3600}
 TOLERANCE_S = 180  # bougie acceptée à ±3 min de l'horizon
@@ -144,7 +144,7 @@ def _orderflow_features(of, price):
       • of_delta    : delta cumulé récent (pression acheteur/vendeur, proxy bougies).
                       Échelle brute (dépend du volume / mode TIME|VOLUME) -> le modèle
                       standardisera par feature ; normalisation à affiner plus tard.
-      • of_imbalance: position dans la Value Area (price-VAL)/(VAH-VAL) — <0 sous la
+      • of_imbalance: position dans la Value Area (price-VAL)/(VAH-VAL), <0 sous la
                       valeur (vendeur), >1 au-dessus (acheteur). Déséquilibre VP, normalisé.
       • of_poc_dist : distance signée au POC (aimant volume), en fraction du prix."""
     if not of or not price:
@@ -166,7 +166,7 @@ def record_cycle(data):
     fg = (radar.get("fear_greed") or {}).get("score")
     cal = radar.get("macro_calendar") or {}
     edge = (data.get("adaptive_edge_policy") or {}).get("label")
-    # Capteurs contextuels (cache interne : COT 24h, crypto 60s — pas de
+    # Capteurs contextuels (cache interne : COT 24h, crypto 60s, pas de
     # martèlement réseau dans la boucle)
     try:
         import crypto_pulse
@@ -421,7 +421,7 @@ def stats():
         f"AND (f.session IS NULL OR f.session <> 'WEEKEND')"
     ).fetchone()[0]
     # Compteur HONNÊTE distinct : décisions A_SETUP/WATCH avec outcome (le n qui
-    # compte pour apprendre une politique d'entrée — bien < lignes de marché).
+    # compte pour apprendre une politique d'entrée, bien < lignes de marché).
     n_setups = con.execute(
         f"SELECT count(*) FROM {out_rel} o JOIN {feat_rel} f USING (ts, asset) "
         f"WHERE o.ret_4h IS NOT NULL AND o.outcome_quality = 'OK' "

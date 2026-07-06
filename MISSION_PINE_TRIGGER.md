@@ -1,4 +1,4 @@
-# MISSION — Intégration Pine "Prime Trend Day Trigger" via claudeverstradingview
+# MISSION, Intégration Pine "Prime Trend Day Trigger" via claudeverstradingview
 
 Contexte : le MCP claudeverstradingview est installé (TradingView Desktop piloté
 en CDP localhost:9222). Le fichier pine/prime_trend_day.pine réplique
@@ -9,11 +9,11 @@ Règles inchangées : signal-only (aucun outil UI sur un quelconque panel de
 trading), watcher totalement découplé du MCP (si TradingView Desktop est fermé,
 rien dans le système autonome ne doit échouer), Gate 1 intact.
 
-## Étape 0 — Rangement
+## Étape 0, Rangement
 - Créer le dossier pine/ dans /Users/sam/trading, y mettre prime_trend_day.pine.
 - L'ajouter au repo git (c'est du code, pas du runtime).
 
-## Étape 1 — Compilation et déploiement
+## Étape 1, Compilation et déploiement
 - tv_health_check d'abord. Si KO, demander à Sam de lancer le script
   launch_tv_debug_mac.sh et s'arrêter là.
 - Compiler le script via l'outil pine du MCP (pine_smart_compile / check).
@@ -23,12 +23,12 @@ rien dans le système autonome ne doit échouer), Gate 1 intact.
   sur le chart 15m GOLD (CFD, le même symbole que SYMBOL_MAP de tv_candles)
   puis US500. Screenshot de chaque chart en preuve.
 
-## Étape 2 — Test de parité Pine vs Python (le cœur de la mission)
+## Étape 2, Test de parité Pine vs Python (le cœur de la mission)
 Créer scripts/compare_pine_parity.py :
 - Côté Python : datafeed.get_candles(asset, "15m", 60) et ("1h", 100), puis
   calculer ADX, ER, dir15, dir1h, armed avec les fonctions EXISTANTES
   (tv_candles compute_ta + regime.efficiency_ratio + trend_day_trigger).
-  Ne pas réimplémenter — importer.
+  Ne pas réimplémenter, importer.
 - Côté Pine : lire les valeurs affichées par l'indicateur sur le chart via le
   MCP (stream values / lecture du status line ou de la table).
 - Comparer avec tolérances : |ΔADX| <= 1.5 pts, |ΔER| <= 0.02, directions
@@ -40,23 +40,23 @@ Créer scripts/compare_pine_parity.py :
 - Lancer le test à deux moments espacés d'au moins 1h, coller les deux
   sorties dans LESSONS.md section "Parité Pine".
 
-## Étape 3 — Alertes TradingView miroir
+## Étape 3, Alertes TradingView miroir
 - Via alert_create du MCP : une alerte par actif sur les conditions
   "Prime ARMÉ LONG", "Prime ARMÉ SHORT" et "Prime DÉSARMÉ" de l'indicateur
   (option "Une fois par clôture de bougie" si confirmOnly=true, sinon
   "Une fois par minute" max pour éviter le spam).
-- Résultat : deux canaux indépendants — Telegram (watcher Python) et push
+- Résultat : deux canaux indépendants, Telegram (watcher Python) et push
   TradingView (Pine). Si l'un se tait pendant que l'autre parle, c'est un
   signal de panne d'un des deux systèmes : noter cette règle dans LESSONS.md.
 - NE PAS supprimer ni modifier les alertes existantes de Sam (alert_list
   d'abord, toucher uniquement aux alertes créées par cette mission).
 
-## Étape 4 — Désynchronisation surveillée
+## Étape 4, Désynchronisation surveillée
 - Ajouter au résumé quotidien Telegram du watcher une ligne "Pine parité :
   dernier check OK/KO/inconnu" : le watcher lit un petit fichier
   pine_parity_status.json que compare_pine_parity.py écrit à chaque run.
   Le watcher ne lance JAMAIS le check lui-même (découplage : pas de
-  dépendance CDP dans la boucle autonome) — il ne fait que lire le fichier
+  dépendance CDP dans la boucle autonome), il ne fait que lire le fichier
   s'il existe et afficher son âge.
 - Proposer à Sam un alias shell `parite` qui lance le script quand
   TradingView Desktop est ouvert.

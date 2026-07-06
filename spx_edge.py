@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-SENTINEL-500 — Internals de marché (l'edge institutionnel)
+SENTINEL-500, Internals de marché (l'edge institutionnel)
 ══════════════════════════════════════════════════════════════════
 1. TERM STRUCTURE VIX : VIX9D / VIX / VIX3M / VVIX
-   Contango (calme) vs Backwardation (stress) — détecte la peur AVANT le prix.
+   Contango (calme) vs Backwardation (stress), détecte la peur AVANT le prix.
 2. BREADTH : S&P vs Russell 2000 vs Dow vs Equal-Weight
    Rallye large (sain) vs étroit (mega-caps, fragile).
 Scores positifs = bullish S&P, négatifs = bearish.
@@ -104,8 +104,8 @@ def full_edge() -> dict:
 
 if __name__ == "__main__":
     e = full_edge()
-    print(f"\n🛡️ INTERNALS — score {e['score']:+.2f} {e['direction']}\n")
-    print(f"  TERM STRUCTURE VIX — régime {e['vix_structure']['regime']}")
+    print(f"\n🛡️ INTERNALS, score {e['score']:+.2f} {e['direction']}\n")
+    print(f"  TERM STRUCTURE VIX, régime {e['vix_structure']['regime']}")
     for s in e["vix_structure"]["signals"]:
         print(f"   {s}")
     print(f"\n  BREADTH")

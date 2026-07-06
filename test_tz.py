@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TEST tz — la preuve DST : Paris = UTC+1 en hiver (CET), UTC+2 en été (CEST).
+"""TEST tz, la preuve DST : Paris = UTC+1 en hiver (CET), UTC+2 en été (CEST).
 C'est exactement ce que le hack `+2h` fixe ratait en hiver."""
 import datetime
 import tz
@@ -8,7 +8,7 @@ FAIL = []
 
 
 def chk(n, ok, d=""):
-    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f" — {d}" if d else ""))
+    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f", {d}" if d else ""))
     if not ok:
         FAIL.append(n)
 
@@ -34,4 +34,4 @@ print()
 if FAIL:
     print(f"X ÉCHEC(S): {FAIL}")
     raise SystemExit(1)
-print("OK — tz.py DST-correct (hiver CET / été CEST).")
+print("OK, tz.py DST-correct (hiver CET / été CEST).")

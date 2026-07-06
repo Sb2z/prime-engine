@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TELEGRAM INBOX — écoute les messages de Sam pour capturer le contexte d'un trade.
+TELEGRAM INBOX, écoute les messages de Sam pour capturer le contexte d'un trade.
 ═══════════════════════════════════════════════════════════════════════════════
 Sam écrit au bot, au moment où il trade : « T GOLD SHORT 4150 » (T ou TRADE,
 alias tolérés). Le bot apparie ce trade au contexte feature_store de l'INSTANT du
@@ -31,7 +31,7 @@ _DIR = {"SHORT": "SHORT", "SELL": "SHORT", "S": "SHORT", "VENDRE": "SHORT",
 # « T|TRADE  <actif>  <sens>  <prix> »
 _RE = re.compile(r"^\s*(?:T|TRADE)\s+([A-Za-z&]+)\s+([A-Za-z]+)\s+([\d]+[.,]?\d*)\s*$", re.I)
 # « Z|ZONE  <actif>  <sens> » : verdict zone edge À LA DEMANDE (AVANT d'entrer),
-# sans rien capturer — l'outil de discipline pré-trade.
+# sans rien capturer, l'outil de discipline pré-trade.
 _RE_ZONE = re.compile(r"^\s*(?:Z|ZONE)\s+([A-Za-z&]+)\s+([A-Za-z]+)\s*$", re.I)
 
 
@@ -50,7 +50,7 @@ def parse(text):
 
 
 def parse_zone(text):
-    """-> (asset, direction) ou None — demande de verdict sans capture."""
+    """-> (asset, direction) ou None, demande de verdict sans capture."""
     m = _RE_ZONE.match(text or "")
     if not m:
         return None
@@ -108,7 +108,7 @@ def poll_and_capture(timeout=8):
                     a, d = zq
                     ctx = edge_zone.live_context(a) or {}
                     v = edge_zone.assess(a, d, ctx)
-                    notify.send(f"❓ {a} {d} — maintenant ?\n"
+                    notify.send(f"❓ {a} {d}, maintenant ?\n"
                                 + edge_zone.format_verdict(a, d, v), silent=True)
                     continue
                 parsed = parse(msg.get("text", ""))
@@ -126,7 +126,7 @@ def poll_and_capture(timeout=8):
                         f"contexte t-{age}min : grade={ctx.get('grade')} conf={ctx.get('conf')} "
                         f"of_imb={ctx.get('of_imbalance')} of_poc={ctx.get('of_poc_dist')} "
                         f"session={ctx.get('session')} régime={ctx.get('regime')}")
-                    try:  # verdict zone edge (discipline) — ne bloque jamais la capture
+                    try:  # verdict zone edge (discipline), ne bloque jamais la capture
                         txt += "\n\n" + edge_zone.format_verdict(a, d, edge_zone.assess(a, d, ctx))
                     except Exception:
                         pass
@@ -134,11 +134,11 @@ def poll_and_capture(timeout=8):
                 else:
                     notify.send(
                         f"⚠️ Trade {a} {d} @{e} enregistré mais contexte ABSENT/périmé "
-                        f"(âge {age}min — marché fermé ou bot inactif à cet instant ?).", silent=True)
+                        f"(âge {age}min, marché fermé ou bot inactif à cet instant ?).", silent=True)
             except Exception:
                 # perte non-silencieuse : Sam est prévenu et peut re-loguer
                 try:
-                    notify.send("⚠️ Capture échouée sur ton dernier message trade — "
+                    notify.send("⚠️ Capture échouée sur ton dernier message trade, "
                                 "re-logue-le (ex : T GOLD SHORT 4150).", silent=False)
                 except Exception:
                     pass

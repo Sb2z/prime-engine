@@ -46,7 +46,7 @@ If the config file already exists and has other servers, merge the `tradingview`
 TradingView Desktop must be running with Chrome DevTools Protocol enabled.
 
 **Auto-detect and launch (recommended):**
-After the MCP server is connected, use the `tv_launch` tool — it auto-detects TradingView on Mac, Windows, and Linux.
+After the MCP server is connected, use the `tv_launch` tool, it auto-detects TradingView on Mac, Windows, and Linux.
 
 **Manual launch by platform:**
 
@@ -118,12 +118,12 @@ Then `tv status`, `tv quote`, `tv pine compile`, etc. work from anywhere.
 | `ECONNREFUSED` | TradingView isn't running or port 9222 is blocked |
 | MCP server not showing in Claude Code | Check `~/.claude/.mcp.json` syntax, restart Claude Code |
 | `tv` command not found | Run `npm link` from the project directory |
-| Tools return stale data | TradingView may still be loading — wait a few seconds |
+| Tools return stale data | TradingView may still be loading, wait a few seconds |
 | Pine Editor tools fail | Open the Pine Editor panel first (`ui_open_panel pine-editor open`) |
 
 ## What to Read Next
 
-- `rules.json` — Your personal trading rules (fill this in before using morning_brief)
-- `CLAUDE.md` — Decision tree for which tool to use when (auto-loaded by Claude Code)
-- `README.md` — Full tool reference including morning brief workflow
-- `RESEARCH.md` — Research context and open questions
+- `rules.json` : Your personal trading rules (fill this in before using morning_brief)
+- `CLAUDE.md` : Decision tree for which tool to use when (auto-loaded by Claude Code)
+- `README.md` : Full tool reference including morning brief workflow
+- `RESEARCH.md` : Research context and open questions

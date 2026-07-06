@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TradingView WebSocket — Streaming bougies 1H + calcul TA
+TradingView WebSocket, Streaming bougies 1H + calcul TA
 Bypasse totalement la REST API rate-limitée de tradingview-ta.
 Même protocole WebSocket que tv_live.py, mais avec chart session.
 """
@@ -314,7 +314,7 @@ def compute_ta(candles):
 if __name__ == "__main__":
     import datetime
     paris = tz.paris_now()
-    print(f"\n📊 TA via WebSocket TradingView — {paris.strftime('%H:%M:%S')} Paris\n")
+    print(f"\n📊 TA via WebSocket TradingView, {paris.strftime('%H:%M:%S')} Paris\n")
 
     client  = TVCandleClient(timeout=25)
     results = client.fetch_ta()

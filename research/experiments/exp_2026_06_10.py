@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Expériences du 10/06/2026 — premier run (manuel, supervisé par Sam).
+"""Expériences du 10/06/2026, premier run (manuel, supervisé par Sam).
 
 Trois hypothèses falsifiables, données lake yfinance horaire (~2 ans),
 mapping production GOLD↔GC=F, US500↔ES=F. Source homogène par test.
 
 H1 (momentum)        : "Un mouvement net de ±0.5% sur 6h sur l'or CONTINUE
-                        dans son sens" — l'edge trend-day de Sam, version
+                        dans son sens", l'edge trend-day de Sam, version
                         systématique grossière.
 H2 (mean_reversion)  : "Un excès intraday de ±1% sur 6h sur l'ES REVIENT
-                        vers sa moyenne" — l'effet le plus documenté sur
+                        vers sa moyenne", l'effet le plus documenté sur
                         indices en intraday.
 H3 (session_hour)    : "Être LONG US500 pendant l'ouverture US (15-17h
-                        Paris) a une espérance positive" — drift
+                        Paris) a une espérance positive", drift
                         d'ouverture, saisonnalité de session.
 """
 

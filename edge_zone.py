@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-EDGE ZONE — discipline « reste dans ta zone gagnante ».
+EDGE ZONE, discipline « reste dans ta zone gagnante ».
 ═══════════════════════════════════════════════════════════════════════════════
 Analyse 2026-06-29 (102 trades réels importés du CSV Revolut) : l'edge de Sam
-n'est PAS une question de news — c'est une question de SESSION, de RÉGIME, de SENS
+n'est PAS une question de news, c'est une question de SESSION, de RÉGIME, de SENS
 et d'ORDER-FLOW. Mesuré sur ses vrais trades :
   • OR SHORT au marché, session NY, tendance propre  -> il GAGNE (WR ~62%)
   • S&P short / Londres / range / transition          -> il PERD (dérive)
 
 Ce module juge, pour un trade (asset, sens) dans un contexte donné, s'il est DANS
 la zone edge ou en DÉRIVE, en s'appuyant sur les STATS RÉELLES (apprend en continu
-depuis user_trade_context.jsonl + journal.json — aucune règle figée). Sert :
+depuis user_trade_context.jsonl + journal.json, aucune règle figée). Sert :
   • au log Telegram (feedback instantané quand Sam logue « T GOLD SHORT 4150 »)
   • au rapport hebdo de maturation (taux d'adhérence à la zone edge)
   • en CLI avant de trader :  python edge_zone.py GOLD SHORT
@@ -77,7 +77,7 @@ def tables():
     # asset x sens : on n'utilise que les trades avec pnl_usd (imports CSV récents,
     # taille réelle). Le $ PONDÉRÉ par la taille est le seul signal honnête : un
     # bucket peut avoir un bon WR mais perdre en $ (pertes plus grosses que les gains
-    # — ex. S&P short). pnl_pct non pondéré masquerait cette fuite.
+    #, ex. S&P short). pnl_pct non pondéré masquerait cette fuite.
     ad = defaultdict(lambda: [0, 0, 0.0])  # (asset,dir) -> [wins, n, somme_pnl_usd]
     for s in _journal_user():
         pu = s.get("pnl_usd")
@@ -104,14 +104,14 @@ def assess(asset, direction, context):
     reasons = []
     score = 0
 
-    # 1) ASSET x SENS — le socle ($ réel mesuré)
+    # 1) ASSET x SENS, le socle ($ réel mesuré)
     ad = (T.get("assetdir") or {}).get((asset, direction))
     if ad and ad[1] >= MIN_N:
         wr, n, pnl = ad   # pnl = somme des pnl_usd ($ pondéré par la taille)
         if pnl > 0 and wr >= 55:
             score += 2; reasons.append(("✅", f"{asset} {direction} = ton edge (${pnl:+.0f}, WR {wr:.0f}% sur {n})"))
         elif pnl < 0:
-            score -= 2; reasons.append(("🔴", f"{asset} {direction} te fait PERDRE (${pnl:+.0f} sur {n}, malgré WR {wr:.0f}%) — hors edge"))
+            score -= 2; reasons.append(("🔴", f"{asset} {direction} te fait PERDRE (${pnl:+.0f} sur {n}, malgré WR {wr:.0f}%), hors edge"))
         else:
             reasons.append(("➖", f"{asset} {direction} neutre (${pnl:+.0f}, WR {wr:.0f}%)"))
     else:
@@ -146,8 +146,8 @@ def assess(asset, direction, context):
     elif reg:
         reasons.append(("➖", f"régime {reg} (peu de données)"))
 
-    # 4) GRADE DU BOT — INFORMATIF SEULEMENT (vérif adversariale 03-07 : le
-    #    candidat « trader les A_SETUP » est RÉFUTÉ — +6,85$ au total recalculé,
+    # 4) GRADE DU BOT, INFORMATIF SEULEMENT (vérif adversariale 03-07 : le
+    #    candidat « trader les A_SETUP » est RÉFUTÉ, +6,85$ au total recalculé,
     #    signe inversé hors 2 meilleurs jours ; aucun score ne doit en dépendre).
     #    On garde une mise en garde hors-heures-US : mécaniquement, les A_SETUP
     #    du matin étaient les market-entries hors-session du bot (6/6 perdants).
@@ -155,10 +155,10 @@ def assess(asset, direction, context):
     grade = (context or {}).get("grade")
     in_us = (context or {}).get("session") in _US
     if grade == "A_SETUP" and not in_us:
-        reasons.append(("🔴", "A_SETUP mais HORS heures US — n'en fais PAS une validation "
+        reasons.append(("🔴", "A_SETUP mais HORS heures US, n'en fais PAS une validation "
                               "(les signaux du matin ont coûté −50$ le 30/06)"))
     elif grade:
-        reasons.append(("➖", f"grade du bot : {grade} (informatif — non prédictif à ce stade)"))
+        reasons.append(("➖", f"grade du bot : {grade} (informatif, non prédictif à ce stade)"))
 
     # 4bis) VETO ANTI-CHASSE (CONFIRMÉ par les 2 réfuteurs, 03-07) : prix étiré
     #    AU-DESSUS de la Value Area (of_imbalance > +1) -> retours futurs 1h-4h
@@ -168,7 +168,7 @@ def assess(asset, direction, context):
     if direction == "LONG" and isinstance(imb_now, (int, float)) and imb_now > 1.0:
         score -= 1
         reasons.append(("🔴", f"ANTI-CHASSE : prix étiré au-dessus de la Value Area "
-                              f"(imb {imb_now:.2f} > 1) — retour 1h-4h historiquement négatif"))
+                              f"(imb {imb_now:.2f} > 1), retour 1h-4h historiquement négatif"))
 
     # 5) ORDER-FLOW imbalance haut : bonus pour les SHORTS seulement (cohérent
     #    avec la réversion confirmée « imb>+1 -> retours futurs négatifs » ;
@@ -177,7 +177,7 @@ def assess(asset, direction, context):
     of_hi = T.get("of_hi") or (None, 0)
     if direction == "SHORT" and isinstance(imb, (int, float)):
         if imb > 0.6 and of_hi[0] and of_hi[1] >= MIN_N:
-            score += 1; reasons.append(("✅", f"order-flow imbalance haut ({imb:.2f}) — WR15m {of_hi[0]:.0f}%"))
+            score += 1; reasons.append(("✅", f"order-flow imbalance haut ({imb:.2f}), WR15m {of_hi[0]:.0f}%"))
         elif imb > 0.6:
             reasons.append(("➕", f"order-flow imbalance haut ({imb:.2f})"))
 
@@ -206,7 +206,7 @@ def format_verdict(asset, direction, v):
         lines.append(f"  {sign} {txt}")
     if v["verdict"] == "DÉRIVE":
         lines.append("  → rappel : ton edge est une affaire de SESSION (après-midi US) et de "
-                     "RÉGIME — pas d'un actif ou d'un sens fétiche.")
+                     "RÉGIME, pas d'un actif ou d'un sens fétiche.")
     return "\n".join(lines)
 
 

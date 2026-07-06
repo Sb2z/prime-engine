@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CRYPTO PULSE — capteur risk-on/risk-off intraday via microstructure BTC.
+"""CRYPTO PULSE, capteur risk-on/risk-off intraday via microstructure BTC.
 
 Imbalance du carnet (top 5 niveaux) + delta des agressions sur 5 min.
 BTC réagit en continu (24/7) : en régime risk-off, sa corrélation avec ES
@@ -61,7 +61,7 @@ def trade_delta(window_s=TRADES_WINDOW_S):
 
 
 def snapshot():
-    """{btc_imbalance, btc_delta_5m, crypto_risk, ts} — cache 60 s, None si API down."""
+    """{btc_imbalance, btc_delta_5m, crypto_risk, ts}, cache 60 s, None si API down."""
     if time.time() - _cache["ts"] < CACHE_TTL_S and _cache["snap"]:
         return _cache["snap"]
     try:

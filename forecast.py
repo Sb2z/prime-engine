@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FORECAST — Anticipation de tendance multi-timeframe (15m / 1h / 4h)
+FORECAST, Anticipation de tendance multi-timeframe (15m / 1h / 4h)
 ══════════════════════════════════════════════════════════════════
 NE donne PAS de trade (pas d'entrée/stop/TP). Donne la DIRECTION ANTICIPÉE
 du cours par timeframe, à partir de TOUT le contexte : news, macro, technique,
@@ -145,9 +145,9 @@ if __name__ == "__main__":
     r = dual()
     rd = r["radar"]
     print("═" * 66)
-    print(f"  🧭 ANTICIPATION DE TENDANCE — {__import__('datetime').datetime.now().strftime('%H:%M')}")
+    print(f"  🧭 ANTICIPATION DE TENDANCE, {__import__('datetime').datetime.now().strftime('%H:%M')}")
     print("═" * 66)
-    print(f"  📡 Contexte news : {rd['alert']} — {rd['msg']}")
+    print(f"  📡 Contexte news : {rd['alert']}, {rd['msg']}")
     print(f"  😱 Fear&Greed {rd['fg'].get('score','?')} ({rd['fg'].get('rating','')}) · biais news OR {rd['gold_bias']:+d} / S&P {rd['spx_bias']:+d}")
     _print_fc(r["gold"], "🥇 GOLD")
     _print_fc(r["spx"], "🛡️ S&P 500")

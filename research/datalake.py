@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""DATA LAKE — données historiques du Research Lab (research/data/).
+"""DATA LAKE, données historiques du Research Lab (research/data/).
 
 Sources gratuites, une source par fichier (garde anti-basis : le harness
 refuse les tests mêlant des sources différentes) :
@@ -98,7 +98,7 @@ def refresh_cot():
 
 
 def load_candles(ticker, tf):
-    """Bougies [ts,o,h,l,c,v] + source — format harness."""
+    """Bougies [ts,o,h,l,c,v] + source, format harness."""
     import pandas as pd
     path = os.path.join(DATA_DIR, f"{_safe(ticker)}_{tf}.parquet")
     df = pd.read_parquet(path)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLUSTERS — déduplication des signaux IA par position virtuelle.
+"""CLUSTERS, déduplication des signaux IA par position virtuelle.
 
 Le watcher re-signale le même trade à chaque cycle tant que le setup reste
 visible (ex.: 7 shorts US500 OTE le 7 juin, pnl identique). Pour les stats,
@@ -119,10 +119,10 @@ def non_duplicates(j=None):
 
 
 def effective_trades(j=None):
-    """Trades clôturés décisifs, doublons exclus — la SEULE source des stats.
+    """Trades clôturés décisifs, doublons exclus, la SEULE source des stats.
     (audit 07-03) session WEEKEND exclue : des « fills » sur prix figés du
     week-end (6 fantômes du 07/06 = 60% du PnL IA) sont des artefacts de
-    mesure — aucune décision ne doit s'appuyer dessus."""
+    mesure, aucune décision ne doit s'appuyer dessus."""
     rows = [
         t for t in non_duplicates(j)
         if t.get("status") == "CLOSED" and t.get("result") in DECISIVE

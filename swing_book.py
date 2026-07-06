@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-SWING BOOK — moteur de signaux ACHAT/VENTE hebdo (actions, hors CFD).
+SWING BOOK, moteur de signaux ACHAT/VENTE hebdo (actions, hors CFD).
 ═══════════════════════════════════════════════════════════════════════════════
-Ce que Sam veut voir (30-06) : un message Telegram DEAD SIMPLE — « achète telle
+Ce que Sam veut voir (30-06) : un message Telegram DEAD SIMPLE, « achète telle
 action, vends telle action ». C'est tout. ≤10 achats/sem (limite Revolut gratuite).
 
 Le bot gère un PORTEFEUILLE MODÈLE (swing_portfolio.json) : il te dit quoi faire,
@@ -11,7 +11,7 @@ tu exécutes sur Revolut. Chaque semaine :
   2. on libère des slots, on classe les nouveaux candidats (swing_scanner) -> ACHÈTE
   3. message Telegram minimal + mise à jour de l'état.
 
-Règles de sortie (le "vendre au pic" en version RÈGLE — on ne devine pas le sommet) :
+Règles de sortie (le "vendre au pic" en version RÈGLE, on ne devine pas le sommet) :
   • cassure de tendance : prix < EMA50
   • trailing stop : repli > 15% depuis le plus-haut depuis l'entrée
   • durée max : 8 semaines (56 j)
@@ -46,7 +46,7 @@ def _load():
         try:
             import shutil
             shutil.copy2(PORTFOLIO, PORTFOLIO + ".corrupt")
-            notify.send(f"🛑 SWING : swing_portfolio.json ILLISIBLE ({e}) — run annulé, "
+            notify.send(f"🛑 SWING : swing_portfolio.json ILLISIBLE ({e}), run annulé, "
                         f"copie .corrupt gardée. Le book réel n'est plus suivi !", silent=False)
         except Exception:
             pass
@@ -113,7 +113,7 @@ def _exit_reason(h, df):
     held_days = (dt.date.today() - entry_date).days
     # défensif : yf.download rend un index tz-naïf aujourd'hui, mais un index
     # tz-aware (Ticker.history / future version yfinance) ferait TypeError et
-    # tuerait TOUT le run hebdo — on neutralise le tz avant de comparer.
+    # tuerait TOUT le run hebdo, on neutralise le tz avant de comparer.
     idx = c.index.tz_localize(None) if getattr(c.index, "tz", None) is not None else c.index
     since = c[idx >= pd.Timestamp(entry_date)]
     peak = float(since.max()) if len(since) else px
@@ -142,7 +142,7 @@ def weekly_signals():
         for h in held:
             df = bars.get(h["ticker"])
             if df is None:
-                # data manquante : on garde par prudence MAIS on le DIT — sinon
+                # data manquante : on garde par prudence MAIS on le DIT, sinon
                 # « ✅ Rien à faire » alors qu'aucune règle de sortie n'a tourné.
                 keep.append(h); no_data.append(h["ticker"]); continue
             out, reason = _exit_reason(h, df)
@@ -169,8 +169,7 @@ def weekly_signals():
                              "sector": r.get("sector", "?"),
                              "entry_date": dt.date.today().isoformat()})
 
-    # 2b) performance : book vs QQQ vs ÉQUIPONDÉRÉ-UNIVERS (le benchmark honnête —
-    # l'univers choisi en 2026 bat QQQ tout seul ; le scoring doit battre l'EW,
+    # 2b) performance : book vs QQQ vs ÉQUIPONDÉRÉ-UNIVERS (le benchmark honnête, # l'univers choisi en 2026 bat QQQ tout seul ; le scoring doit battre l'EW,
     # sinon kill-switch : backtest 36 mois, skill au-dessus de l'EW non démontré).
     perf_line = None
     try:
@@ -180,7 +179,7 @@ def weekly_signals():
 
     # 3) message DEAD SIMPLE
     week = dt.date.today().strftime("%d/%m")
-    lines = [f"📊 SWING ACTIONS — {week}"]
+    lines = [f"📊 SWING ACTIONS, {week}"]
     if perf_line:
         lines.append(perf_line)
     # Lancé pendant la séance US, la « barre du jour » est incomplète : les
@@ -190,7 +189,7 @@ def weekly_signals():
     from zoneinfo import ZoneInfo
     now_p = dt.datetime.now(ZoneInfo("Europe/Paris"))
     if now_p.weekday() < 5 and 15 <= now_p.hour < 22:
-        lines.append("⚠️ marché US OUVERT — barre du jour incomplète, signaux à "
+        lines.append("⚠️ marché US OUVERT, barre du jour incomplète, signaux à "
                      "confirmer à la clôture (préférer le run planifié 14h).")
     if buys:
         lines.append("\n🟢 ACHÈTE maintenant :")
@@ -199,9 +198,9 @@ def weekly_signals():
         lines.append("\n🔴 VENDS maintenant :")
         lines += [f"  • {s['ticker']}  ({s['pnl_pct']:+.0f}%, {s['reason']})" for s in sells]
     if not buys and not sells:
-        lines.append("\n✅ Rien à faire cette semaine — on garde tout.")
+        lines.append("\n✅ Rien à faire cette semaine, on garde tout.")
     if no_data:
-        lines.append(f"\n⚠️ {len(no_data)} ligne(s) SANS données ({', '.join(no_data)}) — "
+        lines.append(f"\n⚠️ {len(no_data)} ligne(s) SANS données ({', '.join(no_data)}), "
                      f"sorties NON vérifiées ce run, garde un œil dessus.")
     new_holdings = keep + buys
     return {"sells": sells, "buys": buys, "message": "\n".join(lines),
@@ -217,7 +216,7 @@ def run(send=False):
         # jamais d'échec silencieux dans swing_book.log un lundi 14h : Sam doit
         # savoir que les règles de sortie n'ont PAS tourné.
         try:
-            notify.send(f"🛑 SWING : run hebdo en ÉCHEC ({type(e).__name__}: {e}) — "
+            notify.send(f"🛑 SWING : run hebdo en ÉCHEC ({type(e).__name__}: {e}), "
                         f"aucune règle de sortie évaluée, relancer python swing_book.py send.",
                         silent=False)
         except Exception:

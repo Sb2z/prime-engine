@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""PAPER SHADOW — évaluation en production des stratégies PAPER du lab.
+"""PAPER SHADOW, évaluation en production des stratégies PAPER du lab.
 
 Le watcher appelle run_shadow() à chaque cycle. Pour chaque stratégie de
 research/paper_strategies.json au statut PAPER (la SEULE chose que la
 production lit dans research/, et elle n'y entre que tamponnée par le juge) :
 
-  • signal calculé par strategy_families.build_signal — le MÊME code que le
+  • signal calculé par strategy_families.build_signal, le MÊME code que le
     backtest du harness, aucun écart possible
   • signal → entrée virtuelle journalisée trader=PAPER_<id> ; l'évaluation
     (fills intrabar 1m, coûts, swap) est celle du journal de production
-  • AUCUNE alerte Telegram/macOS — shadow strict
+  • AUCUNE alerte Telegram/macOS, shadow strict
   • une seule position virtuelle par stratégie x actif (anti-spam)
 
 Les trades PAPER_* sont exclus des stats IA (trader != "AI") et de la

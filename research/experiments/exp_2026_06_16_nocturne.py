@@ -24,7 +24,7 @@ CONTEXTE D'INGESTION (cf. rapport 2026-06-16.md) :
     chikou_confirm HJ, 2 nettement négatifs). RESTE UN SEUL mécanisme jamais
     testé : `twist`.
 
-POURQUOI CES DEUX TESTS (pas un sweep) — clôture du backlog #2 du 15/06 :
+POURQUOI CES DEUX TESTS (pas un sweep), clôture du backlog #2 du 15/06 :
   Le backlog demandait, AVANT de tester twist, de vérifier qu'il existe une
   raison spécifique de le croire DIFFÉRENT des 4 mécanismes déjà morts ; sinon
   déclarer Ichimoku clos. La raison existe et elle est conceptuelle, pas
@@ -40,9 +40,9 @@ POURQUOI CES DEUX TESTS (pas un sweep) — clôture du backlog #2 du 15/06 :
   tendance du lake. On teste donc GOLD (HN) ET US500 (HO, variant_of=HN) la
   même nuit. La famille `ichimoku_twist` a 0 test antérieur au registry :
   HN est le test n°1 (z requis 1.645), HO le test n°2 après enregistrement de
-  HN (z requis ~1.96) — la déflation Bonferroni s'applique DANS la nuit.
+  HN (z requis ~1.96), la déflation Bonferroni s'applique DANS la nuit.
 
-EXITS — AUCUN nouveau degré de liberté :
+EXITS, AUCUN nouveau degré de liberté :
   On réutilise EXACTEMENT la convention de continuation Ichimoku héritée de
   HF/HG/HJ (stop 0.8 / tp 1.5 / horizon 48 barres, RR ~1.9). On NE retune PAS
   l'exit : l'analyste 23h a montré (lignée HH/HL/HM) que l'edge ne vit pas dans
@@ -68,7 +68,7 @@ sys.path.insert(0, os.path.join(_ROOT, "research"))
 import harness
 import datalake
 
-# Convention de continuation Ichimoku, identique à HF/HG/HJ — fixée a priori.
+# Convention de continuation Ichimoku, identique à HF/HG/HJ, fixée a priori.
 _ICHI_EXIT = {"stop_pct": 0.8, "tp_pct": 1.5, "horizon_bars": 48}
 
 STRATEGIES = [
@@ -77,7 +77,7 @@ STRATEGIES = [
         "hypothesis_text": "Le twist du nuage Ichimoku (changement de couleur "
                            "connu à t, twist_age==1, prix du bon côté du nuage) "
                            "capte une AMORCE de tendance sur GOLD 1h et a une "
-                           "espérance nette POSITIVE — mécanisme distinct des 4 "
+                           "espérance nette POSITIVE, mécanisme distinct des 4 "
                            "entrées de continuation déjà réfutées. Si vrai, c'est "
                            "le seul Ichimoku survivant ; si faux, le périmètre "
                            "Ichimoku est clos (5/5 mécanismes morts).",
@@ -92,7 +92,7 @@ STRATEGIES = [
         "id": "HO_us500_ichimoku_twist",
         "hypothesis_text": "Validité externe de HN : si le twist capte une amorce "
                            "de tendance, l'effet se GÉNÉRALISE à l'US500 1h "
-                           "(ES=F) — espérance nette POSITIVE, même config/exit, "
+                           "(ES=F), espérance nette POSITIVE, même config/exit, "
                            "2e actif indépendant. variant_of=HN ; déflation "
                            "Bonferroni comprise (test famille n°2).",
         "family": "ichimoku_twist",

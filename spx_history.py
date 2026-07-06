@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SENTINEL-500 — Moteur d'étude d'événements (Event-Reaction Engine)
+SENTINEL-500, Moteur d'étude d'événements (Event-Reaction Engine)
 ══════════════════════════════════════════════════════════════════
 Quand une annonce tombe :
   1. score la SURPRISE (actual vs forecast vs prev)
@@ -18,7 +18,7 @@ import tz
 # Pour chaque événement :
 #   beta       : % move S&P attendu PAR UNITÉ de surprise (signe = sens actions)
 #   unit       : unité de la surprise (l'écart actual-forecast)
-#   tiers      : (seuil_surprise_abs, magnitude%, label) — ampleurs typiques
+#   tiers      : (seuil_surprise_abs, magnitude%, label), ampleurs typiques
 #   window     : durée de la réaction dominante
 #   hit_rate   : % de fois où le sens de la réaction tient (historique)
 #   follow     : tendance de continuation (>0.5 = le move continue, <0.5 = fade)
@@ -27,8 +27,8 @@ EVENT_REACTIONS = {
     "FOMC": {
         "weight": 10, "window": "instantané → 4-12h", "hit_rate": 0.78, "follow": 0.55,
         "scenarios": {
-            "dovish":  (+1.8, "Rally — pivot/baisse anticipée. Ex: pumps de +1 à +3%."),
-            "hawkish": (-2.2, "Sell-off — higher for longer. Ex: -1 à -3%."),
+            "dovish":  (+1.8, "Rally, pivot/baisse anticipée. Ex: pumps de +1 à +3%."),
+            "hawkish": (-2.2, "Sell-off, higher for longer. Ex: -1 à -3%."),
             "neutral": (-0.2, "Léger fade si rien de neuf (vendu sur le fait)."),
         },
         "note": "Catalyseur #1. Le dot plot et le ton Powell dominent."},
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     print(score_surprise("CPI_US", actual=0.4, forecast=0.2))
     print("\n═══ TEST : FOMC hawkish ═══")
     print(project_qualitative("FOMC", "hawkish"))
-    print("\n═══ CALENDRIER LIVE — surprises + à venir ═══")
+    print("\n═══ CALENDRIER LIVE, surprises + à venir ═══")
     rel, up = analyze_calendar_surprises()
     print(f"Publiés récents ({len(rel)}):")
     for r in rel[:5]:

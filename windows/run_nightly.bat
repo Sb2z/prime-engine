@@ -1,5 +1,5 @@
 @echo off
-rem ── Session chercheur nocturne (23h30) — équivalent research/run_nightly.sh ──
+rem ── Session chercheur nocturne (23h30), équivalent research/run_nightly.sh ──
 cd /d C:\Users\sam\trading
 set PYTHONUTF8=1
 if exist research\PAUSE (

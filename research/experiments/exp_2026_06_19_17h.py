@@ -2,7 +2,7 @@
 """Experience PRIME ANALYST 2026-06-19 17h.
 
 CONTEXTE : l'arc momentum-intraday LAKE-EXPRIMABLE a ete declare FERME au midday
-(13h) — momentum_regime + momentum_breakout 1h KILLED bien-powered sur 3
+(13h), momentum_regime + momentum_breakout 1h KILLED bien-powered sur 3
 instruments independants (GOLD beta / ES negatif / DOLLAR negatif bien-powered).
 Le lake ne contient QUE du 1h et du 1d (pas de 15m), donc aucun NOUVEAU test de
 momentum intraday dans les familles existantes ne serait autre chose qu'un re-knob

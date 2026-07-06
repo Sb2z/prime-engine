@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""PRIME ANALYST — slot MIDI 13h (2026-06-18). DIAGNOSTIC DESCRIPTIF, *PAS* un verdict.
+"""PRIME ANALYST, slot MIDI 13h (2026-06-18). DIAGNOSTIC DESCRIPTIF, *PAS* un verdict.
 
 ================================================================================
 POURQUOI ZÉRO hypothèse soumise au juge ce midi (décision assumée)
 ================================================================================
 Au 18/06 13h le registry compte 28 hypothèses réelles (+4 fixtures TEST_JUDGE),
-TOUTES KILLED — les 7 familles exprimables sont épuisées sur le lake 2021-2026 :
+TOUTES KILLED, les 7 familles exprimables sont épuisées sur le lake 2021-2026 :
   momentum            : H1(6h), HX/HY(1d uncond)                → KILLED
   momentum_regime     : HA, HH/HI(1h), HL/HM, HP, HQ/HR(1d), HU → KILLED
   momentum_breakout   : HS/HT(1h), HV(1d)                       → KILLED
@@ -23,7 +23,7 @@ signal directionnel autonome (déjà mort), pas un FILTRE de session sur un mome
 Il faut la famille `momentum_regime_session` (spec'd le 17/06, TOKEN SAM requis).
 
 ================================================================================
-CE QUE CE SCRIPT FAIT — motivation chiffrée pour (ou contre) la demande de famille
+CE QUE CE SCRIPT FAIT, motivation chiffrée pour (ou contre) la demande de famille
 ================================================================================
 Avant de demander à Sam de dépenser son token sur `momentum_regime_session`, on
 REGARDE LA DONNÉE : le momentum 1h a-t-il une espérance qui dépend de la session
@@ -120,5 +120,5 @@ def diagnose(ticker, label, k=6, thr=0.5, horizon=6):
 if __name__ == "__main__":
     diagnose("GC=F", "GOLD momentum 1h par session", k=6, thr=0.5, horizon=6)
     diagnose("ES=F", "ES momentum 1h par session", k=6, thr=0.5, horizon=6)
-    print("\n⚠️ DESCRIPTIF hors coûts, hors IC, hors walk-forward — motivation pour la "
+    print("\n⚠️ DESCRIPTIF hors coûts, hors IC, hors walk-forward, motivation pour la "
           "demande de famille `momentum_regime_session` à Sam, PAS un verdict.")

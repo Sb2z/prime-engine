@@ -1,6 +1,6 @@
 ---
 name: strategy-report
-description: Generate a comprehensive strategy performance report — metrics, trade analysis, equity curve, and recommendations. Use after backtesting a Pine Script strategy.
+description: Generate a comprehensive strategy performance report, metrics, trade analysis, equity curve, and recommendations. Use after backtesting a Pine Script strategy.
 ---
 
 # Strategy Performance Report
@@ -10,16 +10,16 @@ You are generating a detailed performance report for a Pine Script strategy on T
 ## Step 1: Gather Data
 
 Collect all available performance data:
-1. `data_get_strategy_results` — overall metrics (net profit, win rate, profit factor, etc.)
-2. `data_get_trades` — individual trade list (max 20)
-3. `data_get_equity` — equity curve data points
-4. `chart_get_state` — current symbol, timeframe, and studies on chart
-5. `symbol_info` — symbol metadata for context
+1. `data_get_strategy_results` : overall metrics (net profit, win rate, profit factor, etc.)
+2. `data_get_trades` : individual trade list (max 20)
+3. `data_get_equity` : equity curve data points
+4. `chart_get_state` : current symbol, timeframe, and studies on chart
+5. `symbol_info` : symbol metadata for context
 
 ## Step 2: Capture Visuals
 
-1. `capture_screenshot` with region "chart" — the chart with strategy overlay
-2. `capture_screenshot` with region "strategy_tester" — the Strategy Tester panel
+1. `capture_screenshot` with region "chart", the chart with strategy overlay
+2. `capture_screenshot` with region "strategy_tester", the Strategy Tester panel
 
 ## Step 3: Analyze
 

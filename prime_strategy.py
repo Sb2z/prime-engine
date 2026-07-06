@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PRIME STRATEGY — protocole remplaçant la stratégie discrétionnaire.
+PRIME STRATEGY, protocole remplaçant la stratégie discrétionnaire.
 ══════════════════════════════════════════════════════════════════
 Objectif : privilégier ce que le journal montre comme supérieur :
   • setups OTE / continuation, RR >= 2
@@ -134,7 +134,7 @@ def _major_veto(asset, setup, fc, radar_alert):
 
 
 def _expectancy_ok(setup):
-    """Garde-fou d'espérance pour le grade A — remplace l'ancien RR fixe (>=2).
+    """Garde-fou d'espérance pour le grade A, remplace l'ancien RR fixe (>=2).
     Le but c'est le PROFIT, pas un RR : si la stratégie a un historique effectif
     suffisant, on exige son espérance nette historique >= 0 (on refuse de décerner
     un A_SETUP à une stratégie qui perd en moyenne, même avec un bon RR). Sinon
@@ -224,13 +224,13 @@ def evaluate():
         fc, fc_dir = _forecast_bias(asset)
         fc_map[asset] = fc
         rg = (scan.get("regimes") or {}).get(asset, {})
-        # P1 — jamais de décision tradable sur données mortes : prix indisponible
+        # P1, jamais de décision tradable sur données mortes : prix indisponible
         # ou >=2 TF intraday en erreur de fetch -> NO_TRADE d'office (source dégradée).
         if fc.get("source_degraded"):
             decisions.append({
                 "asset": asset,
                 "grade": "NO_TRADE",
-                "reason": "source dégradée (prix indisponible ou >=2 TF en erreur) — aucune décision tradable",
+                "reason": "source dégradée (prix indisponible ou >=2 TF en erreur), aucune décision tradable",
                 "forecast_direction": fc_dir,
                 "forecast_tf": fc.get("tf"),
                 "price": fc.get("price"),
@@ -332,7 +332,7 @@ def _print():
     replace, stats = should_replace_user_strategy()
     data = evaluate()
     print("═" * 72)
-    print("  PRIME STRATEGY — protocole de remplacement")
+    print("  PRIME STRATEGY, protocole de remplacement")
     print("═" * 72)
     print(f"  Verdict remplacement : {'OUI' if replace else 'PAS ENCORE'}")
 
@@ -356,10 +356,10 @@ def _print():
     rd = data["radar"]
     ep = data.get("adaptive_edge_policy") or {}
     fg = rd.get("fear_greed") or {}
-    print(f"\n  Radar: {rd['alert']} — {rd['message']}")
+    print(f"\n  Radar: {rd['alert']}, {rd['message']}")
     print(f"  Fear&Greed {fg.get('score', '?')} ({fg.get('rating', '')}) · news OR {rd['gold_bias']:+d} / S&P {rd['spx_bias']:+d}")
     if ep:
-        print(f"  Edge adaptatif: {ep.get('mode')} · {ep.get('label')} — {ep.get('reason')}")
+        print(f"  Edge adaptatif: {ep.get('mode')} · {ep.get('label')}, {ep.get('reason')}")
     for d in data["decisions"]:
         print(f"\n  {d['asset']} @ {d.get('price')} · forecast {d.get('forecast_direction')} · régime {d.get('regime')}")
         print(f"  Décision: {d['grade']}")
@@ -368,7 +368,7 @@ def _print():
             print(f"  {s['direction']} conf {s['conf']}/10 · entrée {s['entry']} · stop {s['stop']} · TP {s['tp']} · RR {s['rr']}:1")
             ae = d.get("adaptive_edge") or {}
             if ae:
-                print(f"  Edge: {ae.get('action')} · {ae.get('policy_label')} — {ae.get('reason')}")
+                print(f"  Edge: {ae.get('action')} · {ae.get('policy_label')}, {ae.get('reason')}")
             m = d.get("management") or {}
             if m:
                 print(f"  Gestion: {m['mode']} · entrée valide {m['entry_valid_minutes']}m · review {m['review_after_hours']}h · max {m['max_hold_hours']}h")

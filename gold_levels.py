@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Gold AI — Niveaux clés : psychologiques, liquidité, zones institutionnelles
+Gold AI, Niveaux clés : psychologiques, liquidité, zones institutionnelles
 Logique Smart Money Concepts (SMC) + zones de Fibonacci + ATH/ATL
 """
 
@@ -154,11 +154,11 @@ if __name__ == "__main__":
 
     print("\nLiquidités au-dessus :")
     for l in levels["liquidity_above"]:
-        print(f"  ↑ ${l['level']}  — {l['note']}")
+        print(f"  ↑ ${l['level']}, {l['note']}")
 
     print("\nLiquidités en-dessous :")
     for l in levels["liquidity_below"]:
-        print(f"  ↓ ${l['level']}  — {l['note']}")
+        print(f"  ↓ ${l['level']}, {l['note']}")
 
     print("\nFibonacci (swing $4539 → $4366) :")
     fibs = get_fibonacci_levels(4539, 4366)

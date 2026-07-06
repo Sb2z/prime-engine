@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""RAPPORT HEBDO DE MATURATION — suit la progression vers le 1er modèle appris,
+"""RAPPORT HEBDO DE MATURATION, suit la progression vers le 1er modèle appris,
 sans avoir à demander. Envoyé sur Telegram (dimanche 20h, cf. windows/run_maturation.bat).
 
 Métriques clés (analyse 06-19/06-22) :
@@ -24,7 +24,7 @@ def _fmt_pct(v):
 def build():
     fs = feature_store.stats()
     if fs.get("error"):
-        return f"📈 MATURATION — indisponible ({fs['error']})"
+        return f"📈 MATURATION, indisponible ({fs['error']})"
     of_days = fs.get("jours_order_flow_distincts", 0) or 0
     ready = fs.get("modele_appris_autorise", False)
 
@@ -45,17 +45,17 @@ def build():
     bar = "█" * n_of + "░" * max(0, 15 - n_of)
 
     lines = [
-        "📈 MATURATION HEBDO — vers le 1er modèle appris",
+        "📈 MATURATION HEBDO, vers le 1er modèle appris",
         f"Jours order-flow : {of_days}/15  [{bar}]" + ("  ✅ PRÊT" if ready else ""),
         f"Fill AI par actif : {fillstr}",
         f"WR {st.get('win_rate', '?')}% · espérance {_fmt_pct(st.get('expectancy_pct'))} "
         f"· fill global {st.get('ai_fill_rate', '?')}% · gate {fs.get('gate_apprentissage', '?')}",
         f"Tes trades capturés : {cap.get('avec_contexte', 0)} (avec contexte) sur "
-        f"{cap.get('jours_distincts', 0)} jour(s) — dont {cap.get('jours_distincts_of', 0)}/15 "
+        f"{cap.get('jours_distincts', 0)} jour(s), dont {cap.get('jours_distincts_of', 0)}/15 "
         f"avec order-flow (le compteur du modèle v2)",
     ]
     if cap.get("avec_contexte", 0) == 0:
-        lines.append("⚠️ Aucun trade logué — envoie « T GOLD SHORT 4150 » quand tu "
+        lines.append("⚠️ Aucun trade logué, envoie « T GOLD SHORT 4150 » quand tu "
                      "trades pour nourrir le modèle (c'est le seul moyen d'apprendre TON edge).")
     card = None
     try:

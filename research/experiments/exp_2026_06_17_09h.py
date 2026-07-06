@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Expérience PRIME ANALYST du 2026-06-17 09h — slot matin (focalisé).
+"""Expérience PRIME ANALYST du 2026-06-17 09h, slot matin (focalisé).
 
 UNE hypothèse NOUVELLE, falsifiable, données du lake (source homogène :
-prix yfinance GC=F ; aucune 2e source mélangée). Exit fixé A PRIORI —
-IDENTIQUE à HH (aucun nouveau degré de liberté d'exit).
+prix yfinance GC=F ; aucune 2e source mélangée). Exit fixé A PRIORI, IDENTIQUE à HH (aucun nouveau degré de liberté d'exit).
 
 Contexte d'ingestion (cf. rapport analyst_2026-06-17_09h.md) :
   - Santé bot VERTE : dernier cycle 08:56 Paris (frais <12 min), datafeed
@@ -19,12 +18,11 @@ Contexte d'ingestion (cf. rapport analyst_2026-06-17_09h.md) :
     TOUJOURS 100% LONG (direction dégénérée), ~2-3 jours distincts seulement
     -> NON concluant, inchangé depuis hier. Pas de conclusion.
 
-POURQUOI ce test — clôture du DERNIER levier de régime non exploré :
+POURQUOI ce test, clôture du DERNIER levier de régime non exploré :
   Le faisceau HH/HL/HM (analyste 23h) conclut « le SIGNAL momentum_regime est
-  limitant, pas l'exit » — mais cette inférence a été établie en faisant varier
+  limitant, pas l'exit », mais cette inférence a été établie en faisant varier
   k/thr/exit À PORTE DE RÉGIME FIXE (ER>=0.45/ADX>=30). La dimension
-  RÉGIME-STRICTESSE — « et si le plancher ADX 30 admet encore trop de chop ? »
-  — n'a JAMAIS été testée (backlog #2 explicite du 23h : "seuil ADX plus
+  RÉGIME-STRICTESSE, « et si le plancher ADX 30 admet encore trop de chop ? », n'a JAMAIS été testée (backlog #2 explicite du 23h : "seuil ADX plus
   exigeant"). Sur la priorité (b) du protocole (« entrée en régime tendanciel,
   ADX/ER ÉLEVÉ »), c'est LE levier à trancher. La matinée RANGE/HACHÉE rend la
   question naturelle : isoler UNIQUEMENT les bougies de tendance la plus propre
@@ -51,8 +49,8 @@ POURQUOI ce test — clôture du DERNIER levier de régime non exploré :
   TRANCHE le dernier levier de régime, il n'est pas cosmétique.
 
 UNE SEULE hypothèse (slot matin focalisé) :
-  Le 2e levier listé au backlog 23h — "momentum_regime + confluence
-  session_hour" — est en réalité INEXPRIMABLE dans la famille existante :
+  Le 2e levier listé au backlog 23h, "momentum_regime + confluence
+  session_hour", est en réalité INEXPRIMABLE dans la famille existante :
   _momentum_regime n'utilise PAS `ctx` (strategy_families.py:138), donc aucune
   confluence de session n'est passable par params/ctx. -> DÉCRIT comme SPEC
   pour Sam dans le rapport (fichier protégé, token requis), PAS testé en hack.
@@ -76,7 +74,7 @@ STRATEGIES = [
                            "propre (porte stricte ER>=0.45 ET ADX>=40, vs le plancher "
                            "30 de HH), le MÊME trigger momentum (k=6, thr=0.5) et le "
                            "MÊME exit (stop 0.6%/tp 1.0%/24h) dégagent une espérance "
-                           "nette POSITIVE sur GOLD 1h — i.e. le plancher ADX 30 "
+                           "nette POSITIVE sur GOLD 1h, i.e. le plancher ADX 30 "
                            "admettait trop de chop diluant l'edge trend-day.",
         "family": "momentum_regime",
         "params": {"k": 6, "thr_pct": 0.5, "er_min": 0.45, "adx_min": 40.0},

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""STRATEGY FAMILIES — bibliothèque de signaux partagée juge/production.
+"""STRATEGY FAMILIES, bibliothèque de signaux partagée juge/production.
 
 SOURCE UNIQUE : le harness (backtest) et le watcher (shadow PAPER) évaluent
-les stratégies via build_signal(family, params) — le même code des deux
+les stratégies via build_signal(family, params), le même code des deux
 côtés, donc aucun écart backtest/production possible par construction.
 
 Le chercheur autonome compose des stratégies en CHOISISSANT famille +
@@ -14,7 +14,7 @@ Interface d'un signal :
   window : liste de bougies [ts, o, h, l, c, v] se terminant à la bougie de
            décision (close connue). AUCUN accès au futur : l'entrée se fait
            à l'open de la bougie suivante (géré par le harness/shadow).
-  ctx    : dict optionnel (session, cot_pctile, event_mode...) — peut être
+  ctx    : dict optionnel (session, cot_pctile, event_mode...), peut être
            absent, les familles doivent dégrader proprement.
 """
 
@@ -167,14 +167,14 @@ def _cot_extreme(params):
     return fn
 
 
-# ── ICHIMOKU — périmètre FERMÉ (approuvé par Sam le 11/06/2026) ──────────────
+# ── ICHIMOKU, périmètre FERMÉ (approuvé par Sam le 11/06/2026) ──────────────
 # 5 signaux canoniques, 2 vitesses autorisées, AUCUN autre paramètre libre :
 # le data mining de variantes est structurellement impossible dans ce fichier.
 #
 # ANTI-LOOKAHEAD PAR CONSTRUCTION : sur un graphique, Senkou A/B sont tracés
 # `disp` bougies DEVANT le prix. Le nuage visible au-dessus de la bougie t a
 # donc été calculé sur les données de t-disp. Ici, toute valeur "connue à t"
-# est calculée via un décalage explicite (shift + disp) — jamais les
+# est calculée via un décalage explicite (shift + disp), jamais les
 # midpoints du moment, qui décriraient le nuage de t+disp (le bug classique
 # qui fabrique de faux edges). Chikou : comparer close(t) au high/low de
 # t-disp n'utilise que du passé. Prouvé par test_ichimoku.py.
@@ -335,7 +335,7 @@ def _momentum_breakout(params):
     ANTÉRIEURES, CONFIRMÉE par une tendance propre (ER≥er_min ET ADX≥adx_min) :
     la clôture qui franchit le canal déclenche une entrée DANS le sens de la
     cassure. C'est l'opposé d'OTE_RETRACEMENT (qui attend un repli profond et
-    rate les jours de tendance) — ici on suit le momentum.
+    rate les jours de tendance), ici on suit le momentum.
 
     ANTI-LOOKAHEAD : le canal de référence EXCLUT la bougie de décision
     (window[-1-n:-1]) ; seule la clôture connue window[-1] est comparée. L'entrée

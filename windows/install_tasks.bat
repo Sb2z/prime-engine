@@ -14,7 +14,7 @@ schtasks /Create /F /TN "Prime Research Nightly" /SC DAILY /ST 23:30 ^
   /TR "C:\Users\sam\trading\windows\run_nightly.bat"
 
 rem 4. Data lake : refresh quotidien 07h00 (via le .bat : chemin python complet +
-rem    PYTHONUTF8, comme les autres tâches — le `python` nu échouait sous SYSTEM)
+rem    PYTHONUTF8, comme les autres tâches, le `python` nu échouait sous SYSTEM)
 schtasks /Create /F /TN "Prime Datalake" /SC DAILY /ST 07:00 ^
   /TR "C:\Users\sam\trading\windows\run_datalake.bat"
 

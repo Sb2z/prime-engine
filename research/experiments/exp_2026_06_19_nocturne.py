@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Experience CHERCHEUR NOCTURNE du 2026-06-19 (~23h45).
 
-=== 0 SOUMISSION AU JUGE CE SOIR — par EPUISEMENT du lake, pas par paresse ===
+=== 0 SOUMISSION AU JUGE CE SOIR, par EPUISEMENT du lake, pas par paresse ===
 
 Ce fichier ne soumet RIEN a harness.evaluate. Il documente (a) la verification
 qui conduit a 0 hypothese lake-jugeable nouvelle, et (b) un MINING DESCRIPTIF
@@ -16,7 +16,7 @@ POURQUOI 0 (chaine de verification, pas un a-priori) :
      momentum_regime, momentum_breakout, et les 5 ichimoku. Registry = 38/37.
   2. cot_extreme est la seule famille a n'avoir que 2 instances (HD gold, HE es).
      Or le lake ne contient de COT que pour GOLD et US500 (cot_5y.parquet :
-     assets = {GOLD, US500}) — les deux sont DEJA tues (contrarian 10/90,
+     assets = {GOLD, US500}), les deux sont DEJA tues (contrarian 10/90,
      negatif des deux cotes). Le ressusciter exigerait :
        - changer l'EXIT (ce qu'aurait fait IF_gold_cot_extreme_1d, prepare au
          slot 17h mais NON soumis) => sweep d'exit pour sauver un signal mort.
@@ -30,11 +30,11 @@ POURQUOI 0 (chaine de verification, pas un a-priori) :
      soit des donnees absentes du lake (barres < 1h ; MFE/MAE marche-vs-fill de
      production). Aucune n'est jugeable cette nuit.
   4. Forcer un 39e test serait churner la deflation Bonferroni GLOBALE pour zero
-     information neuve — exactement l'anti-pattern que le protocole existe pour
+     information neuve, exactement l'anti-pattern que le protocole existe pour
      empecher. "0 test force" (cf. rapport nocturne 18/06) est de la SANTE.
 
 Le mining ci-dessous est OBSERVATIONNEL (pas d'IC, comparaisons multiples, proxy
-ret_4h a horizon fixe sans stops ni couts). Il NE conclut RIEN — il signale deux
+ret_4h a horizon fixe sans stops ni couts). Il NE conclut RIEN, il signale deux
 anomalies a investiguer et chiffre la conditionnalite regime/session qui motive
 les specs (famille composee + vol_extreme) portees a Sam.
 """
@@ -78,7 +78,7 @@ def mine_setups():
     g = s.groupby(["session", "regime"])["dir_ret4h"].agg(["count", "mean"]).round(4)
     print(g[g["count"] >= 10])
     print("\nRAPPEL : report-only. Pas d'IC, comparaisons multiples, proxy 4h sans "
-          "stops/couts. AUCUNE conclusion — motive des specs, pas un verdict.")
+          "stops/couts. AUCUNE conclusion, motive des specs, pas un verdict.")
 
 
 if __name__ == "__main__":

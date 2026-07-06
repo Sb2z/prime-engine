@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Expérience PRIME ANALYST du 2026-06-16 17h — slot evening.
+"""Expérience PRIME ANALYST du 2026-06-16 17h, slot evening.
 
 UNE hypothèse NOUVELLE, falsifiable, données du lake (source homogène :
 prix yfinance GC=F ; aucune 2e source mélangée). Exit fixé A PRIORI (aucun
@@ -10,7 +10,7 @@ Contexte d'ingestion (cf. rapport analyst_2026-06-16_17h.md) :
     apprentissage 840/500 (progresse depuis 754 à 13h), 0 outcome MIXED exclu
     (ret_4h reste corrigé), lab 18/17/0/0.
   - Autopsie 13h->17h : 3 signaux LONG (GOLD A_SETUP 13:03 entry 4333.78 ;
-    US500 13:45 & 14:28 entry 7548.76) — AUCUN rempli (prix retracé seulement
+    US500 13:45 & 14:28 entry 7548.76), AUCUN rempli (prix retracé seulement
     jusqu'à 4338.8 / 7552.9 dans les fenêtres de validité 45 min) ; le réalisé
     a été baissier/plat -> les non-fills ont ÉVITÉ des longs perdants. Le
     forecast LONG a persisté en régime RANGE/TRANSITION/HACHÉE alors que le
@@ -19,11 +19,10 @@ Contexte d'ingestion (cf. rapport analyst_2026-06-16_17h.md) :
 POURQUOI ce test (et pas un sweep) :
   HH (GOLD momentum_regime 1h, k6/thr0.5, exit TP 1.0%/stop 0.6%/h24) est mort
   PLAT : exp_net +0.0017 %, t 0.019, n 71. La thèse momentum dit que l'edge
-  trend-day est dans la QUEUE DROITE — qu'un TP serré à 1.0 % tronque. L'exit
+  trend-day est dans la QUEUE DROITE, qu'un TP serré à 1.0 % tronque. L'exit
   n'entre PAS dans hypothesis_key (harness.py:65) : pour tester un exit
   "laisser courir" il FAUT une clé params distincte. Sam a élevé le 16/06 la
-  priorité (a) [placement TP/RR par régime, maximiser l'espérance nette] —
-  ce test la tranche directement : un trigger plus sensible (k4/thr0.3, défauts
+  priorité (a) [placement TP/RR par régime, maximiser l'espérance nette], ce test la tranche directement : un trigger plus sensible (k4/thr0.3, défauts
   famille, JAMAIS testés sur GOLD 1h) DANS le même régime trend propre
   (ER>=0.45/ADX>=30), avec un exit RR 2.5 (TP 2.0%/stop 0.8%/h48), relève-t-il
   l'espérance au-dessus du plat de HH ? Si NON (exp toujours ~0 quelle que soit
@@ -61,7 +60,7 @@ STRATEGIES = [
         "hypothesis_text": "En régime de tendance propre (ER>=0.45/ADX>=30), un "
                            "trigger momentum plus sensible (k=4, thr=0.3) couplé à "
                            "un exit 'laisser courir' (TP 2.0%/stop 0.8%/48h, RR 2.5) "
-                           "a une espérance nette POSITIVE sur l'or 1h — l'edge "
+                           "a une espérance nette POSITIVE sur l'or 1h, l'edge "
                            "trend-day vit dans la queue droite que le TP 1.0% serré "
                            "de HH tronquait (HH = exp plate +0.0017%).",
         "family": "momentum_regime",

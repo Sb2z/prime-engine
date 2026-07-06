@@ -11,7 +11,7 @@ FAIL = []
 
 
 def chk(name, ok, detail=""):
-    print(f"  {'PASS' if ok else 'FAIL'}  {name}" + (f" — {detail}" if detail else ""))
+    print(f"  {'PASS' if ok else 'FAIL'}  {name}" + (f", {detail}" if detail else ""))
     if not ok:
         FAIL.append(name)
 
@@ -122,7 +122,7 @@ if s:
     chk("stop = invalidation volatilité au-dessus (SHORT)", s["stop"] > s["entry"])
 
 print("7b. TENDANCE PROPRE mais HORS fenêtre NY (audit 07-02) : repli OTE conservé")
-scanner._paris_hour = lambda: 3           # nuit — mesuré : 6 fills marché hors-NY = 6 pertes
+scanner._paris_hour = lambda: 3           # nuit, mesuré : 6 fills marché hors-NY = 6 pertes
 s = scanner.quality_setup(R, asset)
 scanner._paris_hour = _real_hour
 chk("setup produit", s is not None)
@@ -146,4 +146,4 @@ print()
 if FAIL:
     print(f"X {len(FAIL)} ECHEC(S): {FAIL}")
     raise SystemExit(1)
-print("OK — garde-fou de distance valide.")
+print("OK, garde-fou de distance valide.")

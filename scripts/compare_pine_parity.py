@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""PARITÉ PINE vs PYTHON — le test qui valide le déploiement TradingView.
+"""PARITÉ PINE vs PYTHON, le test qui valide le déploiement TradingView.
 
 Compare, au même instant, l'état du trend day trigger calculé par :
   • le Python de référence (datafeed + tv_candles.compute_ta + regime +
-    trend_day_trigger — fonctions importées, jamais réimplémentées)
+    trend_day_trigger, fonctions importées, jamais réimplémentées)
   • l'indicateur Pine sur le chart TradingView Desktop (plots PARITY_* lus
     dans la data window via le CLI du MCP claudeverstradingview)
 
@@ -12,7 +12,7 @@ Tolérances : |ΔADX| <= 1.5 (seeding Wilder différent sur ~60 barres),
 Règle de référence : si ça diverge au-delà, on corrige le PINE, jamais le
 Python (c'est lui qui porte l'historique du forward-test).
 
-Écrit pine_parity_status.json à chaque run — le watcher ne fait que LIRE ce
+Écrit pine_parity_status.json à chaque run, le watcher ne fait que LIRE ce
 fichier (découplage total : aucun import CDP dans la boucle autonome).
 
 Usage : python3 scripts/compare_pine_parity.py   (TradingView Desktop ouvert
@@ -79,7 +79,7 @@ def python_side(asset):
     if not c15 or c15.get("stale") or not c1h or c1h.get("stale"):
         raise RuntimeError(f"{asset}: bougies indisponibles côté Python")
     if c15["source"] != "tradingview":
-        raise RuntimeError(f"{asset}: source {c15['source']} != tradingview — parité "
+        raise RuntimeError(f"{asset}: source {c15['source']} != tradingview, parité "
                            f"impossible (le Pine lit le feed TradingView)")
     ta15 = trend_day_trigger._ta(c15["candles"])
     ta1h = trend_day_trigger._ta(c1h["candles"])
@@ -175,11 +175,11 @@ def main():
         except Exception as exc:
             results[asset] = {"error": str(exc)}
             all_pass = False
-            print(f"\n{asset}: ERREUR — {exc}")
+            print(f"\n{asset}: ERREUR, {exc}")
             continue
         all_pass &= ok
         results[asset] = {"python": py, "pine": pn, "checks": checks, "pass": ok}
-        print(f"\n  {asset} — {'PASS ✅' if ok else 'FAIL ❌'}")
+        print(f"\n  {asset}, {'PASS ✅' if ok else 'FAIL ❌'}")
         print(f"  {'':8} {'Python':>10} {'Pine':>10}  ok")
         for k in ("adx", "er", "dir15", "dir1h", "armed"):
             print(f"  {k:8} {str(py[k]):>10} {str(pn[k]):>10}  {'✓' if checks[k] else '✗'}")

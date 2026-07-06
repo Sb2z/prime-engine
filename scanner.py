@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-SCANNER — Détecteur de setups PROPRES à RR élevé (mode "pas scalp")
+SCANNER, Détecteur de setups PROPRES à RR élevé (mode "pas scalp")
 ══════════════════════════════════════════════════════════════════
 Quand le régime n'est PAS scalp-friendly (haché/range), on bascule en mode SETUP :
-moins de trades, mais PROPRES — confluence totale (macro, news, options, SMC, order
+moins de trades, mais PROPRES, confluence totale (macro, news, options, SMC, order
 flow) + entrée sur zone de confluence + RR ≥ 2. Objectif : 3-5 trades de qualité/jour.
 
 Un setup PROPRE = confluence ≥ 6.5 + plusieurs couches alignées sur une ZONE
@@ -14,7 +14,7 @@ Le scanner est ÉVOLUTIF : il re-tourne et s'adapte au contexte.
 import clusters
 import costs
 
-# RR : plus de cible RR FIXE obligatoire (demande Sam 2026-06-16 — « le but c'est
+# RR : plus de cible RR FIXE obligatoire (demande Sam 2026-06-16, « le but c'est
 # le profit, un alliage intelligent, pas un RR fixe »). RR_MIN_SETUP n'est plus
 # qu'un plancher de SANTÉ (le gain couvre au moins le risque, évite les loteries
 # à skew négatif) ; le RR optimal par stratégie × régime pour MAXIMISER L'ESPÉRANCE
@@ -40,7 +40,7 @@ MAX_TP_ATR = 10.0         # plafond intraday (2026-06-16) : un TP au-delà de
 #                           (~+1.55%) passent inchangés. Valeur à affiner par le juge.
 STOP_CAP_ATR = 2.0        # quand l'entrée est rapprochée (cap), le stop devient
 #                           une invalidation volatilité (2 x ATR15m) depuis la
-#                           nouvelle entrée — pas la distance OTE recopiée (P3).
+#                           nouvelle entrée, pas la distance OTE recopiée (P3).
 TREND_ENTRY_ATR = 0.0     # (2026-06-22) offset d'entrée en TENDANCE-continuation, en
 #                           multiple d'ATR15m : 0 = AU MARCHÉ. En tendance technique
 #                           propre, le repli OTE (MAX_ENTRY_ATR) n'imprime quasi jamais
@@ -50,7 +50,7 @@ TREND_ENTRY_ATR = 0.0     # (2026-06-22) offset d'entrée en TENDANCE-continuati
 #                           repli s'y remplit, US500 100%). Lever de FILL pur (ne touche
 #                           ni CONF_A ni RR). Knob à optimiser par le juge (0 vs offset+).
 TREND_ENTRY_H = (14, 23)  # (2026-07-02) fenêtre Paris où l'entrée-marché est permise
-#                           (session NY) — hors fenêtre, retour au repli OTE limite.
+#                           (session NY), hors fenêtre, retour au repli OTE limite.
 
 
 def _paris_hour():
@@ -103,7 +103,7 @@ def quality_setup(R, asset):
     # Si l'entrée OTE est trop loin du prix (repli profond injoignable en
     # intraday), on la ramène à MAX_ENTRY_ATR x ATR15m du prix, DU MÊME CÔTÉ.
     # Le stop est alors recalculé comme une INVALIDATION VOLATILITÉ (STOP_CAP_ATR
-    # x ATR15m) depuis la NOUVELLE entrée — PAS en recopiant la distance OTE
+    # x ATR15m) depuis la NOUVELLE entrée, PAS en recopiant la distance OTE
     # d'origine, qui supposait un repli profond inexistant (audit 2026-06-17, P3).
     # Le plancher de stop/coûts et le RR ci-dessous restent appliqués ensuite.
     entry_capped = False
@@ -228,10 +228,10 @@ if __name__ == "__main__":
         mode = "SCALP" if rg.get("scalp_ok") else "SETUP (pas scalp)"
         print(f"  {a}: régime {rg.get('regime','?')} → mode {mode}")
     if not r["setups"]:
-        print("\n  ⏳ Aucun setup propre (confluence<6.5 ou RR<2) — on ATTEND. Patience = qualité.")
+        print("\n  ⏳ Aucun setup propre (confluence<6.5 ou RR<2), on ATTEND. Patience = qualité.")
     else:
         for s in r["setups"]:
-            print(f"\n  {'🟢' if s['direction']=='LONG' else '🔴'} {s['asset']} {s['direction']} — confluence {s['conf']}/10 (alignés {s['aligned']})")
+            print(f"\n  {'🟢' if s['direction']=='LONG' else '🔴'} {s['asset']} {s['direction']}, confluence {s['conf']}/10 (alignés {s['aligned']})")
             print(f"     Entrée {s['entry']} · Stop {s['stop']} · TP {s['tp']} · RR {s['rr']}:1")
             for d in s["drivers"]:
                 print(f"     {d}")

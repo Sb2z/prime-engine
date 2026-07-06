@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""HARNESS — LE JUGE du Prime Research Lab. GELÉ après création.
+"""HARNESS, LE JUGE du Prime Research Lab. GELÉ après création.
 
 Ce fichier est protégé par le hook constitutionnel (.githooks/pre-commit) :
 le chercheur autonome ne peut pas le modifier. Il ne dépend que de modules
-eux-mêmes protégés (costs, strategy_families) — l'incertitude (bootstrap)
+eux-mêmes protégés (costs, strategy_families), l'incertitude (bootstrap)
 est implémentée ICI pour que le juge soit autosuffisant.
 
 Verdicts : KILLED (attendu ~95% des cas) ou PAPER. Jamais de promotion LIVE
-ici — seul Sam promeut (pipeline MISSION_V3).
+ici, seul Sam promeut (pipeline MISSION_V3).
 
 Règles immuables appliquées à TOUTE stratégie :
   • walk-forward 3 fenêtres chronologiques, purge 1 jour entre les blocs,
@@ -16,7 +16,7 @@ Règles immuables appliquées à TOUTE stratégie :
   • une seule position à la fois par actif (équivalent dédup production)
   • homogénéité de source des données (garde anti-basis V2)
   • correction de comparaisons multiples À VIE : alpha = 0.05 / nb de tests
-    déjà enregistrés dans la famille (registry append-only) — tester plus
+    déjà enregistrés dans la famille (registry append-only), tester plus
     durcit le seuil automatiquement
   • PAPER exige : n effectif >= 30, espérance test nette > 0 sur >= 2/3
     fenêtres, borne basse IC bootstrap-jours > 0, t-stat >= z(alpha déflaté)
@@ -83,7 +83,7 @@ def family_test_count(family):
 
 def required_z(family=None):
     """Bonferroni GLOBAL à vie (audit 2026-06-17, P6) : la déflation porte sur le
-    NOMBRE TOTAL de tests jamais soumis, PAS par famille — sinon tester la même
+    NOMBRE TOTAL de tests jamais soumis, PAS par famille, sinon tester la même
     idée sous une famille cousine (momentum / momentum_regime / momentum_breakout)
     remet le seuil à ~1.96. Inclut le test courant. (family gardé pour le rapport,
     plus utilisé comme compteur.)"""
@@ -191,7 +191,7 @@ def _tstat(pnls):
 
 def _daily_means(trades):
     """Moyennes JOURNALIÈRES de pnl (audit P5) : le t-stat doit se calculer sur
-    les JOURS (blocs indépendants), pas par trade — l'autocorrélation intraday
+    les JOURS (blocs indépendants), pas par trade, l'autocorrélation intraday
     (~5,6 min) gonfle un t par-trade. Cohérent avec bootstrap_ci_by_day."""
     days = {}
     for t in trades:
@@ -233,7 +233,7 @@ def evaluate(strategy, data, sources=None, ctx_fn=None):
     # Garde anti-basis : une seule source par test
     if sources and len(set(sources.values())) > 1:
         return {"verdict": "INVALID", "id": sid,
-                "note": f"sources hétérogènes {sources} — interdit (basis)"}
+                "note": f"sources hétérogènes {sources}, interdit (basis)"}
 
     z_req, alpha, n_family = required_z(family)
     signal_fn = strategy_families.build_signal(family, strategy["params"])

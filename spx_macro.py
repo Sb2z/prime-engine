@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-SENTINEL-500 — Moteur macro S&P 500
+SENTINEL-500, Moteur macro S&P 500
 Corrélations ACTIONS (signes cohérents, pas les paradoxes de l'or) :
-  • VIX      : inverse fort (-0.8)  — VIX↑ = S&P↓
+  • VIX      : inverse fort (-0.8), VIX↑ = S&P↓
   • US10Y    : taux↑ = pression (surtout tech/growth)
   • DXY      : dollar fort = léger frein (multinationales)
-  • NAS100   : leader (+0.9) — la tech mène l'indice
+  • NAS100   : leader (+0.9), la tech mène l'indice
   • OIL      : pétrole↑ = inflation = léger frein
 Score positif = bullish S&P, négatif = bearish.
 """

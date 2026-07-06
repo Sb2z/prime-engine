@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-REGIME — Détecteur de régime de marché (ton filtre "scalper ou pas")
+REGIME, Détecteur de régime de marché (ton filtre "scalper ou pas")
 ══════════════════════════════════════════════════════════════════
 Explique pourquoi Sam fait 89% un jour et 45% le lendemain avec LA MÊME stratégie :
 ce n'est pas la stratégie, c'est le RÉGIME.
@@ -37,23 +37,23 @@ def detect(candles, adx=None, lookback=40):
 
     if a >= 25 and er >= 0.45:
         regime, scalp, wr = "TENDANCE PROPRE 🟢", True, "~85-90% (ton jour vendredi)"
-        note = "One-way directionnel — les rebonds échouent → SCALPE FORT dans le sens"
+        note = "One-way directionnel, les rebonds échouent → SCALPE FORT dans le sens"
     elif a >= 25 and er <= 0.30:
         regime, scalp, wr = "TENDANCE HACHÉE 🔴", False, "~45% (ton jour lundi)"
-        note = "Tendance mais whipsaw — les rebonds piègent → RÉDUIS ou STOP"
+        note = "Tendance mais whipsaw, les rebonds piègent → RÉDUIS ou STOP"
     elif a >= 22 and er > 0.30:
         # ADX modéré (22-25) OU ADX≥25 à ER intermédiaire : tendance correcte. Le
         # cas ER≥0.45 à ADX≥25 est déjà capté par la branche PROPRE plus haut ; ici
         # on inclut ER≥0.45 à 22≤ADX<25 (mouvement directionnel propre mais ADX
         # modéré) qui tombait à tort en TRANSITION « ambigu » (correctif 2026-06-18).
         regime, scalp, wr = "TENDANCE MOYENNE 🟡", True, "~60%"
-        note = "Tendance correcte mais bruitée — scalp SÉLECTIF, taille réduite"
+        note = "Tendance correcte mais bruitée, scalp SÉLECTIF, taille réduite"
     elif a < 18:
         regime, scalp, wr = "RANGE ⚪", False, "~33% (tes pertes)"
-        note = "Pas de tendance — NE PAS SCALPER, c'est là que tu perds"
+        note = "Pas de tendance, NE PAS SCALPER, c'est là que tu perds"
     else:
         regime, scalp, wr = "TRANSITION 🟡", False, "incertain"
-        note = "Régime ambigu — attendre la clarification"
+        note = "Régime ambigu, attendre la clarification"
 
     return {"regime": regime, "er": er, "adx": round(a, 1), "avg_range": round(rng, 2),
             "scalp_ok": scalp, "expected_wr": wr, "note": note}

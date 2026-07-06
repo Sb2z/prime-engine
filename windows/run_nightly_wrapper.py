@@ -26,7 +26,7 @@ CANDIDATES = [
 
 
 def log(msg):
-    print(f"{datetime.datetime.now():%F %T} — {msg}", flush=True)
+    print(f"{datetime.datetime.now():%F %T}, {msg}", flush=True)
 
 
 exe = next((c for c in CANDIDATES if os.path.isfile(c)), None)
@@ -45,7 +45,7 @@ for attempt in (1, 2):
         rc = r.returncode
         break
     except subprocess.TimeoutExpired:
-        log("TIMEOUT 45 min — session interrompue (budget)")
+        log("TIMEOUT 45 min, session interrompue (budget)")
         rc = 124
         break
     except OSError as exc:

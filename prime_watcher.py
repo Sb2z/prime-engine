@@ -111,7 +111,7 @@ def _single_instance_lock():
     try:
         msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
     except OSError:
-        raise SystemExit("prime_watcher DÉJÀ en cours (watcher.lock) — refus de doubler.")
+        raise SystemExit("prime_watcher DÉJÀ en cours (watcher.lock), refus de doubler.")
     return f
 
 
@@ -147,7 +147,7 @@ def main():
             except Exception as exc:
                 print(f"{p.strftime('%H:%M')} erreur telegram inbox: {exc}", flush=True)
             # Banc d'essai PAPIER des hypothèses du mining (gold_ny_fade,
-            # us500_value_reversion) — validation forward, zéro argent réel.
+            # us500_value_reversion), validation forward, zéro argent réel.
             try:
                 import paper_lab
                 paper_lab.tick()
@@ -197,7 +197,7 @@ def main():
             except Exception as exc:
                 print(f"{p.strftime('%H:%M')} erreur feature store: {exc}", flush=True)
             # Outcomes des trades capturés de Sam (user_trade_context) : fonction
-            # DIFFÉRENTE du backfill feature_store ci-dessus — audit 07-02 : elle
+            # DIFFÉRENTE du backfill feature_store ci-dessus, audit 07-02 : elle
             # n'était branchée nulle part, le dataset du 1er modèle cessait de
             # mûrir en silence dès qu'on ne la lançait plus à la main.
             try:
@@ -253,7 +253,7 @@ def main():
                         append_event({"type": "trigger", "decision": d})
                         notify.send(f"🎯 Prime A_SETUP\n{line}")
                         # Auto-journalisation EN ATTENTE (audit 2026-06-17) : on
-                        # mesure le VRAI trade — remplissage de l'entrée annoncée
+                        # mesure le VRAI trade, remplissage de l'entrée annoncée
                         # puis TP/SL. evaluate_open_live le suit intrabar.
                         try:
                             journal.log_pending_setup(
@@ -284,7 +284,7 @@ def main():
                 key = radar.get("message") or "pre-event"
                 if pre_event_alerted.get(key) != p.date():
                     pre_event_alerted[key] = p.date()
-                    notify.send(f"⏳ {radar['alert']} — {radar.get('message')}")
+                    notify.send(f"⏳ {radar['alert']}, {radar.get('message')}")
 
             # Job quotidien d'enrichissement des actuals (no-op sinon)
             try:
@@ -337,7 +337,7 @@ def main():
                     _, st = prime_strategy.should_replace_user_strategy()
                     ai, fs = st["ai"], feature_store.stats()
                     # Parité Pine : on LIT le fichier écrit par
-                    # compare_pine_parity.py — jamais de CDP/MCP ici
+                    # compare_pine_parity.py, jamais de CDP/MCP ici
                     # (découplage : TradingView fermé ne casse rien).
                     parite = "inconnu (jamais lancé)"
                     try:
@@ -370,7 +370,7 @@ def main():
                         f"{fs.get('outcomes_mixed_exclus')})\n"
                         f"Pine parité: {parite}\n"
                         f"{lab_line}"
-                        f"Gate 1 forward-test en cours — seuils gelés.",
+                        f"Gate 1 forward-test en cours, seuils gelés.",
                         silent=True,
                     )
                 except Exception as exc:

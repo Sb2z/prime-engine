@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Expériences du 13/06/2026 — run nocturne n°4.
+"""Expériences du 13/06/2026, run nocturne n°4.
 
 Trois hypothèses NOUVELLES, falsifiables, données du lake (source homogène
 par test : prix yfinance ; le COT CFTC est un CONTEXTE fondamental via ctx_fn,
-pas une 2e source de prix — la garde anti-basis du harness porte sur les prix).
+pas une 2e source de prix, la garde anti-basis du harness porte sur les prix).
 
 Backlog d'hier honoré :
   • #1 (repoussé 2 runs) : CÂBLER cot_extreme via un ctx_fn cot_pctile SANS
@@ -15,12 +15,12 @@ CHOIX DU TIMEFRAME COT = DAILY (1d), pas 1h. Le COT est un signal HEBDO :
 le tester sur des bougies 1h fabrique des centaines de "trades" corrélés à
 l'intérieur d'une même semaine d'extrême (le percentile est constant sur la
 semaine). Sur 1d, un extrême ≈ 5 bougies, l'autocorrélation chute, et le lake
-daily couvre 5 ans (260 rapports COT) — échantillon propre pour un signal hebdo.
+daily couvre 5 ans (260 rapports COT), échantillon propre pour un signal hebdo.
 
 HD (cot_extreme, GOLD, 1d, 1er test famille → z 1.645) :
     "Quand le positionnement spéculatif net non-commercial sur l'or atteint un
      extrême (≤10e ou ≥90e percentile sur 156 semaines glissantes, COT connu
-     avec lag de publication +4j), le prix MEAN-REVERTE — entrée contrarian."
+     avec lag de publication +4j), le prix MEAN-REVERTE, entrée contrarian."
 
 HE (cot_extreme, US500/ES, 1d, 2e test famille → z 1.96, déflation Bonferroni) :
     "Le même extrême de positionnement COT mean-reverte aussi sur l'indice
@@ -31,7 +31,7 @@ HF (ichimoku_tk_cross, GOLD, 1h, 1er test famille → z 1.645) :
     "Un croisement Tenkan/Kijun confirmé par la position du prix vs le nuage
      (LONG si croisement haussier ET close > nuage ; SHORT symétrique) entre
      en tendance et a une espérance nette positive sur l'or." Mécanisme
-     CANONIQUE distinct de la cassure de nuage (HC, KILLED) — pas une variante
+     CANONIQUE distinct de la cassure de nuage (HC, KILLED), pas une variante
      de sauvetage : l'un est un croisement de moyennes, l'autre une cassure de
      bord. Périmètre Ichimoku fermé, speed 'standard', aucun paramètre libre.
 

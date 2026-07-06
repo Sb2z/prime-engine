@@ -1,6 +1,6 @@
 # Les agents du système
 
-Un agent = une entrée dans ce fichier : ce qu'il fait, ce qui le déclenche, ce qu'il consomme et produit, et les garde-fous qui le bornent. La règle maison est simple — pas d'entrée ici, pas d'agent en production.
+Un agent = une entrée dans ce fichier : ce qu'il fait, ce qui le déclenche, ce qu'il consomme et produit, et les garde-fous qui le bornent. La règle maison est simple, pas d'entrée ici, pas d'agent en production.
 
 | Agent | Rôle | Déclencheur | Entrées | Sorties | Garde-fous |
 |---|---|---|---|---|---|
@@ -20,8 +20,8 @@ Un agent = une entrée dans ce fichier : ce qu'il fait, ce qui le déclenche, ce
 
 ## Cycle de vie d'un agent
 
-1. **Proposition** — une hypothèse ou un besoin, formalisé dans `research/`.
-2. **Validation** — backtest honnête (déflation, coûts, jours distincts) puis validation forward en papier.
-3. **Déploiement** — tâche planifiée + entrée dans ce registre + garde-fous explicites.
-4. **Mesure** — chaque agent notifie ses échecs ; les métriques passent dans les rapports hebdomadaires.
-5. **Révision** — un agent dont l'hypothèse est réfutée est dégradé en informatif ou retiré (voir l'historique du premier modèle, rejeté par son propre protocole).
+1. **Proposition** : une hypothèse ou un besoin, formalisé dans `research/`.
+2. **Validation** : backtest honnête (déflation, coûts, jours distincts) puis validation forward en papier.
+3. **Déploiement** : tâche planifiée + entrée dans ce registre + garde-fous explicites.
+4. **Mesure** : chaque agent notifie ses échecs ; les métriques passent dans les rapports hebdomadaires.
+5. **Révision** : un agent dont l'hypothèse est réfutée est dégradé en informatif ou retiré (voir l'historique du premier modèle, rejeté par son propre protocole).

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Expérience PRIME ANALYST du 2026-06-17 13h — slot MIDDAY (focalisé, léger).
+"""Expérience PRIME ANALYST du 2026-06-17 13h, slot MIDDAY (focalisé, léger).
 
 UNE hypothèse NOUVELLE, falsifiable, données du lake (source homogène :
 prix yfinance GC=F 1d ; aucune 2e source mélangée).
@@ -17,7 +17,7 @@ Contexte d'ingestion (cf. rapport analyst_2026-06-17_13h.md) :
     sur les DEUX actifs. Le bot reste correctement à l'écart : le momentum
     intraday n'a RIEN à capter en chop pré-FOMC (thèse cohérente).
 
-POURQUOI ce test — la DIMENSION HORIZON, jamais tranchée :
+POURQUOI ce test, la DIMENSION HORIZON, jamais tranchée :
   Les 6 tests momentum_regime du registry (HH/HI/HL/HM/HP) ont TOUS été menés
   en INTRADAY 1h (GOLD et ES), avec divers knobs (k/thr/exit/ADX) -> tous
   KILLED, conclusion 09h : « le SIGNAL est limitant ». MAIS l'effet momentum
@@ -71,7 +71,7 @@ STRATEGIES = [
     {
         "id": "HQ_gold_momentum_regime_1d_swing",
         "hypothesis_text": "Le momentum de tendance propre (ER>=0.45 ET ADX>=30, "
-                           "trigger k=6/thr=0.5) — KILLED 6x en INTRADAY 1h — dégage "
+                           "trigger k=6/thr=0.5), KILLED 6x en INTRADAY 1h, dégage "
                            "une espérance nette POSITIVE à son horizon NATIF de swing "
                            "(GOLD 1d, exit stop1.2%/tp2.4%/10j), i.e. l'edge momentum "
                            "documenté (Jegadeesh-Titman) existe en daily mais est noyé "

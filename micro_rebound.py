@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MICRO-REBOUND — Scalp des micro-rebonds entre order blocks (stratégie gagnante de Sam)
+MICRO-REBOUND, Scalp des micro-rebonds entre order blocks (stratégie gagnante de Sam)
 ══════════════════════════════════════════════════════════════════
 Setup validé en réel (+30% en 1 jour) :
   Le prix tape une résistance/OB et MET DU TEMPS à casser le prochain order block
@@ -98,7 +98,7 @@ def detect_micro_rebound(candles_5m, trend="RANGE"):
                 "atr_5m": round(atr, 2),
                 "note": "Pas de micro-rebond actionnable (pas de rejet/stall à un OB)"}
 
-    # Priorité au scalp ALIGNÉ avec la tendance (mais les 2 sont jouables — Sam scalpe les deux)
+    # Priorité au scalp ALIGNÉ avec la tendance (mais les 2 sont jouables, Sam scalpe les deux)
     setups.sort(key=lambda s: (s["direction"] == "LONG") == (trend == "UPTREND"), reverse=True)
     best = setups[0]
     best["aligned_with_trend"] = (best["direction"] == "LONG") == (trend == "UPTREND")

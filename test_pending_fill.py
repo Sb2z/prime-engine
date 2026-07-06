@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TEST fill-tracking des A_SETUP (journal PENDING→OPEN/EXPIRED) — exigé avant
+"""TEST fill-tracking des A_SETUP (journal PENDING→OPEN/EXPIRED), exigé avant
 commit (audit 2026-06-17). Isolé sur un journal temporaire."""
 import datetime
 import tempfile
@@ -13,7 +13,7 @@ FAIL = []
 
 
 def chk(n, ok, d=""):
-    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f" — {d}" if d else ""))
+    print(f"  {'PASS' if ok else 'FAIL'}  {n}" + (f", {d}" if d else ""))
     if not ok:
         FAIL.append(n)
 
@@ -114,4 +114,4 @@ print()
 if FAIL:
     print(f"X {len(FAIL)} ÉCHEC(S): {FAIL}")
     raise SystemExit(1)
-print("OK — fill-tracking PENDING→OPEN/EXPIRED validé.")
+print("OK, fill-tracking PENDING→OPEN/EXPIRED validé.")

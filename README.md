@@ -1,8 +1,8 @@
 # Prime Engine
 
-Plateforme personnelle d'agents et d'automatisation appliquée aux marchés (or et S&P 500), **signal-only** : le système analyse, décide, alerte et mesure — l'exécution reste humaine.
+Plateforme personnelle d'agents et d'automatisation appliquée aux marchés (or et S&P 500), **signal-only** : le système analyse, décide, alerte et mesure, l'exécution reste humaine.
 
-Le moteur tourne 24h/24 sur un poste Windows, orchestré par une dizaine de tâches planifiées. Chaque brique suit la même grammaire que les orchestrateurs de workflows (n8n, Power Automate) : **déclencheur → traitement → contrôle → action → journalisation → gestion d'erreur** — sauf qu'ici la chaîne est codée en Python, ce qui permet des règles métier plus fines et une mesure statistique honnête à chaque étage.
+Le moteur tourne 24h/24 sur un poste Windows, orchestré par une dizaine de tâches planifiées. Chaque brique suit la même grammaire que les orchestrateurs de workflows (n8n, Power Automate) : **déclencheur → traitement → contrôle → action → journalisation → gestion d'erreur** : sauf qu'ici la chaîne est codée en Python, ce qui permet des règles métier plus fines et une mesure statistique honnête à chaque étage.
 
 ```
 Telegram (mobile) ◄──── alertes, briefings, verdicts ────┐
@@ -81,11 +81,11 @@ Le même patron partout : chaque étape loggue, chaque échec notifie, aucune er
 
 ## Ponts & intégrations
 
-- **TradingView — deux ponts.** Un flux temps réel (prix + bougies multi-timeframes) alimente la boucle principale, et [`tools/claudeverstradingview`](tools/claudeverstradingview) est un **serveur MCP** (Node.js) qui pilote TradingView Desktop via Chrome DevTools Protocol : lecture de la data window, scan multi-symboles, vérification de parité des indicateurs Pine.
-- **Telegram, dans les deux sens.** Sortant : alertes de setups, briefings, rapports, alarmes du watchdog. Entrant : journal de trading en une ligne (`T GOLD SHORT 4150`) et interrogation de discipline (`Z GOLD SHORT`) — le téléphone sert d'interface au système.
-- **Windows Task Scheduler + PowerShell.** Des tâches planifiées portent l'ensemble — démarrage machine, cycles, sessions d'agents, rapports hebdomadaires (voir [`windows/install_tasks.bat`](windows/install_tasks.bat)). Un superviseur en boucle relance le moteur en cas de crash ; un fichier `STOP_WATCHER` permet un redémarrage propre sans élévation.
+- **TradingView, deux ponts.** Un flux temps réel (prix + bougies multi-timeframes) alimente la boucle principale, et [`tools/claudeverstradingview`](tools/claudeverstradingview) est un **serveur MCP** (Node.js) qui pilote TradingView Desktop via Chrome DevTools Protocol : lecture de la data window, scan multi-symboles, vérification de parité des indicateurs Pine.
+- **Telegram, dans les deux sens.** Sortant : alertes de setups, briefings, rapports, alarmes du watchdog. Entrant : journal de trading en une ligne (`T GOLD SHORT 4150`) et interrogation de discipline (`Z GOLD SHORT`), le téléphone sert d'interface au système.
+- **Windows Task Scheduler + PowerShell.** Des tâches planifiées portent l'ensemble, démarrage machine, cycles, sessions d'agents, rapports hebdomadaires (voir [`windows/install_tasks.bat`](windows/install_tasks.bat)). Un superviseur en boucle relance le moteur en cas de crash ; un fichier `STOP_WATCHER` permet un redémarrage propre sans élévation.
 - **Agents LLM sous contrainte.** Les sessions analyste/chercheur tournent en CLI avec une deny-list de 134 règles ([`.claude/autonomous_settings.json`](.claude/autonomous_settings.json)) : elles proposent dans `research/`, ne touchent jamais à la production.
-- **DuckDB + Parquet.** Base mono-écrivain (le watcher), exports Parquet atomiques pour tous les lecteurs concurrents — le pattern classique writer/readers sans verrou partagé.
+- **DuckDB + Parquet.** Base mono-écrivain (le watcher), exports Parquet atomiques pour tous les lecteurs concurrents, le pattern classique writer/readers sans verrou partagé.
 - **yfinance** pour l'univers actions du book swing (~77 titres, données daily + fondamentaux).
 
 ## Les agents
@@ -96,10 +96,10 @@ Chaque agent est documenté dans [`AGENTS.md`](AGENTS.md) : rôle, déclencheur,
 
 Un système qui décide doit être gouverné. Les règles ici sont mécaniques, pas déclaratives :
 
-- **Constitution avec approbation humaine.** Les fichiers critiques (juge, stratégie, coûts, feature store) ne se committent qu'avec un jeton d'approbation à durée limitée, appliqué par un hook git ([`.githooks/pre-commit`](.githooks/pre-commit)) — un jeton, un commit.
+- **Constitution avec approbation humaine.** Les fichiers critiques (juge, stratégie, coûts, feature store) ne se committent qu'avec un jeton d'approbation à durée limitée, appliqué par un hook git ([`.githooks/pre-commit`](.githooks/pre-commit)), un jeton, un commit.
 - **Séparation proposition / promotion.** Les agents de recherche proposent, l'humain promeut. Rien ne passe en production sans validation.
 - **Mesure honnête, structurellement.** Anti-lookahead à la capture (le contexte d'un trade = la dernière ligne *antérieure* au trade), unité statistique = jours distincts (jamais les lignes autocorrélées), correction de tests multiples, coûts de transaction appliqués, et test de concentration (un edge qui repose sur ses deux meilleurs jours n'est pas un edge).
-- **Validation forward obligatoire.** Toute hypothèse issue du mining passe par le paper-lab (signaux journalisés, zéro capital) avant toute considération réelle. Le premier modèle entraîné a été **rejeté par son propre protocole** (AUC hors-échantillon inférieure au hasard) — c'est le comportement attendu d'un système qui se juge.
+- **Validation forward obligatoire.** Toute hypothèse issue du mining passe par le paper-lab (signaux journalisés, zéro capital) avant toute considération réelle. Le premier modèle entraîné a été **rejeté par son propre protocole** (AUC hors-échantillon inférieure au hasard), c'est le comportement attendu d'un système qui se juge.
 - **Robustesse opérationnelle.** Écritures atomiques (temp + rename) sur tous les états, verrou single-instance, rotation des journaux d'événements, watchdog avec relance, récupération WAL après coupure de courant.
 
 ## Structure du dépôt

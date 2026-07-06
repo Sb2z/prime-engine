@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SMC — Smart Money Concepts (détection sur bougies réelles)
+SMC, Smart Money Concepts (détection sur bougies réelles)
 ══════════════════════════════════════════════════════════════════
 Le cœur des méthodes Raja Banks / ICT :
   • Structure de marché (HH/HL uptrend, LH/LL downtrend)
@@ -52,14 +52,14 @@ def detect_bos_choch(candles):
     last_sh = sh[-1][1]; last_sl = sl[-1][1]
     if trend == "UPTREND":
         if price > last_sh:
-            return {"type": "BOS", "dir": "LONG", "level": round(last_sh, 2), "note": "BOS haussier — continuation uptrend"}
+            return {"type": "BOS", "dir": "LONG", "level": round(last_sh, 2), "note": "BOS haussier, continuation uptrend"}
         if price < last_sl:
-            return {"type": "CHoCH", "dir": "SHORT", "level": round(last_sl, 2), "note": "CHoCH baissier — possible retournement"}
+            return {"type": "CHoCH", "dir": "SHORT", "level": round(last_sl, 2), "note": "CHoCH baissier, possible retournement"}
     elif trend == "DOWNTREND":
         if price < last_sl:
-            return {"type": "BOS", "dir": "SHORT", "level": round(last_sl, 2), "note": "BOS baissier — continuation downtrend"}
+            return {"type": "BOS", "dir": "SHORT", "level": round(last_sl, 2), "note": "BOS baissier, continuation downtrend"}
         if price > last_sh:
-            return {"type": "CHoCH", "dir": "LONG", "level": round(last_sh, 2), "note": "CHoCH haussier — possible retournement"}
+            return {"type": "CHoCH", "dir": "LONG", "level": round(last_sh, 2), "note": "CHoCH haussier, possible retournement"}
     return None
 
 
@@ -136,7 +136,7 @@ def smc_analysis(candles):
             score += d * 0.7
         else:
             score += d * 0.9   # CHoCH = signal de reversal plus fort
-        signals.append(f"🔑 {bos['type']} {bos['dir']} @ {bos['level']} — {bos['note']}")
+        signals.append(f"🔑 {bos['type']} {bos['dir']} @ {bos['level']}, {bos['note']}")
         concepts.append(bos["type"])
     # Order block le plus proche
     if obs:
@@ -154,7 +154,7 @@ def smc_analysis(candles):
         concepts.append(f["type"])
     # Liquidité
     for p in liq:
-        signals.append(f"🎯 {p['type']} @ {p['level']} — {p['note']}")
+        signals.append(f"🎯 {p['type']} @ {p['level']}, {p['note']}")
         concepts.append(p["type"])
 
     bias = "LONG" if score >= 0.5 else ("SHORT" if score <= -0.5 else "NEUTRAL")
@@ -168,7 +168,7 @@ if __name__ == "__main__":
     cl.fetch_ta()
     candles = cl._candles.get("GOLD", [])
     r = smc_analysis(candles)
-    print(f"\n🧠 SMC GOLD — biais {r['bias']} (score {r['score']}) — structure {r['structure']}\n")
+    print(f"\n🧠 SMC GOLD, biais {r['bias']} (score {r['score']}), structure {r['structure']}\n")
     for s in r["signals"]:
         print(f"   {s}")
     print(f"\n   Concepts détectés : {r['concepts']}")

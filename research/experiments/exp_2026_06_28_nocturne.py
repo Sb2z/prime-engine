@@ -2,7 +2,7 @@
 """Experience CHERCHEUR NOCTURNE du 2026-06-28 (~23h30, nuit dimanche -> lundi).
 
 === LE BACKLOG #5 ("re-tester twist_1d quand le lake 1d s'epaissit") EST
-    INACTIONNABLE PAR LE HARNESS TEL QUEL — demonstration empirique ===
+    INACTIONNABLE PAR LE HARNESS TEL QUEL, demonstration empirique ===
 
 CONSTAT D'INGESTION (re-verifie ce run, pas recopie) :
   - Pas de research/PAUSE. Budget respecte. J'ecris UNIQUEMENT dans research/.
@@ -54,7 +54,7 @@ CE QUE FAIT CE SCRIPT (et ce qu'il NE fait PAS) :
     Le chemin DUPLICATE retourne AVANT _registry_append -> 0 effet de bord, 0
     deflation brulee, lab_counters inchange (verifie avant/apres).
 
-PROPOSITION POUR SAM (token Sam, fichier protege harness.py — je ne touche pas) :
+PROPOSITION POUR SAM (token Sam, fichier protege harness.py, je ne touche pas) :
   pour rendre le backlog #5 actionnable sans ouvrir la porte au re-knob, ajouter
   une EMPREINTE DE DONNEES a la cle OU un chemin de re-evaluation explicite, p.ex.
   inclure dans hypothesis_key un fingerprint du lake (nb de barres + ts du dernier

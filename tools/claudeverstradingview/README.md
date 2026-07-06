@@ -24,7 +24,7 @@ Collez ceci dans Claude Code, il s'occupe de tout :
 ```
 Configure Claude vs TradingView pour moi.
 Clone le repo dans ~/claudeverstradingview, lance npm install, puis ajoute-le à ma config MCP dans ~/.claude/.mcp.json (fusionne avec les serveurs existants, ne les écrase pas).
-Le bloc de config est : { "mcpServers": { "claudeverstradingview": { "command": "node", "args": ["/Users/VOTRE_USERNAME/claudeverstradingview/src/server.js"] } } } — remplace VOTRE_USERNAME par mon nom d'utilisateur réel.
+Le bloc de config est : { "mcpServers": { "claudeverstradingview": { "command": "node", "args": ["/Users/VOTRE_USERNAME/claudeverstradingview/src/server.js"] } } }, remplace VOTRE_USERNAME par mon nom d'utilisateur réel.
 Ensuite copie rules.example.json vers rules.json et ouvre-le.
 Enfin redémarre et vérifie avec tv_health_check.
 ```

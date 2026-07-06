@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Expérience PRIME ANALYST du 2026-06-18 09h — slot MATIN (focalisé, léger).
+"""Expérience PRIME ANALYST du 2026-06-18 09h, slot MATIN (focalisé, léger).
 
 DEUX hypothèses NOUVELLES, falsifiables, données du lake (source HOMOGÈNE par
 test : GOLD↔GC=F 1d et US500↔ES=F 1d, jamais mélangées dans un même test).
@@ -17,13 +17,13 @@ Contexte d'ingestion (cf. rapport analyst_2026-06-18_09h.md) :
   - Macro du jour : BoE 11:00 UTC (décision taux, GBP, secondaire GOLD/US500),
     Philly Fed + Unemployment Claims 12:30 UTC. SNB déjà passée (07:30-08:00).
 
-POURQUOI ces tests — ISOLER « signal momentum » vs « filtre de régime », et
+POURQUOI ces tests, ISOLER « signal momentum » vs « filtre de régime », et
 GAGNER DE LA PUISSANCE, sur le seul horizon où subsiste un résidu (le 1d) :
 
   L'arc momentum_regime 1d est essentiellement CLOS mais pour une raison de
   PUISSANCE, pas d'edge tranché :
     - HQ (GOLD 1d, ER≥0.45 & ADX≥30) : exp +1.55%, IC95 [0.66, 2.32] (borne
-      basse POSITIVE), t=3.698 — mais n_eff=12 < 30 → KILLED sur la PUISSANCE,
+      basse POSITIVE), t=3.698, mais n_eff=12 < 30 → KILLED sur la PUISSANCE,
       et confond bull-gold séculaire suspectée (37 LONG / 2 SHORT).
     - HR (ES 1d, même filtre) : exp −0.40%, IC95 [-1.30, 0.92], n_eff=8 → le
       résidu DISPARAÎT sur le contrôle ES (pas de tailwind bull-gold).
@@ -46,7 +46,7 @@ GAGNER DE LA PUISSANCE, sur le seul horizon où subsiste un résidu (le 1d) :
        POSITIF net de coûts → le filtre ER/ADX n'était PAS l'ingrédient (juste
        du momentum daily) ; s'il est PLAT/négatif → le filtre concentrait un
        résidu réel (mais alors non-powerable, cf. mur ci-dessus).
-    3. ÉQUILIBRE DIRECTIONNEL : 607L/438S (GOLD), 619L/424S (ES) — bien plus
+    3. ÉQUILIBRE DIRECTIONNEL : 607L/438S (GOLD), 619L/424S (ES), bien plus
        symétrique que 37L/2S → désamorce partiellement la confond bull-gold
        (l'edge ne peut plus venir QUE des longs).
 
@@ -58,13 +58,13 @@ GAGNER DE LA PUISSANCE, sur le seul horizon où subsiste un résidu (le 1d) :
         * HX PASSE & HY échoue → artefact beta-gold (bull séculaire), la thèse
           momentum-sur-gold daily est de la BÊTA passive, pas de l'alpha. Mort.
         * Les deux échouent → momentum CLOS au 1d aussi (pas seulement intraday).
-      Résultat informatif dans les TROIS cas — aucun n'est un échec.
+      Résultat informatif dans les TROIS cas, aucun n'est un échec.
 
   ISOLEMENT D'UNE SEULE DIMENSION : trigger EXACT de HQ (k=6 / thr_pct=0.5) et
   exit EXACT de HQ (stop 1.2% / tp 2.4% / 10 bars, calé A PRIORI sur la magnitude
   quotidienne, AUCUN sweep). On change UNIQUEMENT : on retire er_min/adx_min.
   variant_of = HQ (GOLD) / HR (ES) : prolongation d'idées KILLED, déflation
-  GLOBALE comprise (10e/11e test de l'arc momentum* — z requis encore durci).
+  GLOBALE comprise (10e/11e test de l'arc momentum*, z requis encore durci).
 
   GARDE-FOU CONFOND assumé d'avance : un PASS sur GOLD seul sur 2021-2026 (bull
   1800→4300) reste suspect de bêta long. Les défenses sont (a) le bootstrap PAR
@@ -93,7 +93,7 @@ STRATEGIES = [
         "id": "HX_gold_momentum_uncond_1d",
         "hypothesis_text": "Le momentum INCONDITIONNEL au quotidien (k=6/thr=0.5, "
                            "SANS filtre de régime) dégage une espérance nette POSITIVE "
-                           "sur GOLD 1d (exit stop1.2%/tp2.4%/10j) — i.e. le résidu vu "
+                           "sur GOLD 1d (exit stop1.2%/tp2.4%/10j), i.e. le résidu vu "
                            "en momentum_regime 1d (HQ +1.55% mais n=12) est du momentum "
                            "time-series daily généralisable, pas un artefact du filtre, "
                            "et il survit avec PUISSANCE (~1045 signaux, n_eff>>30).",

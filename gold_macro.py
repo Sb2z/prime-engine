@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Gold AI — Couche Macro : DXY, taux réels, corrélations, régime macro
+Gold AI, Couche Macro : DXY, taux réels, corrélations, régime macro
 Fetch via TradingView WebSocket (mêmes symboles, zéro rate-limit)
 """
 
@@ -89,7 +89,7 @@ MACRO_REACTIONS = {
                          "note": "Discours hawkish Fed → dollar↑ → or↓"},
 }
 
-# ── Calendrier économique — prochains événements impactants (à mettre à jour) ─
+# ── Calendrier économique, prochains événements impactants (à mettre à jour) ─
 # Ces données doivent être rafraîchies quotidiennement
 UPCOMING_EVENTS = [
     # Format: {"date": "2026-05-28", "time": "14:30", "event": "...", "impact": "HIGH/MED/LOW", "prev": "...", "forecast": "..."}
@@ -336,4 +336,4 @@ if __name__ == "__main__":
 
     print("\n📅 Événements macro à venir :")
     for ev in get_upcoming_events():
-        print(f"  ⏰ {ev['time']} ({ev['hours_away']:+.1f}h) — {ev['event']} [{ev['impact']}] — {ev['note']}")
+        print(f"  ⏰ {ev['time']} ({ev['hours_away']:+.1f}h), {ev['event']} [{ev['impact']}], {ev['note']}")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-OPTIONS — Positionnement options (CBOE, gratuit) → aimants & murs du cours
+OPTIONS, Positionnement options (CBOE, gratuit) → aimants & murs du cours
 ══════════════════════════════════════════════════════════════════
 Données CBOE (la bourse d'options source, meilleur que TradingView pour ça) :
   • MAX PAIN : le strike où le max d'options expire sans valeur = AIMANT (les MM
