@@ -1,0 +1,6 @@
+duckdb>=1.0
+pandas>=2.0
+numpy>=1.26
+yfinance>=0.2.60
+websocket-client>=1.6
+ta>=0.11

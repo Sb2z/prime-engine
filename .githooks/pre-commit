@@ -1,0 +1,87 @@
+#!/bin/bash
+# ═══════════════════════════════════════════════════════════════════════════
+# HOOK CONSTITUTIONNEL — séparation des pouvoirs du Research Lab (V3)
+#
+# Bloque tout commit qui MODIFIE ou SUPPRIME un fichier protégé (le juge harness,
+# le PROTOCOLE de grade prime_strategy, le journal/clusters/costs, le feature_store,
+# régime/trend_day/familles, les briefs, ce hook) sauf si research/HUMAN_APPROVAL
+# contient un token frais (< 60 min) écrit par Sam. Le token est CONSOMMÉ
+# (fichier vidé) à chaque usage : un token = un commit.
+#
+# PORTÉE EXACTE (décision Sam 2026-06-18) — voir liste PROTECTED ci-dessous. Le
+# PIPELINE de décision live (aurum, sentinel500, scanner, forecast, prime_watcher)
+# n'est VOLONTAIREMENT PAS gelé : itération rapide assumée. Seuls le juge et le
+# protocole de grade sont protégés — ne pas dire « tout le cœur Prime est gelé ».
+#
+# La CRÉATION initiale d'un fichier protégé est autorisée (il n'existe pas
+# encore dans HEAD) — c'est ce qui permet d'installer le système une fois.
+#
+# Pour approuver une modification, Sam écrit :
+#   echo "APPROVE $(date +%s)" > research/HUMAN_APPROVAL
+# puis committe dans les 60 minutes.
+# ═══════════════════════════════════════════════════════════════════════════
+
+PROTECTED="harness.py prime_strategy.py journal.py clusters.py costs.py feature_store.py regime.py trend_day_trigger.py strategy_families.py MISSION_V3_RESEARCH_LAB.md MISSION_FIX_MESURE.md .githooks/pre-commit"
+APPROVAL_FILE="research/HUMAN_APPROVAL"
+MAX_AGE_S=3600
+
+touched=""
+while IFS=$'\t' read -r status f1 f2; do
+  # Statut R (rename) / C (copy) : la ligne porte ANCIEN<TAB>NOUVEAU -> il faut
+  # vérifier les DEUX chemins, sinon renommer/déplacer un fichier protégé (ou
+  # écraser un protégé par un rename) échappe au token (audit 2026-06-18). Pour un
+  # statut simple (M/A/D), f1 = le chemin et f2 est vide.
+  for file in "$f1" "$f2"; do
+    [ -z "$file" ] && continue
+    for p in $PROTECTED; do
+      if [ "$file" = "$p" ]; then
+        # Création initiale (pas encore dans HEAD) : autorisée
+        if git cat-file -e "HEAD:$p" 2>/dev/null; then
+          touched="$touched $p"
+        fi
+      fi
+    done
+  done
+done < <(git diff --cached --name-status)
+
+[ -z "$touched" ] && exit 0
+
+if [ ! -s "$APPROVAL_FILE" ]; then
+  echo "✗ COMMIT BLOQUÉ — fichiers protégés modifiés :$touched"
+  echo "  Le juge et le cœur Prime sont gelés (MISSION_V3, séparation des pouvoirs)."
+  echo "  Seul Sam peut approuver :"
+  echo "    echo \"APPROVE \$(date +%s)\" > research/HUMAN_APPROVAL"
+  exit 1
+fi
+
+now=$(date +%s)
+# Portabilité Mac->Windows : GNU stat (git-bash/Linux) = `-c %Y` ; BSD/macOS = `-f %m`.
+# On tente GNU EN PREMIER (poste de prod Windows), fallback BSD. stderr étouffé des deux
+# côtés. ATTENTION : l'ancien ordre (`-f` d'abord) faisait que GNU interprétait `-f` comme
+# --file-system, réussissait, imprimait du parasite -> mtime non numérique -> la garde
+# d'expiration sautait silencieusement (fail-OPEN). Bug Mac->PC corrigé 2026-06-18.
+mtime=$(stat -c %Y "$APPROVAL_FILE" 2>/dev/null || stat -f %m "$APPROVAL_FILE" 2>/dev/null)
+# Fail-CLOSED : si mtime illisible/non numérique (stat non portable, fichier absent),
+# on BLOQUE par défaut au lieu d'autoriser. Un refus est récupérable (Sam repose un token) ;
+# une autorisation silencieuse d'un token périmé ne l'est pas.
+case "$mtime" in
+  ''|*[!0-9]*)
+    echo "✗ COMMIT BLOQUÉ — âge du token illisible (stat non portable ou token absent)."
+    echo "  Sécurité fail-closed : refus par défaut. Sam doit reposer un token frais."
+    exit 1 ;;
+esac
+if [ $((now - mtime)) -gt $MAX_AGE_S ]; then
+  echo "✗ COMMIT BLOQUÉ — token d'approbation expiré (> 60 min)."
+  echo "  Sam doit le réécrire : echo \"APPROVE \$(date +%s)\" > research/HUMAN_APPROVAL"
+  exit 1
+fi
+
+if ! grep -q "^APPROVE" "$APPROVAL_FILE"; then
+  echo "✗ COMMIT BLOQUÉ — token invalide (attendu : ligne 'APPROVE <ts>')."
+  exit 1
+fi
+
+echo "✓ Token d'approbation humaine valide — fichiers protégés :$touched"
+echo "  Token consommé (un token = un commit)."
+: > "$APPROVAL_FILE"
+exit 0

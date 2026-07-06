@@ -1,0 +1,22 @@
+# secrets & état local
+.env
+research/HUMAN_APPROVAL
+
+# données générées à l'exécution
+*.log
+*.jsonl
+*.duckdb
+*.duckdb.wal
+feature_exports/
+journal.json
+*_state.json
+*cache*.json
+swing_portfolio.json
+calendar_history.json
+hypothesis_registry.json
+*.bak*
+__pycache__/
+*.pyc
+research/reports/
+research/data/
+node_modules/
