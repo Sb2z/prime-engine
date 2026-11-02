@@ -15,8 +15,10 @@ import subprocess
 import sys
 import time
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # dossier du projet
+
 CANDIDATES = [
-    r"C:\Users\samue\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe",
+    os.path.expandvars(r"%APPDATA%\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe"),
     os.path.expandvars(r"%USERPROFILE%\.local\bin\claude.exe"),
 ]
 
@@ -66,8 +68,8 @@ rc = 3
 try:
     r = subprocess.run(
         [exe, "-p", PROMPT, "--permission-mode", "acceptEdits", "--max-turns", "80",
-         "--settings", r"C:\Users\sam\trading\.claude\autonomous_settings.json"],
-        timeout=timeout_min * 60, cwd=r"C:\Users\sam\trading", stdin=subprocess.DEVNULL)
+         "--settings", os.path.join(ROOT, ".claude", "autonomous_settings.json")],
+        timeout=timeout_min * 60, cwd=ROOT, stdin=subprocess.DEVNULL)
     rc = r.returncode
 except subprocess.TimeoutExpired:
     log(f"TIMEOUT {timeout_min}min, session coupée (budget)")
@@ -80,7 +82,7 @@ log(f"analyst {slot} terminé (exit {rc})")
 if rc != 0:
     # audit 07-02 : le créneau 09h a échoué en silence (session limit Claude), # un passage de surveillance sur 4 perdu sans que personne ne le sache.
     try:
-        sys.path.insert(0, r"C:\Users\sam\trading")
+        sys.path.insert(0, ROOT)
         import notify
         notify.send(f"⚠️ Prime Analyst {slot} en ÉCHEC (exit {rc}), passage de "
                     f"surveillance perdu (quota/timeout ?). Voir research/analyst.log.",

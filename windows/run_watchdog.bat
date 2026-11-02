@@ -1,5 +1,5 @@
 @echo off
-cd /d C:\Users\sam\trading
+cd /d "%~dp0.."
 set PYTHONUTF8=1
-set PY=C:\Users\samue\AppData\Local\Programs\Python\Python313\python.exe
+set PY=%LOCALAPPDATA%\Programs\Python\Python313\python.exe
 "%PY%" watchdog.py >> watchdog.log 2>&1

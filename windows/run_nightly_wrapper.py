@@ -11,6 +11,8 @@ import subprocess
 import sys
 import time
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # dossier du projet
+
 PROMPT = """Tu es le chercheur nocturne du Prime Research Lab. Lis et applique
 strictement research/RESEARCH_PROTOCOL.md (cycle: ingestion, autopsie, max 3
 hypothèses nouvelles, expériences via harness.evaluate, rapport
@@ -19,7 +21,7 @@ silent=True). Tu n'écris QUE dans research/. Commit final de tes fichiers
 research/ avec un message clair.""".format(date=datetime.date.today().isoformat())
 
 CANDIDATES = [
-    r"C:\Users\samue\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe",
+    os.path.expandvars(r"%APPDATA%\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe"),
     os.path.expandvars(r"%USERPROFILE%\.local\bin\claude.exe"),
     os.path.expandvars(r"%USERPROFILE%\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe"),
 ]
@@ -40,8 +42,8 @@ for attempt in (1, 2):
     try:
         r = subprocess.run(
             [exe, "-p", PROMPT, "--permission-mode", "acceptEdits", "--max-turns", "80",
-             "--settings", r"C:\Users\sam\trading\.claude\autonomous_settings.json"],
-            timeout=45 * 60, cwd=r"C:\Users\sam\trading", stdin=subprocess.DEVNULL)
+             "--settings", os.path.join(ROOT, ".claude", "autonomous_settings.json")],
+            timeout=45 * 60, cwd=ROOT, stdin=subprocess.DEVNULL)
         rc = r.returncode
         break
     except subprocess.TimeoutExpired:
@@ -52,7 +54,7 @@ for attempt in (1, 2):
         log(f"échec du lancement (tentative {attempt}/2) : {type(exc).__name__} {exc}")
         log(f"diag: USERNAME={os.environ.get('USERNAME')} "
             f"USERPROFILE={os.environ.get('USERPROFILE')} "
-            f"exe_existe={os.path.isfile(exe)} cwd_existe={os.path.isdir(r'C:\Users\sam\trading')}")
+            f"exe_existe={os.path.isfile(exe)} cwd_existe={os.path.isdir(ROOT)}")
         if attempt == 1:
             time.sleep(60)
 
