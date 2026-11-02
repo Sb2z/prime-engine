@@ -6,10 +6,10 @@ rem DuckDB se libère, puis on relance. Auto-cicatrisation d'un crash de process
 rem pas seulement d'un reboot. Les évènements START/EXIT vont dans
 rem watcher_supervisor.log (PAS prime_watcher.log) pour ne pas fausser la
 rem détection mtime du watchdog (silence >12 min sur prime_watcher.log).
-cd /d C:\Users\sam\trading
+cd /d "%~dp0.."
 set PYTHONUTF8=1
 rem chemin complet : la tache tourne en SYSTEM, dont le PATH ignore l'install Python par-utilisateur
-set PY=C:\Users\samue\AppData\Local\Programs\Python\Python313\python.exe
+set PY=%LOCALAPPDATA%\Programs\Python\Python313\python.exe
 :loop
 echo %date% %time% START prime_watcher >> watcher_supervisor.log
 "%PY%" -u prime_watcher.py >> prime_watcher.log 2>&1

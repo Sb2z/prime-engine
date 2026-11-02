@@ -20,3 +20,8 @@ __pycache__/
 research/reports/
 research/data/
 node_modules/
+
+# outil TradingView recopié : réglages et journaux personnels, jamais l'exécution d'ordres
+tools/claudeverstradingview/rules.json
+tools/claudeverstradingview/safety-check-log.json
+tools/claudeverstradingview/scalper-run.js
